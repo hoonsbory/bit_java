@@ -25,6 +25,9 @@
         <h5 style="margin : 0">메뉴</h5>
     </div>
 
+    <video id="video" width="640" height="480" autoplay></video>
+<button id="snap">Snap Photo</button>
+<canvas id="canvas" width="640" height="480"></canvas>
 
     <div id="mainbody">
         <div id="mainTitle">
@@ -38,7 +41,7 @@
 
             <div class="image-upload-wrap">
                 <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
-                    onchange="readURL(this);" accept="image/*"/>
+                    onchange="readURL(this);" accept="image/*" ; />
                 <div class="drag-text">
                     <img src="camera.png" />
                     <h1>내 피부 촬영하기 </h1>
