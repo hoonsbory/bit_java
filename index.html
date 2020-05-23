@@ -188,7 +188,7 @@
                 video.srcObject = stream;
                 video.play();
             }).catch(function (err) {
-                console.log(err);
+                alert("지원안돼")
                 document.getElementById("noCamDiv").style.display = "block"
                 document.getElementById("fileInput").style.display = "block"
             });
@@ -842,7 +842,7 @@
         //인풋창 파일 업로드 시 
         function readURL(input) {
             if ((input.files && input.files[0]) || input == "cam") {
-
+                alert("인풋까짇르오")
                 if (navigator.userAgent.indexOf("Android") > 0 ||
                     navigator.userAgent.indexOf("iPhone") > 0 ||
                     navigator.userAgent.indexOf("iPod") > 0 ||
@@ -866,6 +866,7 @@
                 $('#slider').show();
                 uploadCheck = false;
                 if (input == "cam") {
+                    alert("여기까지>")
                     return
                 }
                 editCheck = false;
