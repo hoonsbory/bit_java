@@ -68,7 +68,7 @@
                                     단계로</span></div>
                             <img id="originalImg" style="display: none;" />
                         </div>
-                        <video id="video" style="max-width: 300px; max-height: 300px;" autoplay></video>
+                        <video id="video" width="50px" height="50px" autoplay></video>
                         <div id="mainCam" style="display: none;">
                             <canvas id="canvas" style="display: none;"></canvas>
                             <div class="arrowBtn"><img src="arrow.png" onclick="camCheck()"><span
@@ -221,7 +221,7 @@
             // var canvas = document.getElementById('canvas');
             // var context = canvas.getContext('2d');
             // context.drawImage(video, 0, 0, video.width, video.height);
-            color(video)
+            color(video.src)
         }
 
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
