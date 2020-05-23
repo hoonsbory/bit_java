@@ -22,9 +22,6 @@
 #realImage{
   border : 5px solid rgb(10, 59, 112);
 }
-#video{
-  border : 5px solid rgb(10, 59, 112);
-}
 .blocking-time {
  opacity: 0;
 }
@@ -489,10 +486,6 @@ color: rgb(10, 59, 112);
     width: 450px !important;
     height: 450px !important;
   }
-  #video{
-    width: 450px !important;
-    height: 450px !important;
-  }
   .file-upload {
     width: 550px;
   }
@@ -537,10 +530,6 @@ color: rgb(10, 59, 112);
     left: 50%;
 }
   #realImage{
-    width: 350px !important;
-    height: 350px !important;
-  }
-  #video{
     width: 350px !important;
     height: 350px !important;
   }
@@ -601,10 +590,6 @@ color: rgb(10, 59, 112);
   left: 50%;
 }
   #realImage{
-    width: 300px !important;
-    height: 300px !important;
-  }
-  #video{
     width: 300px !important;
     height: 300px !important;
   }
