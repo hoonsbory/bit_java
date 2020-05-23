@@ -1081,7 +1081,6 @@
             }
 
             if (!editCheck) {
-                firstCrop = false;
                 rotateCrop = true;
                 //캔버스에 그림이 그려진 후 회전을 시켜야해서 콜백함수로 순서를 맞춤.
                 editImg(rotateCall, plusMinus);
@@ -1120,6 +1119,8 @@
             // 캔버스의 중심점 설정.
             rtx.translate(rotateCanvas.width / 2, rotateCanvas.height / 2);
             if (navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i) == null ? false : true && firstCrop == true) {
+                firstCrop = false;
+
                 if (plusMinus == "right") {
                     rtx.rotate(Math.PI * 1);
                 } else {
@@ -1127,6 +1128,8 @@
 
                 }
             } else {
+                firstCrop = false;
+
                 if (plusMinus == "right") {
                     rtx.rotate(Math.PI * 0.5);
                 } else {
