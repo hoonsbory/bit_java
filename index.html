@@ -24,10 +24,7 @@
     <div class="header">
         <h5 style="margin : 0">메뉴</h5>
     </div>
-    <video id="video" width="640" height="480" autoplay></video>
-    <button id="snap">Snap Photo</button>
-    <canvas id="canvas" width="640" height="480"></canvas>
-    <img id="testImg" width="400px" height="400px">
+
 
 
     <div id="mainbody">
@@ -40,7 +37,7 @@
         <div id="cropNotice">※사각형에 피부만 꽉차게 편집해주세요</div>
         <div class="file-upload">
 
-            <div class="image-upload-wrap">
+            <div class="image-upload-wrap" style="display : none">
                 <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
                     onchange="readURL(this);" accept="image/*" ; />
                 <div class="drag-text">
@@ -52,7 +49,7 @@
 
                 <ul>
                     <li>
-                        <div class="file-upload-content">
+                        <div id="noCamDiv" class="file-upload-content" style="display: none;">
                             <img class="file-upload-image" id="realImage" src="#" alt="your image" />
                             <div style="margin-top : 2vh">
                                 <div class="btnGroup" id="editBtn" onclick="editImg()"><img
@@ -71,6 +68,14 @@
                             <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                             </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
                             <img id="originalImg" style="display: none;" />
+                        </div>
+                        <div id="camDiv" class="file-upload-content">
+                            <video id="video"  autoplay></video>
+                            <button id="snap">피부톤 측정</button>
+                            <canvas id="canvas"  style="display: none;"></canvas>
+                            <div class="arrowBtn"><img src="arrow.png" onclick="next()"><span onclick="next()">다음
+                                    단계로</span></div>
+                                    <span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
                         </div>
 
                     </li>
@@ -180,8 +185,9 @@
                 //video.src = window.URL.createObjectURL(stream);
                 video.srcObject = stream;
                 video.play();
-            }).catch(function(err){
-                console.log(err);
+            }).catch(function (err) {
+                document.getElementById("noCamDiv").style.display = "block";
+                document.getElementById("camDiv").style.display = "none";
             });
         }
 
@@ -192,7 +198,7 @@
                 video.play();
             }, errBack);
         } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-                console.log(3);
+            console.log(3);
             navigator.webkitGetUserMedia({ video: true }, function (stream) {
                 video.src = window.webkitURL.createObjectURL(stream);
                 video.play();
@@ -207,12 +213,11 @@
 
 
 
-        document.getElementById("snap").addEventListener("click", function () {
-            // var canvas = document.getElementById('canvas');
-            // var context = canvas.getContext('2d');
-            // context.drawImage(video, 0, 0, 640, 480);
-            document.getElementById("testImg").src = video
-            
+        document.getElementById("snap").addEventListener("click", async function () {
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            await context.drawImage(video, 0, 0, video.width, video.height);
+            color(canvas)
         });
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
         //3초가 지나면 기본폰트로
@@ -434,10 +439,10 @@
         };
 
         //이미지에서 색상추출
-        function color() {
+        function color(src) {
             var colorThief = new ColorThief();
 
-            var sourceImage = document.getElementById("realImage");
+            var sourceImage = src
             sourceImage.setAttribute('crossOrigin', '')
 
             console.log(
@@ -511,7 +516,7 @@
             if (uploadCheck) {
                 moveRight("");
             } else {
-                color();
+                color(document.getElementById("realImage"));
             }
 
         }
