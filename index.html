@@ -187,6 +187,7 @@
                 video.play();
             }).catch(function (err) {
                 alert("지원안돼")
+                console.log(err);
                 document.getElementById("noCamDiv").style.display = "block"
                 document.getElementById("fileInput").style.display = "block"
             });
