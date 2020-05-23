@@ -37,7 +37,7 @@
         <div id="cropNotice">※사각형에 피부만 꽉차게 편집해주세요</div>
         <div class="file-upload">
 
-            <div class="image-upload-wrap" style="display : none">
+            <div id="noCamDiv" class="image-upload-wrap" style="display : none">
                 <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
                     onchange="readURL(this);" accept="image/*" ; />
                 <div class="drag-text">
@@ -49,7 +49,7 @@
 
                 <ul>
                     <li>
-                        <div id="noCamDiv" class="file-upload-content" style="display: none;">
+                        <div id="noCamDiv2"  class="file-upload-content" style="display: none;">
                             <img class="file-upload-image" id="realImage" src="#" alt="your image" />
                             <div style="margin-top : 2vh">
                                 <div class="btnGroup" id="editBtn" onclick="editImg()"><img
@@ -61,21 +61,23 @@
                                 <div class="btnGroup" onclick="crop()"><span style="padding-left: 0px">완료</span></div>
                             </div>
                             <div onclick="$('.file-upload-input').trigger( 'click' )" class="btnGroup" id="newfile">
-                                <span>새로운 사진으로
-                                    재시도</span></div>
-                            <div class="arrowBtn"><img src="arrow.png" onclick="next()"><span onclick="next()">다음
-                                    단계로</span></div>
+                                <span>새로운 사진으로 재시도</span>
+                            </div>
+                            <div class="arrowBtn">
+                                <img src="arrow.png" onclick="next()">
+                                <span onclick="next()">다음 단계로</span>
+                            </div>
                             <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                             </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
                             <img id="originalImg" style="display: none;" />
                         </div>
-                        <div id="camDiv" class="file-upload-content">
-                            <video id="video"  autoplay></video>
-                            <button id="snap">피부톤 측정</button>
-                            <canvas id="canvas"  style="display: none;"></canvas>
-                            <div class="arrowBtn"><img src="arrow.png" onclick="next()"><span onclick="next()">다음
-                                    단계로</span></div>
-                                    <span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
+                        <div id="camDiv" style="display: none;">
+                            <video id="video" autoplay></video>
+                            <canvas id="canvas" style="display: none;"></canvas>
+                            <div class="arrowBtn">
+                                <img src="arrow.png" onclick="camCheck()"><span onclick="camCheck()">피부톤 측정</span>
+                            </div>
+                            <span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
                         </div>
 
                     </li>
@@ -184,10 +186,12 @@
             navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function (stream) {
                 //video.src = window.URL.createObjectURL(stream);
                 document.getElementById("slider").style.display = "block";
+                document.getElementById("camDiv").style.display = "block";
                 video.srcObject = stream;
                 video.play();
             }).catch(function (err) {
                 document.getElementById("noCamDiv").style.display = "block";
+                document.getElementById("noCamDiv2").style.display = "block";
                 document.getElementById("camDiv").style.display = "none";
             });
         }
@@ -214,12 +218,17 @@
 
 
 
-        document.getElementById("snap").addEventListener("click", async function () {
+        function camCheck() {
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
-            await context.drawImage(video, 0, 0, video.width, video.height);
+            context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
+            document.getElementById("subTitle").style.display = "none";
+            document.getElementById("mainTitle").style.display = "none";
+            document.getElementById("notice").style.display = "none";
+            document.getElementById("stepInfo").style.display = "block";
+            document.getElementById("cropNotice").style.display = "block";
             color(canvas)
-        });
+        };
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
         //3초가 지나면 기본폰트로
         setTimeout(function () {

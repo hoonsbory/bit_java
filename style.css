@@ -396,7 +396,9 @@ a.control_next {
 .file-upload-content {
   text-align: center;
 }
-
+#camDiv{
+  text-align: center;
+}
 .file-upload-input {
   position: absolute;
   margin: 0;
