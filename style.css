@@ -666,7 +666,7 @@ color: rgb(10, 59, 112);
   height: 100vh;
 }
 }
-@media(max-height : 584px){
+@media(max-height : 500px){
   
   #mainbody{
     height: unset;

@@ -72,7 +72,7 @@
                         <div id="mainCam" style="display: none;">
                             <canvas id="canvas" style="display: none;"></canvas>
                             <div class="arrowBtn"><img style="margin-top : 15px" src="arrow.png" onclick="camCheck()"><span
-                                    onclick="camCheck(color())">피부톤 측정</span></div>
+                                    onclick="camCheck()">피부톤 측정</span></div>
                         </div>
                         <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                         </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
@@ -217,11 +217,11 @@
             }, errBack);
         }
 
-        function camCheck(callback) {
+        function camCheck() {
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
             context.drawImage(video, 0, 0, video.width, video.height);
-            callback(canvas)
+            color(canvas)
         }
 
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
