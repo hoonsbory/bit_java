@@ -179,7 +179,7 @@
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             console.log(1);
             // Not adding `{ audio: true }` since we only want video now
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function (stream) {
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "user" } } }).then(function (stream) {
                 document.getElementById("camDiv").style.display = "block"
                 document.getElementById("mainCam").style.display = "block"
                 //video.src = window.URL.createObjectURL(stream);
