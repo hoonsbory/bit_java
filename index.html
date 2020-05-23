@@ -173,7 +173,6 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
             var video = document.getElementById('video');
-        function videoCapture() {
 
             // Get access to the camera!
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -185,7 +184,12 @@
                 });
             }
 
-           else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
+            else if (navigator.getUserMedia) { // Standard
+                navigator.getUserMedia({ video: true }, function (stream) {
+                    video.src = stream;
+                    video.play();
+                }, errBack);
+            } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
                 navigator.webkitGetUserMedia({ video: true }, function (stream) {
                     video.src = window.webkitURL.createObjectURL(stream);
                     video.play();
@@ -198,7 +202,6 @@
             }
 
 
-        }
 
         document.getElementById("snap").addEventListener("click", function () {
             context.drawImage(video, 0, 0, 640, 480);
