@@ -27,6 +27,7 @@
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap">Snap Photo</button>
     <canvas id="canvas" width="640" height="480"></canvas>
+    <img id="testImg" width="400px" height="400px">
 
 
     <div id="mainbody">
@@ -65,11 +66,8 @@
                             <div onclick="$('.file-upload-input').trigger( 'click' )" class="btnGroup" id="newfile">
                                 <span>새로운 사진으로
                                     재시도</span></div>
-                            <!-- <button id="cropImage" onclick="crop()" disabled="true">자르기</button> -->
-                            <!-- <button type="button" id="leftBtn" onclick="rotateImg('left')">왼쪽으로 90도 회전</button> -->
                             <div class="arrowBtn"><img src="arrow.png" onclick="next()"><span onclick="next()">다음
                                     단계로</span></div>
-                            <!-- <button onclick="next()">다음>></button> -->
                             <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                             </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
                             <img id="originalImg" style="display: none;" />
@@ -210,9 +208,11 @@
 
 
         document.getElementById("snap").addEventListener("click", function () {
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, 640, 480);
+            // var canvas = document.getElementById('canvas');
+            // var context = canvas.getContext('2d');
+            // context.drawImage(video, 0, 0, 640, 480);
+            document.getElementById("testImg").src = video.src
+            
         });
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
         //3초가 지나면 기본폰트로
@@ -867,7 +867,8 @@
 
                         $('.image-upload-wrap').hide();
                         $('.file-upload-image').removeAttr("style");
-                        $('#originalImg').attr('src', tempImage.src);
+                        document.getElementById("originalImg").src = tempImage.src;
+                        // $('#originalImg').attr('src', tempImage.src);
                         $('.file-upload-image').attr('src', tempImage.src);
 
 
