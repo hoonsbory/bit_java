@@ -773,11 +773,13 @@
                             // @details 이미지 회전값이 0인경우 ( 정방향 )
                             case undefined:
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
+                                callback(plusMinus);
                                 break;
                             case 1:
 
 
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
+                                callback(plusMinus);
                                 break;
 
                             case 3:
@@ -792,7 +794,7 @@
                                 // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
 
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-
+                                callback(plusMinus);
                                 break;
 
                             // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
@@ -807,7 +809,7 @@
                                 canvasContext.rotate(Math.PI * 0.5);
                                 canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-
+                                callback(plusMinus);
 
 
                                 // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
@@ -827,7 +829,7 @@
                                 canvasContext.rotate(Math.PI * 1.5);
                                 canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-
+                                callback(plusMinus);
                                 //회전하기전에 정사각형을 만들어주자.
                                 break;
                         }
@@ -835,7 +837,7 @@
                     })
                 } else {
                     canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-
+                    callback(plusMinus);
                 }
                 $("#realImage").Jcrop({
                     onSelect: showCoords,
@@ -846,7 +848,7 @@
 
                 // 사진편집을 누르면 편집 테두리가 전체를 감싸도록 설정
                 $('.file-upload-content').show();
-                callback(plusMinus);
+                
                 // firstCrop = true;
             }
 
