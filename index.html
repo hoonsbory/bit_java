@@ -66,16 +66,16 @@
                                     재시도</span></div>
                             <div class="arrowBtn"><img src="arrow.png" onclick="next()"><span onclick="next()">다음
                                     단계로</span></div>
-                                    <img id="originalImg" style="display: none;" />
-                                </div>
-                                <div id="mainCam" style="display: none;">
-                                    <video id="video" width="300" height="300" autoplay></video>
-                                    <canvas id="canvas" width="300" height="300" style="display: none;"></canvas>
-                                    <div class="arrowBtn"><img src="arrow.png" onclick="camCheck()"><span
-                                        onclick="camCheck()">피부톤 측정</span></div>
-                                    </div>
-                                    <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
-                                    </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
+                            <img id="originalImg" style="display: none;" />
+                        </div>
+                        <div id="mainCam" style="display: none;">
+                            <video id="video" width="100%" height="100%" autoplay></video>
+                            <canvas id="canvas" style="display: none;"></canvas>
+                            <div class="arrowBtn"><img src="arrow.png" onclick="camCheck()"><span
+                                    onclick="camCheck()">피부톤 측정</span></div>
+                        </div>
+                        <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
+                        </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
                     </li>
                     <li>
                         <div class="question">
@@ -179,7 +179,12 @@
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             console.log(1);
             // Not adding `{ audio: true }` since we only want video now
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "user" } } }).then(function (stream) {
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+                }
+            }).then(function (stream) {
                 document.getElementById("camDiv").style.display = "block"
                 document.getElementById("mainCam").style.display = "block"
                 //video.src = window.URL.createObjectURL(stream);
@@ -216,7 +221,7 @@
         function camCheck() {
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, 300, 300);
+            context.drawImage(video, 0, 0, video.width, video.height);
             color(canvas)
         }
 
@@ -854,7 +859,7 @@
                 document.getElementById("stepInfo").style.display = "block";
                 document.getElementById("cropNotice").style.display = "block";
                 document.getElementById('editBtn').style.pointerEvents = 'auto';
-               
+
                 // $('#originalImg').attr('src', tempImage.src);
 
 
@@ -862,9 +867,9 @@
                 // $('#realImage').attr('src', e.target.result);
                 uploadCheck = false;
                 if (input == "cam") {
-                $('.image-upload-wrap').hide();
-                $('.file-upload-image').removeAttr("style");
-                $('#slider').show();
+                    $('.image-upload-wrap').hide();
+                    $('.file-upload-image').removeAttr("style");
+                    $('#slider').show();
                     return
                 }
                 editCheck = false;
@@ -881,11 +886,11 @@
                     tempImage.src = e.target.result;
                     tempImage.onload = async function () {
 
-                document.getElementById("originalImg").src = tempImage.src;
-                $('.file-upload-image').attr('src', tempImage.src);
-                $('.image-upload-wrap').hide();
-                $('.file-upload-image').removeAttr("style");
-                $('#slider').show();
+                        document.getElementById("originalImg").src = tempImage.src;
+                        $('.file-upload-image').attr('src', tempImage.src);
+                        $('.image-upload-wrap').hide();
+                        $('.file-upload-image').removeAttr("style");
+                        $('#slider').show();
                         // @breif 캔버스 위에 이미지 그리기
 
 
