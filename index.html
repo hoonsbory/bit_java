@@ -176,6 +176,7 @@
 
         // Get access to the camera!
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            console.log(1);
             // Not adding `{ audio: true }` since we only want video now
             navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
                 //video.src = window.URL.createObjectURL(stream);
@@ -185,16 +186,19 @@
         }
 
         else if (navigator.getUserMedia) { // Standard
+            console.log(2);
             navigator.getUserMedia({ video: true }, function (stream) {
                 video.src = stream;
                 video.play();
             }, errBack);
         } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
+                console.log(3);
             navigator.webkitGetUserMedia({ video: true }, function (stream) {
                 video.src = window.webkitURL.createObjectURL(stream);
                 video.play();
             }, errBack);
         } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
+            console.log(4);
             navigator.mozGetUserMedia({ video: true }, function (stream) {
                 video.srcObject = stream;
                 video.play();
