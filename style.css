@@ -662,13 +662,13 @@ color: rgb(10, 59, 112);
 #newfile{
   margin-bottom: .6rem;
 }
-/* #mainbody{
+#mainbody{
   height: 100vh;
-} */
 }
-/* @media(max-height : 584px){
+}
+@media(max-height : 584px){
   
   #mainbody{
     height: unset;
   }
-} */
+}
