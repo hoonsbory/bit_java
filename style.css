@@ -102,7 +102,7 @@
     
 }
 #newfile{
-  width: 300px;
+  width: 284px !important;
   padding: 0;
   display: block;
   position: relative;
@@ -120,7 +120,7 @@
   width: 20px;
   height: 20px;
   position: relative;
-  top: 5px;
+  top: .3rem;
 }
 .btnGroup span{
   padding-left: 5px;
@@ -236,18 +236,21 @@ p{
   border-radius: 25px;
   padding-left : 1rem;
   padding-right: 1rem;
-  padding-top: .5rem;
   padding-bottom: .5rem;
 }
 #mainTitle p {
   font-size: 1.2rem;
   margin: 0;
   color: rgb(10, 59, 112);
+  position: relative;
+  top: 1.1rem;
 }
 #wormSpan{
+  font-family: sans-serif;
   background-color: rgba(255,233,196);
 }
 #coolSpan{
+  font-family: sans-serif;
   background-color: rgba( 255,227,213);
 }
 #bgSpan{
@@ -258,8 +261,12 @@ p{
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-color: rgb(10, 59, 112);
   -webkit-text-stroke-width: 1px ;
+  position: relative;
+  top: .8rem;
 }
 #noBgSpan{
+  position: relative;
+  top: .8rem;
   color: rgb(10, 59, 112);
   font-size: 3.5rem;
 }
@@ -393,9 +400,7 @@ a.control_next {
 .file-upload-content {
   text-align: center;
 }
-#camDiv{
-  text-align: center;
-}
+
 .file-upload-input {
   position: absolute;
   margin: 0;
@@ -408,7 +413,7 @@ a.control_next {
 }
 
 .image-upload-wrap {
-  border: 4px solid rgb(10, 59, 112);
+  border: 10px solid rgb(10, 59, 112);
   position: relative;
   border-radius: 200px;
   width: 300px;
@@ -547,8 +552,12 @@ color: rgb(10, 59, 112);
   #slider ul li{
     width : 320px;
   }
+  #newfile{
+    width: 248px !important;
+  }
   .btnGroup{
     padding : .9rem;
+    padding-top : .6rem;
     padding-bottom: 0px;
   }
   .btnGroup span{
@@ -556,10 +565,10 @@ color: rgb(10, 59, 112);
     font-size: 1.2rem;
   }
   .btnGroup img{
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
     position: relative;
-    top: 5px;
+    top: .4rem;
   }
   .file-upload{
     width: 320px;
@@ -572,7 +581,6 @@ color: rgb(10, 59, 112);
     font-size : 10px !important;
   }
   .image-upload-wrap {
-    border: 4px solid rgb(10, 59, 112);
     position: relative;
     width: 200px !important;
     height: 200px !important;

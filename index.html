@@ -69,7 +69,7 @@
                             <img id="originalImg" style="display: none;" />
                         </div>
                         <div id="mainCam" style="display: none;">
-                            <video id="video" width="300px"  height="300px" autoplay></video>
+                            <video id="video" style="max-width: 300px; max-height: 300px;" autoplay></video>
                             <canvas id="canvas" style="display: none;"></canvas>
                             <div class="arrowBtn"><img src="arrow.png" onclick="camCheck()"><span
                                     onclick="camCheck()">피부톤 측정</span></div>
@@ -197,7 +197,6 @@
                 document.getElementById("fileInput").style.display = "block"
             });
         }
-
         else if (navigator.getUserMedia) { // Standard
             console.log(2);
             navigator.getUserMedia({ video: true }, function (stream) {
