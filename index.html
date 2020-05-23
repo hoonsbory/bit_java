@@ -724,7 +724,6 @@
         }
         //업로드된 이미지를 jcrop라이브러리로 변환하고 이미지를 캔버스에 그려놓는다.
         async function editImg(callback, plusMinus) {
-            editCheck = true;
             if (plusMinus) {
 
             } else {
@@ -1122,6 +1121,8 @@
             rtx.translate(rotateCanvas.width / 2, rotateCanvas.height / 2);
             if (navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i) == null ? false : true && !editCheck) {
                 alert("dz")
+                editCheck = true;
+
                 if (plusMinus == "right") {
                     rtx.rotate(Math.PI * 1);
                 } else {
@@ -1129,6 +1130,7 @@
 
                 }
             } else {
+                editCheck = true;
 
                 if (plusMinus == "right") {
                     rtx.rotate(Math.PI * 0.5);
