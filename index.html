@@ -1115,13 +1115,24 @@
                 rotateCanvas.height = rotateCanvas.width;
             }
 
+
+
             // 캔버스의 중심점 설정.
             rtx.translate(rotateCanvas.width / 2, rotateCanvas.height / 2);
-            if (plusMinus == "right") {
-                rtx.rotate(Math.PI * 0.5);
-            } else {
-                rtx.rotate(Math.PI * -0.5);
+            if (navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i) == null ? false : true && firstCrop == true) {
+                if (plusMinus == "right") {
+                    rtx.rotate(Math.PI * 1);
+                } else {
+                    rtx.rotate(Math.PI * -0.5);
 
+                }
+            } else {
+                if (plusMinus == "right") {
+                    rtx.rotate(Math.PI * 0.5);
+                } else {
+                    rtx.rotate(Math.PI * -0.5);
+
+                }
             }
             rtx.translate(-rotateCanvas.width / 2, -rotateCanvas.height / 2);
             rtx.drawImage(canvas, 0, 0, rotateCanvas.width, rotateCanvas.height);
