@@ -185,6 +185,7 @@
                     height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
                 }
             }).then(function (stream) {
+                alert("된당")
                 document.getElementById("camDiv").style.display = "block"
                 document.getElementById("mainCam").style.display = "block"
                 //video.src = window.URL.createObjectURL(stream);
@@ -237,6 +238,7 @@
         //페이스북 인앱 브라우저에서 accept속성때문에 업로드가 안되는 버그가 있어서 대응
         function isFacebookApp() {
             let ua = navigator.userAgent || navigator.vendor || window.opera;
+            alert(ua)
             return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) && !navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i));
         };
         if (isFacebookApp()) {
