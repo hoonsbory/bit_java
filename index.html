@@ -24,7 +24,7 @@
     <div class="header">
         <h5 style="margin : 0">메뉴</h5>
     </div>
-    
+
 
 
     <div id="mainbody">
@@ -39,8 +39,8 @@
 
             <div class="image-upload-wrap">
                 <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
-                    onchange="readURL(this);" accept="image/*" ; />
-                    <div class="file-upload-input" id="camDiv" onclick="readURL('cam')"></div>
+                    onchange="readURL(this);" accept="image/*" ; style="display: none;" />
+                <div class="file-upload-input" id="camDiv" onclick="readURL('cam')" style="display: none;"></div>
                 <div class="drag-text">
                     <img src="camera.png" />
                     <h1>내 피부 촬영하기 </h1>
@@ -50,7 +50,7 @@
 
                 <ul>
                     <li>
-                        <div class="file-upload-content">
+                        <div class="file-upload-content" id="nocamDiv" style="display: none;">
                             <img class="file-upload-image" id="realImage" src="#" alt="your image" />
                             <div style="margin-top : 2vh">
                                 <div class="btnGroup" id="editBtn" onclick="editImg()"><img
@@ -70,10 +70,11 @@
                             </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
                             <img id="originalImg" style="display: none;" />
                         </div>
-                        <div id="mainCam">
+                        <div id="mainCam" style="display: none;">
                             <video id="video" width="300" height="300" autoplay></video>
                             <canvas id="canvas" width="300" height="300" style="display: none;"></canvas>
-                            <div class="arrowBtn"><img src="arrow.png" onclick="camCheck()"><span onclick="camCheck()">피부톤 측정</span></div>
+                            <div class="arrowBtn"><img src="arrow.png" onclick="camCheck()"><span
+                                    onclick="camCheck()">피부톤 측정</span></div>
                             <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                             </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
                         </div>
@@ -181,15 +182,15 @@
             console.log(1);
             // Not adding `{ audio: true }` since we only want video now
             navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function (stream) {
-                document.getElementById("fileInput").style.display = "none"
                 document.getElementById("camDiv").style.display = "block"
+                document.getElementById("mainCam").style.display = "block"
                 //video.src = window.URL.createObjectURL(stream);
                 video.srcObject = stream;
                 video.play();
-            }).catch(function(err){
+            }).catch(function (err) {
                 console.log(err);
+                document.getElementById("noCamDiv").style.display = "block"
                 document.getElementById("fileInput").style.display = "block"
-                document.getElementById("camDiv").style.display = "none"
             });
         }
 
@@ -200,7 +201,7 @@
                 video.play();
             }, errBack);
         } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-                console.log(3);
+            console.log(3);
             navigator.webkitGetUserMedia({ video: true }, function (stream) {
                 video.src = window.webkitURL.createObjectURL(stream);
                 video.play();
@@ -213,7 +214,7 @@
             }, errBack);
         }
 
-        function camCheck(){
+        function camCheck() {
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
             context.drawImage(video, 0, 0, 300, 300);
@@ -840,7 +841,7 @@
 
         //인풋창 파일 업로드 시 
         function readURL(input) {
-            if ((input.files && input.files[0]) || input=="cam") {
+            if ((input.files && input.files[0]) || input == "cam") {
 
                 if (navigator.userAgent.indexOf("Android") > 0 ||
                     navigator.userAgent.indexOf("iPhone") > 0 ||
@@ -855,7 +856,16 @@
                 document.getElementById("stepInfo").style.display = "block";
                 document.getElementById("cropNotice").style.display = "block";
                 document.getElementById('editBtn').style.pointerEvents = 'auto';
-                if(input=="cam"){
+                $('.image-upload-wrap').hide();
+                $('.file-upload-image').removeAttr("style");
+                // $('#originalImg').attr('src', tempImage.src);
+
+
+                // $('.file-upload-image').css("display", "none");
+                // $('#realImage').attr('src', e.target.result);
+                $('#slider').show();
+                uploadCheck = false;
+                if (input == "cam") {
                     return
                 }
                 editCheck = false;
@@ -872,19 +882,11 @@
                     tempImage.src = e.target.result;
                     tempImage.onload = async function () {
 
+                document.getElementById("originalImg").src = tempImage.src;
+                $('.file-upload-image').attr('src', tempImage.src);
                         // @breif 캔버스 위에 이미지 그리기
 
-                        $('.image-upload-wrap').hide();
-                        $('.file-upload-image').removeAttr("style");
-                        document.getElementById("originalImg").src = tempImage.src;
-                        // $('#originalImg').attr('src', tempImage.src);
-                        $('.file-upload-image').attr('src', tempImage.src);
 
-
-                        // $('.file-upload-image').css("display", "none");
-                        // $('#realImage').attr('src', e.target.result);
-                        $('#slider').show();
-                        uploadCheck = false;
                     };
 
 
