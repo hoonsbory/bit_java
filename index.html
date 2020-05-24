@@ -905,9 +905,9 @@
         }
 
         function cameraCheck(){
-            alert(ua)
+            alert(navigator.userAgent)
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                if(ua.indexOf("Safari") > -1){
+                if(navigator.userAgent.indexOf("Safari") > -1){
                     navigator.mediaDevices.getUserMedia({
                 video: {
                     facingMode: { exact: "environment" }
