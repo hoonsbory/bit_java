@@ -78,8 +78,14 @@ html{
 }
 .arrowBtn{
   color: white;
+  display: inline;
   position: relative;
-  left: 3rem;
+  background-image: url(arrow.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 1.5rem;
+  left: 0 !important;
+  top: -2vh;
   
 }
 .arrowBtn img{
@@ -105,6 +111,20 @@ html{
     cursor: pointer;
     
 }
+.leftArrow{
+  color: white;
+  display: inline;
+  position: relative;
+  background-image: url(arrowLeft.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 1.5rem;
+  left: 0 !important;
+}
+#askFooter{
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
 #newfile{
   width: 284px !important;
   padding: 0;
@@ -113,13 +133,14 @@ html{
   left: 50%;
   transform: translateX(-50%);
   margin-top: 15px;
-  margin-bottom: .6rem;
+  margin-bottom : 2.6rem;
   padding-top: 0.5rem;
   padding-bottom: 0.3rem;
 }
 #leftBtn span{
   left : -6rem;
 }
+
 .btnGroup img{
   width: 20px;
   height: 20px;
@@ -586,7 +607,7 @@ color: rgb(10, 59, 112);
   }
   .btnGroup span{
     padding-left: .6vh;
-    font-size: 1.2rem;
+    font-size: 2vh;
   }
   .btnGroup img{
     width: 1.5rem;
@@ -618,12 +639,12 @@ color: rgb(10, 59, 112);
 .middleBar{
   border-left: 3px solid white;
   position: absolute;
-  height: 300px;
+  height: 56vh;
   left: 50%;
 }
   #realImage{
     width: 300px !important;
-    height: 300px !important;
+    height: 48vh !important;
   }
   /* .dragBar{
     display: block;
@@ -637,8 +658,13 @@ color: rgb(10, 59, 112);
     color: white;
     display: inline;
     position: relative;
-    left: 3rem;
-    font-size: 1rem;
+    background-image: url(arrow.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    font-size: 2vh;
+    padding: 3vh;
+    padding-top: 2.9vh;
+    left : 0 !important
 }
 .arrowBtn img{
     width: 9rem;
@@ -658,13 +684,13 @@ color: rgb(10, 59, 112);
   background-color: rgb(74, 114, 176);
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
-  font-size: 2.2rem;
+  font-size: 3.5vh;
   color: white;
   padding-right: 1.8rem;
   padding-top: 0.4rem;
   padding-left: 0.3rem;
   padding-bottom: 0.3rem;
-  margin-top: 2vh;
+  margin-top: 6vh;
   margin-bottom: 2vh;
 }
 #cropNotice {
@@ -672,7 +698,7 @@ color: rgb(10, 59, 112);
   margin-bottom: 1vh;
   background: rgb(250,50,34);
   padding: 4px;
-  font-size: 1.3rem;
+  font-size: 2vh;
   color: white;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -684,9 +710,46 @@ color: rgb(10, 59, 112);
     border-radius: 4px
 }
 #newfile{
-  margin-bottom: .6rem;
+  margin-bottom: 5vh;
 }
 #mainbody{
   height: 100vh;
+  justify-content: unset;
 }
+.question{
+  padding: 1.5vh;
+  font-size: 2vh;
+}
+.choose{
+    font-size: 3vh;
+}
+.choose span{
+  position: relative;
+  top: 50%;
+}
+
+.leftChoose, .rightChoose{
+  height: 56vh !important;
+}
+.leftArrow{
+  color: white;
+  display: inline;
+  position: relative;
+  background-image: url(arrowLeft.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 2vh;
+  padding: 3vh;
+  padding-top: 2.9vh;
+  left: 0 !important;
+}
+#askFooter{
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+}
+}
+@media(max-height : 439px){
+  #mainbody{
+    height: unset;
+  }
 }

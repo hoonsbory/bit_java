@@ -39,8 +39,8 @@
 
             <div class="image-upload-wrap">
                 <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
-                    onchange="readURL(this);" accept="image/*" ; style="display: none;" />
-                <div class="file-upload-input" id="camDiv" onclick="readURL('cam')" style="display: none;"></div>
+                    onchange="readURL(this);" accept="image/*" ; style="display: none; z-index: 998;" />
+                <div class="file-upload-input" id="camDiv" onclick="readURL('cam')" style="display: none; z-index: 998;"></div>
                 <div class="drag-text">
                     <img src="camera.png" />
                     <h1>내 피부 촬영하기 </h1>
@@ -64,8 +64,7 @@
                             <div onclick="$('.file-upload-input').trigger( 'click' )" class="btnGroup" id="newfile">
                                 <span>새로운 사진으로
                                     재시도</span></div>
-                            <div class="arrowBtn"><img src="arrow.png" onclick="next()"><span onclick="next()">다음
-                                    단계로</span></div>
+                            <div class="arrowBtn" onclick="next()">다음 단계로</div>
                             <img id="originalImg" style="display: none;" />
                         </div>
                         <div id="mainCam" style="display: none;">
@@ -89,8 +88,7 @@
                                 onclick="moveRight('cool')"><span>파란색</span></div>
                         </div>
                         <div id="askFooter">
-                            <div id="leftBtn" class="arrowBtn"><img src="arrowLeft.png" onclick="moveLeft()"><span
-                                    onclick="moveLeft()">이전 단계로</span></div>
+                            <div  class="leftArrow" onclick="moveLeft()">이전 단계로</div>
                         </div>
                     </li>
                     <li>
@@ -105,8 +103,7 @@
                                 <span>블랙</span></div>
                         </div>
                         <div id="askFooter">
-                            <div id="leftBtn" class="arrowBtn"><img src="arrowLeft.png" onclick="moveLeft()"><span
-                                    onclick="moveLeft()">이전 단계로</span></div>
+                            <div  class="leftArrow" onclick="moveLeft()">이전 단계로</div>
                         </div>
                     </li>
                     <li>
@@ -121,8 +118,7 @@
                                 onclick="moveRight('cool')"><span>붉은기</span></div>
                         </div>
                         <div id="askFooter">
-                            <div id="leftBtn" class="arrowBtn"><img src="arrowLeft.png" onclick="moveLeft()"><span
-                                    onclick="moveLeft()">이전 단계로</span></div>
+                            <div  class="leftArrow" onclick="moveLeft()">이전 단계로</div>
                         </div>
                     </li>
                     <li>
@@ -137,8 +133,7 @@
                                 onclick="moveRight('cool')"><span>빨갛게 익는다</span></div>
                         </div>
                         <div id="askFooter">
-                            <div id="leftBtn" class="arrowBtn"><img src="arrowLeft.png" onclick="moveLeft()"><span
-                                    onclick="moveLeft()">이전 단계로</span></div>
+                            <div  class="leftArrow" onclick="moveLeft()">이전 단계로</div>
                         </div>
                     </li>
                     <li>
@@ -155,8 +150,7 @@
                                 onclick="moveRight('cool')"><span>순백색</span></div>
                         </div>
                         <div id="askFooter">
-                            <div id="leftBtn" class="arrowBtn"><img src="arrowLeft.png" onclick="moveLeft()"><span
-                                    onclick="moveLeft()">이전 단계로</span></div>
+                            <div  class="leftArrow" onclick="moveLeft()">이전 단계로</div>
                         </div>
                     </li>
                 </ul>
@@ -181,10 +175,10 @@
             alert("현 브라우저에서 올바른 작동이 안될 수 있습니다. 애플은 우측 하단, 안드로이드는 우측 상단 버튼을 눌러 외부 브라우저로 접속해주세요")
         }
         var video = document.getElementById('video');
-        function camErr(){
-                console.log(err);
-                document.getElementById("noCamDiv").style.display = "block"
-                document.getElementById("fileInput").style.display = "block"
+        function camErr() {
+            document.getElementById("noCamDiv").style.display = "block"
+            document.getElementById("fileInput").style.display = "block"
+            document.getElementById("camDiv").remove();
         }
         // Get access to the camera!
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -195,13 +189,19 @@
                     width: { min: 1024, ideal: 1280, max: 1920 },
                     height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
                 }
-            },function (stream) {
+            }).then(function (stream) {
                 document.getElementById("camDiv").style.display = "block"
                 document.getElementById("mainCam").style.display = "block"
+                document.getElementById("fileInput").remove();
                 //video.src = window.URL.createObjectURL(stream);
                 video.srcObject = stream;
                 video.play();
-            } ,camErr());
+            }).catch(function (err) {
+                console.log(err);
+                document.getElementById("noCamDiv").style.display = "block"
+                document.getElementById("fileInput").style.display = "block"
+                document.getElementById("camDiv").remove();
+            });
         }
         else if (navigator.getUserMedia) { // Standard
             console.log(2);
@@ -213,6 +213,7 @@
             }, function (stream) {
                 document.getElementById("camDiv").style.display = "block"
                 document.getElementById("mainCam").style.display = "block"
+                document.getElementById("fileInput").remove();
                 video.src = stream;
                 video.play();
             }, camErr());
@@ -226,6 +227,7 @@
             }, function (stream) {
                 document.getElementById("camDiv").style.display = "block"
                 document.getElementById("mainCam").style.display = "block"
+                document.getElementById("fileInput").remove();
                 video.src = window.webkitURL.createObjectURL(stream);
                 video.play();
             }, camErr());
@@ -239,12 +241,12 @@
             }, function (stream) {
                 document.getElementById("camDiv").style.display = "block"
                 document.getElementById("mainCam").style.display = "block"
+                document.getElementById("fileInput").remove();
                 video.srcObject = stream;
                 video.play();
             }, camErr());
         } else {
-            document.getElementById("noCamDiv").style.display = "block"
-            document.getElementById("fileInput").style.display = "block"
+            caemErr();
         }
 
         document.getElementById("mainbody").scrollIntoView();
