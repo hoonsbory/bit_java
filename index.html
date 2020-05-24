@@ -69,7 +69,7 @@
                         </div>
                         <div id="mainCam" style="display: none;">
                             <video id="video"  style="margin-bottom : 5vh; width: 300px; height : 60vh" autoplay playsinline></video>
-                            <div class="arrowBtn" onclick="camCheck()">피부톤 측정</div>
+                            <div id="camCheck" class="arrowBtn" >피부톤 측정</div>
                             <canvas id="canvas" style="display: none;"></canvas>
                         </div>
                         <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
@@ -256,17 +256,16 @@
 
         document.getElementById("mainbody").scrollIntoView();
 
-        function camCheck() {
+        function camCheck(callback) {
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
-            video.onload = function(){
-
             context.drawImage(video, 0, 0, video.width, video.height);
-            color(canvas);
+            callback(canvas);
 
-            }
         }
-
+        document.getElementById("camCheck").click(function(){
+            camCheck(color)
+        })
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
         //3초가 지나면 기본폰트로
         setTimeout(function () {
