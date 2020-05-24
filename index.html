@@ -259,6 +259,8 @@
         async function camCheck(){
             var camCanvas = document.getElementById('canvas');
             var context = camCanvas.getContext('2d');
+            var video = document.getElementById('video');
+
             context.drawImage(video, 0, 0, video.width, video.height);
             // setTimeout(() => {
                 
