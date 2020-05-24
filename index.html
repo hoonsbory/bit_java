@@ -175,15 +175,18 @@
         }
         var video = document.getElementById('video');
         function camErr() {
+            alert('1번');
             document.getElementById("noCamDiv").style.display = "block"
+            alert('2번');
             document.getElementById("fileInput").style.display = "block"
+            alert('3번');
             document.getElementById("camDiv").remove();
+            alert('4번');
         }
         // Get access to the camera!
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             console.log(1);
             alert("1")
-            alert('msg');
             // Not adding `{ audio: true }` since we only want video now
             navigator.mediaDevices.getUserMedia({
                 video: {
@@ -251,20 +254,23 @@
             }, camErr());
         } else {
             alert("5")
-            // camErr();
+            camErr();
         }
 
         document.getElementById("mainbody").scrollIntoView();
 
-        function camCheck() {
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
+            var camCanvas = document.getElementById('canvas');
+            var context = camCanvas.getContext('2d');
+        function camCheck2(){
             setTimeout(() => {
                 
             context.drawImage(video, 0, 0, video.width, video.height);
             }, 0);
 
-            color(canvas);
+        }
+        function camCheck() {
+            camCheck2();
+            color(camCanvas);
 
         }
 
