@@ -813,6 +813,7 @@
                 if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1) ) {
                     if(isFacebookApp &&(ua.indexOf("15E") > -1) && (ua.indexOf("iPhone") > -1)){
                         canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
+                        alert('애플+페북');
                         if (plusMinus) callback(plusMinus);
                         return
                     }
@@ -821,6 +822,7 @@
                     EXIF.getData(fileInfo, async () => {
                         const orientation = EXIF.getTag(fileInfo, "Orientation");
                         console.log("회전도는 " + orientation);
+                    alert('그냥 애플' + orientation);
                         switch (orientation) {
 
                             // @details 이미지 회전값이 0인경우 ( 정방향 )
