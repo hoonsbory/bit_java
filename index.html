@@ -857,6 +857,7 @@
         //인풋창 파일 업로드 시 
         function readURL(input) {
             if ((input.files && input.files[0]) || input == "cam") {
+                console.log(input);
                 if (navigator.userAgent.indexOf("Android") > 0 ||
                     navigator.userAgent.indexOf("iPhone") > 0 ||
                     navigator.userAgent.indexOf("iPod") > 0 ||
