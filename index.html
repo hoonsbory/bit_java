@@ -811,9 +811,9 @@
                 //망할놈의 캔버스. 아이폰6+페북, 아이패드+페북 에서는 정확히 잘됨. 그러나 아이폰xs+페북에서는 안드로이드처럼 정방향으로 잘나온다...
                 //아이폰 xs에서만 이렇게 되면 예외처리를 해두면 되겠지만, 분명 다른 버전에서도 문제가 일어날 것이 뻔하다.. 대체 왜이러는걸까.
                 if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1) ) {
-                    if(isFacebookApp &&(ua.indexOf("15E") > -1) && (ua.indexOf("iPhone") > -1)){
+                    if(isFacebookApp &&(ua.indexOf("15E145") > -1) && (ua.indexOf("iPhone") > -1)){
                         canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                        alert('애플+페북');
+                        alert(ua);
                         if (plusMinus) callback(plusMinus);
                         return
                     }
@@ -916,12 +916,18 @@
                 }
             }).then(function (stream) {
                 //video.src = window.URL.createObjectURL(stream);
+                alert('1번');
                 document.getElementById("mainCam").style.display = "block"
+                alert('2번');
                 modeChange()
+                alert('3번');
                 video.srcObject = stream;
+                alert('4번');
                 video.play();
+                alert('5번');
             }).catch(function (err) {
                 console.log(err);
+                alert('6번');
                 camErr()
             });
         }
@@ -973,7 +979,9 @@
         }
         }
         function modeChange(){
+            alert('7번');
                     document.getElementById("mainbody").scrollIntoView();
+                    alert('8번');
                     if (navigator.userAgent.indexOf("Android") > 0 ||
                     navigator.userAgent.indexOf("iPhone") > 0 ||
                     navigator.userAgent.indexOf("iPod") > 0 ||
