@@ -68,12 +68,9 @@
                             <img id="originalImg" style="display: none;" />
                         </div>
                         <div id="mainCam" style="display: none;">
-                            <video id="video" style="margin-bottom : 5vh; width: 300px; height : 60vh" autoplay playsinline></video>
-<button id="snap">Snap Photo</button>
-<canvas id="canvas" ></canvas>
-                            <!-- <video id="video"  style="margin-bottom : 5vh; width: 300px; height : 60vh" autoplay playsinline></video>
+                            <video id="video"  style="margin-bottom : 5vh; width: 300px; height : 60vh" autoplay playsinline></video>
                             <div class="arrowBtn" onclick="camCheck()">피부톤 측정</div>
-                            <canvas id="canvas" width="300px" height="300px" ></canvas> -->
+                            <canvas id="canvas" style="display: none;"></canvas>
                         </div>
                         <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                         </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
@@ -158,7 +155,7 @@
                 </ul>
             </div>
 
-            <img id="camImg">
+
         </div>
         <div id="notice">※퍼스널컬러 진단을 위해서 <p>&nbsp;&nbsp;<span
                     style="background-color: rgb(250,50,34); color: white; padding : 4px; padding-bottom: 0px;">팔목
@@ -259,14 +256,13 @@
         document.getElementById("mainbody").scrollIntoView();
 
 
-        var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
-var video = document.getElementById('video');
+        function camCheck() {
+            var camCanvas = document.getElementById('canvas');
+            var context = camCanvas.getContext('2d');
+            context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
+            color(camCanvas)
+        }
 
-// Trigger photo take
-document.getElementById("snap").addEventListener("click", function() {
-	context.drawImage(video, 0, 0, video.width, video.height);
-});
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
         //3초가 지나면 기본폰트로
         setTimeout(function () {
@@ -486,14 +482,13 @@ document.getElementById("snap").addEventListener("click", function() {
 
         //이미지에서 색상추출
         function color(src) {
-            console.log(src);
             var colorThief = new ColorThief();
 
             var sourceImage = src
+
             console.log(
                 colorThief.getColor(sourceImage)
             );
-
 
             // Display palette of colors
             // e.g [[55,37,29],[213,193,136],[110,204,223]]
