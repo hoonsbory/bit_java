@@ -911,8 +911,7 @@
             // Not adding `{ audio: true }` since we only want video now
             navigator.mediaDevices.getUserMedia({
                 video: {
-                    width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
+                     facingMode: { exact: "environment" }
                 }
             }).then(function (stream) {
                 //video.src = window.URL.createObjectURL(stream);
