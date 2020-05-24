@@ -64,10 +64,12 @@ html{
 #stepNum{
   background-color: white;
     color: rgb(74, 114, 176);
-    padding-top: 0.8rem;
-    padding-bottom: 0;
-    padding-right: 1.4rem;
-    padding-left: 0.5rem;
+    padding-top: .75rem;
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
+    /* padding-bottom: 0; */
+    /* padding-right: 1.4rem; */
+    /* padding-left: 0.5rem; */
     margin-right: 1rem;
 }
 #askFooter{
@@ -710,6 +712,11 @@ color: rgb(10, 59, 112);
 }
 #newfile{
   margin-bottom: 5vh;
+}
+#stepNum{
+  padding-top: 1.2vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
 }
 #mainbody{
   height: 100vh;
