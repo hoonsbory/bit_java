@@ -177,6 +177,7 @@
         function isFacebookApp() {
             let ua = navigator.userAgent || navigator.vendor || window.opera;
             alert(ua)
+            document.getElementById("subTitle").innerHTML = ua
             return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) && !navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i));
         };
         if (isFacebookApp()) {
@@ -395,6 +396,8 @@
 
         //뒤로가기
         function moveLeft() {
+            document.getElementById("mainbody").scrollIntoView();
+
             slideCheck--;
             if (slideCheck == 0) {
                 document.getElementById("cropNotice").style.display = "block"
@@ -414,6 +417,8 @@
         };
         //다음 단계로
         function moveRight(tone) {
+            document.getElementById("mainbody").scrollIntoView();
+
             slideCheck++;
             if (slideCheck > 0) {
                 document.getElementById("cropNotice").style.display = "none"
@@ -858,8 +863,11 @@
 
         //인풋창 파일 업로드 시 
         function readURL(input) {
+            
             if ((input.files && input.files[0]) || input == "cam") {
                 console.log(input );
+                document.getElementById("mainbody").scrollIntoView();
+
                 if (navigator.userAgent.indexOf("Android") > 0 ||
                     navigator.userAgent.indexOf("iPhone") > 0 ||
                     navigator.userAgent.indexOf("iPod") > 0 ||
