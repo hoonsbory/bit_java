@@ -422,10 +422,14 @@ a.control_next {
   transform: translateX(-50%);
   background: white;
 }
+.drag-text{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .drag-text img{
 width: 6rem;
 height: 4.5rem;
-margin-top: 4rem;
 }
 
 .drag-text h1 {
