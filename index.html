@@ -155,7 +155,7 @@
                 </ul>
             </div>
 
-
+            <img id="camImg">
         </div>
         <div id="notice">※퍼스널컬러 진단을 위해서 <p>&nbsp;&nbsp;<span
                     style="background-color: rgb(250,50,34); color: white; padding : 4px; padding-bottom: 0px;">팔목
@@ -489,13 +489,14 @@
 
         //이미지에서 색상추출
         function color(src) {
+            console.log(src);
             var colorThief = new ColorThief();
 
             var sourceImage = src
-
             console.log(
                 colorThief.getColor(sourceImage)
             );
+
 
             // Display palette of colors
             // e.g [[55,37,29],[213,193,136],[110,204,223]]
