@@ -173,18 +173,19 @@
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        alert("망할 애플 ")
         function isFacebookApp() {
             let ua = navigator.userAgent || navigator.vendor || window.opera;
-            alert(ua)
-            document.getElementById("subTitle").innerHTML = ua
-            return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) && !navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i));
+            return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1));
         };
         if (isFacebookApp()) {
-            alert("페이스북 브라우저가 아닌 외부 브라우저로 접속해주세요!")
+            alert("현 브라우저에서 올바른 작동이 안될 수 있습니다. 애플은 우측 하단, 안드로이드는 우측 상단 버튼을 눌러 외부 브라우저로 접속해주세요")
         }
         var video = document.getElementById('video');
-
+        function camErr(){
+                console.log(err);
+                document.getElementById("noCamDiv").style.display = "block"
+                document.getElementById("fileInput").style.display = "block"
+        }
         // Get access to the camera!
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             console.log(1);
@@ -194,43 +195,54 @@
                     width: { min: 1024, ideal: 1280, max: 1920 },
                     height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
                 }
-            }).then(function (stream) {
-                alert("된당")
+            },function (stream) {
                 document.getElementById("camDiv").style.display = "block"
                 document.getElementById("mainCam").style.display = "block"
                 //video.src = window.URL.createObjectURL(stream);
                 video.srcObject = stream;
                 video.play();
-            }).catch(function (err) {
-                alert("지원안돼1")
-                console.log(err);
-                document.getElementById("noCamDiv").style.display = "block"
-                document.getElementById("fileInput").style.display = "block"
-            });
+            } ,camErr());
         }
         else if (navigator.getUserMedia) { // Standard
             console.log(2);
-            alert("지원안돼2")
-            navigator.getUserMedia({ video: true }, function (stream) {
+            navigator.getUserMedia({
+                video: {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+                }
+            }, function (stream) {
+                document.getElementById("camDiv").style.display = "block"
+                document.getElementById("mainCam").style.display = "block"
                 video.src = stream;
                 video.play();
-            }, errBack);
+            }, camErr());
         } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
             console.log(3);
-            alert("지원안돼3")
-            navigator.webkitGetUserMedia({ video: true }, function (stream) {
+            navigator.webkitGetUserMedia({
+                video: {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+                }
+            }, function (stream) {
+                document.getElementById("camDiv").style.display = "block"
+                document.getElementById("mainCam").style.display = "block"
                 video.src = window.webkitURL.createObjectURL(stream);
                 video.play();
-            }, errBack);
+            }, camErr());
         } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
             console.log(4);
-            alert("지원안돼4")
-            navigator.mozGetUserMedia({ video: true }, function (stream) {
+            navigator.mozGetUserMedia({
+                video: {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+                }
+            }, function (stream) {
+                document.getElementById("camDiv").style.display = "block"
+                document.getElementById("mainCam").style.display = "block"
                 video.srcObject = stream;
                 video.play();
-            }, errBack);
+            }, camErr());
         } else {
-            alert("지원안돼5")
             document.getElementById("noCamDiv").style.display = "block"
             document.getElementById("fileInput").style.display = "block"
         }
@@ -785,13 +797,13 @@
                             // @details 이미지 회전값이 0인경우 ( 정방향 )
                             case undefined:
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                                if(plusMinus) callback(plusMinus);
+                                if (plusMinus) callback(plusMinus);
                                 break;
                             case 1:
 
 
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                                if(plusMinus) callback(plusMinus);
+                                if (plusMinus) callback(plusMinus);
                                 break;
 
                             case 3:
@@ -806,7 +818,7 @@
                                 // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
 
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                                if(plusMinus) callback(plusMinus);
+                                if (plusMinus) callback(plusMinus);
                                 break;
 
                             // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
@@ -821,7 +833,7 @@
                                 canvasContext.rotate(Math.PI * 0.5);
                                 canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                                if(plusMinus) callback(plusMinus);
+                                if (plusMinus) callback(plusMinus);
 
 
                                 // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
@@ -841,7 +853,7 @@
                                 canvasContext.rotate(Math.PI * 1.5);
                                 canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                                if(plusMinus) callback(plusMinus);
+                                if (plusMinus) callback(plusMinus);
                                 //회전하기전에 정사각형을 만들어주자.
                                 break;
                         }
@@ -849,13 +861,13 @@
                     })
                 } else {
                     canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                    if(plusMinus) callback(plusMinus);
+                    if (plusMinus) callback(plusMinus);
                 }
-                
+
 
                 // 사진편집을 누르면 편집 테두리가 전체를 감싸도록 설정
                 $('.file-upload-content').show();
-                
+
                 // firstCrop = true;
             }
 
@@ -863,9 +875,9 @@
 
         //인풋창 파일 업로드 시 
         function readURL(input) {
-            
+
             if ((input.files && input.files[0]) || input == "cam") {
-                console.log(input );
+                console.log(input);
                 document.getElementById("mainbody").scrollIntoView();
 
                 if (navigator.userAgent.indexOf("Android") > 0 ||

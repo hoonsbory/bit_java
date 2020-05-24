@@ -557,8 +557,27 @@ color: rgb(10, 59, 112);
   #slider ul li{
     width : 320px;
   }
+  #mainTitle p{
+    font-size: 2vh;
+  }
+  #bgSpan, #noBgSpan{
+    font-size: 6vh;
+  }
+  #subTitle{
+    font-size: 1.9vh;
+  }
+  .drag-text img{
+    width : 11vh;
+    height: unset;
+  }
+  .drag-text h1{
+    font-size: 3.4vh;
+  }
   #newfile{
     width: 248px !important;
+  }
+  #notice{
+    font-size: 2.5vh;
   }
   .btnGroup{
     padding : .9rem;
@@ -587,8 +606,8 @@ color: rgb(10, 59, 112);
   }
   .image-upload-wrap {
     position: relative;
-    width: 200px !important;
-    height: 200px !important;
+    width: 36vh;
+    height: 36vh;
     left: 50%;
     transform: translateX(-50%);
     background: white;
@@ -670,10 +689,4 @@ color: rgb(10, 59, 112);
 #mainbody{
   height: 100vh;
 }
-}
-@media(max-height : 584px){
-  
-  #mainbody{
-    height: unset;
-  }
 }
