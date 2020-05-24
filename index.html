@@ -37,10 +37,10 @@
         <div id="cropNotice">※사각형에 피부만 꽉차게 편집해주세요</div>
         <div class="file-upload">
 
-            <div class="image-upload-wrap">
-                <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
-                    onchange="readURL(this);" accept="image/*" ; style="display: none; z-index: 998;" />
-                <div class="file-upload-input" id="camDiv" onclick="readURL('cam')" style="display: none; z-index: 998;"></div>
+            <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
+                onchange="readURL(this);" accept="image/*" ; style="display: none; z-index: 998;" />
+            <div class="file-upload-input" id="camDiv" onclick="readURL('cam')" style="display: none; z-index: 998;"></div>
+            <div class="image-upload-wrap" onclick="cameraCheck()">
                 <div class="drag-text">
                     <img src="camera.png" />
                     <h1>내 피부 촬영하기 </h1>
@@ -184,84 +184,85 @@
         //비디오 에러 캐치
         function camErr() {
             document.getElementById("noCamDiv").style.display = "block"
-            document.getElementById("fileInput").style.display = "block"
-            document.getElementById("camDiv").remove();
+            // document.getElementById("fileInput").style.display = "block"
+            // document.getElementById("camDiv").remove();
+            document.getElementById("fileInput").click();
         }
         // Get access to the camera!
 
         //후면 카메라가 가능한 기기는 캠을 켜고 아니면 파일업로드.
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            console.log(1);
-            alert("1")
-            // Not adding `{ audio: true }` since we only want video now
-            navigator.mediaDevices.getUserMedia({
-                video: {
-                    width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
-                }
-            }).then(function (stream) {
-                document.getElementById("camDiv").style.display = "block"
-                document.getElementById("mainCam").style.display = "block"
-                document.getElementById("fileInput").remove();
-                //video.src = window.URL.createObjectURL(stream);
-                video.srcObject = stream;
-                video.play();
-            }).catch(function (err) {
-                console.log(err);
-                document.getElementById("noCamDiv").style.display = "block"
-                document.getElementById("fileInput").style.display = "block"
-                document.getElementById("camDiv").remove();
-            });
-        }
-        else if (navigator.getUserMedia) { // Standard
-            console.log(2);
-            alert("2")
-            navigator.getUserMedia({
-                video: {
-                    width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-                }
-            }, function (stream) {
-                document.getElementById("camDiv").style.display = "block"
-                document.getElementById("mainCam").style.display = "block"
-                document.getElementById("fileInput").remove();
-                video.src = stream;
-                video.play();
-            }, camErr());
-        } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-            console.log(3);
-            alert("3")
-            navigator.webkitGetUserMedia({
-                video: {
-                    width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-                }
-            }, function (stream) {
-                document.getElementById("camDiv").style.display = "block"
-                document.getElementById("mainCam").style.display = "block"
-                document.getElementById("fileInput").remove();
-                video.src = window.webkitURL.createObjectURL(stream);
-                video.play();
-            }, camErr());
-        } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
-            console.log(4);
-            alert("4")
-            navigator.mozGetUserMedia({
-                video: {
-                    width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
-                }
-            }, function (stream) {
-                document.getElementById("camDiv").style.display = "block"
-                document.getElementById("mainCam").style.display = "block"
-                document.getElementById("fileInput").remove();
-                video.srcObject = stream;
-                video.play();
-            }, camErr());
-        } else {
-            alert("5")
-            camErr();
-        }
+        // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        //     console.log(1);
+        //     alert("1")
+        //     // Not adding `{ audio: true }` since we only want video now
+        //     navigator.mediaDevices.getUserMedia({
+        //         video: {
+        //             width: { min: 1024, ideal: 1280, max: 1920 },
+        //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
+        //         }
+        //     }).then(function (stream) {
+        //         document.getElementById("camDiv").style.display = "block"
+        //         document.getElementById("mainCam").style.display = "block"
+        //         document.getElementById("fileInput").remove();
+        //         //video.src = window.URL.createObjectURL(stream);
+        //         video.srcObject = stream;
+        //         video.play();
+        //     }).catch(function (err) {
+        //         console.log(err);
+        //         document.getElementById("noCamDiv").style.display = "block"
+        //         document.getElementById("fileInput").style.display = "block"
+        //         document.getElementById("camDiv").remove();
+        //     });
+        // }
+        // else if (navigator.getUserMedia) { // Standard
+        //     console.log(2);
+        //     alert("2")
+        //     navigator.getUserMedia({
+        //         video: {
+        //             width: { min: 1024, ideal: 1280, max: 1920 },
+        //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+        //         }
+        //     }, function (stream) {
+        //         document.getElementById("camDiv").style.display = "block"
+        //         document.getElementById("mainCam").style.display = "block"
+        //         document.getElementById("fileInput").remove();
+        //         video.src = stream;
+        //         video.play();
+        //     }, camErr());
+        // } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
+        //     console.log(3);
+        //     alert("3")
+        //     navigator.webkitGetUserMedia({
+        //         video: {
+        //             width: { min: 1024, ideal: 1280, max: 1920 },
+        //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+        //         }
+        //     }, function (stream) {
+        //         document.getElementById("camDiv").style.display = "block"
+        //         document.getElementById("mainCam").style.display = "block"
+        //         document.getElementById("fileInput").remove();
+        //         video.src = window.webkitURL.createObjectURL(stream);
+        //         video.play();
+        //     }, camErr());
+        // } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
+        //     console.log(4);
+        //     alert("4")
+        //     navigator.mozGetUserMedia({
+        //         video: {
+        //             width: { min: 1024, ideal: 1280, max: 1920 },
+        //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
+        //         }
+        //     }, function (stream) {
+        //         document.getElementById("camDiv").style.display = "block"
+        //         document.getElementById("mainCam").style.display = "block"
+        //         document.getElementById("fileInput").remove();
+        //         video.srcObject = stream;
+        //         video.play();
+        //     }, camErr());
+        // } else {
+        //     alert("5")
+        //     camErr();
+        // }
 
         document.getElementById("mainbody").scrollIntoView();
 
@@ -901,14 +902,77 @@
 
         }
 
-        //인풋창 파일 업로드 시 
-        function readURL(input) {
-
-            if ((input.files && input.files[0]) || input == "cam") {
-                console.log(input);
-                document.getElementById("mainbody").scrollIntoView();
-
-                if (navigator.userAgent.indexOf("Android") > 0 ||
+        function cameraCheck(){
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            console.log(1);
+            alert("1")
+            // Not adding `{ audio: true }` since we only want video now
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
+                }
+            }).then(function (stream) {
+                //video.src = window.URL.createObjectURL(stream);
+                document.getElementById("mainCam").style.display = "block"
+                modeChange()
+                video.srcObject = stream;
+                video.play();
+            }).catch(function (err) {
+                console.log(err);
+                camErr()
+            });
+        }
+        else if (navigator.getUserMedia) { // Standard
+            console.log(2);
+            alert("2")
+            navigator.getUserMedia({
+                video: {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+                }
+            }, function (stream) {
+                document.getElementById("mainCam").style.display = "block"
+                modeChange()
+                video.src = stream;
+                video.play();
+            }, camErr());
+        } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
+            console.log(3);
+            alert("3")
+            navigator.webkitGetUserMedia({
+                video: {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+                }
+            }, function (stream) {
+                document.getElementById("mainCam").style.display = "block"
+                modeChange()
+                video.src = window.webkitURL.createObjectURL(stream);
+                video.play();
+            }, camErr());
+        } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
+            console.log(4);
+            alert("4")
+            navigator.mozGetUserMedia({
+                video: {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
+                }
+            }, function (stream) {
+                document.getElementById("mainCam").style.display = "block"
+                modeChange()
+                video.srcObject = stream;
+                video.play();
+            }, camErr());
+        } else {
+            alert("5")
+            camErr();
+        }
+        }
+        function modeChange(){
+                    document.getElementById("mainbody").scrollIntoView();
+                    if (navigator.userAgent.indexOf("Android") > 0 ||
                     navigator.userAgent.indexOf("iPhone") > 0 ||
                     navigator.userAgent.indexOf("iPod") > 0 ||
                     navigator.userAgent.indexOf("iPad") > 0 ||
@@ -922,19 +986,23 @@
                 document.getElementById("stepInfo").style.display = "block";
                 document.getElementById("cropNotice").style.display = "block";
                 document.getElementById('editBtn').style.pointerEvents = 'auto';
+                    $('.image-upload-wrap').hide();
+                    $('.file-upload-image').removeAttr("style");
+                    $('#slider').show();
+                }
+        //인풋창 파일 업로드 시 
+        function readURL(input) {
+            
+            if ((input.files && input.files[0])) {
+                
 
                 // $('#originalImg').attr('src', tempImage.src);
-
+               
 
                 // $('.file-upload-image').css("display", "none");
                 // $('#realImage').attr('src', e.target.result);
                 uploadCheck = false;
-                if (input == "cam") {
-                    $('.image-upload-wrap').hide();
-                    $('.file-upload-image').removeAttr("style");
-                    $('#slider').show();
-                    return
-                }
+              
                 editCheck = false;
                 if (jcropApi) {
                     jcropApi.destroy();
@@ -951,9 +1019,7 @@
 
                         document.getElementById("originalImg").src = tempImage.src;
                         $('.file-upload-image').attr('src', tempImage.src);
-                        $('.image-upload-wrap').hide();
-                        $('.file-upload-image').removeAttr("style");
-                        $('#slider').show();
+                       modeChange();
                         // @breif 캔버스 위에 이미지 그리기
 
 
