@@ -256,15 +256,10 @@
         document.getElementById("mainbody").scrollIntoView();
 
 
-        function camCheck2(callback) {
-                callback()
-        }
         async function camCheck(){
             var camCanvas = document.getElementById('canvas');
             var context = camCanvas.getContext('2d');
-            await camCheck2(function(){
             context.drawImage(video, 0, 0, video.width, video.height);
-            })
             // setTimeout(() => {
                 
             // color(camCanvas);
