@@ -4,6 +4,10 @@
   font-weight: 100;
   src: url(font/HSThin.ttf) format("truetype");
 } */
+html{
+  font-size: 17px;
+  scroll-behavior: smooth; 
+}
 @font-face {
   font-family: 'HSThin';
   font-style: normal;
@@ -136,10 +140,7 @@
   left: 0;
   top: 0;
 } */
-html{
-  font-size: 17px;
 
-}
 .jcrop-holder:before{
   content : "드래그해서 영역을 선택한 후 완료 버튼을 눌러주세요";
   color: white;  
