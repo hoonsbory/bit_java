@@ -835,16 +835,22 @@
                         }
 
                     })
+                    $("#realImage").Jcrop({
+                    onSelect: showCoords,
+                }, function () {
+                    jcropApi = this;
+                    div();
+                });
                 } else {
                     canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
                     if(plusMinus) callback(plusMinus);
-                }
                 $("#realImage").Jcrop({
                     onSelect: showCoords,
                 }, function () {
                     jcropApi = this;
                     div();
                 });
+                }
 
                 // 사진편집을 누르면 편집 테두리가 전체를 감싸도록 설정
                 $('.file-upload-content').show();
