@@ -175,13 +175,9 @@
         }
         var video = document.getElementById('video');
         function camErr() {
-            alert('1번');
             document.getElementById("noCamDiv").style.display = "block"
-            alert('2번');
             document.getElementById("fileInput").style.display = "block"
-            alert('3번');
             document.getElementById("camDiv").remove();
-            alert('4번');
         }
         // Get access to the camera!
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -265,7 +261,7 @@
             setTimeout(() => {
                 
             context.drawImage(video, 0, 0, video.width, video.height);
-            }, 0);
+            }, 5000);
 
         }
         function camCheck() {
