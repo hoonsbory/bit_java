@@ -809,6 +809,7 @@
                 if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1) ) {
                     if(isFacebookApp){
                         canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
+                        if (plusMinus) callback(plusMinus);
                         return
                     }
                     console.log("애플기기입니다.");
