@@ -170,7 +170,7 @@
             let ua = navigator.userAgent || navigator.vendor || window.opera;
         function isFacebookApp() {
             document.getElementById("subTitle").innerHTML = ua;
-            return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBMD") > -1) || (ua.indexOf("FBDV") > -1));
+            return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBMD") > -1) || (ua.indexOf("FBDV") > -1) || (ua.indexOf("FBSN") > -1) );
         };
         //페이스북에서 파일 업로드가 안된다. accept속성을 지우면 된다는 얘기가 많은데 시도해봐도 되지를 않아서 외부 브라우저를 키도록 유도함.
         if (isFacebookApp()) {
@@ -806,7 +806,7 @@
                 //그리고 데스크탑 같은 경우, 크롬은 자동으로 정방향으로 나오지만 엣지는 회전되어 나온다. 기기 별 대응이 너무 많아지기 떄문에, 자체적으로 회전 로직을 추가했다.
                 //크롭을 하기위해선 캔버스가 필요한데, 애플 기기에서 업로드시 img태그에는 정방향으로 나오지만 캔버스에는 회전이 적용되어 나오기 때문에, 피부를 특정해서 crop해야 하는
                 //이 앱에서는 자동회전이 불가피하게 되어 넣게 됐다.iPhone|iPad|iPod|Mac
-                if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1) && !((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBMD") > -1) || (ua.indexOf("FBDV") > -1))) {
+                if (!((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBMD") > -1) || (ua.indexOf("FBSN") > -1) || (ua.indexOf("FBDV") > -1)) && (ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1) ) {
                     console.log("애플기기입니다.");
                     document.getElementById("cropNotice").innerHTML = "애플기기띠"
                     var fileInfo = document.getElementById("fileInput").files[0];
