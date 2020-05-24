@@ -808,7 +808,7 @@
                 //이 앱에서는 자동회전이 불가피하게 되어 넣게 됐다.iPhone|iPad|iPod|Mac
                 if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1)) {
                     console.log("애플기기입니다.");
-                    document.getElementById("subTitle").innerHTML = "애플기기띠"
+                    document.getElementById("cropNotice").innerHTML = "애플기기띠"
                     var fileInfo = document.getElementById("fileInput").files[0];
                     EXIF.getData(fileInfo, async () => {
                         const orientation = EXIF.getTag(fileInfo, "Orientation");
