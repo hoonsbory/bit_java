@@ -166,20 +166,29 @@
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">
+
         function isFacebookApp() {
             let ua = navigator.userAgent || navigator.vendor || window.opera;
             return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1));
         };
+        //페이스북에서 파일 업로드가 안된다. accept속성을 지우면 된다는 얘기가 많은데 시도해봐도 되지를 않아서 외부 브라우저를 키도록 유도함.
         if (isFacebookApp()) {
             alert("현 브라우저에서 올바른 작동이 안될 수 있습니다. 애플은 우측 하단, 안드로이드는 우측 상단 버튼을 눌러 외부 브라우저로 접속해주세요")
         }
+
+
+
         var video = document.getElementById('video');
+
+        //비디오 에러 캐치
         function camErr() {
             document.getElementById("noCamDiv").style.display = "block"
             document.getElementById("fileInput").style.display = "block"
             document.getElementById("camDiv").remove();
         }
         // Get access to the camera!
+
+        //후면 카메라가 가능한 기기는 캠을 켜고 아니면 파일업로드.
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             console.log(1);
             alert("1")
@@ -187,7 +196,7 @@
             navigator.mediaDevices.getUserMedia({
                 video: {
                     width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
                 }
             }).then(function (stream) {
                 document.getElementById("camDiv").style.display = "block"
@@ -256,6 +265,7 @@
         document.getElementById("mainbody").scrollIntoView();
 
 
+        //캠화면 캡쳐 및 주요컬러 도출
         function camCheck() {
             var camCanvas = document.getElementById('canvas');
             var context = camCanvas.getContext('2d');
