@@ -1255,6 +1255,10 @@
                 canvas.width = this.width;
                 canvas.height = this.height;
                 if (navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i) == null ? false : true) {
+                    if(isFacebookApp){
+                        canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
+                        return
+                    }
                     console.log("애플기기입니다.");
                     var fileInfo = document.getElementById("fileInput").files[0];
                     EXIF.getData(fileInfo, async () => {
