@@ -633,9 +633,6 @@ color: rgb(10, 59, 112);
     transform: translateX(-50%);
     background: white;
 }
-.leftChoose,.rightChoose{
-  height: 300px;
-}
 .middleBar{
   border-left: 3px solid white;
   position: absolute;
@@ -644,7 +641,7 @@ color: rgb(10, 59, 112);
 }
   #realImage{
     width: 300px !important;
-    height: 48vh !important;
+    height: 300px !important;
   }
   /* .dragBar{
     display: block;
@@ -748,7 +745,7 @@ color: rgb(10, 59, 112);
   padding-bottom: 4vh;
 }
 }
-@media(max-height : 439px){
+@media(max-height : 551px){
   #mainbody{
     height: unset;
   }
