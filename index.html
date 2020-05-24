@@ -906,29 +906,39 @@
 
         function cameraCheck(){
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            console.log(1);
-            alert("1")
-            // Not adding `{ audio: true }` since we only want video now
-            navigator.mediaDevices.getUserMedia({
+                if(ua.indexOf("safari") > -1){
+                    navigator.mediaDevices.getUserMedia({
                 video: {
-                     facingMode: { exact: "environment" }
+                    facingMode: { exact: "environment" }
                 }
             }).then(function (stream) {
                 //video.src = window.URL.createObjectURL(stream);
-                alert('1번');
                 document.getElementById("mainCam").style.display = "block"
-                alert('2번');
                 modeChange()
-                alert('3번');
                 video.srcObject = stream;
-                alert('4번');
                 video.play();
-                alert('5번');
             }).catch(function (err) {
                 console.log(err);
-                alert(err);
                 camErr()
             });
+                }else{
+            // Not adding `{ audio: true }` since we only want video now
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
+                }
+            }).then(function (stream) {
+                //video.src = window.URL.createObjectURL(stream);
+                document.getElementById("mainCam").style.display = "block"
+                modeChange()
+                video.srcObject = stream;
+                video.play();
+            }).catch(function (err) {
+                console.log(err);
+                camErr()
+            });
+                }
         }
         else if (navigator.getUserMedia) { // Standard
             console.log(2);
@@ -978,9 +988,7 @@
         }
         }
         function modeChange(){
-            alert('7번');
                     document.getElementById("mainbody").scrollIntoView();
-                    alert('8번');
                     if (navigator.userAgent.indexOf("Android") > 0 ||
                     navigator.userAgent.indexOf("iPhone") > 0 ||
                     navigator.userAgent.indexOf("iPod") > 0 ||
