@@ -183,7 +183,6 @@
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             console.log(1);
             alert("1")
-            alert('msg');
             // Not adding `{ audio: true }` since we only want video now
             navigator.mediaDevices.getUserMedia({
                 video: {
@@ -251,7 +250,7 @@
             }, camErr());
         } else {
             alert("5")
-            caemErr();
+            camErr();
         }
 
         document.getElementById("mainbody").scrollIntoView();
@@ -263,9 +262,7 @@
             callback(canvas);
 
         }
-        document.getElementById("camCheck").click(function(){
-            camCheck(color)
-        })
+        document.getElementById("camCheck").addEventListener("click", camCheck(color))
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
         //3초가 지나면 기본폰트로
         setTimeout(function () {
