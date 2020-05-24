@@ -68,9 +68,12 @@
                             <img id="originalImg" style="display: none;" />
                         </div>
                         <div id="mainCam" style="display: none;">
-                            <video id="video"  style="margin-bottom : 5vh; width: 300px; height : 60vh" autoplay playsinline></video>
+                            <video id="video" width="640" height="480" autoplay></video>
+<button id="snap">Snap Photo</button>
+<canvas id="canvas" width="640" height="480"></canvas>
+                            <!-- <video id="video"  style="margin-bottom : 5vh; width: 300px; height : 60vh" autoplay playsinline></video>
                             <div class="arrowBtn" onclick="camCheck()">피부톤 측정</div>
-                            <canvas id="canvas" width="300px" height="300px" ></canvas>
+                            <canvas id="canvas" width="300px" height="300px" ></canvas> -->
                         </div>
                         <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                         </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
@@ -256,17 +259,14 @@
         document.getElementById("mainbody").scrollIntoView();
 
 
-        async function camCheck(){
-            var camCanvas = document.getElementById('canvas');
-            var context = camCanvas.getContext('2d');
-            var video = document.getElementById('video');
+        var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var video = document.getElementById('video');
 
-            context.drawImage(video, 0, 0, video.width, video.height);
-            // setTimeout(() => {
-                
-            // color(camCanvas);
-            // }, 5000);
-        }
+// Trigger photo take
+document.getElementById("snap").addEventListener("click", function() {
+	context.drawImage(video, 0, 0, 640, 480);
+});
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
         //3초가 지나면 기본폰트로
         setTimeout(function () {
