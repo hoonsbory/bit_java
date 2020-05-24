@@ -640,8 +640,10 @@ color: rgb(10, 59, 112);
   left: 50%;
 }
   #realImage{
-    width: 300px !important;
-    height: 300px !important;
+    width: 48vh !important;
+    height: 48vh !important;
+    max-width: 310px !important;
+    max-height: 310px !important;
   }
   /* .dragBar{
     display: block;
@@ -745,7 +747,7 @@ color: rgb(10, 59, 112);
   padding-bottom: 4vh;
 }
 }
-@media(max-height : 551px){
+@media(max-height : 439px){
   #mainbody{
     height: unset;
   }
