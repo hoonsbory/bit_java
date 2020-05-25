@@ -39,7 +39,6 @@
 
             <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
                 onchange="readURL(this);" accept="image/*" ; style="display: none; z-index: 998;" />
-            <div class="file-upload-input" id="camDiv" onclick="readURL('cam')" style="display: none; z-index: 998;"></div>
             <div class="image-upload-wrap" onclick="cameraCheck()">
                 <div class="drag-text">
                     <img src="camera.png" />
@@ -188,81 +187,7 @@
             // document.getElementById("camDiv").remove();
             document.getElementById("fileInput").click();
         }
-        // Get access to the camera!
-
-        //후면 카메라가 가능한 기기는 캠을 켜고 아니면 파일업로드.
-        // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        //     console.log(1);
-        //     alert("1")
-        //     // Not adding `{ audio: true }` since we only want video now
-        //     navigator.mediaDevices.getUserMedia({
-        //         video: {
-        //             width: { min: 1024, ideal: 1280, max: 1920 },
-        //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
-        //         }
-        //     }).then(function (stream) {
-        //         document.getElementById("camDiv").style.display = "block"
-        //         document.getElementById("mainCam").style.display = "block"
-        //         document.getElementById("fileInput").remove();
-        //         //video.src = window.URL.createObjectURL(stream);
-        //         video.srcObject = stream;
-        //         video.play();
-        //     }).catch(function (err) {
-        //         console.log(err);
-        //         document.getElementById("noCamDiv").style.display = "block"
-        //         document.getElementById("fileInput").style.display = "block"
-        //         document.getElementById("camDiv").remove();
-        //     });
-        // }
-        // else if (navigator.getUserMedia) { // Standard
-        //     console.log(2);
-        //     alert("2")
-        //     navigator.getUserMedia({
-        //         video: {
-        //             width: { min: 1024, ideal: 1280, max: 1920 },
-        //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-        //         }
-        //     }, function (stream) {
-        //         document.getElementById("camDiv").style.display = "block"
-        //         document.getElementById("mainCam").style.display = "block"
-        //         document.getElementById("fileInput").remove();
-        //         video.src = stream;
-        //         video.play();
-        //     }, camErr());
-        // } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-        //     console.log(3);
-        //     alert("3")
-        //     navigator.webkitGetUserMedia({
-        //         video: {
-        //             width: { min: 1024, ideal: 1280, max: 1920 },
-        //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-        //         }
-        //     }, function (stream) {
-        //         document.getElementById("camDiv").style.display = "block"
-        //         document.getElementById("mainCam").style.display = "block"
-        //         document.getElementById("fileInput").remove();
-        //         video.src = window.webkitURL.createObjectURL(stream);
-        //         video.play();
-        //     }, camErr());
-        // } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
-        //     console.log(4);
-        //     alert("4")
-        //     navigator.mozGetUserMedia({
-        //         video: {
-        //             width: { min: 1024, ideal: 1280, max: 1920 },
-        //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
-        //         }
-        //     }, function (stream) {
-        //         document.getElementById("camDiv").style.display = "block"
-        //         document.getElementById("mainCam").style.display = "block"
-        //         document.getElementById("fileInput").remove();
-        //         video.srcObject = stream;
-        //         video.play();
-        //     }, camErr());
-        // } else {
-        //     alert("5")
-        //     camErr();
-        // }
+        
 
         document.getElementById("mainbody").scrollIntoView();
 
@@ -434,7 +359,7 @@
             slideCheck--;
             if (slideCheck == 0) {
                 document.getElementById("cropNotice").style.display = "block"
-                document.getElementById("stepNum").innerHTML = "\u00A01";
+                document.getElementById("stepNum").innerHTML = "1";
                 document.getElementById("subInfo").innerHTML = "피부\u00A0사진\u00A0촬영"
             }
             answerStack.pop();
@@ -455,7 +380,7 @@
             slideCheck++;
             if (slideCheck > 0) {
                 document.getElementById("cropNotice").style.display = "none"
-                document.getElementById("stepNum").innerHTML = "\u00A02";
+                document.getElementById("stepNum").innerHTML = "2";
                 document.getElementById("subInfo").innerHTML = "질문\u00A05단계"
             }
             if (tone == "worm") {
@@ -1423,65 +1348,7 @@
             }
 
         }
-        // run the webcam image through the image model
-        // function apiTest() {
-        //     $.ajax({
-        //         url: "https://eng-contact-277115.dt.r.appspot.com/apiTest",
-        //         type: "post",
-        //         data: document.getElementById("realImage").src,
-        //         contentType: 'application/json;charset=UTF-8',
-        //         success: function (data) {
-        //             imgRed = data.red;
-        //             imgGreen = data.green;
-        //             imgBlue = data.blue;
-        //             for(var i =0; i<colorList.length;i++){
-        //                 var color = "color" + i;
-        //         var red = (imgRed - colorList[i][0]);
-        //         red = red < 0 ? -(red) : red;
-        //         var green = (imgGreen - colorList[i][1]);
-        //         green = green < 0 ? -(green) : green;
-        //         var blue = (imgBlue - colorList[i][2]);
-        //         blue = blue < 0 ? -(blue) : blue;
-
-        //         firstResult.push([red + green + blue, i]);
-        //             }
-        //             firstResult.sort(function (a, b) { // 오름차순 
-        //         return a[0] - b[0];
-        //     });
-        //     var colorNum = firstResult[0][1];
-        //     var colorThumbnail = "rgb("+red+","+green+","+blue+")"
-        //     document.getElementById("failColor").style.backgroundColor = colorThumbnail;
-        //     document.getElementById("failColor").style.display = "inline-block";
-        //     document.getElementById("failColor").nextElementSibling.style.display = "inline-block"
-        //         if(colorNum<16){
-        //             moveRight("");
-        //             document.getElementById("btnGroup").style.display = "none";
-        //             uploadCheck = true;
-        //             firstResult = [];
-        //             return;
-        //         }else if(colorNum==16){
-        //             alert("사진이 너무 빨갛습니다.")
-        //         }else if(colorNum==17){
-        //             alert("사진이 너무 초록색입니다.")
-        //         }else if(colorNum==18){
-        //             alert("사진이 너무 하늘색입니다.")
-        //         }else if(colorNum==19){
-        //             alert("사진이 너무 파란색입니다.")
-        //         }else if(colorNum==20){
-        //             alert("사진이 너무 보라색입니다.")
-        //         }else if(colorNum==21){
-        //             alert("사진이 너무 하얀색입니다.")
-        //         }else{
-        //             alert("사진이 너무 검정색입니다.")
-        //         }
-        //         firstResult = [];
-
-        //         }, error: function () {
-        //             alert("실패")
-        //         }
-        //     })
-
-        // }
+        
 
         //색상과 질문 총 결과값을 종합하여 결과 도출
         function season(colorGroup, toneColor) {
@@ -1520,15 +1387,8 @@
     </script>
     <script>
 
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-        /*
-        var disqus_config = function () {
-        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        };
-        */
+       
+        
         (function () { // DON'T EDIT BELOW THIS LINE
             var d = document, s = d.createElement('script');
             s.src = 'https://personalcolor.disqus.com/embed.js';

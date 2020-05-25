@@ -47,30 +47,27 @@ html{
   padding-left: 2rem;
   padding-right: 2rem;
 }
-#stepInfo{
+  #stepInfo {
     display: none;
     background-color: rgb(74, 114, 176);
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
-    font-size: 2.3rem;
+    font-size: 3.5vh;
     color: white;
     padding-right: 1.8rem;
     padding-top: 0.4rem;
     padding-left: 0.3rem;
     padding-bottom: 0.3rem;
-    margin-top: 7vh;
-    margin-bottom: 3vh;
-}
+    margin-top: 6vh;
+    margin-bottom: 2vh;
+  }
 #stepNum{
   background-color: white;
     color: rgb(74, 114, 176);
-    padding-top: .75rem;
-    padding-left: 1.3rem;
-    padding-right: 1.3rem;
-    /* padding-bottom: 0; */
-    /* padding-right: 1.4rem; */
-    /* padding-left: 0.5rem; */
-    margin-right: 1rem;
+    padding-top: 1.2vh;
+padding-left: 2vh;
+padding-right: 2vh;
+    margin-right: 1vh;
 }
 #askFooter{
   background: white;
@@ -136,8 +133,6 @@ html{
   transform: translateX(-50%);
   margin-top: 15px;
   margin-bottom : 3.6rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.3rem;
 }
 #leftBtn span{
   left : -6rem;
@@ -224,7 +219,7 @@ p{
 #notice{
   background-color: #ffffff;
   background-color: rgba( 255, 255, 255, 0.4 );
-  font-size: 1.5rem;
+  font-size: 2.5vh;
   color: rgb(10, 59, 112);
   margin-top: 5vh;
   margin-bottom : 2rem;
@@ -236,7 +231,7 @@ p{
 #subTitle{
   color: white;
   background-color: rgb(10, 59, 112);
-  font-size: 1.2rem;
+  font-size: 1.9vh;
   margin-bottom: 5vh;
   padding: 6px;
   padding-left: 15px;
@@ -263,7 +258,7 @@ p{
   padding-bottom: .5rem;
 }
 #mainTitle p {
-  font-size: 1.2rem;
+  font-size: 2vh;
   margin: 0;
   color: rgb(10, 59, 112);
   position: relative;
@@ -278,7 +273,8 @@ p{
   background-color: rgba( 255,227,213);
 }
 #bgSpan{
-  font-size: 3.5rem;
+  font-size: 6vh;
+
   background: url(fontBg.png);
   background-size: contain;
   -webkit-background-clip: text;
@@ -292,33 +288,45 @@ p{
   position: relative;
   top: .8rem;
   color: rgb(10, 59, 112);
-  font-size: 3.5rem;
+  font-size: 6vh;
+
 }
 .question{
   background-color: white;
   color: rgb(10, 59, 112);
-  padding: 1rem;
-  font-size: 1.3rem;
+  padding: 1.5vh;
+  font-size: 2vh;
 }
-.choose{
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    font-size: 1.7rem;
-}
-.choose span{
+
+  .choose{
+    font-size: 3vh;
+  }
+  .choose span{
   position: relative;
   top: 50%;
-}
-.leftChoose{
-    width: 50%;
-    float: left;
-}
-.rightChoose{
+  }
+  
+  .leftChoose, .rightChoose{
+  height: 56vh !important;
   width: 50%;
   float: left;
-}
+  }
+  .leftArrow{
+  color: white;
+  display: inline;
+  position: relative;
+  background-image: url(arrowLeft.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 2vh;
+  padding: 3vh;
+  padding-top: 2.9vh;
+  left: 0 !important;
+  }
+  #askFooter{
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  }
 #slider {
   position: relative;
   overflow: hidden;
@@ -440,8 +448,8 @@ a.control_next {
   border: 10px solid rgb(10, 59, 112);
   position: relative;
   border-radius: 200px;
-  width: 300px;
-  height: 300px;
+  width: 36vh;
+  height: 36vh;
   left: 50%;
   transform: translateX(-50%);
   background: white;
@@ -452,14 +460,15 @@ a.control_next {
   transform: translateY(-50%);
 }
 .drag-text img{
-width: 6rem;
-height: 4.5rem;
+width: 13vh;
+height: unset;
 }
 
 .drag-text h1 {
 font-weight: 100;
 text-transform: uppercase;
 color: rgb(10, 59, 112);
+font-size: 3vh;
 }
 .image-dropping,
 .image-upload-wrap:hover {
@@ -522,15 +531,7 @@ color: rgb(10, 59, 112);
   .file-upload {
     width: 550px;
   }
-  .leftChoose,.rightChoose{
-    height: 450px;
-  }
-  .middleBar{
-        border-left: 3px solid white;
-        position: absolute;
-        height: 450px;
-        left: 50%;
-  }
+  
   
   /* .dragBar{
     display: block;
@@ -544,44 +545,24 @@ color: rgb(10, 59, 112);
 @media(min-width : 768px) and (max-width : 1024px){
   
   #slider ul li{
-    width : 450px;
+    width : 600px;
   }
   .file-upload{
-    width: 450px;
+    width: 600px;
   }
   #slider ul{
-    width : 2700px !important;
-    margin-left : -450px !important;
+    width : 3600px !important;
+    margin-left : -600px !important;
   }
-  .leftChoose,.rightChoose{
-    height: 350px;
+  #newfile{
+    width: 400px !important;
   }
-  .middleBar{
-    border-left: 3px solid white;
-    position: absolute;
-    height: 350px;
-    left: 50%;
-}
+  #mainbody{
+    height: 100vh;
+  }
   #realImage{
-    width: 350px !important;
-    height: 350px !important;
-  }
-  /* .dragBar{
-    display: block;
-    width: 350px ;
-    height: 350px ;
-    position: absolute;
-    left: 0;
-    top: 0;
-  } */
-}
-
-@media(max-width: 767px){
-  #slider ul li{
-    width : 320px;
-  }
-  #mainTitle p{
-    font-size: 2vh;
+    width: 43vh !important;
+    height: 43vh !important;
   }
   #bgSpan, #noBgSpan{
     font-size: 6vh;
@@ -596,20 +577,19 @@ color: rgb(10, 59, 112);
   .drag-text h1{
     font-size: 3.4vh;
   }
-  #newfile{
-    width: 248px !important;
-  }
   #notice{
     font-size: 2.5vh;
   }
   .btnGroup{
-    padding : .9rem;
-    padding-top : .6rem;
+    padding : 1vh;
+    padding-top : 1vh;
     padding-bottom: 0px;
+    line-height: 2;
   }
   .btnGroup span{
     padding-left: .6vh;
     font-size: 2vh;
+    word-break: keep-all;
   }
   .btnGroup img{
     width: 1.5rem;
@@ -617,16 +597,96 @@ color: rgb(10, 59, 112);
     position: relative;
     top: .4rem;
   }
+.image-upload-wrap {
+position: relative;
+width: 36vh;
+height: 36vh;
+left: 50%;
+border-radius: 1000px;
+transform: translateX(-50%);
+background: white;
+}
+
+.arrowBtn{
+color: white;
+display: inline;
+position: relative;
+background-image: url(arrow.png);
+background-size: contain;
+background-repeat: no-repeat;
+font-size: 2vh;
+padding: 3vh;
+padding-top: 2.9vh;
+left : 0 !important
+}
+.arrowBtn img{
+width: 9rem;
+height: 5rem;
+}
+.arrowBtn span{
+position: relative;
+bottom: 2.1rem;
+left: -8rem;
+}
+#leftBtn span{
+left : -6rem;
+}
+
+
+#cropNotice {
+display: none;
+margin-bottom: 1vh;
+background: rgb(250,50,34);
+padding: 4px;
+font-size: 2vh;
+color: white;
+padding-left: 2rem;
+padding-right: 2rem;
+}
+}
+
+@media(max-width: 767px){
+  #slider ul li{
+    width : 320px;
+  }
+  #mainTitle p{
+  }
   .file-upload{
     width: 320px;
   }
-  #slider ul{
-    width : 1920px !important;
-    margin-left : -320px !important;
-  }
-  html{
-    font-size : 10px !important;
-  }
+        #bgSpan, #noBgSpan{
+          font-size: 6vh;
+        }
+        #subTitle{
+          font-size: 1.9vh;
+        }
+        .drag-text img{
+          width : 11vh;
+          height: unset;
+        }
+        .drag-text h1{
+          font-size: 3.4vh;
+        }
+        #notice{
+          font-size: 2.5vh;
+        }
+        .btnGroup{
+          padding : 1vh;
+          padding-top : 1vh;
+          padding-bottom: 0px;
+          line-height: 2;
+        }
+        .btnGroup span{
+          padding-left: .6vh;
+          font-size: 2vh;
+          word-break: keep-all;
+        }
+        .btnGroup img{
+          width: 1.5rem;
+          height: 1.5rem;
+          position: relative;
+          top: .4rem;
+        }
   .image-upload-wrap {
     position: relative;
     width: 36vh;
@@ -635,51 +695,59 @@ color: rgb(10, 59, 112);
     transform: translateX(-50%);
     background: white;
 }
-.middleBar{
-  border-left: 3px solid white;
-  position: absolute;
-  height: 56vh;
-  left: 50%;
-}
-  #realImage{
-    width: 48vh !important;
-    height: 48vh !important;
-    max-width: 310px !important;
-    max-height: 310px !important;
-  }
-  /* .dragBar{
-    display: block;
-    width: 300px ;
-    height: 300px ;
-    position: absolute;
-    left: 0;
-    top: 0;
-  } */
-  .arrowBtn{
-    color: white;
-    display: inline;
-    position: relative;
-    background-image: url(arrow.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    font-size: 2vh;
-    padding: 3vh;
-    padding-top: 2.9vh;
-    left : 0 !important
+
+.arrowBtn{
+  color: white;
+  display: inline;
+  position: relative;
+  background-image: url(arrow.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 2vh;
+  padding: 3vh;
+  padding-top: 2.9vh;
+  left : 0 !important
 }
 .arrowBtn img{
-    width: 9rem;
-    height: 5rem;
+  width: 9rem;
+  height: 5rem;
 }
 .arrowBtn span{
-    position: relative;
-    bottom: 2.1rem;
-    left: -8rem;
+  position: relative;
+  bottom: 2.1rem;
+  left: -8rem;
 }
 #leftBtn span{
-  left : -6rem;
+left : -6rem;
 }
 
+
+#cropNotice {
+display: none;
+margin-bottom: 1vh;
+background: rgb(250,50,34);
+padding: 4px;
+font-size: 2vh;
+color: white;
+padding-left: 2rem;
+padding-right: 2rem;
+}
+#slider{
+position: relative;
+  overflow: hidden;
+  margin: 10px auto 0 auto;
+  border-radius: 4px
+}
+#newfile{
+margin-bottom: 5vh;
+margin-top: 1vh !important;
+width: 248px !important;
+}
+#stepNum{
+padding-top: 1.2vh;
+padding-left: 2vh;
+padding-right: 2vh;
+}
 #stepInfo {
   display: none;
   background-color: rgb(74, 114, 176);
@@ -694,65 +762,62 @@ color: rgb(10, 59, 112);
   margin-top: 6vh;
   margin-bottom: 2vh;
 }
-#cropNotice {
-  display: none;
-  margin-bottom: 1vh;
-  background: rgb(250,50,34);
-  padding: 4px;
-  font-size: 2vh;
-  color: white;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-#slider{
-  position: relative;
-    overflow: hidden;
-    margin: 10px auto 0 auto;
-    border-radius: 4px
-}
-#newfile{
-  margin-bottom: 5vh;
-}
-#stepNum{
-  padding-top: 1.2vh;
-  padding-left: 2vh;
-  padding-right: 2vh;
-}
 #mainbody{
-  height: 100vh;
-  justify-content: unset;
+height: 100vh;
+justify-content: unset;
 }
 .question{
-  padding: 1.5vh;
-  font-size: 2vh;
+padding: 1.5vh;
+font-size: 2vh;
 }
 .choose{
-    font-size: 3vh;
+  font-size: 3vh;
 }
 .choose span{
-  position: relative;
-  top: 50%;
+position: relative;
+top: 50%;
 }
 
 .leftChoose, .rightChoose{
-  height: 56vh !important;
+height: 56vh !important;
 }
 .leftArrow{
-  color: white;
-  display: inline;
-  position: relative;
-  background-image: url(arrowLeft.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  font-size: 2vh;
-  padding: 3vh;
-  padding-top: 2.9vh;
-  left: 0 !important;
+color: white;
+display: inline;
+position: relative;
+background-image: url(arrowLeft.png);
+background-size: contain;
+background-repeat: no-repeat;
+font-size: 2vh;
+padding: 3vh;
+padding-top: 2.9vh;
+left: 0 !important;
 }
 #askFooter{
-  padding-top: 4vh;
-  padding-bottom: 4vh;
+padding-top: 4vh;
+padding-bottom: 4vh;
 }
+  #slider ul{
+    width : 1920px !important;
+    margin-left : -320px !important;
+  }
+  html{
+    font-size : 10px !important;
+  }
+  #realImage{
+    width: 48vh !important;
+    height: 48vh !important;
+    max-width: 310px !important;
+    max-height: 310px !important;
+  }
+  /* .dragBar{
+    display: block;
+    width: 300px ;
+    height: 300px ;
+    position: absolute;
+    left: 0;
+    top: 0;
+  } */
 }
 @media(max-height : 439px){
   #mainbody{
