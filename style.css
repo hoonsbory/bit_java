@@ -554,9 +554,6 @@ font-size: 3vh;
     width : 3600px !important;
     margin-left : -600px !important;
   }
-  #newfile{
-    width: 400px !important;
-  }
   #mainbody{
     height: 100vh;
   }
@@ -566,7 +563,7 @@ font-size: 3vh;
   }
   
 #video{
-  width: 400px !important;
+  width: auto !important;
 }
 }
 @media(max-width: 1024px){
@@ -667,7 +664,7 @@ position: relative;
 #newfile{
 margin-bottom: 5vh;
 margin-top: 1vh !important;
-width: 248px !important;
+width: 37vh !important;
 }
 
 #mainbody{
