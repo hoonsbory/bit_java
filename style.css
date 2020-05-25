@@ -563,7 +563,7 @@ font-size: 3vh;
   }
   
 #video{
-  width: auto !important;
+  width: 1000px !important;
   height: 500px !important;
 }
 }
