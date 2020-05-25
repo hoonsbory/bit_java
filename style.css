@@ -564,6 +564,12 @@ font-size: 3vh;
     width: 43vh !important;
     height: 43vh !important;
   }
+  
+#video{
+  width: 400px !important;
+}
+}
+@media(max-width: 1024px){
   #bgSpan, #noBgSpan{
     font-size: 6vh;
   }
@@ -643,98 +649,15 @@ color: white;
 padding-left: 2rem;
 padding-right: 2rem;
 }
-#video{
-  width: 400px !important;
 }
-}
-
 @media(max-width: 767px){
   #slider ul li{
     width : 320px;
   }
-  #mainTitle p{
-  }
   .file-upload{
     width: 320px;
   }
-        #bgSpan, #noBgSpan{
-          font-size: 6vh;
-        }
-        #subTitle{
-          font-size: 1.9vh;
-        }
-        .drag-text img{
-          width : 11vh;
-          height: unset;
-        }
-        .drag-text h1{
-          font-size: 3.4vh;
-        }
-        #notice{
-          font-size: 2.5vh;
-        }
-        .btnGroup{
-          padding : 1vh;
-          padding-top : 1vh;
-          padding-bottom: 0px;
-          line-height: 2;
-        }
-        .btnGroup span{
-          padding-left: .6vh;
-          font-size: 2vh;
-          word-break: keep-all;
-        }
-        .btnGroup img{
-          width: 1.5rem;
-          height: 1.5rem;
-          position: relative;
-          top: .4rem;
-        }
-  .image-upload-wrap {
-    position: relative;
-    width: 36vh;
-    height: 36vh;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-}
-
-.arrowBtn{
-  color: white;
-  display: inline;
-  position: relative;
-  background-image: url(arrow.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  font-size: 2vh;
-  padding: 3vh;
-  padding-top: 3.2vh;
-  left : 0 !important
-}
-.arrowBtn img{
-  width: 9rem;
-  height: 5rem;
-}
-.arrowBtn span{
-  position: relative;
-  bottom: 2.1rem;
-  left: -8rem;
-}
-#leftBtn span{
-left : -6rem;
-}
-
-
-#cropNotice {
-display: none;
-margin-bottom: 1vh;
-background: rgb(250,50,34);
-padding: 4px;
-font-size: 2vh;
-color: white;
-padding-left: 2rem;
-padding-right: 2rem;
-}
+       
 #slider{
 position: relative;
   overflow: hidden;
@@ -746,60 +669,12 @@ margin-bottom: 5vh;
 margin-top: 1vh !important;
 width: 248px !important;
 }
-#stepNum{
-padding-top: 1.2vh;
-padding-left: 2vh;
-padding-right: 2vh;
-}
-#stepInfo {
-  display: none;
-  background-color: rgb(74, 114, 176);
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
-  font-size: 3.5vh;
-  color: white;
-  padding-right: 1.8rem;
-  padding-top: 0.4rem;
-  padding-left: 0.3rem;
-  padding-bottom: 0.3rem;
-  margin-top: 6vh;
-  margin-bottom: 2vh;
-}
+
 #mainbody{
 height: 100vh;
 justify-content: unset;
 }
-.question{
-padding: 1.5vh;
-font-size: 2vh;
-}
-.choose{
-  font-size: 3vh;
-}
-.choose span{
-position: relative;
-top: 50%;
-}
 
-.leftChoose, .rightChoose{
-height: 56vh !important;
-}
-.leftArrow{
-color: white;
-display: inline;
-position: relative;
-background-image: url(arrowLeft.png);
-background-size: contain;
-background-repeat: no-repeat;
-font-size: 2vh;
-padding: 3vh;
-padding-top: 2.9vh;
-left: 0 !important;
-}
-#askFooter{
-padding-top: 4vh;
-padding-bottom: 4vh;
-}
   #slider ul{
     width : 1920px !important;
     margin-left : -320px !important;
