@@ -563,8 +563,7 @@ font-size: 3vh;
   }
   
 #video{
-  width: 700px !important;
-  height: 500px !important;
+  width: 600px !important;
 }
 }
 @media(max-width: 1024px){
