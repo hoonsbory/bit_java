@@ -616,7 +616,7 @@ background-size: contain;
 background-repeat: no-repeat;
 font-size: 2vh;
 padding: 3vh;
-padding-top: 2.9vh;
+padding-top: 3.2vh;
 left : 0 !important
 }
 .arrowBtn img{
@@ -642,6 +642,9 @@ font-size: 2vh;
 color: white;
 padding-left: 2rem;
 padding-right: 2rem;
+}
+#video{
+  width: 400px !important;
 }
 }
 
@@ -705,7 +708,7 @@ padding-right: 2rem;
   background-repeat: no-repeat;
   font-size: 2vh;
   padding: 3vh;
-  padding-top: 2.9vh;
+  padding-top: 3.2vh;
   left : 0 !important
 }
 .arrowBtn img{
