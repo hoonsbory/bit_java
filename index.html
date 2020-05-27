@@ -851,7 +851,8 @@
             }).catch(function (err) {
                 var error = err;
                 alert(error)
-                alert('시발짜증나;');
+                alert(error=="NotAllowedError");
+                alert(error.indexOf('Safari'));
                 if(err.indexOf("NotAllowedError") > -1){
                     alert('시발?');
                     window.location.reload();
