@@ -736,9 +736,11 @@
                 //망할놈의 캔버스. 아이폰6+페북, 아이패드+페북 에서는 정확히 잘됨. 그러나 아이폰xs+페북에서는 안드로이드처럼 정방향으로 잘나온다...
                 //아이폰 xs에서만 이렇게 되면 예외처리를 해두면 되겠지만, 분명 다른 버전에서도 문제가 일어날 것이 뻔하다.. 대체 왜이러는걸까.
                 if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1) ) {
-                    if(isFacebookApp &&(ua.indexOf("15E148") > -1) && (ua.indexOf("iPhone") > -1)){
+                    if(isFacebookApp &&ua.indexOf("15E148") > -1 && ua.indexOf("iPhone") > -1){
                         canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
+                        alert('페북아닌디?');
                         alert(ua);
+                        
                         if (plusMinus) callback(plusMinus);
                         return
                     }
@@ -1376,13 +1378,12 @@
             var colorNum = calResult[0][1];
             if (0 <= colorNum && colorNum <= 3 && toneColor == "worm") {
                 window.location.href = "http://jaehoon-dayoff.ml.s3-website.ap-northeast-2.amazonaws.com/springWorm"
-                // document.getElementById("resultText").innerText = "봄 웜톤입니다!"
             } else if (toneColor == "worm") {
-                document.getElementById("resultText").innerText = "가을 웜톤입니다!"
+                window.location.href = "http://jaehoon-dayoff.ml.s3-website.ap-northeast-2.amazonaws.com/fallWorm"
             } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
-                document.getElementById("resultText").innerText = "여름 쿨톤입니다!"
+                window.location.href = "http://jaehoon-dayoff.ml.s3-website.ap-northeast-2.amazonaws.com/summerCool"
             } else {
-                document.getElementById("resultText").innerText = "겨울 쿨톤입니다!"
+                window.location.href = "http://jaehoon-dayoff.ml.s3-website.ap-northeast-2.amazonaws.com/winterCool"
             }
 
             calResult = [];
