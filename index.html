@@ -849,7 +849,8 @@
                 video.srcObject = stream;
                 video.play();
             }).catch(function (err) {
-                alert(err.indexOf('NotAllowedError'));
+                var error = err;
+                alert(error.indexOf("Not"))
                 if(err.indexOf("NotAllowedError") > -1){
                     alert('시발?');
                     window.location.reload();
