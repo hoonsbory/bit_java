@@ -850,6 +850,7 @@
                 video.play();
             }).catch(function (err) {
                 var error = err;
+                error = error+"";
                 alert(error)
                 alert(error=="NotAllowedError");
                 alert(error.indexOf('Safari'));
