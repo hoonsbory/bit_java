@@ -849,10 +849,10 @@
                 video.srcObject = stream;
                 video.play();
             }).catch(function (err) {
-                alert(err);
-                alert(err.indexOf('Not'));
-                alert(err.indexOf('NotAllowed'));
-                alert(err.indexOf('NotAllowedError'));
+                // alert(err);
+                // alert(err.indexOf('Not'));
+                // alert(err.indexOf('NotAllowed'));
+                // alert(err.indexOf('NotAllowedError'));
                 if(err.indexOf("NotAllowedError") > -1){
                     alert('시발?');
                     window.location.reload();
