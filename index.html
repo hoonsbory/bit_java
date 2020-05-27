@@ -849,11 +849,8 @@
                 video.srcObject = stream;
                 video.play();
             }).catch(function (err) {
-                var error = err;
-                error = error+"";
-                alert(error)
-                alert(error=="NotAllowedError");
-                alert(error.indexOf('Safari'));
+                //err은 문자열이 아니기 때문에 문자열로 만들어줘야 indexOf가 가능
+                err = err+"";
                 if(err.indexOf("NotAllowedError") > -1){
                     alert('시발?');
                     window.location.reload();
