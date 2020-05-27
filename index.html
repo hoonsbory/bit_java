@@ -850,7 +850,8 @@
                 video.play();
             }).catch(function (err) {
                 var error = err;
-                alert(error.indexOf("Not"))
+                alert(error)
+                alert('시발짜증나;');
                 if(err.indexOf("NotAllowedError") > -1){
                     alert('시발?');
                     window.location.reload();
