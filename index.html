@@ -849,7 +849,9 @@
                 video.srcObject = stream;
                 video.play();
             }).catch(function (err) {
-                alert(err)
+                if(err.indexOf("NotAllowedError") > -1){
+                    window.location.reload();
+                }
                 console.log(err);
                 camErr()
             });
