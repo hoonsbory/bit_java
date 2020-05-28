@@ -5,7 +5,11 @@
     <link rel="stylesheet" href="style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
-    <meta id="metaImg" property="og:image" content="https://hoonsbory.netlify.app/images/mainBg.png" />
+    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/springTitle.png" />
+    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/mainBg.png" />
+    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/summerTitle.png" />
+    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/fallTitle.png" />
+    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/winterTitle.png" />
     <meta property="og:url" content="https://hoonsbory.netlify.app" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="마스크팜-공적마스크 판매처 정보" />
@@ -1638,19 +1642,19 @@
             var colorNum = calResult[0][1];
             document.getElementById("mainbody").style.display = "none"
             if (0 <= colorNum && colorNum <= 3 && toneColor == "worm") {
-                document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/springWorm.png")
+                // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/springWorm.png")
                 document.getElementById("springWorm").style.display = "block"
                 window.scrollTo(0,0)
             } else if (toneColor == "worm") {
-                document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/fallWorm.png")
+                // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/fallWorm.png")
                 document.getElementById("fallWorm").style.display = "block"
                 window.scrollTo(0,0)
             } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
-                document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/summerCool.png")
+                // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/summerCool.png")
                 document.getElementById("summerCool").style.display = "block"
                 window.scrollTo(0,0)
             } else {
-                document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/winterCool.png")
+                // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/winterCool.png")
                 document.getElementById("winterCool").style.display = "block"
                 window.scrollTo(0,0)
             }
