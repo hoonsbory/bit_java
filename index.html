@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
-    <meta property="og:image" content="https://hoonsbory.netlify.app/images/mainBg.png" />
+    <meta id="metaImg" property="og:image" content="https://hoonsbory.netlify.app/images/mainBg.png" />
     <meta property="og:url" content="https://hoonsbory.netlify.app" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="마스크팜-공적마스크 판매처 정보" />
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-
+    <div class="addthis_inline_share_toolbox"></div>
     <canvas id="myCanvas" style="display: none;">
     </canvas>
     <canvas id="copyCanvas" style="display: none;">
@@ -23,6 +23,7 @@
     <p id="resultText"></p>
     <script src="color-thief.umd.js"></script>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ec7a8d507b95d15"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="Jcrop.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
@@ -65,13 +66,13 @@
             <img alt="wormMain" class="pcMainImg" src="images/springMain.png"></img>
             <div class="mainRight">
                 <div class="squareGroup">
-                    <div style="display: flex; margin-bottom: 1rem;">
+                    <div style="display: flex; margin-bottom : .5rem;">
                         <span style="background : rgb(255,233,196)"></span>
-                        <span style="background : rgb(255,224,174); margin-left : 1rem;"></span>
+                        <span style="background : rgb(255,224,174); margin-left : .5rem;"></span>
                     </div>
-                    <div style="display: flex; margin-bottom: 2rem;">
+                    <div style="display: flex; margin-bottom : 1.5rem;">
                         <span style="background : rgb(253,215,153)"></span>
-                        <span style="background : rgb(244,203,149); margin-left : 1rem;"></span>
+                        <span style="background : rgb(244,203,149); margin-left : .5rem;"></span>
                     </div>
                 </div>
                 <div class="pcTopText">
@@ -116,13 +117,13 @@
             <img alt="wormMain" class="pcMainImg" src="images/summerMain.png"></img>
             <div class="mainRight">
                 <div class="squareGroup">
-                    <div style="display: flex; margin-bottom: 1rem;">
+                    <div style="display: flex; margin-bottom : .5rem;">
                         <span style="background : rgb(254,236,224)"></span>
-                        <span style="background : rgb(255,227,213); margin-left : 1rem;"></span>
+                        <span style="background : rgb(255,227,213); margin-left : .5rem;"></span>
                     </div>
-                    <div style="display: flex; margin-bottom: 2rem;">
+                    <div style="display: flex; margin-bottom : 1.5rem;">
                         <span style="background : rgb(255,222,203)"></span>
-                        <span style="background : rgb(250,208,184); margin-left : 1rem;"></span>
+                        <span style="background : rgb(250,208,184); margin-left : .5rem;"></span>
                     </div>
                 </div>
                 <div class="pcTopText">
@@ -166,13 +167,13 @@
             <img alt="wormMain" class="pcMainImg" src="images/fallMain.png"></img>
             <div class="mainRight">
                 <div class="squareGroup">
-                    <div style="display: flex; margin-bottom: 1rem;">
+                    <div style="display: flex; margin-bottom : .5rem;">
                         <span style="background : rgb(238,219,179)"></span>
-                        <span style="background : rgb(238,210,160); margin-left : 1rem;"></span>
+                        <span style="background : rgb(238,210,160); margin-left : .5rem;"></span>
                     </div>
-                    <div style="display: flex; margin-bottom: 2rem;">
+                    <div style="display: flex; margin-bottom : 1.5rem;">
                         <span style="background : rgb(232,197,139)"></span>
-                        <span style="background : rgb(223,180,112); margin-left : 1rem;"></span>
+                        <span style="background : rgb(223,180,112); margin-left : .5rem;"></span>
                     </div>
                 </div>
                 <div class="pcTopText">
@@ -215,13 +216,13 @@
             <img alt="wormMain" class="pcMainImg" src="images/winterMain.png"></img>
             <div class="mainRight">
                 <div class="squareGroup">
-                    <div style="display: flex; margin-bottom: 1rem;">
+                    <div style="display: flex; margin-bottom : .5rem;">
                         <span style="background : rgb(248,230,216)"></span>
-                        <span style="background : rgb(249,226,208); margin-left : 1rem;"></span>
+                        <span style="background : rgb(249,226,208); margin-left : .5rem;"></span>
                     </div>
-                    <div style="display: flex; margin-bottom: 2rem;">
+                    <div style="display: flex; margin-bottom : 1.5rem;">
                         <span style="background : rgb(246,216,192)"></span>
-                        <span style="background : rgb(236,205,177); margin-left : 1rem;"></span>
+                        <span style="background : rgb(236,205,177); margin-left : .5rem;"></span>
                     </div>
                 </div>
                 <div class="pcTopText">
@@ -1637,15 +1638,19 @@
             var colorNum = calResult[0][1];
             document.getElementById("mainbody").style.display = "none"
             if (0 <= colorNum && colorNum <= 3 && toneColor == "worm") {
+                document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/springWorm.png")
                 document.getElementById("springWorm").style.display = "block"
                 window.scrollTo(0,0)
             } else if (toneColor == "worm") {
+                document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/fallWorm.png")
                 document.getElementById("fallWorm").style.display = "block"
                 window.scrollTo(0,0)
             } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
+                document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/summerCool.png")
                 document.getElementById("summerCool").style.display = "block"
                 window.scrollTo(0,0)
             } else {
+                document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/winterCool.png")
                 document.getElementById("winterCool").style.display = "block"
                 window.scrollTo(0,0)
             }

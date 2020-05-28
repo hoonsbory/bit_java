@@ -696,9 +696,6 @@ justify-content: unset;
     width : 1920px !important;
     margin-left : -320px !important;
   }
-  html{
-    font-size : 10px !important;
-  }
   #realImage{
     width: 48vh !important;
     height: 48vh !important;
