@@ -4,7 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta property="og:image" content="https://hoonsbory.netlify.app/images/winterTitle.png" />
-	<meta property="og:url" content="https://hoonsbory.netlify.app" />
+	<meta id="url" property="og:url" content="https://hoonsbory.netlify.app/winterCool" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="퍼스널컬러 진단하러가기!" />
 	<meta property="og:description" content="나의 퍼스널 컬러는 무엇일까?" />
@@ -66,11 +66,17 @@
         
     </div>
     <script type="text/javascript">
-    var params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
-    console.log(params);
-    if(params.redirect="true"){
+    var params =  new URLSearchParams(location.search).get("redirect");
+   console.log(params); 
+    if(params=="true"){
         window.location.href = "https://hoonsbory.netlify.app"
+    }
+    // function redirect(){
+    //     document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
+    // }
+    alert(document.referrer);
+    if(document.referrer =="https://hoonsbory.netlify.app"){
+        document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
     }
     </script>
 </body>
