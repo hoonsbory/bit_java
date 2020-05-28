@@ -195,13 +195,17 @@
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        window.onpageshow = function (event) {
-            console.log(event);
-            console.log(event.persisted);
-            if (event.persisted) {
-                window.location.reload();
-            }
-        };
+    //뒤로가기고 페이지에 진입하면 새로고침되게
+    //엣지는 뒤로가기해도 캐시가없이 스크립트가 실행되었고, 크롬 일부버전은 persisted값이 false로만 나오는 버그가 있다고 한다. 그래서 window.performance조건을 추가해줌
+        if (document.addEventListener) {
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted || window.performance &&
+                    window.performance.navigation.type == 2) {
+                    location.reload();
+                }
+            },
+                false);
+        }
 
         let ua = navigator.userAgent || navigator.vendor || window.opera;
         function isFacebookApp() {
