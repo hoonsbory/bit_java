@@ -67,17 +67,17 @@
     </div>
     <script type="text/javascript">
     var params =  new URLSearchParams(location.search).get("redirect");
-   console.log(params); 
     if(params=="true"){
         window.location.href = "https://hoonsbory.netlify.app"
+    }
+    var params2 =  new URLSearchParams(location.search).get("referrer");
+    if(params2=="true"){
+        document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
     }
     // function redirect(){
     //     document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
     // }
-    alert(document.referrer);
-    if(document.referrer =="https://hoonsbory.netlify.app"){
-        document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
-    }
+   
     </script>
 </body>
 </html>
