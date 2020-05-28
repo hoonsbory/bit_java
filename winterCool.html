@@ -70,10 +70,13 @@
     if(params=="true"){
         window.location.href = "https://hoonsbory.netlify.app"
     }
+    $(document).ready(function(){
+
     var params2 =  new URLSearchParams(location.search).get("referrer");
     if(params2=="true"){
         document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
     }
+    })
     // function redirect(){
     //     document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
     // }
