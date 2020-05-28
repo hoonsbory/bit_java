@@ -4,7 +4,6 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta property="og:image" content="https://hoonsbory.netlify.app/images/winterTitle.png" />
-	<meta id="url" property="og:url" content="https://hoonsbory.netlify.app/winterCool" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="퍼스널컬러 진단하러가기!" />
 	<meta property="og:description" content="나의 퍼스널 컬러는 무엇일까?" />
@@ -12,6 +11,7 @@
     <title>퍼스널 컬러</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
     <link rel="stylesheet" href="result.css"> 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ec7a8d507b95d15"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -73,9 +73,16 @@
     $(document).ready(function(){
 
     var params2 =  new URLSearchParams(location.search).get("referrer");
+        var meta = document.createElement("meta");
+        meta.setAttribute("property","og:url")
     if(params2=="true"){
-        document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
+        meta.setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
+        window.location.href = "https://hoonsbory.netlify.app/winterCool?redirect=true"
+        // document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")
+    }else{
+        meta.setAttribute("content","https://hoonsbory.netlify.app/winterCool")
     }
+        document.querySelector("head").append(meta)
     })
     // function redirect(){
     //     document.getElementById("url").setAttribute("content","https://hoonsbory.netlify.app/winterCool?redirect=true")

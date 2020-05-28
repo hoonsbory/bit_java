@@ -18,6 +18,7 @@ body{
     padding-top: 2vw !important;
     color: rgb(10, 59, 112);
     max-width: 800px;
+    display: none;
 }
 .squareGroup span{
     width: 60px;

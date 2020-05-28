@@ -719,3 +719,88 @@ justify-content: unset;
     height: unset;
   }
 }
+
+
+
+
+
+
+/* 결과창*/
+.textDiv{
+  margin-top : 3rem;
+}
+.textSub{
+  padding-left: .3rem;
+  padding-right: .3rem;
+  display: inline-block;
+  margin-bottom: 1rem !important;
+}
+.pcMainDiv{
+  margin: auto;
+  padding-top: 2vw !important;
+  color: rgb(10, 59, 112);
+  max-width: 800px;
+  display: none;
+}
+.squareGroup span{
+  width: 60px;
+  padding-bottom: 60px;
+  display: inline-block;
+}
+.pcMainDiv p{
+  margin: 0 !important;
+  font-size: .9rem;
+}
+.pcMainImg{
+  float: left;
+  width: 200px;
+  margin-right: 30px;
+  height: 300px;
+}
+.specLip{
+  width: 100%;
+  margin-top : 20px;
+}
+.pcTitle{
+  width : 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.pcTopText {
+  position: relative;
+  top: -12px;
+}
+.pcTopText p{
+  font-size: .9rem !important;
+}
+.pcTopDiv{
+  display: inline-flex;
+  padding-top: 15px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 20px;
+}
+@media(max-width : 900px){
+.pcMainDiv{
+  padding: 10vw;
+  color: rgb(10, 59, 112);
+}
+.pcMainImg{
+  width: 150px;
+  height: 225px;
+  margin-right: 5vw;
+}
+.squareGroup span{
+  width: 40px ;
+  padding-bottom: 40px ;
+  display: inline-block;
+}
+.pcTopText p{
+      font-size: .78rem !important;
+}
+.pcMainDiv p{
+  font-size: .78rem;
+}
+}
