@@ -99,7 +99,7 @@ padding-right: 2vh;
   color: white;
   display: inline;
   position: relative;
-  background-image: url(arrow.png);
+  background-image: url(images/arrow.png);
   background-size: contain;
   background-repeat: no-repeat;
   padding: 1.5rem;
@@ -134,7 +134,7 @@ padding-right: 2vh;
   color: white;
   display: inline;
   position: relative;
-  background-image: url(arrowLeft.png);
+  background-image: url(images/arrowLeft.png);
   background-size: contain;
   background-repeat: no-repeat;
   padding: 1.5rem;
@@ -263,7 +263,7 @@ p{
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-image: url(mainBg.png);  
+  background-image: url(images/mainBg.png);  
   background-size: contain;
 }
 #mainTitle{
@@ -295,7 +295,7 @@ p{
 #bgSpan{
   font-size: 6vh;
 
-  background: url(fontBg.png);
+  background: url(images/fontBg.png);
   background-size: contain;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -335,7 +335,7 @@ p{
   color: white;
   display: inline;
   position: relative;
-  background-image: url(arrowLeft.png);
+  background-image: url(images/arrowLeft.png);
   background-size: contain;
   background-repeat: no-repeat;
   font-size: 2vh;
@@ -512,7 +512,7 @@ font-size: 3vh;
 
 /* jquery.Jcrop.min.css v0.9.12 (build:20130126) */
 .jcrop-holder{margin:auto;direction:ltr;text-align:left; border : 5px solid rgb(10, 59, 112);}
-.jcrop-vline,.jcrop-hline{background:#FFF url(Jcrop.gif);font-size:0;position:absolute;}
+.jcrop-vline,.jcrop-hline{background:#FFF url(images/Jcrop.gif);font-size:0;position:absolute;}
 .jcrop-vline{height:100%;width:1px!important;}
 .jcrop-vline.right{right:0;}
 .jcrop-hline{height:1px!important;width:100%;}
@@ -634,7 +634,7 @@ background: white;
 color: white;
 display: inline;
 position: relative;
-background-image: url(arrow.png);
+background-image: url(images/arrow.png);
 background-size: contain;
 background-repeat: no-repeat;
 font-size: 2vh;
