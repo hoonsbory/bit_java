@@ -5,20 +5,10 @@
     <link rel="stylesheet" href="style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
-    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/springTitle.png" />
-    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/mainBg.png" />
-    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/summerTitle.png" />
-    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/fallTitle.png" />
-    <meta  property="og:image" content="https://hoonsbory.netlify.app/images/winterTitle.png" />
-    <meta property="og:url" content="https://hoonsbory.netlify.app" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="마스크팜-공적마스크 판매처 정보" />
-    <meta property="og:description" content="마스크팜-공적마스크 판매처 정보를 입고순, 거리순으로 확인할 수 있는 마스크알리미입니다." />
-    <meta property="og:site_name" content="마스크팜-공적마스크 판매처 정보" />
 </head>
 
 <body>
-    <div class="addthis_inline_share_toolbox"></div>
+
     <canvas id="myCanvas" style="display: none;">
     </canvas>
     <canvas id="copyCanvas" style="display: none;">
@@ -27,7 +17,6 @@
     <p id="resultText"></p>
     <script src="color-thief.umd.js"></script>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ec7a8d507b95d15"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="Jcrop.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
@@ -62,7 +51,7 @@
         </div>
     </div>
     <div class="header">
-        <a href="/"><h5 style="margin : 0">메뉴</h5></a>
+        <h5 style="margin : 0">메뉴</h5>
     </div>
     <div class="pcMainDiv" id="springWorm">
         <img alt="wormTitle" class="pcTitle" src="images/springTitle.png"></img>
@@ -267,14 +256,13 @@
     </div>
 
 
-
     <div id="mainbody">
         <div id="mainTitle">
             <p>나는 <span id="wormSpan">웜톤</span>일까? <span id="coolSpan">쿨톤</span>일까?</p>
             <span id="bgSpan">퍼스널컬러</span><span id="noBgSpan"> 진단</span>
         </div>
         <div id="subTitle">'톤.잘.알'이 되어 훈남,훈녀 되자!</div>
-        <div id="stepInfo"><span id="stepNum">1</span><span id="subInfo">피부 사진 촬영</span></div>
+        <div id="stepInfo"><div id="stepDiv"></div><span id="stepNum">1</span><span id="subInfo" style="vertical-align: top;">피부 사진 촬영</span></div>
         <div id="cropNotice">※사각형에 피부만 꽉차게 편집해주세요</div>
         <div class="file-upload">
 
@@ -292,7 +280,7 @@
                     <li>
                         <div class="file-upload-content" id="noCamDiv" style="display: none;">
                             <img class="file-upload-image" id="realImage" src="#" alt="your image" />
-                            <div style="margin-top : 2vh">
+                            <div style="margin-top : 2vh;">
                                 <div class="btnGroup" id="editBtn" onclick="editImg()"><img
                                         src="images/crop.png"><span>자르기</span></div>
                                 <div class="btnGroup" id="rotateBtn" onclick="rotateImg('right')"><img
@@ -407,8 +395,8 @@
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        //뒤로가기고 페이지에 진입하면 새로고침되게
-        //엣지는 뒤로가기해도 캐시가없이 스크립트가 실행되었고, 크롬 일부버전은 persisted값이 false로만 나오는 버그가 있다고 한다. 그래서 window.performance조건을 추가해줌
+    //뒤로가기고 페이지에 진입하면 새로고침되게
+    //엣지는 뒤로가기해도 캐시가없이 스크립트가 실행되었고, 크롬 일부버전은 persisted값이 false로만 나오는 버그가 있다고 한다. 그래서 window.performance조건을 추가해줌
         if (document.addEventListener) {
             window.addEventListener('pageshow', function (event) {
                 if (event.persisted || window.performance &&
@@ -429,6 +417,11 @@
             document.getElementById("subTitle").innerHTML = ua;
         }
 
+        if(ua.indexOf("Mobile") > -1){
+            alert('모바일');
+            document.getElementById("subInfo").style.position = "relative"
+            document.getElementById("subInfo").style.top = "1vh"
+        }
 
 
         var video = document.getElementById('video');
@@ -1184,14 +1177,14 @@
         }
         function modeChange() {
             document.getElementById("mainbody").scrollIntoView();
-            if (navigator.userAgent.indexOf("Android") > 0 ||
-                navigator.userAgent.indexOf("iPhone") > 0 ||
-                navigator.userAgent.indexOf("iPod") > 0 ||
-                navigator.userAgent.indexOf("iPad") > 0 ||
-                navigator.userAgent.indexOf("BlackBerry") > 0) {
-                document.getElementById("stepNum").style.paddingRight = "2.3vh";
-                document.getElementById("stepNum").style.paddingTop = ".6vh";
-            }
+            // if (navigator.userAgent.indexOf("Android") > 0 ||
+            //     navigator.userAgent.indexOf("iPhone") > 0 ||
+            //     navigator.userAgent.indexOf("iPod") > 0 ||
+            //     navigator.userAgent.indexOf("iPad") > 0 ||
+            //     navigator.userAgent.indexOf("BlackBerry") > 0) {
+            //     document.getElementById("stepNum").style.paddingRight = "2.3vh";
+            //     document.getElementById("stepNum").style.paddingTop = ".6vh";
+            // }
             document.getElementById("subTitle").style.display = "none";
             document.getElementById("mainTitle").style.display = "none";
             document.getElementById("notice").style.display = "none";

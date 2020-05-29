@@ -4,6 +4,8 @@
   font-weight: 100;
   src: url(font/HSThin.ttf) format("truetype");
 } */
+@charset "utf-8";
+
 html{
   font-size: 17px;
   scroll-behavior: smooth; 
@@ -67,27 +69,32 @@ html{
   padding-left: 2rem;
   padding-right: 2rem;
 }
+#stepDiv{
+  width: 51px;
+  padding-top: 53px;
+  display: inline-block;
+  background: white;
+}
   #stepInfo {
     display: none;
     background-color: rgb(74, 114, 176);
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
-    font-size: 3.5vh;
+    font-size: 2rem;
     color: white;
     padding-right: 1.8rem;
     padding-top: 0.4rem;
     padding-left: 0.3rem;
+    height: 55px;
     padding-bottom: 0.3rem;
     margin-top: 6vh;
     margin-bottom: 2vh;
   }
 #stepNum{
-  background-color: white;
     color: rgb(74, 114, 176);
-    padding-top: 1.2vh;
-padding-left: 2vh;
-padding-right: 2vh;
-    margin-right: 1vh;
+    position: relative;
+    left: -35px;
+    top: -20px;
 }
 #askFooter{
   background: white;
@@ -580,8 +587,14 @@ font-size: 3vh;
   #realImage{
     width: 43vh !important;
     height: 43vh !important;
+    max-width: 580px !important;
+    max-height: 580px !important;
   }
-  
+  #newfile{
+    max-width: 450px;
+    width: 35vh !important;
+    min-width: 223px;
+  }
 #video{
   width: 600px !important;
 }
@@ -611,7 +624,7 @@ font-size: 3vh;
   }
   .btnGroup span{
     padding-left: .6vh;
-    font-size: 2vh;
+    font-size: 1.7vh;
     word-break: keep-all;
   }
   .btnGroup img{
@@ -674,7 +687,18 @@ padding-right: 2rem;
   .file-upload{
     width: 320px;
   }
-       
+  #stepInfo {
+    font-size: 3.5vh;
+    height: 6vh;
+  }
+#stepNum{
+  left: -3.9vh;
+  top: -1.9vh;
+}
+#stepDiv{
+    width: 6vh;
+    padding-top: 5.8vh;
+}
 #slider{
 position: relative;
   overflow: hidden;
@@ -685,6 +709,8 @@ position: relative;
 margin-bottom: 5vh;
 margin-top: 1vh !important;
 width: 37vh !important;
+max-width: 300px;
+min-width: 150px;
 }
 
 #mainbody{
@@ -696,11 +722,16 @@ justify-content: unset;
     width : 1920px !important;
     margin-left : -320px !important;
   }
+  html{
+    font-size : 10px !important;
+  }
   #realImage{
     width: 48vh !important;
     height: 48vh !important;
+    min-width: 182px !important;
     max-width: 310px !important;
     max-height: 310px !important;
+    min-height: 182px !important;
   }
   /* .dragBar{
     display: block;
@@ -716,88 +747,81 @@ justify-content: unset;
     height: unset;
   }
 }
-
-
-
-
-
-
-/* 결과창*/
 .textDiv{
-  margin-top : 3rem;
-}
-.textSub{
-  padding-left: .3rem;
-  padding-right: .3rem;
-  display: inline-block;
-  margin-bottom: 1rem !important;
-}
-.pcMainDiv{
-  margin: auto;
-  padding-top: 2vw !important;
-  color: rgb(10, 59, 112);
-  max-width: 800px;
-  display: none;
-}
-.squareGroup span{
-  width: 60px;
-  padding-bottom: 60px;
-  display: inline-block;
-}
-.pcMainDiv p{
-  margin: 0 !important;
-  font-size: .9rem;
-}
-.pcMainImg{
-  float: left;
-  width: 200px;
-  margin-right: 30px;
-  height: 300px;
-}
-.specLip{
-  width: 100%;
-  margin-top : 20px;
-}
-.pcTitle{
-  width : 100%;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.pcTopText {
-  position: relative;
-  top: -12px;
-}
-.pcTopText p{
-  font-size: .9rem !important;
-}
-.pcTopDiv{
-  display: inline-flex;
-  padding-top: 15px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 20px;
-}
-@media(max-width : 900px){
-.pcMainDiv{
-  padding: 10vw;
-  color: rgb(10, 59, 112);
-}
-.pcMainImg{
-  width: 150px;
-  height: 225px;
-  margin-right: 5vw;
-}
-.squareGroup span{
-  width: 40px ;
-  padding-bottom: 40px ;
-  display: inline-block;
-}
-.pcTopText p{
-      font-size: .78rem !important;
-}
-.pcMainDiv p{
-  font-size: .78rem;
-}
-}
+    margin-top : 3rem;
+  }
+  .textSub{
+    padding-left: .3rem;
+    padding-right: .3rem;
+    display: inline-block;
+    margin-bottom: 1rem !important;
+  }
+  .pcMainDiv{
+    margin: auto;
+    padding-top: 2vw !important;
+    color: rgb(10, 59, 112);
+    max-width: 800px;
+    display: none;
+  }
+  .squareGroup span{
+    width: 60px;
+    padding-bottom: 60px;
+    display: inline-block;
+  }
+  .pcMainDiv p{
+    margin: 0 !important;
+    font-size: .9rem;
+  }
+  .pcMainImg{
+    float: left;
+    width: 200px;
+    margin-right: 30px;
+    height: 300px;
+  }
+  .specLip{
+    width: 100%;
+    margin-top : 20px;
+  }
+  .pcTitle{
+    width : 100%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .pcTopText {
+    position: relative;
+    top: -12px;
+  }
+  .pcTopText p{
+    font-size: .9rem !important;
+  }
+  .pcTopDiv{
+    display: inline-flex;
+    padding-top: 15px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 20px;
+  }
+  @media(max-width : 900px){
+  .pcMainDiv{
+    padding: 10vw;
+    color: rgb(10, 59, 112);
+  }
+  .pcMainImg{
+    width: 150px;
+    height: 225px;
+    margin-right: 5vw;
+  }
+  .squareGroup span{
+    width: 40px ;
+    padding-bottom: 40px ;
+    display: inline-block;
+  }
+  .pcTopText p{
+        font-size: .78rem !important;
+  }
+  .pcMainDiv p{
+    font-size: .78rem;
+  }
+  }
