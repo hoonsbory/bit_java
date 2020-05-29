@@ -814,12 +814,12 @@ justify-content: unset;
     margin-right: 5vw;
   }
   .squareGroup span{
-    width: 40px ;
-    padding-bottom: 40px ;
+    width: 50px ;
+    padding-bottom: 50px ;
     display: inline-block;
   }
   .pcTopText p{
-        font-size: .78rem !important;
+        font-size: 1.3rem !important;
   }
   .pcMainDiv p{
     font-size: .78rem;
