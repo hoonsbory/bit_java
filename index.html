@@ -53,7 +53,7 @@
     <div class="header">
         <h5 style="margin : 0">메뉴</h5>
     </div>
-    <div class="pcMainDiv" id="springWorm">
+    <!-- <div class="pcMainDiv" id="springWorm">
         <img alt="wormTitle" class="pcTitle" src="images/springTitle.png"></img>
         <div class="pcTopDiv">
             <img alt="wormMain" class="pcMainImg" src="images/springMain.png"></img>
@@ -253,7 +253,7 @@
             <img alt="wormLip" class="specLip" src="images/winterLip.png"></img>
         </div>
 
-    </div>
+    </div> -->
 
 
     <div id="mainbody">
@@ -1634,22 +1634,26 @@
                 return a[0] - b[0];
             });
             var colorNum = calResult[0][1];
-            document.getElementById("mainbody").style.display = "none"
+            // document.getElementById("mainbody").style.display = "none"
             if (0 <= colorNum && colorNum <= 3 && toneColor == "worm") {
                 // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/springWorm.png")
-                document.getElementById("springWorm").style.display = "block"
+                // document.getElementById("springWorm").style.display = "block"
+                window.location.href = "/springWorm"
                 window.scrollTo(0,0)
             } else if (toneColor == "worm") {
                 // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/fallWorm.png")
-                document.getElementById("fallWorm").style.display = "block"
+                // document.getElementById("fallWorm").style.display = "block"
+                window.location.href = "/fallWorm"
                 window.scrollTo(0,0)
             } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
                 // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/summerCool.png")
-                document.getElementById("summerCool").style.display = "block"
+                // document.getElementById("summerCool").style.display = "block"
+                window.location.href = "/summerCool"
                 window.scrollTo(0,0)
             } else {
                 // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/winterCool.png")
-                document.getElementById("winterCool").style.display = "block"
+                // document.getElementById("winterCool").style.display = "block"
+                window.location.href = "/winterCool"
                 window.scrollTo(0,0)
             }
 
