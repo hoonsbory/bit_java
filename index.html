@@ -1109,6 +1109,7 @@
                         alert("1");
                         //video.src = window.URL.createObjectURL(stream);
                         document.getElementById("mainCam").style.display = "block"
+                        document.getElementById("cropNotice").innerHTML = "※ 손목 안쪽 피부가 잘보이는 상태에서 측정버튼을 눌러주세요"
                         modeChange()
                         video.srcObject = stream;
                         video.play();
