@@ -986,7 +986,7 @@
                 //망할놈의 캔버스. 아이폰6+페북, 아이패드+페북 에서는 정확히 잘됨. 그러나 아이폰xs+페북에서는 안드로이드처럼 정방향으로 잘나온다...
                 //아이폰 xs에서만 이렇게 되면 예외처리를 해두면 되겠지만, 분명 다른 버전에서도 문제가 일어날 것이 뻔하다.. 대체 왜이러는걸까.
                 if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1)) {
-                    if (isFacebookApp() && ua.indexOf("15E148") > -1 && ua.indexOf("iPhone") > -1) {
+                    if (ua.indexOf("15E148") > -1 && ua.indexOf("iPhone") > -1) {
                         canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
                         alert('페북아닌디?');
                         alert(ua);
