@@ -409,7 +409,9 @@
 
         let ua = navigator.userAgent || navigator.vendor || window.opera;
         alert(ua);
-        let osInfo = ua.substring(34,38);
+        let osInfo = ua.substring(34,39);
+        let realOs = osInfo.substring(0,2) + "." + osInfo.substring(3,4);
+        let doubleOs = parseFloat(realOs)
         alert(osInfo)
         function isFacebookApp() {
             return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("FBSV") > -1) || (ua.indexOf("FBSS") > -1) || (ua.indexOf("FBCR") > -1) || (ua.indexOf("FBID") > -1) || (ua.indexOf("FBCL") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBMD") > -1) || (ua.indexOf("FBDV") > -1) || (ua.indexOf("FBSN") > -1));
@@ -989,7 +991,7 @@
                 //망할놈의 캔버스. 아이폰6+페북, 아이패드+페북 에서는 정확히 잘됨. 그러나 아이폰xs+페북에서는 안드로이드처럼 정방향으로 잘나온다...
                 //아이폰 xs에서만 이렇게 되면 예외처리를 해두면 되겠지만, 분명 다른 버전에서도 문제가 일어날 것이 뻔하다.. 대체 왜이러는걸까.
                 if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1)) {
-                    if (osInfo > 13.3 && ua.indexOf("15E148") > -1 && ua.indexOf("iPhone") > -1) {
+                    if (realOs > 13.3 && ua.indexOf("15E148") > -1 && ua.indexOf("iPhone") > -1) {
                         canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
                         alert('페북아닌디?');
                         alert(ua);
@@ -1533,7 +1535,7 @@
                 canvas.width = this.width;
                 canvas.height = this.height;
                 if (navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i) == null ? false : true) {
-                    if (osInfo > 13.3  && (ua.indexOf("15E148") > -1) && (ua.indexOf("iPhone") > -1)) {
+                    if (realOs > 13.3  && (ua.indexOf("15E148") > -1) && (ua.indexOf("iPhone") > -1)) {
                         canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
                         alert(ua);
                         if (plusMinus) callback(plusMinus);
