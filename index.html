@@ -53,7 +53,7 @@
     <div class="header">
         <h5 style="margin : 0">메뉴</h5>
     </div>
-    <!-- <div class="pcMainDiv" id="springWorm">
+    <div class="pcMainDiv" id="springWorm">
         <img alt="wormTitle" class="pcTitle" src="images/springTitle.png"></img>
         <div class="pcTopDiv">
             <img alt="wormMain" class="pcMainImg" src="images/springMain.png"></img>
@@ -253,7 +253,7 @@
             <img alt="wormLip" class="specLip" src="images/winterLip.png"></img>
         </div>
 
-    </div> -->
+    </div>
 
 
     <div id="mainbody">
@@ -296,7 +296,7 @@
                             <img id="originalImg" style="display: none;" />
                         </div>
                         <div id="mainCam" style="display: none;">
-                            <video id="video" style="margin-bottom : 5vh; width: 300px; height : 60vh" autoplay
+                            <video id="video" style="margin-bottom : 5vh; width: 100%; height : 60vh" autoplay
                                 playsinline></video>
                             <div class="arrowBtn" onclick="camCheck()">피부톤 측정</div>
                             <canvas id="canvas" style="display: none;"></canvas>
@@ -407,13 +407,19 @@
                 false);
         }
 
+        let appleCheck = false;
         let ua = navigator.userAgent || navigator.vendor || window.opera;
-        alert(ua);
-        let osInfo = ua.split("OS")[1]
-        let realOs = osInfo.substring(1,3) + "." + osInfo.substring(4,5);
-        alert(realOs);
-        //ios버전 추출해서 실수형으로.
-        let floatOs = parseFloat(realOs)
+        let osInfo;
+        let realOs;
+        let floatOs = 0;
+        if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1)) {
+            appleCheck = true;
+            osInfo = ua.split("OS")[1]
+            realOs = osInfo.substring(1, 3) + "." + osInfo.substring(4, 5);
+
+            //ios버전 추출해서 실수형으로.
+            floatOs = parseFloat(realOs)
+        }
         function isFacebookApp() {
             return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("FBSV") > -1) || (ua.indexOf("FBSS") > -1) || (ua.indexOf("FBCR") > -1) || (ua.indexOf("FBID") > -1) || (ua.indexOf("FBCL") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBMD") > -1) || (ua.indexOf("FBDV") > -1) || (ua.indexOf("FBSN") > -1));
         };
