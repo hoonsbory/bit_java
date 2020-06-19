@@ -278,7 +278,14 @@
 // console.log(DeltaE.getDeltaE00(color1, color2));
     </script> -->
     <script type="module">
-     import dE00 from "./node_modules/delta-e/src/de00.js"
+        import dE00 from "./node_modules/delta-e/src/de00.js"
+        var module1 = function(labColor1, labColor2){
+        var delta = new dE00(labColor1, labColor2);
+            console.log(delta.getDeltaE());
+        }
+        window.module1 = module1;
+    </script>
+    <script>
 /**
  * Converts RGB color to CIE 1931 XYZ color space.
  * https://www.image-engineering.de/library/technotes/958-how-to-convert-between-srgb-and-ciexyz
@@ -288,7 +295,7 @@
  
 
         // var DeltaE = require('delta-e');
-        $(document).ready(function() {
+    
 
 
      function rgbToXyz(hex) {
@@ -362,9 +369,8 @@ function colorTest() {
             var labColor1 = { L: colorArray1[0], A: colorArray1[1], B: colorArray1[2]};
             var colorArray2 = xyzToLab(rgbToXyz(color2));
             var labColor2 = { L: colorArray2[0], A: colorArray2[1], B: colorArray2[2]};
-            var delta = new dE00(labColor1, labColor2);
-            console.log(delta.getDeltaE());
-        }
+            window.module1(labColor1,labColor2)
+            
 
 
 
@@ -1681,7 +1687,7 @@ function colorTest() {
 
             calResult = [];
         }
-    })
+
 
 
     </script>
