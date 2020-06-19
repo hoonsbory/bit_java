@@ -281,6 +281,7 @@
         import dE00 from "./node_modules/delta-e/src/de00.js"
         var module1 = function(labColor1, labColor2){
         var delta = new dE00(labColor1, labColor2);
+        return delta.getDeltaE();
         }
         window.module1 = module1;
     </script>
@@ -732,7 +733,7 @@ function colorTest() {
 
             var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
             var labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2]};
-            var result;
+
             for (var i = 0; i < colorList.length; i++) {
                 // var color = "color" + i;
                 // var red = (imgRed - colorList[i][0]);
@@ -741,10 +742,8 @@ function colorTest() {
                 // green = green < 0 ? -(green) : green;
                 // var blue = (imgBlue - colorList[i][2]);
                 // blue = blue < 0 ? -(blue) : blue;
-                result = window.module1(labColor,colorList[i])
-                console.log(result);
-                console.log(i);
-                firstResult.push([result, i]);
+                
+                firstResult.push([window.module1(labColor,colorList[i]), i]);
             }
             firstResult.sort(function (a, b) { // 오름차순 
                 return a[0] - b[0];
