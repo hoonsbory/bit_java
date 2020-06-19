@@ -1655,7 +1655,7 @@ function colorTest() {
                 // blue = blue < 0 ? -(blue) : blue;
 
                 calResult.push([window.module1(labColor,colorGroup[i]), i]);
-                calResult.push([red + green + blue, i]);
+                // calResult.push([red + green + blue, i]);
 
             }
             var length2 = calResult.length
@@ -1689,17 +1689,23 @@ function colorTest() {
                 } else {
                     season1[0] -= season2[0] * 0.1
                 }
+                console.log(season1[0]);
+                console.log(season2[0]);
             // }
             var colorNum = season1[0] == season2[0] ? calResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
             setTimeout(function () {
                 if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
-                    window.location.href = "https://mycolor.kr/springWarm"
+                    // window.location.href = "https://mycolor.kr/springWarm"
+                    console.log("spring");
                 } else if (toneColor == "warm") {
-                    window.location.href = "https://mycolor.kr/fallWarm"
+                    // window.location.href = "https://mycolor.kr/fallWarm"
+                    console.log("fall");
                 } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
-                    window.location.href = "https://mycolor.kr/summerCool"
+                    // window.location.href = "https://mycolor.kr/summerCool"
+                    console.log("summer");
                 } else {
-                    window.location.href = "https://mycolor.kr/winterCool"
+                    // window.location.href = "https://mycolor.kr/winterCool"
+                    console.log("winter");
                 }
             }, 1500);
 
