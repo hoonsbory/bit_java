@@ -761,7 +761,6 @@
                 return a[0] - b[0];
             });
             var colorNum = firstResult[0][1];
-            console.log(firstResult);
             setTimeout(function () {
 
                 loading.style.display = "none"
@@ -1666,7 +1665,7 @@
             calResult.sort(function (a, b) { // 오름차순 
                 return a[0] - b[0];
             });
-
+            console.log(calResult);
             //스트림 방식은 아무래도 카메라로 바로 측정하기 때문에 그늘지기도 하고 크롭으로 특정 부위를 자를수도 없어 좀 더 어둡기 때문에 인위적으로 벨런스를 조절해줌.
             if (stream || toneColor == "warm") {
                 for (var i = 0; i < length2; i++) {
@@ -1681,6 +1680,8 @@
                         break;
                     }
                 }
+                console.log(season1);
+                console.log(season2);
                 // if (toneColor == "warm") {
                 //     season1 -= season1 / 5
                 // } else {
