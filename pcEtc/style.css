@@ -1,9 +1,4 @@
-/* @font-face {
-  font-family: 'HSThin';
-  font-style: normal;
-  font-weight: 100;
-  src: url(font/HSThin.ttf) format("truetype");
-} */
+
 @charset "utf-8";
 
 html{
@@ -15,10 +10,10 @@ html{
   font-style: normal;
   font-weight: 100;
   src: local('HSThin'),
-  url(font/HSThin.woff2) format('woff2'),
-  url(font/HSThin.woff) format('woff'),
-  url(font/HSThin.ttf) format('truetype'),
-  url(font/HSThin.otf) format('opentype')
+  url(../font/HSThin.woff2) format('woff2'),
+  url(../font/HSThin.woff) format('woff'),
+  url(../font/HSThin.ttf) format('truetype'),
+  url(../font/HSThin.otf) format('opentype')
   /* 파이썬의 pyftsubset을 통해 경량화함 */
 }
 .fonts-loaded body {
@@ -27,6 +22,10 @@ html{
 }
 #realImage{
   border : 5px solid rgb(10, 59, 112);
+}
+#checkFail, #checkSuccess{
+  width: 90%;
+  margin  : auto;
 }
 .blocking-time {
  opacity: 0;
@@ -39,6 +38,18 @@ html{
     background-color: white;
   }
 }
+#footer{
+  background: aliceblue;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  font-size: 12px !important;
+}
+#footer img{
+  width: 9rem;
+}
 .popupBg{
     width: 100%;
     height: 100%;
@@ -47,17 +58,48 @@ html{
     position: fixed;
     z-index: 998;
 }
+#popup img{
+  width: 30px;
+}
 .popDiv{
-    position: fixed;
-    left: 50%;
-    text-align: center;
-    top: 50%;
-    z-index: 999;
-    transform: translate(-50%,-50%);
-    width: 300px;
-    height: 200px;
-    background: white;
-    border-radius: 16px;
+  position: fixed;
+  left: 50%;
+  text-align: center;
+  top: 50%;
+  z-index: 999;
+  transform: translate(-50%,-50%);
+  background-color: rgba(230, 230, 230, 1 );
+  font-size: 1.7vh;
+  color: rgb(10, 59, 112);
+  word-break: keep-all;
+  max-width: 250px;
+}
+.popDivFB{
+  position: fixed;
+  left: 50%;
+  text-align: center;
+  top: 50%;
+  z-index: 999;
+  transform: translate(-50%,-50%);
+  padding: 5vh;
+  padding-left: 6vh;
+  padding-right: 6vh;
+  background-color: rgba(230, 230, 230, 0.7 );
+  font-size: 1.7vh;
+  color: rgb(10, 59, 112);
+  word-break: keep-all;
+}
+.confirmBtn{
+
+    background-color: rgb(171, 196, 223);
+    color: rgb(10, 59, 112);
+    display: inline;
+    border: 1px solid rgb(10, 59, 112);
+    border-radius: 6px;
+    padding: 2vh;
+    padding-top: 1vh;
+    padding-bottom: .4vh;
+    cursor: pointer;
 }
 #cropNotice{
   display: none;
@@ -68,6 +110,7 @@ html{
   color: white;
   padding-left: 2rem;
   padding-right: 2rem;
+  padding-bottom: 1px;
 }
 #stepDiv{
   width: 51px;
@@ -106,12 +149,13 @@ html{
   color: white;
   display: inline;
   position: relative;
-  background-image: url(images/arrow.png);
+  background-image: url(../pcImages/arrow.png);
   background-size: contain;
   background-repeat: no-repeat;
   padding: 1.5rem;
   left: 0 !important;
   top: -2vh;
+  cursor: pointer;
   
 }
 .arrowBtn img{
@@ -141,10 +185,11 @@ html{
   color: white;
   display: inline;
   position: relative;
-  background-image: url(images/arrowLeft.png);
+  background-image: url(../pcImages/arrowLeft.png);
   background-size: contain;
   background-repeat: no-repeat;
   padding: 1.5rem;
+  cursor: pointer;
   left: 0 !important;
 }
 #askFooter{
@@ -160,6 +205,7 @@ html{
   transform: translateX(-50%);
   margin-top: 15px;
   margin-bottom : 3.6rem;
+  padding-top: 4px;
 }
 #leftBtn span{
   left : -6rem;
@@ -177,26 +223,19 @@ html{
 .fonts-loaded.blocking-time {
  opacity: 1;
 }
-/* .dragBar{
-  display: block;
-  width: 400px;
-  height: 400px;
-  position: absolute;
-  left: 0;
-  top: 0;
-} */
+
 
 .jcrop-holder:before{
-  content : "드래그해서 영역을 선택한 후 완료 버튼을 눌러주세요";
-  color: white;  
+  content: "드래그해서 영역을 선택한 후 완료 버튼을 눌러주세요";
+  color: white;
   position: absolute;
-  top : 50%;
-  left: 50%;
+  top: 50%;
+  width: 100%;
   transform: translateX(-50%);
-  width: 15rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   z-index: 100;
 }
+
 .jcrop-holder.aft:before{
   content: "";
 }
@@ -211,42 +250,11 @@ body{
 p{
   margin : 0;
 }
-/* @media(max-width : 767px){
-  html{
-    font-size : 14px !important;
-  }
-  .image-upload-wrap {
-    border: 4px solid rgb(10, 59, 112);
-    position: relative;
-    width: 200px !important;
-    height: 200px !important;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-}
-  #realImage{
-    width: 300px !important;
-    height: 300px !important;
-  }
-  .dragBar{
-    display: block;
-    width: 300px ;
-    height: 300px ;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-}
-@media(min-width : 768px){
-  #realImage{
-    width: 400px !important;
-    height: 400px !important;
-  }
-} */
+
 #notice{
   background-color: #ffffff;
   background-color: rgba( 255, 255, 255, 0.4 );
-  font-size: 2.5vh;
+  font-size: 2.3vh;
   color: rgb(10, 59, 112);
   margin-top: 5vh;
   margin-bottom : 2rem;
@@ -261,6 +269,7 @@ p{
   font-size: 1.9vh;
   margin-bottom: 5vh;
   padding: 6px;
+  padding-bottom: 3px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -270,7 +279,7 @@ p{
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-image: url(images/mainBg.png);  
+  background-image: url(../pcImages/mainBg.png);  
   background-size: contain;
 }
 #mainTitle{
@@ -291,7 +300,7 @@ p{
   position: relative;
   top: 1.1rem;
 }
-#wormSpan{
+#warmSpan{
   font-family: sans-serif;
   background-color: rgba(255,233,196);
 }
@@ -302,7 +311,7 @@ p{
 #bgSpan{
   font-size: 6vh;
 
-  background: url(images/fontBg.png);
+  background: url(../pcImages/fontBg.png);
   background-size: contain;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -337,12 +346,14 @@ p{
   height: 56vh !important;
   width: 50%;
   float: left;
+  cursor: pointer;
+  word-break: keep-all;
   }
   .leftArrow{
   color: white;
   display: inline;
   position: relative;
-  background-image: url(images/arrowLeft.png);
+  background-image: url(../pcImages/arrowLeft.png);
   background-size: contain;
   background-repeat: no-repeat;
   font-size: 2vh;
@@ -485,10 +496,20 @@ a.control_next {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  margin-top: 5px;
 }
 .drag-text img{
-width: 13vh;
-height: unset;
+  width: 13vh;
+  height: unset;
+}
+.drag-text p{
+  font-size: 2vh;
+    color: white;
+    background: red;
+    padding: 5px;
+    display: inline;
+    padding-bottom: 0px;
+    border-radius: 5px;
 }
 
 .drag-text h1 {
@@ -496,6 +517,7 @@ font-weight: 100;
 text-transform: uppercase;
 color: rgb(10, 59, 112);
 font-size: 3vh;
+margin-bottom: 5px;
 }
 .image-dropping,
 .image-upload-wrap:hover {
@@ -518,8 +540,8 @@ font-size: 3vh;
 
 
 /* jquery.Jcrop.min.css v0.9.12 (build:20130126) */
-.jcrop-holder{margin:auto;direction:ltr;text-align:left; border : 5px solid rgb(10, 59, 112);}
-.jcrop-vline,.jcrop-hline{background:#FFF url(images/Jcrop.gif);font-size:0;position:absolute;}
+.jcrop-holder{margin:auto;direction:ltr;text-align:center; border : 5px solid rgb(10, 59, 112);}
+.jcrop-vline,.jcrop-hline{background:#FFF url(../pcImages/Jcrop.gif);font-size:0;position:absolute;}
 .jcrop-vline{height:100%;width:1px!important;}
 .jcrop-vline.right{right:0;}
 .jcrop-hline{height:1px!important;width:100%;}
@@ -560,15 +582,14 @@ font-size: 3vh;
   }
   
   
-  /* .dragBar{
+ 
+  .middleSec{
+    width: 1024px;
     display: block;
-    width: 450px ;
-    height: 450px ;
-    position: absolute;
-    left: 0;
-    top: 0;
-  } */
+    margin: auto;
+  }
 }
+
 @media(min-width : 768px) and (max-width : 1024px){
   #video{
     height: 80vh;
@@ -597,8 +618,12 @@ font-size: 3vh;
     width: 35vh !important;
     min-width: 223px;
   }
+
 }
 @media(max-width: 1024px){
+  .middleSec{
+    width: 100% !important;
+  }
   #bgSpan, #noBgSpan{
     font-size: 6vh;
   }
@@ -613,7 +638,7 @@ font-size: 3vh;
     font-size: 3.4vh;
   }
   #notice{
-    font-size: 2.5vh;
+    font-size: 2.3vh;
   }
   .btnGroup{
     padding : 1vh;
@@ -646,7 +671,7 @@ background: white;
 color: white;
 display: inline;
 position: relative;
-background-image: url(images/arrow.png);
+background-image: url(../pcImages/arrow.png);
 background-size: contain;
 background-repeat: no-repeat;
 font-size: 2vh;
@@ -673,13 +698,33 @@ display: none;
 margin-bottom: 1vh;
 background: rgb(250,50,34);
 padding: 4px;
-font-size: 2vh;
+font-size: 1.5vh;
 color: white;
 padding-left: 2rem;
 padding-right: 2rem;
 }
 }
 @media(max-width: 767px){
+  #popup img{
+    width: 6vw;
+  }
+  .popDiv{
+      font-size: 2.2vw;
+  }
+  .popDivFB{
+    font-size: 2vw;
+    min-width: 58vw;
+  }
+  .jcrop-holder:before{
+    content: "드래그해서 영역을 선택한 후 완료 버튼을 눌러주세요";
+    color: white;
+    position: absolute;
+    top: 50%;
+    font-size: 1.1rem;
+    z-index: 100;
+    min-width: 182px !important;
+    max-width: 310px !important;
+    }
   #slider ul li{
     width : 320px;
   }
@@ -732,95 +777,10 @@ justify-content: unset;
     max-height: 310px !important;
     min-height: 182px !important;
   }
-  /* .dragBar{
-    display: block;
-    width: 300px ;
-    height: 300px ;
-    position: absolute;
-    left: 0;
-    top: 0;
-  } */
+  
 }
 @media(max-height : 439px){
   #mainbody{
     height: unset;
   }
 }
-.textDiv{
-    margin-top : 3rem;
-  }
-  .textSub{
-    padding-left: .3rem;
-    padding-right: .3rem;
-    display: inline-block;
-    margin-bottom: 1rem !important;
-  }
-  .pcMainDiv{
-    margin: auto;
-    padding-top: 2vw !important;
-    color: rgb(10, 59, 112);
-    max-width: 800px;
-    /* display: none; */
-  }
-  .squareGroup span{
-    width: 60px;
-    padding-bottom: 60px;
-    display: inline-block;
-  }
-  .pcMainDiv p{
-    margin: 0 !important;
-    font-size: .9rem;
-  }
-  .pcMainImg{
-    float: left;
-    width: 200px;
-    margin-right: 30px;
-    height: 300px;
-  }
-  .specLip{
-    width: 100%;
-    margin-top : 20px;
-  }
-  .pcTitle{
-    width : 100%;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .pcTopText {
-    position: relative;
-    top: -12px;
-  }
-  .pcTopText p{
-    font-size: .9rem !important;
-  }
-  .pcTopDiv{
-    display: inline-flex;
-    padding-top: 15px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 20px;
-  }
-  @media(max-width : 900px){
-  .pcMainDiv{
-    padding: 10vw;
-    color: rgb(10, 59, 112);
-  }
-  .pcMainImg{
-    width: 150px;
-    height: 225px;
-    margin-right: 5vw;
-  }
-  .squareGroup span{
-    width: 50px ;
-    padding-bottom: 50px ;
-    display: inline-block;
-  }
-  .pcTopText p{
-        font-size: 1.3rem !important;
-  }
-  .pcMainDiv p{
-    font-size: .78rem;
-  }
-  }

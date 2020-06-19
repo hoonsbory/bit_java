@@ -2,276 +2,116 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161543285-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-161543285-2');
+    </script>
+
+    <link rel="stylesheet" href="pcEtc/style.css">
+    <link rel="icon" href="images/favicon.ico" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
+    <meta property="og:image" content="https://mycolor.kr/pcImages/metaImg.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="나의 퍼스널 컬러는 무엇일까?" />
+    <meta property="og:description"
+        content="나는 웜톤일까? 쿨톤일까? 퍼스널컬러 진단하러가기!! 인공지능이 피부사진을 분석하여 결과를 알려줍니다. 회원가입없이 봄 웜톤, 여름 쿨톤, 가을 웜톤, 겨울 쿨톤 중 어디에 해당하는지 알아보세요." />
+    <meta property="og:site_name" content="마이퍼스널컬러" />
+    <link rel="canonical" href="https://mycolor.kr">
+    <meta name="description"
+        content="나는 웜톤일까? 쿨톤일까? 퍼스널컬러 진단하러가기!! 인공지능이 피부사진을 분석하여 결과를 알려줍니다. 회원가입없이 봄 웜톤, 여름 쿨톤, 가을 웜톤, 겨울 쿨톤 중 어디에 해당하는지 알아보세요.">
+    <meta name="naver-site-verification" content="5dc3a557afdd3f611a7539f850a0d9a895ac7867" />
+    <meta name="google-site-verification" content="x5-5ISQuDn24eQWdy-pG-KeCAYIi5iss2oL4dseBkS8" />
+
+    <title>마이퍼스널컬러</title>
 </head>
 
 <body>
 
+    <img id="loading" src="pcImages/loading.gif"
+        style="width : 65px; z-index : 999;display : none; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);">
     <canvas id="myCanvas" style="display: none;">
     </canvas>
     <canvas id="copyCanvas" style="display: none;">
     </canvas>
     <p id="resultText"></p>
     <p id="resultText"></p>
-    <script src="color-thief.umd.js"></script>
+    <script src="pcEtc/color-thief.umd.js"></script>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="Jcrop.min.js"></script>
+    <script src="pcEtc/Jcrop.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <div id="popup" style="display: none;">
         <div class="popupBg"></div>
-        <div class="popDiv">
-            <div style="background-color: cornflowerblue; border-top-left-radius: 16px; border-top-right-radius : 16px">
-                header</div>
+        <div class="popDivFB" style=" background-color: rgba(230, 230, 230, 1);">
             <div>
+                <img src="pcImages/warning.png">
                 <p>현 브라우저는 호환되지 않을 수 있습니다.</p>
-                <p>애플 - 우측하단클릭 -> 사파리에서 열기</p>
-                <p>안드로이드 - 우측상단클릭 -> 열기</p>
+                <p>아래의 경로로 재접속해주세요</p>
+                <p>* 우측하단 혹은 우측상단 터치 후</p>
+                <p style="margin-bottom : 15px">* 열기 or Safari에서 열기</p>
             </div>
-            <div><span class="popupConfirm" onclick="popupConfirm('popup')">확 인</span></div>
+            <div class="confirmBtn"><span class="popupConfirm" onclick="popupConfirm('popup')">확 인</span></div>
         </div>
     </div>
     <div id="checkResult" style="display: none;">
         <div class="popupBg"></div>
+
         <div class="popDiv">
-            <div style="background-color: cornflowerblue; border-top-left-radius: 16px; border-top-right-radius : 16px">
-                측정 결과</div>
-            <div id="checkFail">
+            <!-- 메인페이지 팝업 -->
+            <!-- <ins class="adsbygoogle" style="display:inline-block;width:250px;height:250px"
+                data-ad-client="ca-pub-9106671749645972" data-ad-slot="1187857035"></ins> -->
+
+            <div id="checkFail" style="margin-top: 10px;">
                 <p>피부색과 너무 거리가 멀어요!</p>
-                <p>다른 부위로 시도해 주세요</p>
+                <p style="margin-bottom : 15px"></p>
             </div>
-            <div id="checkSuccess" style="display: none;">
+            <div id="checkSuccess" style="display: none; margin-top: 10px;">
                 <p>피부 측정이 완료되었습니다!</p>
-                <p>더 정확한 측정을 위해 확인을 눌러 다음 단계로 넘어가세요</p>
+                <p style="margin-bottom : 15px">더 정확한 진단을 위해 다음 단계로 넘어갑니다</p>
             </div>
-            <div><span class="popupConfirm" onclick="popupConfirm('checkResult')">확 인</span></div>
+            <div class="confirmBtn" onclick="popupConfirm('checkResult')"><span class="popupConfirm">확 인</span></div>
+            <ins class="kakao_ad_area" style="display:block; margin-top: 5px !important; margin : auto;"
+                data-ad-unit="DAN-1h7fvl13rbh9w" data-ad-width="250" data-ad-height="250"></ins>
         </div>
     </div>
-    <div class="header">
-        <h5 style="margin : 0">메뉴</h5>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 결과페이지 하단2 -->
+    <div class="middleSec">
+        <ins class="adsbygoogle" style="display:block; width: 100%; height: 100px;"
+            data-ad-client="ca-pub-9106671749645972" data-ad-slot="1655934358"></ins>
     </div>
-    <div class="pcMainDiv" id="springWorm">
-        <img alt="wormTitle" class="pcTitle" src="images/springTitle.png"></img>
-        <div class="pcTopDiv">
-            <img alt="wormMain" class="pcMainImg" src="images/springMain.png"></img>
-            <div class="mainRight">
-                <div class="squareGroup">
-                    <div style="display: flex; margin-bottom : .5rem;">
-                        <span style="background : rgb(255,233,196)"></span>
-                        <span style="background : rgb(255,224,174); margin-left : .5rem;"></span>
-                    </div>
-                    <div style="display: flex; margin-bottom : 1.5rem;">
-                        <span style="background : rgb(253,215,153)"></span>
-                        <span style="background : rgb(244,203,149); margin-left : .5rem;"></span>
-                    </div>
-                </div>
-                <div class="pcTopText">
-                    <p>#밝은</p>
-                    <p>#생기넘치는</p>
-                    <p>#발랄한</p>
-                    <p>#부드러운</p>
-                    <p>#귀여운</p>
-                    <p>#로맨틱</p>
-                    <p>#따뜻한</p>
-                </div>
-            </div>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 봄 웜톤의 특징</span>
-            <p>한국인의 많은 사람이 봄 웜톤의 피부색을 가지고 있습니다. 봄 웜톤인 사람은 사랑스럽고 귀여운 이미지로 어려보이고 생동감이 있으며 활기가 넘칩니다. 로맨틱하면서 경쾌한 이미지가 많으며
-                사람들에게 인기가 많은 편입니다.</p>
-            <p>봄타입은 노란색을 지닌 따듯한 유형으로 선명(vivid)하고 밝은(bright)톤과 엷은(pale)톤으로 화사하며 생동감과 에너지를 느끼게 합니다.</p>
-            <p>봄타입은 복숭아빛이 감도는 밝고 노란 빛의 피부를 가지고 있습니다. 눈동자는 반짝반짝 거리고 생기가 있는 밝은 갈색 빛을 띄고 있으며 찰랑찰랑 윤기가 나는 머릿결이 특징입니다. 피부는
-                밝으면서 매끄럽고 투명한 분들이 많고 피부가 얇아서 주근깨 같이 잡티가 있는 경우도 있습니다.</p>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 봄 웜톤 컬러파레트</span>
-            <p>봄 컬러들은 전체적으로 노란색을 가지고 있는 그룹으로 밝고 선명하고 파스텔톤으로 이루어져 있어 화사하면서 활기찬 느낌이나는 탄력있는 파레트 입니다. 따라서 새싹과 꽃이 피어나는 봄의 맑은
-                이미지를 생각하며 스타일링 하는것을 추천합니다.</p>
-            <p>봄타입에게 잘 어울리는 컬러는 아이보리, 베이지와 같은 밝은톤과 알록달록 캔디처럼 선명한 컬러를 사용할 수 있는데, 대표적인 컬러는 복숭아 핑크, 오렌지 레드, 해바라기 노란색, 새싹의
-                초록, 팬지꽃의 퍼플 등 싱그러운 과일이나 햇살을 듬뿍 머금은 선명한 컬러입니다.</p>
-            <img alt="wormSpectrum" class="specLip" src="images/springSpectrum.png"></img>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 메이크업 / 스타일링 팁</span>
-            <p>[주얼리] 골드 / 브론즈 / 내츄럴진주</p>
-            <p>[블러셔] 코랄 / 오렌지 / 클리어피치 계열</p>
-            <p>[립스틱] 핑크베이지 / 코랄 / 누드베이지 / 오렌지 / 살몬핑크 / 선홍빛레드 계열</p>
-            <img alt="wormLip" class="specLip" src="images/springLip.png"></img>
-        </div>
-
-    </div>
-    <div class="pcMainDiv" id="summerCool">
-        <img alt="wormTitle" class="pcTitle" src="images/summerTitle.png"></img>
-        <div class="pcTopDiv">
-            <img alt="wormMain" class="pcMainImg" src="images/summerMain.png"></img>
-            <div class="mainRight">
-                <div class="squareGroup">
-                    <div style="display: flex; margin-bottom : .5rem;">
-                        <span style="background : rgb(254,236,224)"></span>
-                        <span style="background : rgb(255,227,213); margin-left : .5rem;"></span>
-                    </div>
-                    <div style="display: flex; margin-bottom : 1.5rem;">
-                        <span style="background : rgb(255,222,203)"></span>
-                        <span style="background : rgb(250,208,184); margin-left : .5rem;"></span>
-                    </div>
-                </div>
-                <div class="pcTopText">
-                    <p>#맑은</p>
-                    <p>#페미닌한</p>
-                    <p>#시원한</p>
-                    <p>#깨끗한</p>
-                    <p>#우아한</p>
-                    <p>#세련된</p>
-                    <p>#청량한</p>
-                </div>
-            </div>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 여름 쿨톤의 특징</span>
-            <p>여름 쿨톤인 사람은 대체적으로 깨끗한 이미지를 가지고 있습니다. 또한 여름타입은 자연스럽고 산뜻한 이미지로, 화사하며 부드럽고 여성스러운 스타일이 주로 많습니다. </p>
-            <p>여름타입은 흰색과 파랑을 지닌 차가운 유형으로 부드러움(soft)과 밝은(light)톤, 밝은 잿빛(light grayish)톤의 시원스럽고 화려함을 느끼게 합니다.</p>
-            <p>핑크빛과 붉은 빛이 감도는 혈색 좋은 피부톤을 가지고 있으며, 피부가 얇아 예민합니다. 차분하고 깊은 부드러운 갈색의 눈동자, 회갈색을 띠는 건조하고 얇으며 부시시한 머리카락, 지적이고
-                세련되며 우아한 인상이 여름타입의 특징입니다.</p>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 여름 쿨톤 컬러파레트</span>
-            <p>흰색과 파란색을 머금고 있는 여름 컬러들은 소프트하고 밝은 컬러, 그레이시한 컬러들로 이루어져 있어 시원하고 화려한 인상을 줍니다. 여름쿨톤의 컬러들은 블루베이스로 이루어져 있고 난색이어도
-                차가운 느낌을 가집니다. </p>
-            <p>여름타입에게 잘 어울리는 컬러는 화이트, 그레이, 네이비 등 차가운 느낌의 컬러를 기본색으로 그레이쉬한 파스텔톤과 함께 사용할 수 있는데, 대표적인 컬러는 딸기우유 핑크, 루비 레드, 민트
-                그린, 라벤더의 연보라, 시원한 파스텔 블루 등 안개가 낀 듯 뿌옇고 부드럽게 보이는게 특징입니다. 여름의 컬러는 시원함과 시크함, 세련된 느낌의 이미지를 보여줍니다.</p>
-            <img alt="wormSpectrum" class="specLip" src="images/summerSpectrum.png"></img>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 메이크업 / 스타일링 팁</span>
-            <p>[주얼리] 실버 / 화이트골드 / 다이아몬드 / 백진주</p>
-            <p>[블러셔] 푸른빛이 도는 핑크 / 라벤더 계열</p>
-            <p>[립스틱] 베이비핑크 / 로즈핑크 / 푸시아 / 라즈베리</p>
-            <img alt="wormLip" class="specLip" src="images/summerLip.png"></img>
-        </div>
-
-    </div>
-    <div class="pcMainDiv" id="fallWorm">
-        <img alt="wormTitle" class="pcTitle" src="images/fallTitle.png"></img>
-        <div class="pcTopDiv">
-            <img alt="wormMain" class="pcMainImg" src="images/fallMain.png"></img>
-            <div class="mainRight">
-                <div class="squareGroup">
-                    <div style="display: flex; margin-bottom : .5rem;">
-                        <span style="background : rgb(238,219,179)"></span>
-                        <span style="background : rgb(238,210,160); margin-left : .5rem;"></span>
-                    </div>
-                    <div style="display: flex; margin-bottom : 1.5rem;">
-                        <span style="background : rgb(232,197,139)"></span>
-                        <span style="background : rgb(223,180,112); margin-left : .5rem;"></span>
-                    </div>
-                </div>
-                <div class="pcTopText">
-                    <p>#깊은</p>
-                    <p>#내추럴</p>
-                    <p>#클래식</p>
-                    <p>#섹시한</p>
-                    <p>#그윽한</p>
-                    <p>#편안한</p>
-                    <p>#차분한</p>
-                </div>
-            </div>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 가을 웜톤의 특징</span>
-            <p>가을 웜톤인 사람은 클래식하고 글램한 느낌을 가집니다. 또한 포근하고 부드러우며 차분하고 원숙한 이미지를 지니고 있습니다. 상대방에게 친근함가 편안함을 느끼게하는 이미지 입니다.</p>
-            <p>가을타입은 황색을 지닌 따드산 유형으로 강한(strong)톤과 깊은(deep)톤, 중후한(dull)톤으로 편안함과 고급스러운 이미지를 느끼게 합니다.</p>
-            <p>가을타입은 누르스름한 피부톤에 혈색이 있으며 매끈매끈하며 탄력이 있는 피부를 가지고 있습니다. 눈동자색은 짙고 깊이감이 있어 차분하고 믿음직스럽고 그윽함이 특징입니다. 황갈색 피부, 혹은
-                짙은 갈색빛을 지닌 굵고 윤기없고 볼륨있는 머리카락을 가지고 있습니다. </p>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 가을 웜톤 컬러파레트</span>
-            <p>가을 컬러들은 노란색보다 짙은 황색을 지니고 있는 색의 그룹으로 깊고 강하면서 고급스럽고 편안한 컬러들이 주를 이루며, 어른스럽고 차분한 이미지를 가지고 있는 파레트 입니다.</p>
-            <p>가을타입에게 잘어울리는 컬러는 아이보리, 베이지와 같은 밝은톤과 골드와 브라운과 같은 진한톤에서 어두운 톤까지 많은 영역의 컬러를 사용할 수 있습니다. 대표적인 컬러는 잘익은 토마토,
-                연어살색, 가을의 단풍, 가을의 황금벌판, 황토색 등 가을의 자연에서 흔히 볼 수 있는 컬러입니다. 가을의 컬러는 따듯함과 안정감, 편안한 이미지를 줍니다. </p>
-            <img alt="wormSpectrum" class="specLip" src="images/fallSpectrum.png"></img>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 메이크업 / 스타일링 팁</span>
-            <p>[주얼리] 골드 / 브론즈 / 내츄럴진주</p>
-            <p>[블러셔] 인디핑크 / 테라코타 / 오렌지 계열</p>
-            <p>[립스틱] MLBB / 말린장미 / 토마토 / 오렌지레드 / 브라운레드 계열</p>
-            <img alt="wormLip" class="specLip" src="images/fallLip.png"></img>
-        </div>
-
-    </div>
-    <div class="pcMainDiv" id="winterCool">
-        <img alt="wormTitle" class="pcTitle" src="images/winterTitle.png"></img>
-        <div class="pcTopDiv">
-            <img alt="wormMain" class="pcMainImg" src="images/winterMain.png"></img>
-            <div class="mainRight">
-                <div class="squareGroup">
-                    <div style="display: flex; margin-bottom : .5rem;">
-                        <span style="background : rgb(248,230,216)"></span>
-                        <span style="background : rgb(249,226,208); margin-left : .5rem;"></span>
-                    </div>
-                    <div style="display: flex; margin-bottom : 1.5rem;">
-                        <span style="background : rgb(246,216,192)"></span>
-                        <span style="background : rgb(236,205,177); margin-left : .5rem;"></span>
-                    </div>
-                </div>
-                <div class="pcTopText">
-                    <p>#도도한</p>
-                    <p>#차가운</p>
-                    <p>#카리스마</p>
-                    <p>#섹시한</p>
-                    <p>#개성있는</p>
-                    <p>#시크한</p>
-                    <p>#화려한</p>
-                </div>
-            </div>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 겨울 쿨톤의 특징</span>
-            <p>겨울 쿨톤인 사람은 차갑고 강렬하며 이지적인 느낌을 지니고 있으며 깔끔하고 세련된 이미지를 지니는 사람이 많습니다. 전형적인 모던한 스타일로 선명하고 액티브한 이미지를 지니고 있어 존재감이
-                있으며 도시적인 감각을 지닌 유형입니다. </p>
-            <p>겨울타입은 파랑과 흰색, 검정을 지닌 차가운 유형으로 선명(vivid)하고 엷은(pale)톤, 어두운(dark)톤의 모던하며 도시적인 강렬함을 느끼게 합니다.</p>
-            <p>겨울타입은 핏기가 없어 보일 정도의 창백하고 투명한 피부톤을 가집니다. 눈동자는 푸른빛, 갈색빛으로 강렬하고 개성있으며 카리스마가 있다. 푸른빛이 감도는 갈색 머리, 혹은 아주 까만 머리를
-                가지고 있습니다.</p>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 겨울 쿨톤 컬러파레트</span>
-            <p>겨울 컬러들은 파란색, 흰색, 검정을 내포하고 있는 차갑고 강렬한 컬러들의 그룹입니다. 선명하고 강하거나, 혹은 아주 여린 아이시한 컬러들이 이 그룹에 속합니다. 모던하고 도회적인 이미지를
-                가지고 있는 파레트 입니다.</p>
-            <p>겨울타입에게 잘 어울리는 컬러는 화이트, 블랙과 같은 모노톤과 시리도록 차갑고 선명한 색과 아이스 컬러를 사용할 수 있는데, 대표적인 컬러는 아이스블루, 아이스핑크, 쇼킹핑크, 와인레드,
-                레몬옐로우, 크리스마스트리 그린, 사파이어 등 인공적이면서 얼음처럼 차갑고 강한 컬러들입니다. 겨울의 컬러는 차가움과 모던함, 카리스마 있는 이미지를 줍니다.</p>
-            <img alt="wormSpectrum" class="specLip" src="images/winterSpectrum.png"></img>
-        </div>
-        <div class="textDiv">
-            <span class="textSub" style="background: yellow;"># 메이크업 / 스타일링 팁</span>
-            <p>[주얼리] 실버 / 화이트골드 / 다이아몬드 / 백진주</p>
-            <p>[블러셔] 푸른빛이 강한 핑크 계열</p>
-            <p>[립스틱] 버건디 / 퍼플 / 딥로즈 / 플럼 / 체리 계열</p>
-            <img alt="wormLip" class="specLip" src="images/winterLip.png"></img>
-        </div>
-
-    </div>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
 
     <div id="mainbody">
         <div id="mainTitle">
-            <p>나는 <span id="wormSpan">웜톤</span>일까? <span id="coolSpan">쿨톤</span>일까?</p>
+            <p>나는 <span id="warmSpan">웜톤</span>일까? <span id="coolSpan">쿨톤</span>일까?</p>
             <span id="bgSpan">퍼스널컬러</span><span id="noBgSpan"> 진단</span>
         </div>
-        <div id="subTitle">'톤.잘.알'이 되어 훈남,훈녀 되자!</div>
-        <div id="stepInfo"><div id="stepDiv"></div><span id="stepNum">1</span><span id="subInfo" style="vertical-align: top;">피부 사진 촬영</span></div>
-        <div id="cropNotice">※사각형에 피부만 꽉차게 편집해주세요</div>
+        <div id="subTitle">'톤.잘.알'이 되어 훈남 , 훈녀 되자!</div>
+        <div id="stepInfo">
+            <div id="stepDiv"></div><span id="stepNum">1</span><span id="subInfo" style="vertical-align: top;">피부 사진
+                촬영</span>
+        </div>
+        <div id="cropNotice">※ 손목 안쪽 피부가 꽉 차게 편집해주세요</div>
         <div class="file-upload">
 
             <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
                 onchange="readURL(this);" accept="image/*" ; style="display: none; z-index: 998;" />
             <div class="image-upload-wrap" onclick="cameraCheck()">
                 <div class="drag-text">
-                    <img src="images/camera.png" />
+                    <img src="pcImages/camera.png" />
                     <h1>내 피부 촬영하기 </h1>
+                    <p>※ 손목 안쪽 피부</p>
                 </div>
             </div>
             <div id="slider" style="display: none;">
@@ -282,9 +122,9 @@
                             <img class="file-upload-image" id="realImage" src="#" alt="your image" />
                             <div style="margin-top : 2vh;">
                                 <div class="btnGroup" id="editBtn" onclick="editImg()"><img
-                                        src="images/crop.png"><span>자르기</span></div>
+                                        src="pcImages/crop.png"><span>자르기</span></div>
                                 <div class="btnGroup" id="rotateBtn" onclick="rotateImg('right')"><img
-                                        src="images/rotate.png"><span>회전</span></div>
+                                        src="pcImages/rotate.png"><span>회전</span></div>
                                 <div class="btnGroup" id="refreshBtn" onclick="refresh()"><span
                                         style="padding-left: 0px">재설정</span></div>
                                 <div class="btnGroup" onclick="crop()"><span style="padding-left: 0px">완료</span></div>
@@ -310,7 +150,7 @@
                         </div>
                         <div class="choose" style="color: rgb(10, 59, 112);">
                             <div class="leftChoose" style="background-color: rgb(162,206,164);"
-                                onclick="moveRight('worm')"><span>초록색</span></div>
+                                onclick="moveRight('warm')"><span>초록색</span></div>
                             <div class="middleBar"></div>
                             <div class="rightChoose" style="background-color: rgb(153,198,228);"
                                 onclick="moveRight('cool')"><span>파란색</span></div>
@@ -325,7 +165,7 @@
                         </div>
                         <div class="choose" style="color: white;">
                             <div class="leftChoose" style="background-color: rgb(117,76,36);"
-                                onclick="moveRight('worm')"><span>브라운</span></div>
+                                onclick="moveRight('warm')"><span>브라운</span></div>
                             <div class="middleBar"></div>
                             <div class="rightChoose" style="background-color: black;" onclick="moveRight('cool')">
                                 <span>블랙</span></div>
@@ -340,7 +180,7 @@
                         </div>
                         <div class="choose" style="color: rgb(10, 59, 112);">
                             <div class="leftChoose" style="background-color: rgb(253,215,153);"
-                                onclick="moveRight('worm')"><span>노란기</span></div>
+                                onclick="moveRight('warm')"><span>노란기</span></div>
                             <div class="middleBar"></div>
                             <div class="rightChoose" style="background-color: rgb(250,208,184);"
                                 onclick="moveRight('cool')"><span>붉은기</span></div>
@@ -355,7 +195,7 @@
                         </div>
                         <div class="choose" style="color: white;">
                             <div class="leftChoose" style="background-color: rgb(167,135,84);"
-                                onclick="moveRight('worm')"><span>쉽게 탄다</span></div>
+                                onclick="moveRight('warm')"><span>쉽게 탄다</span></div>
                             <div class="middleBar"></div>
                             <div class="rightChoose" style="background-color: rgb(225,152,142);"
                                 onclick="moveRight('cool')"><span>빨갛게 익는다</span></div>
@@ -371,7 +211,7 @@
                         <div class="choose" style="color: rgb(10, 59, 112);">
                             <div class="leftChoose"
                                 style="border-top: 4px solid rgb(253,245,226); border-bottom: 4px solid rgb(253,245,226); background-color: rgb(253,245,226);"
-                                onclick="moveRight('worm')"><span>아이보리 / 베이지</span></div>
+                                onclick="moveRight('warm')"><span>아이보리 / 베이지</span></div>
                             <div class="middleBar"></div>
                             <div class="rightChoose"
                                 style="border-top: 4px solid rgb(253,245,226); border-bottom: 4px solid rgb(253,245,226); background-color: white;"
@@ -386,17 +226,41 @@
 
 
         </div>
-        <div id="notice">※퍼스널컬러 진단을 위해서 <p>&nbsp;&nbsp;<span
-                    style="background-color: rgb(250,50,34); color: white; padding : 4px; padding-bottom: 0px;">팔목
-                    안쪽</span> 피부 촬영이
-                필요합니다.</p>
+        <div id="notice" style="text-align: center;">※ 피부톤은 <span
+                style="background-color: rgb(10, 59, 112); color: white; padding : 4px; padding-bottom: 0px;">1단계
+                카메라 측색값</span>과<p>
+                <span style="background-color: rgb(10, 59, 112); color: white; padding : 4px; padding-bottom: 0px;">2단계
+                    질문결과</span>를 종합하여 평가합니다</p>
         </div>
     </div>
 
-    <div id="disqus_thread"></div>
+    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    <div class="middleSec">
+
+        <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-9106671749645972"
+            data-ad-slot="7150630154" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t4tgk6re3upi" data-ad-width="320"
+            data-ad-height="50"></ins>
+        <div id="disqus_thread"></div>
+        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t89ovgrl5so5" data-ad-width="320"
+            data-ad-height="100"></ins>
+    </div>
+    <div id="footer">
+        <div id="footerLeft">
+            <img src="pcImages/footerImg.png">
+            <p>mycolor.kr</p>
+        </div>
+        <div>제작 도움 - <a href="https://www.youtube.com/channel/UCQNE2JmbasNYbjGAcuBiRRg"
+                style="color : rgb(10, 59, 112)">JoCoding Youtube</a></div>
+        <div id="footerCenter"><a href="https://mycolor.kr/privacy" style="color : rgb(10, 59, 112)">개인정보 처리방침</a></div>
+        <div id="footerRight">Contact : 신재훈 -tonymkcv93@gmail.com</div>
+    </div>
     <script type="text/javascript">
-    //뒤로가기고 페이지에 진입하면 새로고침되게
-    //엣지는 뒤로가기해도 캐시가없이 스크립트가 실행되었고, 크롬 일부버전은 persisted값이 false로만 나오는 버그가 있다고 한다. 그래서 window.performance조건을 추가해줌
+        //뒤로가기고 페이지에 진입하면 새로고침되게
+        //엣지는 뒤로가기해도 캐시가없이 스크립트가 실행되었고, 크롬 일부버전은 persisted값이 false로만 나오는 버그가 있다고 한다. 그래서 window.performance조건을 추가해줌
         if (document.addEventListener) {
             window.addEventListener('pageshow', function (event) {
                 if (event.persisted || window.performance &&
@@ -409,6 +273,12 @@
 
         let appleCheck = false;
         let ua = navigator.userAgent || navigator.vendor || window.opera;
+        if ((navigator.appName == 'Netscape' && ua.search('Trident') != -1) || (ua.indexOf("msie") != -1)) { // IE 일 경우
+            document.documentElement.classList.add('fonts-loaded');
+            alert("지원하지않는 브라우저입니다. 크롬,엣지,사파리 등의 브라우저를 이용해주세요");
+        }
+
+        //애플 기기의 ios버전을 체크하기 위함.
         let osInfo;
         let realOs;
         let floatOs = 0;
@@ -421,16 +291,14 @@
             floatOs = parseFloat(realOs)
         }
         function isFacebookApp() {
-            return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("FBSV") > -1) || (ua.indexOf("FBSS") > -1) || (ua.indexOf("FBCR") > -1) || (ua.indexOf("FBID") > -1) || (ua.indexOf("FBCL") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBMD") > -1) || (ua.indexOf("FBDV") > -1) || (ua.indexOf("FBSN") > -1));
+            return ((ua.indexOf("FBAN") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("FBSV") > -1) || (ua.indexOf("FBSS") > -1) || (ua.indexOf("FBCR") > -1) || (ua.indexOf("FBID") > -1) || (ua.indexOf("FBCL") > -1) || (ua.indexOf("FBMD") > -1) || (ua.indexOf("FBDV") > -1) || (ua.indexOf("FBSN") > -1));
         };
         //페이스북에서 파일 업로드가 안된다. accept속성을 지우면 된다는 얘기가 많은데 시도해봐도 되지를 않아서 외부 브라우저를 키도록 유도함.
         if (isFacebookApp()) {
             document.getElementById("popup").style.display = "block";
-            document.getElementById("subTitle").innerHTML = ua;
         }
 
-        if(ua.indexOf("Mobile") > -1){
-            alert('모바일');
+        if (ua.indexOf("Mobile") > -1) {
             document.getElementById("subInfo").style.position = "relative"
             document.getElementById("subInfo").style.top = "1vh"
         }
@@ -441,11 +309,11 @@
         //비디오 에러 캐치
         function camErr() {
             document.getElementById("noCamDiv").style.display = "block"
-            // document.getElementById("fileInput").style.display = "block"
-            // document.getElementById("camDiv").remove();
             document.getElementById("fileInput").click();
         }
 
+
+        //상황에따라 다른 팝업창 구분
         function popupConfirm(div) {
             if (document.getElementById("checkSuccess").style.display == "block") {
                 moveRight("");
@@ -455,7 +323,6 @@
             document.getElementById(div).style.display = "none";
         }
 
-        document.getElementById("mainbody").scrollIntoView();
 
 
         //캠화면 캡쳐 및 주요컬러 도출
@@ -493,11 +360,14 @@
         //첫 크롭여부 확인 후 처음인 경우만 드래그 안내
         var firstCrop = true;
 
-        var uploadCheck = false;
+        //steram 지원 유무 
+        var stream = false;
         //업로드여부 체크해
-        var slideCheck = 0;
+        var uploadCheck = false;
         //슬라이드 위치체크
-
+        var slideCheck = 0;
+        //로딩
+        var loading = document.getElementById("loading");
         //회전율
         var rotateRate = 0;
         //첫 비교 결과값을 담을 변수
@@ -524,15 +394,15 @@
             [246, 216, 192],
             [236, 205, 177],
             //여기까지 톤색깔
-            [220, 0, 18],//빨강
-            [0, 152, 68],//초록
-            [0, 159, 232],//하늘색
-            [29, 32, 135],//파랑
-            [94, 21, 108],//보라
-            [255, 255, 255],//하양
-            [0, 0, 0]//검정
+            // [220, 0, 18],//빨강
+            // [0, 152, 68],//초록
+            // [0, 159, 232],//하늘색
+            // [29, 32, 135],//파랑
+            // [95, 100, 255],//보라
+            // [254, 254, 254],//하양
+            // [0, 0, 0]//검정
         ]
-        var wormColor = [
+        var warmColor = [
             //봄
             [255, 233, 196],
             [254, 224, 174],
@@ -653,26 +523,26 @@
                 document.getElementById("stepNum").innerHTML = "2";
                 document.getElementById("subInfo").innerHTML = "질문\u00A05단계"
             }
-            if (tone == "worm") {
-                answerStack.push("worm");
+            if (tone == "warm") {
+                answerStack.push("warm");
             } else if (tone == "cool") {
                 answerStack.push("cool");
             }
             if (slideCheck == 6) {
-                var worm = 0;
+                var warm = 0;
                 var cool = 0;
                 for (var i = 0; i < answerStack.length; i++) {
-                    if (answerStack[i] == "worm") {
-                        worm++;
+                    if (answerStack[i] == "warm") {
+                        warm++;
                     } else {
                         cool++;
                     }
                 }
-                if (worm < cool) {
+                if (warm < cool) {
                     season(coolColor, "cool");
                     return
                 } else {
-                    season(wormColor, "worm");
+                    season(warmColor, "warm");
                     return
                 }
 
@@ -691,16 +561,24 @@
 
         //이미지에서 색상추출
         function color(src) {
+            var checkSuccess = document.getElementById("checkSuccess");
+            var checkFail = document.getElementById("checkFail");
+            var checkResult = document.getElementById("checkResult")
+
+            loading.style.display = "block"
             var colorThief = new ColorThief();
 
             var sourceImage = src
+            try {
 
-            console.log(
                 colorThief.getColor(sourceImage)
-            );
+            } catch (error) {
+                checkSuccess.style.display = "none"
+                checkFail.style.display = "block"
+                checkResult.style.display = "block"
+                loading.style.display = "none"
+            }
 
-            // Display palette of colors
-            // e.g [[55,37,29],[213,193,136],[110,204,223]]
             imgRed = colorThief.getColor(sourceImage)[0];
             imgGreen = colorThief.getColor(sourceImage)[1];
             imgBlue = colorThief.getColor(sourceImage)[2];
@@ -719,26 +597,30 @@
                 return a[0] - b[0];
             });
             var colorNum = firstResult[0][1];
-            var colorThumbnail = "rgb(" + red + "," + green + "," + blue + ")"
-            document.getElementById("failColor").style.backgroundColor = colorThumbnail;
-            document.getElementById("failColor").style.display = "inline-block";
-            document.getElementById("failColor").nextElementSibling.style.display = "inline-block"
-            if (colorNum < 16) {
-                document.getElementById("checkSuccess").style.display = "block"
-                document.getElementById("checkFail").style.display = "none"
+            alert(colorNum+"/ red="+imgRed+" green = "+ imgGreen + " blue = " + imgBlue + "//"+firstResult[0][0]);
+            setTimeout(function () {
 
-                document.getElementById("checkResult").style.display = "block"
+                loading.style.display = "none"
+                if (firstResult[0][0]<150) {
+                    checkSuccess.style.display = "block"
+                    checkFail.style.display = "none"
 
-                return;
-            } else {
-                document.getElementById("checkSuccess").style.display = "none"
-                document.getElementById("checkFail").style.display = "block"
-                document.getElementById("checkResult").style.display = "block"
-            }
+                    checkResult.style.display = "block"
+
+                    return;
+                }
+                else {
+                    checkFail.firstElementChild.nextElementSibling.innerHTML = "사각형에 피부가 꽉차게 편집해주세요!"
+                    if (stream) {
+                        checkFail.firstElementChild.nextElementSibling.innerHTML = "혹시 주변이 어두우시다면 피부가 화면에 꽉 찬 상태에서 시도해보세요!"
+                    }
+                    checkSuccess.style.display = "none"
+                    checkFail.style.display = "block"
+                    checkResult.style.display = "block"
+                }
+            }, 1500);
             firstResult = [];
 
-            // Display main color
-            // e.g [125, 189, 193]
         }
 
 
@@ -769,113 +651,116 @@
 
         //자르기
         function crop() {
-            if (cropCheck) {
-                return;
+            try {
+
+
+                if (cropCheck) {
+                    return;
+                }
+                cropCheck = true;
+                uploadCheck = false;
+                document.getElementById("refreshBtn").disabled = false;
+                //로드된 이미지를 캔버스에 출력
+                //복사용 캔버스에 복사함. 하나의 캔버스에서 자기 자신을 불러와 크롭해서 리드로우가 불가능하기 때문.
+                let canvas = document.getElementById("myCanvas");
+
+                let canvasContext = canvas.getContext("2d");
+
+
+
+                // @breif 캔버스 크기를 이미지 크기와 동일하게 지정
+
+                var imgWidth = document.getElementById("copyCanvas").width;
+                var imgHeight = document.getElementById("copyCanvas").height;
+                //캔버스와 비율을 맞추기 위해 메인 이미지의 크기로 나눈다. jcrop이 원본이미지 크기를 줄이기때문에, jcrop의 자식의 크기를 가져온다
+                var xRate = imgWidth / document.getElementById("jcropImg").width;
+                var yRate = imgHeight / document.getElementById("jcropImg").height;
+                canvas.width = w * xRate;
+
+                canvas.height = h * yRate;
+                if (canvas.width == 0 || canvas.height == 0) {
+                    alert("더 이상 확대할 수 없습니다.")
+                    cropCheck = false;
+                    return;
+                }
+                canvasContext.drawImage(
+
+                    document.getElementById("copyCanvas")
+
+                    , x * xRate        // 자르기를 시작할 x좌표
+
+                    , y * yRate       // 자르기를 시작할 y좌표
+
+                    , w * xRate   // 잘라낸 이미지의 넓이
+
+                    , h * yRate    // 잘라낸 이미지의 높이
+
+                    , 0                                         // 캔버스에 이미지를 배치할 x좌표
+
+                    , 0                                         // 캔버스에 이미지를 배치할 y좌표
+
+                    , w * xRate  // 사용할 이미지의 넓이(이미지 스트레칭 또는 축소)
+
+                    , h * yRate  // 사용할 이미지의 높이(이미지 스트레칭 또는 축소)
+
+                );
+
+                // console.log(canvas.getContext('2d').getImageData(50,50, 1, 1).data);
+                // getImageData로 특정 좌표의 컬러 값을 가져올 수 있다.
+
+                // 로드된 이미지를 캔버스에 출력
+                let canvas2 = document.getElementById("copyCanvas");
+
+                let canvasContext2 = canvas2.getContext("2d");
+
+
+
+                // @breif 캔버스 크기를 이미지 크기와 동일하게 지정
+
+                canvas2.width = document.getElementById("myCanvas").width;
+
+                canvas2.height = document.getElementById("myCanvas").height;
+
+                canvasContext2.drawImage(
+
+                    document.getElementById("myCanvas"), 0, 0
+
+
+                );
+
+
+
+                if (jcropApi) {
+                    jcropApi.destroy();
+                    jcropApi = null;
+                }
+                // let canvas2 = document.getElementById("copyCanvas");
+
+                // let canvasContext2 = canvas2.getContext("2d");
+                // var image = new Image();
+                // image.src = document.getElementById("realImage").src;
+                // image.onload = function () {
+
+                //     canvasContext2.drawImage(image, 0, 0, 200, 200);
+                // }
+                $(".file-upload-image").attr("src", getBase64Image());
+
+                document.getElementById("realImage").style.transform = "none";
+                rotateRate = 0;
+                $("#realImage").Jcrop({
+                    onSelect: showCoords,
+                }, function () {
+                    jcropApi = this;
+                    div();
+                });
+
+
+
+
+                // @details JCROP을 종료한다.
+
+            } catch (error) {
             }
-            cropCheck = true;
-            uploadCheck = false;
-            document.getElementById("refreshBtn").disabled = false;
-            //로드된 이미지를 캔버스에 출력
-            //복사용 캔버스에 복사함. 하나의 캔버스에서 자기 자신을 불러와 크롭해서 리드로우가 불가능하기 때문.
-            let canvas = document.getElementById("myCanvas");
-
-            let canvasContext = canvas.getContext("2d");
-
-
-
-            // @breif 캔버스 크기를 이미지 크기와 동일하게 지정
-
-            var imgWidth = document.getElementById("copyCanvas").width;
-            var imgHeight = document.getElementById("copyCanvas").height;
-            //캔버스와 비율을 맞추기 위해 메인 이미지의 크기로 나눈다. jcrop이 원본이미지 크기를 줄이기때문에, jcrop의 자식의 크기를 가져온다
-            var xRate = imgWidth / document.getElementById("jcropImg").width;
-            var yRate = imgHeight / document.getElementById("jcropImg").height;
-            canvas.width = w * xRate;
-
-            canvas.height = h * yRate;
-            if (canvas.width == 0 || canvas.height == 0) {
-                alert("더 이상 확대할 수 없습니다.")
-                cropCheck = false;
-                return;
-            }
-            canvasContext.drawImage(
-
-                document.getElementById("copyCanvas")
-
-                , x * xRate        // 자르기를 시작할 x좌표
-
-                , y * yRate       // 자르기를 시작할 y좌표
-
-                , w * xRate   // 잘라낸 이미지의 넓이
-
-                , h * yRate    // 잘라낸 이미지의 높이
-
-                , 0                                         // 캔버스에 이미지를 배치할 x좌표
-
-                , 0                                         // 캔버스에 이미지를 배치할 y좌표
-
-                , w * xRate  // 사용할 이미지의 넓이(이미지 스트레칭 또는 축소)
-
-                , h * yRate  // 사용할 이미지의 높이(이미지 스트레칭 또는 축소)
-
-            );
-
-            // console.log(canvas.getContext('2d').getImageData(50,50, 1, 1).data);
-            // getImageData로 특정 좌표의 컬러 값을 가져올 수 있다.
-
-            // 로드된 이미지를 캔버스에 출력
-            let canvas2 = document.getElementById("copyCanvas");
-
-            let canvasContext2 = canvas2.getContext("2d");
-
-
-
-            // @breif 캔버스 크기를 이미지 크기와 동일하게 지정
-
-            canvas2.width = document.getElementById("myCanvas").width;
-
-            canvas2.height = document.getElementById("myCanvas").height;
-
-            canvasContext2.drawImage(
-
-                document.getElementById("myCanvas"), 0, 0
-
-
-            );
-
-
-
-            if (jcropApi) {
-                jcropApi.destroy();
-                jcropApi = null;
-            }
-            // let canvas2 = document.getElementById("copyCanvas");
-
-            // let canvasContext2 = canvas2.getContext("2d");
-            // var image = new Image();
-            // image.src = document.getElementById("realImage").src;
-            // image.onload = function () {
-
-            //     canvasContext2.drawImage(image, 0, 0, 200, 200);
-            // }
-            $(".file-upload-image").attr("src", getBase64Image());
-
-            document.getElementById("realImage").style.transform = "none";
-            rotateRate = 0;
-            $("#realImage").Jcrop({
-                onSelect: showCoords,
-            }, function () {
-                jcropApi = this;
-                div();
-            });
-
-
-
-
-
-            // @details JCROP을 종료한다.
-
-
 
 
         };
@@ -950,7 +835,7 @@
             }
         }
         //업로드된 이미지를 jcrop라이브러리로 변환하고 이미지를 캔버스에 그려놓는다.
-        async function editImg(callback, plusMinus) {
+        function editImg(callback, plusMinus) {
             editCheck = true;
             if (plusMinus) {
 
@@ -965,7 +850,7 @@
                 }
             }
             document.getElementById("editBtn").style.animation = "fade 0.5s"
-            setTimeout(() => {
+            setTimeout(function () {
                 document.getElementById("editBtn").style.animation = "unset"
             }, 500);
             let canvas = document.getElementById("copyCanvas");
@@ -999,26 +884,17 @@
                 //아이폰 xs에서만 이렇게 되면 예외처리를 해두면 되겠지만, 분명 다른 버전에서도 문제가 일어날 것이 뻔하다.. 대체 왜이러는걸까.
                 //아이폰xs ios업데이트를 했더니 알아서 정방향으로 잘나온다. 이전에 했던 로직이 안먹힘. 하... 일단 ios 13.4버전 기준으로 자동회전을 시켜놨다.
                 //아이패드에서도 실험해봤는데 13.5버전 또한 안드로이드처럼 정방향으로 잘나온다. 확실히 ios문제인거 같다. 정확히 이 패치가 몇 버전에서 이루어졌는지 알아내야한다.
-                if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1)) {
-                    alert(floatOs);
-                    var fileInfo = document.getElementById("fileInput").files[0];
-                    EXIF.getData(fileInfo, async () => {
-                        const orientation2 = EXIF.getTag(fileInfo, "Orientation");
-                        alert(orientation2);
-                    })
-                    if (floatOs > 13.3 && ua.indexOf("15E148") > -1 ) {
+                if (appleCheck) {
+                    if (floatOs >= 13.4 || ua.indexOf("13.4") > -1 || ua.indexOf("13.5") > -1) {
                         canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                        alert('페북아닌디?');
-                        alert(ua);
-
                         if (plusMinus) callback(plusMinus);
                         return
                     }
-                    console.log("애플기기입니다.");
-                    EXIF.getData(fileInfo, async () => {
+                    // console.log("애플기기입니다.");
+                    var fileInfo = document.getElementById("fileInput").files[0];
+                    EXIF.getData(fileInfo, function () {
                         const orientation = EXIF.getTag(fileInfo, "Orientation");
-                        console.log("회전도는 " + orientation);
-                        alert('그냥 애플' + orientation);
+                        // console.log("회전도는 " + orientation);
                         switch (orientation) {
 
                             // @details 이미지 회전값이 0인경우 ( 정방향 )
@@ -1094,39 +970,39 @@
 
                 // 사진편집을 누르면 편집 테두리가 전체를 감싸도록 설정
                 $('.file-upload-content').show();
-
                 // firstCrop = true;
             }
 
         }
 
+        function streamTrue() {
+            document.getElementById("mainCam").style.display = "block"
+            document.getElementById("cropNotice").innerHTML = "※ 손목 안쪽이 잘보이는 상태에서 측정 버튼을 눌러주세요"
+            modeChange();
+            stream = true;
+        }
         function cameraCheck() {
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
                 //사파리는 해상도가 자동으로 조절되기때문에 해상도를 설정해주면 에러가난다. 그래서 사파리는 설정을 안해줘야하는데,
                 //기기 정보를 받아올때 크롬에는 사파리 크롬이 다 적혀있고, 사파리에는 사파리만 적혀있으므로 사파리를 특정하기 위해서는 
-                //사파리 문자를 포함하고 크롬 문자를 포함하지않는 조건을 충족시켜줘야한다ㅇㅇ
-                if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+                //사파리 문자를 포함하고 크롬 문자를 포함하지않는 조건을 충족시켜줘야한다
+                if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
                     navigator.mediaDevices.getUserMedia({
                         video: {
                             facingMode: { exact: "environment" }
                         }
                     }).then(function (stream) {
-                        alert("1");
                         //video.src = window.URL.createObjectURL(stream);
-                        document.getElementById("mainCam").style.display = "block"
-                        document.getElementById("cropNotice").innerHTML = "※ 손목 안쪽 피부가 잘보이는 상태에서 측정버튼을 눌러주세요"
-                        modeChange()
+                        streamTrue();
                         video.srcObject = stream;
                         video.play();
                     }).catch(function (err) {
                         //err은 문자열이 아니기 때문에 문자열로 만들어줘야 indexOf가 가능
                         err = err + "";
-                        alert(err);
                         if (err.indexOf("NotAllowedError") > -1) {
                             window.location.reload();
                         }
-                        console.log(err);
                         camErr()
                     });
                 } else {
@@ -1138,74 +1014,53 @@
                         }
                     }).then(function (stream) {
                         //video.src = window.URL.createObjectURL(stream);
-                        document.getElementById("mainCam").style.display = "block"
-                        modeChange()
+                        streamTrue();
                         video.srcObject = stream;
                         video.play();
                     }).catch(function (err) {
-                        console.log(err);
-                        alert(err)
                         camErr()
                     });
                 }
             }
             else if (navigator.getUserMedia) { // Standard
-                console.log(2);
-                alert("2")
                 navigator.getUserMedia({
                     video: {
                         width: { min: 1024, ideal: 1280, max: 1920 },
                         height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
                     }
                 }, function (stream) {
-                    document.getElementById("mainCam").style.display = "block"
-                    modeChange()
+                    streamTrue();
                     video.src = stream;
                     video.play();
                 }, camErr());
             } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-                console.log(3);
-                alert("3")
                 navigator.webkitGetUserMedia({
                     video: {
                         width: { min: 1024, ideal: 1280, max: 1920 },
                         height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
                     }
                 }, function (stream) {
-                    document.getElementById("mainCam").style.display = "block"
-                    modeChange()
+                    streamTrue();
                     video.src = window.webkitURL.createObjectURL(stream);
                     video.play();
                 }, camErr());
             } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
-                console.log(4);
-                alert("4")
                 navigator.mozGetUserMedia({
                     video: {
                         width: { min: 1024, ideal: 1280, max: 1920 },
                         height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
                     }
                 }, function (stream) {
-                    document.getElementById("mainCam").style.display = "block"
-                    modeChange()
+                    streamTrue();
                     video.srcObject = stream;
                     video.play();
                 }, camErr());
             } else {
-                alert("5")
                 camErr();
             }
         }
         function modeChange() {
             document.getElementById("mainbody").scrollIntoView();
-            // if (navigator.userAgent.indexOf("Android") > 0 ||
-            //     navigator.userAgent.indexOf("iPhone") > 0 ||
-            //     navigator.userAgent.indexOf("iPod") > 0 ||
-            //     navigator.userAgent.indexOf("iPad") > 0 ||
-            //     navigator.userAgent.indexOf("BlackBerry") > 0) {
-            //     document.getElementById("stepNum").style.paddingRight = "2.3vh";
-            //     document.getElementById("stepNum").style.paddingTop = ".6vh";
-            // }
             document.getElementById("subTitle").style.display = "none";
             document.getElementById("mainTitle").style.display = "none";
             document.getElementById("notice").style.display = "none";
@@ -1220,7 +1075,7 @@
         function readURL(input) {
 
             if ((input.files && input.files[0])) {
-
+                loading.style.display = "block"
 
                 // $('#originalImg').attr('src', tempImage.src);
 
@@ -1240,16 +1095,11 @@
                 var reader = new FileReader();
                 let tempImage = new Image();
                 reader.onload = function (e) {
-                    tempImage.src = e.target.result;
-                    tempImage.onload = async function () {
 
-                        document.getElementById("originalImg").src = tempImage.src;
-                        $('.file-upload-image').attr('src', tempImage.src);
+                        document.getElementById("originalImg").src = e.target.result;
+                        $('.file-upload-image').attr('src', e.target.result);
                         modeChange();
-                        // @breif 캔버스 위에 이미지 그리기
 
-
-                    };
 
 
                     //회전값이 있는 사진을 정방향으로 돌리는 로직을 짜려했지만, 디바이스마다 회전값을 처리하는 기준이 달라서(특히 애플) 결국 포기하고 
@@ -1402,18 +1252,16 @@
                 }
 
                 reader.readAsDataURL(fileInfo);
+                loading.style.display = "none"
 
-
-            } else {
-                removeUpload();
-            }
+            } 
         }
 
 
         //이미지 회전.
         function rotateImg(plusMinus) {
             document.getElementById("rotateBtn").style.animation = "fade 0.5s"
-            setTimeout(() => {
+            setTimeout(function () {
                 document.getElementById("rotateBtn").style.animation = "unset"
             }, 500);
             if (plusMinus == "right") {
@@ -1435,7 +1283,6 @@
             } else {
                 rotateCall(plusMinus);
             }
-
 
         }
         function rotateCall(plusMinus) {
@@ -1481,19 +1328,6 @@
 
             canvasContext.drawImage(rotateCanvas, 0, 0, rotateCanvas.width, rotateCanvas.height);
         }
-        function removeUpload() {
-            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-            $('.file-upload-content').hide();
-            $('.image-upload-wrap').show();
-        }
-        $('.image-upload-wrap').bind('dragover', function () {
-            $('.image-upload-wrap').addClass('image-dropping');
-        });
-        $('.image-upload-wrap').bind('dragleave', function () {
-            $('.image-upload-wrap').removeClass('image-dropping');
-        });
-
-
 
         //크롭 영역 지정 이벤트 함수
         var showCoords = function (c) {
@@ -1523,7 +1357,7 @@
         //사진 원상복구. 숨겨놓앗던 오리지널 이미지태그를 불러와 캔버스에 다시그림
         function refresh() {
             document.getElementById("refreshBtn").style.animation = "fade 0.5s"
-            setTimeout(() => {
+            setTimeout(function () {
                 document.getElementById("refreshBtn").style.animation = "unset"
             }, 500);
             uploadCheck = false;
@@ -1545,99 +1379,107 @@
 
 
             // canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-            image.onload = function () {
-                canvas.width = this.width;
-                canvas.height = this.height;
-                if (navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i) == null ? false : true) {
-                    if (floatOs > 13.3  && (ua.indexOf("15E148") > -1)) {
-                        canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                        alert(ua);
-                        if (plusMinus) callback(plusMinus);
-                        return
-                    }
-                    console.log("애플기기입니다.");
-                    var fileInfo = document.getElementById("fileInput").files[0];
-                    EXIF.getData(fileInfo, async () => {
-                        const orientation = EXIF.getTag(fileInfo, "Orientation");
-                        console.log("회전도는 " + orientation);
-                        switch (orientation) {
-
-                            // @details 이미지 회전값이 0인경우 ( 정방향 )
-
-                            case 1:
+            try {
 
 
-                                canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                                break;
-
-                            case 3:
-
-
-                                canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                                canvasContext.rotate(Math.PI);
-                                canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-
-
-
-                                // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
-
-                                canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-                                break;
-
-                            // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
-                            case 6:
-                                if (canvas.width < canvas.height) {
-                                    canvas.width = canvas.height;
-                                } else {
-                                    canvas.height = canvas.width;
-                                }
-
-                                canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                                canvasContext.rotate(Math.PI * 0.5);
-                                canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-                                canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-
-
-                                // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
-
-
-                                break;
-
-                            // @details 이미지 회전값이 90 기운 경우
-                            case 8:
-                                if (canvas.width < canvas.height) {
-                                    canvas.width = canvas.height;
-                                } else {
-                                    canvas.height = canvas.width;
-                                }
-
-                                canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                                canvasContext.rotate(Math.PI * 1.5);
-                                canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-                                canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-                                //회전하기전에 정사각형을 만들어주자.x
-                                break;
+                image.onload = function () {
+                    canvas.width = this.width;
+                    canvas.height = this.height;
+                    if (appleCheck) {
+                        if (floatOs >= 13.4 || ua.indexOf("13.4") > -1 || ua.indexOf("13.5") > -1) {
+                            canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
+                            if (plusMinus) callback(plusMinus);
+                            return
                         }
+                        var fileInfo = document.getElementById("fileInput").files[0];
+                        EXIF.getData(fileInfo, function () {
+                            const orientation = EXIF.getTag(fileInfo, "Orientation");
+                            // console.log("회전도는 " + orientation);
+                            switch (orientation) {
+
+                                // @details 이미지 회전값이 0인경우 ( 정방향 )
+
+                                case 1:
 
 
-                    })
-                } else {
-                    canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                                    canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                                    break;
+                                case undefined:
+
+
+                                    canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                                    break;
+
+                                case 3:
+
+
+                                    canvasContext.translate(canvas.width / 2, canvas.height / 2);
+                                    canvasContext.rotate(Math.PI);
+                                    canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
 
 
 
+                                    // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
+
+                                    canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+                                    break;
+
+                                // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
+                                case 6:
+                                    if (canvas.width < canvas.height) {
+                                        canvas.width = canvas.height;
+                                    } else {
+                                        canvas.height = canvas.width;
+                                    }
+
+                                    canvasContext.translate(canvas.width / 2, canvas.height / 2);
+                                    canvasContext.rotate(Math.PI * 0.5);
+                                    canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
+                                    canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+
+
+                                    // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
+
+
+                                    break;
+
+                                // @details 이미지 회전값이 90 기운 경우
+                                case 8:
+                                    if (canvas.width < canvas.height) {
+                                        canvas.width = canvas.height;
+                                    } else {
+                                        canvas.height = canvas.width;
+                                    }
+
+                                    canvasContext.translate(canvas.width / 2, canvas.height / 2);
+                                    canvasContext.rotate(Math.PI * 1.5);
+                                    canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
+                                    canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+                                    //회전하기전에 정사각형을 만들어주자.x
+                                    break;
+                            }
+
+
+                        })
+                    } else {
+                        canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+
+
+                    }
                 }
+            } catch (error) {
+                console.log(error);
             }
-
         }
 
 
         //색상과 질문 총 결과값을 종합하여 결과 도출
         function season(colorGroup, toneColor) {
+            loading.style.display = "block"
             var length = colorGroup.length
             for (var i = 0; i < length; i++) {
                 var red = (imgRed - colorGroup[i][0]);
@@ -1650,32 +1492,49 @@
                 calResult.push([red + green + blue, i]);
 
             }
+            var length2 = calResult.length
+            var season1 = [];
+            var season2 = [];
             calResult.sort(function (a, b) { // 오름차순 
                 return a[0] - b[0];
             });
-            var colorNum = calResult[0][1];
-            // document.getElementById("mainbody").style.display = "none"
-            if (0 <= colorNum && colorNum <= 3 && toneColor == "worm") {
-                // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/springWorm.png")
-                // document.getElementById("springWorm").style.display = "block"
-                window.location.href = "/springWorm"
-                window.scrollTo(0,0)
-            } else if (toneColor == "worm") {
-                // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/fallWorm.png")
-                // document.getElementById("fallWorm").style.display = "block"
-                window.location.href = "/fallWorm"
-                window.scrollTo(0,0)
-            } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
-                // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/summerCool.png")
-                // document.getElementById("summerCool").style.display = "block"
-                window.location.href = "/summerCool"
-                window.scrollTo(0,0)
-            } else {
-                // document.getElementById("metaImg").setAttribute("content","https://hoonsbory.netlify.app/images/winterCool.png")
-                // document.getElementById("winterCool").style.display = "block"
-                window.location.href = "/winterCool"
-                window.scrollTo(0,0)
+            for (var i = 0; i < length2; i++) {
+                if (calResult[i][1] <= 3) {
+                    season1.push(calResult[i][0])
+                    season1.push(calResult[i][1])
+                } else {
+                    season2.push(calResult[i][0])
+                    season2.push(calResult[i][1])
+                }
+                if (season2[0] && season1[0]) {
+                    break;
+                }
             }
+            // if (toneColor == "warm") {
+            //     season1 -= season1 / 5
+            // } else {
+
+            //     season1 -= season1 / 7.3
+            // }
+            if (season2[0] < 200 || season1[0] < 200) {
+                if (toneColor == "warm") {
+                    season1[0] -= season2[0] * 0.3
+                } else {
+                    season1[0] -= season2[0] * 0.26
+                }
+            }
+            var colorNum = season1[0] == season2[0] ? calResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
+            setTimeout(function () {
+                if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
+                    window.location.href = "https://mycolor.kr/springWarm"
+                } else if (toneColor == "warm") {
+                    window.location.href = "https://mycolor.kr/fallWarm"
+                } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
+                    window.location.href = "https://mycolor.kr/summerCool"
+                } else {
+                    window.location.href = "https://mycolor.kr/winterCool"
+                }
+            }, 1500);
 
             calResult = [];
         }
@@ -1696,6 +1555,39 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
             Disqus.</a></noscript>
+
 </body>
 
 </html>
+<!-- Copyright (c) 2020 by zuraiz (https://codepen.io/zuraizm/pen/vGDHl)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+The MIT License
+
+Copyright 짤2008 Kelly Hallman and Deep Liquid Group
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
+ to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+ -->
