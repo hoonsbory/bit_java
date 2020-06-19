@@ -261,12 +261,14 @@
         <div id="footerRight">Contact : 신재훈 -tonymkcv93@gmail.com</div>
     </div>
     <script type="module">
-    import DeltaE from "./node_modules/delta-e/src/index.js"
+    import dE00 from "./node_modules/delta-e/src/de00.js"
 
 // var DeltaE = require('delta-e');
 var color1 = {L: 36, A: 60, B: 41};
 var color2 = {L: 100, A: 40, B: 90};
-console.log(DeltaE.getDeltaE00(color1, color2));
+var delta = new dE00(color1, color2);
+console.log(delta.getDeltaE());
+// console.log(DeltaE.getDeltaE00(color1, color2));
     </script>
     <script type="text/javascript">
         //뒤로가기고 페이지에 진입하면 새로고침되게
