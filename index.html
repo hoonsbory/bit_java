@@ -596,12 +596,13 @@
             firstResult.sort(function (a, b) { // 오름차순 
                 return a[0] - b[0];
             });
-            var colorNum = firstResult[0][1];
+            var colorNum = firstResult[0][0];
             alert(colorNum+"/ red="+imgRed+" green = "+ imgGreen + " blue = " + imgBlue + "//"+firstResult[0][0]);
             setTimeout(function () {
 
                 loading.style.display = "none"
-                if (firstResult[0][0]<150) {
+                console.log(colorNum);
+                if (colorNum < 140) {
                     checkSuccess.style.display = "block"
                     checkFail.style.display = "none"
 
