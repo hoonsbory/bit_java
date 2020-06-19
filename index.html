@@ -260,17 +260,114 @@
         <div id="footerCenter"><a href="https://mycolor.kr/privacy" style="color : rgb(10, 59, 112)">개인정보 처리방침</a></div>
         <div id="footerRight">Contact : 신재훈 -tonymkcv93@gmail.com</div>
     </div>
-    <script type="module">
-    import dE00 from "./node_modules/delta-e/src/de00.js"
+    <!-- <script type="module">
+        import dE00 from "./node_modules/delta-e/src/de00.js"
+/**
+ * Converts RGB color to CIE 1931 XYZ color space.
+ * https://www.image-engineering.de/library/technotes/958-how-to-convert-between-srgb-and-ciexyz
+ * @param  {string} hex
+ * @return {number[]}
+ */
+ 
 
-// var DeltaE = require('delta-e');
-var color1 = {L: 36, A: 60, B: 41};
-var color2 = {L: 100, A: 40, B: 90};
-var delta = new dE00(color1, color2);
-console.log(delta.getDeltaE());
+        // var DeltaE = require('delta-e');
+        var color1 = { L: 36, A: 60, B: 41 };
+        var color2 = { L: 100, A: 40, B: 90 };
+        var delta = new dE00(color1, color2);
+        console.log(delta.getDeltaE());
 // console.log(DeltaE.getDeltaE00(color1, color2));
-    </script>
-    <script type="text/javascript">
+    </script> -->
+    <script type="module">
+     import dE00 from "./node_modules/delta-e/src/de00.js"
+/**
+ * Converts RGB color to CIE 1931 XYZ color space.
+ * https://www.image-engineering.de/library/technotes/958-how-to-convert-between-srgb-and-ciexyz
+ * @param  {string} hex
+ * @return {number[]}
+ */
+ 
+
+        // var DeltaE = require('delta-e');
+      
+
+
+     function rgbToXyz(hex) {
+    const [r, g, b] = hex.map(_ => _ / 255).map(sRGBtoLinearRGB)
+    const X =  0.4124 * r + 0.3576 * g + 0.1805 * b
+    const Y =  0.2126 * r + 0.7152 * g + 0.0722 * b
+    const Z =  0.0193 * r + 0.1192 * g + 0.9505 * b
+    // For some reason, X, Y and Z are multiplied by 100.
+    return [X, Y, Z].map(_ => _ * 100)
+}
+
+/**
+ * Undoes gamma-correction from an RGB-encoded color.
+ * https://en.wikipedia.org/wiki/SRGB#Specification_of_the_transformation
+ * https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
+ * @param  {number}
+ * @return {number}
+ */
+function sRGBtoLinearRGB(color) {
+    // Send this function a decimal sRGB gamma encoded color value
+    // between 0.0 and 1.0, and it returns a linearized value.
+    if (color <= 0.04045) {
+        return color / 12.92
+    } else {
+        return Math.pow((color + 0.055) / 1.055, 2.4)
+    }
+}
+
+/**
+ * Converts hex color to RGB.
+ * https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+ * @param  {string} hex
+ * @return {number[]} [rgb]
+ */
+function hexToRgb(hex) {
+    const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    if (match) {
+        match.shift()
+        return match.map(_ => parseInt(_, 16))
+    }
+}
+/**
+ * Converts CIE 1931 XYZ colors to CIE L*a*b*.
+ * The conversion formula comes from <http://www.easyrgb.com/en/math.php>.
+ * https://github.com/cangoektas/xyz-to-lab/blob/master/src/index.js
+ * @param   {number[]} color The CIE 1931 XYZ color to convert which refers to
+ *                           the D65/2° standard illuminant.
+ * @returns {number[]}       The color in the CIE L*a*b* color space.
+ */
+// X, Y, Z of a "D65" light source.
+// "D65" is a standard 6500K Daylight light source.
+// https://en.wikipedia.org/wiki/Illuminant_D65
+const D65 = [95.047, 100, 108.883]
+ function xyzToLab([x, y, z]) {
+  [x, y, z] = [x, y, z].map((v, i) => {
+    v = v / D65[i]
+    return v > 0.008856 ? Math.pow(v, 1 / 3) : v * 7.787 + 16 / 116
+  })
+  const l = 116 * y - 16
+  const a = 500 * (x - y)
+  const b = 200 * (y - z)
+  return [l, a, b]
+}
+
+function colorTest() {
+            var color1 = []
+            var color2 = []
+            color1 = document.getElementById("color1").value.split(",")
+            color2 = document.getElementById("color2").value.split(",")
+            var colorArray1 = xyzToLab(rgbToXyz(color1));
+            var labColor1 = { L: colorArray1[0], A: colorArray1[1], B: colorArray1[2]};
+            var colorArray2 = xyzToLab(rgbToXyz(color2));
+            var labColor2 = { L: colorArray2[0], A: colorArray2[1], B: colorArray2[2]};
+            var delta = new dE00(labColor1, labColor2);
+            console.log(delta.getDeltaE());
+        }
+
+
+
         //뒤로가기고 페이지에 진입하면 새로고침되게
         //엣지는 뒤로가기해도 캐시가없이 스크립트가 실행되었고, 크롬 일부버전은 persisted값이 false로만 나오는 버그가 있다고 한다. 그래서 window.performance조건을 추가해줌
         if (document.addEventListener) {
@@ -346,7 +443,7 @@ console.log(delta.getDeltaE());
             context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
             color(camCanvas)
         }
-        
+
         //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
         //3초가 지나면 기본폰트로
         setTimeout(function () {
@@ -356,46 +453,40 @@ console.log(delta.getDeltaE());
         font.load(null, 3000).then(function () {
             document.documentElement.classList.add('fonts-loaded');
         });
-        function colorTest(){
-            var color1 =[]
-            var color2 = []
-            color1 = document.getElementById("color1").value.split(",")
-            color2 = document.getElementById("color2").value.split(",")
-            console.log(deltaE(color1,color2))
-        }
-        function deltaE(rgbA, rgbB) {
-  let labA = rgb2lab(rgbA);
-  let labB = rgb2lab(rgbB);
-  let deltaL = labA[0] - labB[0];
-  let deltaA = labA[1] - labB[1];
-  let deltaB = labA[2] - labB[2];
-  let c1 = Math.sqrt(labA[1] * labA[1] + labA[2] * labA[2]);
-  let c2 = Math.sqrt(labB[1] * labB[1] + labB[2] * labB[2]);
-  let deltaC = c1 - c2;
-  let deltaH = deltaA * deltaA + deltaB * deltaB - deltaC * deltaC;
-  deltaH = deltaH < 0 ? 0 : Math.sqrt(deltaH);
-  let sc = 1.0 + 0.045 * c1;
-  let sh = 1.0 + 0.015 * c1;
-  let deltaLKlsl = deltaL / (1.0);
-  let deltaCkcsc = deltaC / (sc);
-  let deltaHkhsh = deltaH / (sh);
-  let i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
-  return i < 0 ? 0 : Math.sqrt(i);
-}
+        
+        //         function deltaE(rgbA, rgbB) {
+        //   let labA = rgb2lab(rgbA);
+        //   let labB = rgb2lab(rgbB);
+        //   let deltaL = labA[0] - labB[0];
+        //   let deltaA = labA[1] - labB[1];
+        //   let deltaB = labA[2] - labB[2];
+        //   let c1 = Math.sqrt(labA[1] * labA[1] + labA[2] * labA[2]);
+        //   let c2 = Math.sqrt(labB[1] * labB[1] + labB[2] * labB[2]);
+        //   let deltaC = c1 - c2;
+        //   let deltaH = deltaA * deltaA + deltaB * deltaB - deltaC * deltaC;
+        //   deltaH = deltaH < 0 ? 0 : Math.sqrt(deltaH);
+        //   let sc = 1.0 + 0.045 * c1;
+        //   let sh = 1.0 + 0.015 * c1;
+        //   let deltaLKlsl = deltaL / (1.0);
+        //   let deltaCkcsc = deltaC / (sc);
+        //   let deltaHkhsh = deltaH / (sh);
+        //   let i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
+        //   return i < 0 ? 0 : Math.sqrt(i);
+        // }
 
-function rgb2lab(rgb){
-  let r = rgb[0] / 255, g = rgb[1] / 255, b = rgb[2] / 255, x, y, z;
-  r = (r > 0.04045) ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
-  g = (g > 0.04045) ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
-  b = (b > 0.04045) ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
-  x = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047;
-  y = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 1.00000;
-  z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883;
-  x = (x > 0.008856) ? Math.pow(x, 1/3) : (7.787 * x) + 16/116;
-  y = (y > 0.008856) ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
-  z = (z > 0.008856) ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
-  return [(116 * x) - 16, 500 * (x - y), 200 * (y - z)]
-}
+        // function rgb2lab(rgb){
+        //   let r = rgb[0] / 255, g = rgb[1] / 255, b = rgb[2] / 255, x, y, z;
+        //   r = (r > 0.04045) ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
+        //   g = (g > 0.04045) ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
+        //   b = (b > 0.04045) ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
+        //   x = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047;
+        //   y = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 1.00000;
+        //   z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883;
+        //   x = (x > 0.008856) ? Math.pow(x, 1/3) : (7.787 * x) + 16/116;
+        //   y = (y > 0.008856) ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
+        //   z = (z > 0.008856) ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
+        //   return [(116 * x) - 16, 500 * (x - y), 200 * (y - z)]
+        // }
         //페이스북 인앱 브라우저에서 accept속성때문에 업로드가 안되는 버그가 있어서 대응
 
         //크롭없이 회전후 크롭할 경우  크롭을 하는 것은, 원본이미지를 캔버스에 옮겨오는 것으로 시작하는데, 크롭버튼을 누르지않고 회전부터 할 경우, 나중에 크롭할때 회전도가 달라 문제가 생긴다.
@@ -648,7 +739,7 @@ function rgb2lab(rgb){
                 return a[0] - b[0];
             });
             var colorNum = firstResult[0][0];
-            alert(colorNum+"/ red="+imgRed+" green = "+ imgGreen + " blue = " + imgBlue + "//"+firstResult[0][0]);
+            alert(colorNum + "/ red=" + imgRed + " green = " + imgGreen + " blue = " + imgBlue + "//" + firstResult[0][0]);
             setTimeout(function () {
 
                 loading.style.display = "none"
@@ -1148,9 +1239,9 @@ function rgb2lab(rgb){
                 let tempImage = new Image();
                 reader.onload = function (e) {
 
-                        document.getElementById("originalImg").src = e.target.result;
-                        $('.file-upload-image').attr('src', e.target.result);
-                        modeChange();
+                    document.getElementById("originalImg").src = e.target.result;
+                    $('.file-upload-image').attr('src', e.target.result);
+                    modeChange();
 
 
 
@@ -1306,7 +1397,7 @@ function rgb2lab(rgb){
                 reader.readAsDataURL(fileInfo);
                 loading.style.display = "none"
 
-            } 
+            }
         }
 
 
