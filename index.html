@@ -502,6 +502,8 @@ function colorTest() {
         //크롭버튼 클릭 유무. 크롭을 한적이 없다면 회전시 자동크롭
         var editCheck = false;
 
+        //lab값
+        var labColor;
         //자르기버튼 비활성화를 위한 체크.
         var cropCheck = true;
 
@@ -561,28 +563,28 @@ function colorTest() {
         ]
         var warmColor = [
             //봄
-            [255, 233, 196],
-            [254, 224, 174],
-            [253, 215, 153],
-            [244, 203, 149],
+            {L : 93.24308501707372, A : 1.8831653918775504, B : 20.718646292445865},
+            {L : 90.52289128383626, A : 3.233666015118153, B : 28.307937546766237},
+            {L : 87.86424337552954, A : 5.039781815103062, B : 35.51057954854002},
+            {L : 84.02555434458635, A : 7.303593750393079, B : 32.35239498551059},
             //가을
-            [238, 219, 179],
-            [238, 210, 160],
-            [232, 191, 139],
-            [223, 180, 112]
+            {L : 88.01422576423417, A : 0.44469105936484343, B : 22.066594327876565},
+            {L : 85.40709355772393, A : 2.6280755544423884, B : 28.39518318891747},
+            {L : 79.77375484413481, A : 7.765231163705922, B : 31.730027579476207},
+            {L : 75.76154718068078, A : 7.23321668208865, B : 40.38007858135049}
 
         ]
         var coolColor = [
             //여름
-            [254, 236, 224],
-            [255, 227, 213],
-            [255, 222, 203],
-            [250, 208, 184],
+            {L : 94.50167496851937, A : 4.139834223156058, B : 7.996009480649668},
+            {L : 92.13269969033836, A : 7.406843133354157, B : 10.332405216677664},
+            {L : 90.69511899883976, A : 8.506748645930816, B : 13.506314388479757},
+            {L : 86.45273910781171, A : 11.28147997114498, B : 17.43590092164615},
             //겨울
-            [248, 230, 216],
-            [249, 226, 208],
-            [246, 216, 192],
-            [236, 205, 177]
+            {L : 92.35725352107004, A : 3.850753074886304, B : 9.013026210042252},
+            {L : 91.2734226421461, A : 5.028273762088087, B : 11.6465909405429},
+            {L : 88.21365467347522, A : 6.757624702209474, B : 15.649915754155597},
+            {L : 84.31331292028791, A : 6.67861946731424, B : 17.951879223826882}
         ]
         var imgRed;
         var imgGreen;
@@ -741,7 +743,7 @@ function colorTest() {
             // imgBlue = colorThief.getColor(sourceImage)[2];
 
             var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
-            var labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2]};
+             labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2]};
 
             for (var i = 0; i < colorList.length; i++) {
                 // var color = "color" + i;
@@ -760,28 +762,28 @@ function colorTest() {
             var colorNum = firstResult[0][1];
             console.log(firstResult);
             alert(colorNum + "/ rgb=" + colorThief.getColor(sourceImage) + "//" + firstResult[0][0]);
-            // setTimeout(function () {
+            setTimeout(function () {
 
-            //     loading.style.display = "none"
-            //     console.log(colorNum);
-            //     if (colorNum < 140) {
-            //         checkSuccess.style.display = "block"
-            //         checkFail.style.display = "none"
+                loading.style.display = "none"
+                console.log(colorNum);
+                if (colorNum < 16) {
+                    checkSuccess.style.display = "block"
+                    checkFail.style.display = "none"
 
-            //         checkResult.style.display = "block"
+                    checkResult.style.display = "block"
 
-            //         return;
-            //     }
-            //     else {
-            //         checkFail.firstElementChild.nextElementSibling.innerHTML = "사각형에 피부가 꽉차게 편집해주세요!"
-            //         if (stream) {
-            //             checkFail.firstElementChild.nextElementSibling.innerHTML = "혹시 주변이 어두우시다면 피부가 화면에 꽉 찬 상태에서 시도해보세요!"
-            //         }
-            //         checkSuccess.style.display = "none"
-            //         checkFail.style.display = "block"
-            //         checkResult.style.display = "block"
-            //     }
-            // }, 1500);
+                    return;
+                }
+                else {
+                    checkFail.firstElementChild.nextElementSibling.innerHTML = "사각형에 피부가 꽉차게 편집해주세요!"
+                    if (stream) {
+                        checkFail.firstElementChild.nextElementSibling.innerHTML = "혹시 주변이 어두우시다면 피부가 화면에 꽉 찬 상태에서 시도해보세요!"
+                    }
+                    checkSuccess.style.display = "none"
+                    checkFail.style.display = "block"
+                    checkResult.style.display = "block"
+                }
+            }, 1500);
             firstResult = [];
 
         }
@@ -1645,13 +1647,14 @@ function colorTest() {
             loading.style.display = "block"
             var length = colorGroup.length
             for (var i = 0; i < length; i++) {
-                var red = (imgRed - colorGroup[i][0]);
-                red = red < 0 ? -(red) : red;
-                var green = (imgGreen - colorGroup[i][1]);
-                green = green < 0 ? -(green) : green;
-                var blue = (imgBlue - colorGroup[i][2]);
-                blue = blue < 0 ? -(blue) : blue;
+                // var red = (imgRed - colorGroup[i][0]);
+                // red = red < 0 ? -(red) : red;
+                // var green = (imgGreen - colorGroup[i][1]);
+                // green = green < 0 ? -(green) : green;
+                // var blue = (imgBlue - colorGroup[i][2]);
+                // blue = blue < 0 ? -(blue) : blue;
 
+                calResult.push([window.module1(labColor,colorGroup[i]), i]);
                 calResult.push([red + green + blue, i]);
 
             }
@@ -1679,13 +1682,14 @@ function colorTest() {
 
             //     season1 -= season1 / 7.3
             // }
-            if (season2[0] < 200 || season1[0] < 200) {
+
+            // if (season2[0] < 200 || season1[0] < 200) {
                 if (toneColor == "warm") {
-                    season1[0] -= season2[0] * 0.3
+                    season1[0] -= season2[0] * 0.1
                 } else {
-                    season1[0] -= season2[0] * 0.26
+                    season1[0] -= season2[0] * 0.1
                 }
-            }
+            // }
             var colorNum = season1[0] == season2[0] ? calResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
             setTimeout(function () {
                 if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
