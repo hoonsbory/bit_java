@@ -285,17 +285,17 @@
         }
         window.module1 = module1;
     </script>
-    <script>
+<script>
 /**
  * Converts RGB color to CIE 1931 XYZ color space.
  * https://www.image-engineering.de/library/technotes/958-how-to-convert-between-srgb-and-ciexyz
  * @param  {string} hex
  * @return {number[]}
  */
- 
 
-        // var DeltaE = require('delta-e');
-    
+
+// var DeltaE = require('delta-e');
+
 
 
      function rgbToXyz(hex) {
@@ -370,7 +370,7 @@ function colorTest() {
             var colorArray2 = xyzToLab(rgbToXyz(color2));
             var labColor2 = { L: colorArray2[0], A: colorArray2[1], B: colorArray2[2]};
             window.module1(labColor1,labColor2)
-            
+}
 
 
 
@@ -1689,8 +1689,8 @@ function colorTest() {
         }
 
 
-
     </script>
+    
     <script>
 
 
