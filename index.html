@@ -279,98 +279,98 @@
     </script> -->
     <script type="module">
         import dE00 from "./node_modules/delta-e/src/de00.js"
-        var module1 = function(labColor1, labColor2){
-        var delta = new dE00(labColor1, labColor2);
-        return delta.getDeltaE();
+        var module1 = function (labColor1, labColor2) {
+            var delta = new dE00(labColor1, labColor2);
+            return delta.getDeltaE();
         }
         window.module1 = module1;
     </script>
-<script>
-/**
- * Converts RGB color to CIE 1931 XYZ color space.
- * https://www.image-engineering.de/library/technotes/958-how-to-convert-between-srgb-and-ciexyz
- * @param  {string} hex
- * @return {number[]}
- */
+    <script>
+        /**
+         * Converts RGB color to CIE 1931 XYZ color space.
+         * https://www.image-engineering.de/library/technotes/958-how-to-convert-between-srgb-and-ciexyz
+         * @param  {string} hex
+         * @return {number[]}
+         */
 
 
-// var DeltaE = require('delta-e');
+        // var DeltaE = require('delta-e');
 
 
 
-     function rgbToXyz(hex) {
-    const [r, g, b] = hex.map(_ => _ / 255).map(sRGBtoLinearRGB)
-    const X =  0.4124 * r + 0.3576 * g + 0.1805 * b
-    const Y =  0.2126 * r + 0.7152 * g + 0.0722 * b
-    const Z =  0.0193 * r + 0.1192 * g + 0.9505 * b
-    // For some reason, X, Y and Z are multiplied by 100.
-    return [X, Y, Z].map(_ => _ * 100)
-}
+        function rgbToXyz(hex) {
+            const [r, g, b] = hex.map(_ => _ / 255).map(sRGBtoLinearRGB)
+            const X = 0.4124 * r + 0.3576 * g + 0.1805 * b
+            const Y = 0.2126 * r + 0.7152 * g + 0.0722 * b
+            const Z = 0.0193 * r + 0.1192 * g + 0.9505 * b
+            // For some reason, X, Y and Z are multiplied by 100.
+            return [X, Y, Z].map(_ => _ * 100)
+        }
 
-/**
- * Undoes gamma-correction from an RGB-encoded color.
- * https://en.wikipedia.org/wiki/SRGB#Specification_of_the_transformation
- * https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
- * @param  {number}
- * @return {number}
- */
-function sRGBtoLinearRGB(color) {
-    // Send this function a decimal sRGB gamma encoded color value
-    // between 0.0 and 1.0, and it returns a linearized value.
-    if (color <= 0.04045) {
-        return color / 12.92
-    } else {
-        return Math.pow((color + 0.055) / 1.055, 2.4)
-    }
-}
+        /**
+         * Undoes gamma-correction from an RGB-encoded color.
+         * https://en.wikipedia.org/wiki/SRGB#Specification_of_the_transformation
+         * https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
+         * @param  {number}
+         * @return {number}
+         */
+        function sRGBtoLinearRGB(color) {
+            // Send this function a decimal sRGB gamma encoded color value
+            // between 0.0 and 1.0, and it returns a linearized value.
+            if (color <= 0.04045) {
+                return color / 12.92
+            } else {
+                return Math.pow((color + 0.055) / 1.055, 2.4)
+            }
+        }
 
-/**
- * Converts hex color to RGB.
- * https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
- * @param  {string} hex
- * @return {number[]} [rgb]
- */
-function hexToRgb(hex) {
-    const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    if (match) {
-        match.shift()
-        return match.map(_ => parseInt(_, 16))
-    }
-}
-/**
- * Converts CIE 1931 XYZ colors to CIE L*a*b*.
- * The conversion formula comes from <http://www.easyrgb.com/en/math.php>.
- * https://github.com/cangoektas/xyz-to-lab/blob/master/src/index.js
- * @param   {number[]} color The CIE 1931 XYZ color to convert which refers to
- *                           the D65/2° standard illuminant.
- * @returns {number[]}       The color in the CIE L*a*b* color space.
- */
-// X, Y, Z of a "D65" light source.
-// "D65" is a standard 6500K Daylight light source.
-// https://en.wikipedia.org/wiki/Illuminant_D65
-const D65 = [95.047, 100, 108.883]
- function xyzToLab([x, y, z]) {
-  [x, y, z] = [x, y, z].map((v, i) => {
-    v = v / D65[i]
-    return v > 0.008856 ? Math.pow(v, 1 / 3) : v * 7.787 + 16 / 116
-  })
-  const l = 116 * y - 16
-  const a = 500 * (x - y)
-  const b = 200 * (y - z)
-  return [l, a, b]
-}
+        /**
+         * Converts hex color to RGB.
+         * https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+         * @param  {string} hex
+         * @return {number[]} [rgb]
+         */
+        function hexToRgb(hex) {
+            const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+            if (match) {
+                match.shift()
+                return match.map(_ => parseInt(_, 16))
+            }
+        }
+        /**
+         * Converts CIE 1931 XYZ colors to CIE L*a*b*.
+         * The conversion formula comes from <http://www.easyrgb.com/en/math.php>.
+         * https://github.com/cangoektas/xyz-to-lab/blob/master/src/index.js
+         * @param   {number[]} color The CIE 1931 XYZ color to convert which refers to
+         *                           the D65/2° standard illuminant.
+         * @returns {number[]}       The color in the CIE L*a*b* color space.
+         */
+        // X, Y, Z of a "D65" light source.
+        // "D65" is a standard 6500K Daylight light source.
+        // https://en.wikipedia.org/wiki/Illuminant_D65
+        const D65 = [95.047, 100, 108.883]
+        function xyzToLab([x, y, z]) {
+            [x, y, z] = [x, y, z].map((v, i) => {
+                v = v / D65[i]
+                return v > 0.008856 ? Math.pow(v, 1 / 3) : v * 7.787 + 16 / 116
+            })
+            const l = 116 * y - 16
+            const a = 500 * (x - y)
+            const b = 200 * (y - z)
+            return [l, a, b]
+        }
 
-function colorTest() {
+        function colorTest() {
             var color1 = []
             var color2 = []
             color1 = document.getElementById("color1").value.split(",")
             color2 = document.getElementById("color2").value.split(",")
             var colorArray1 = xyzToLab(rgbToXyz(color1));
-            var labColor1 = { L: colorArray1[0], A: colorArray1[1], B: colorArray1[2]};
+            var labColor1 = { L: colorArray1[0], A: colorArray1[1], B: colorArray1[2] };
             var colorArray2 = xyzToLab(rgbToXyz(color2));
-            var labColor2 = { L: colorArray2[0], A: colorArray2[1], B: colorArray2[2]};
-            window.module1(labColor1,labColor2)
-}
+            var labColor2 = { L: colorArray2[0], A: colorArray2[1], B: colorArray2[2] };
+            window.module1(labColor1, labColor2)
+        }
 
 
 
@@ -459,7 +459,7 @@ function colorTest() {
         font.load(null, 3000).then(function () {
             document.documentElement.classList.add('fonts-loaded');
         });
-        
+
         //         function deltaE(rgbA, rgbB) {
         //   let labA = rgb2lab(rgbA);
         //   let labB = rgb2lab(rgbB);
@@ -528,28 +528,28 @@ function colorTest() {
 
         var warmColor = [
             //봄
-            {L : 93.24308501707372, A : 1.8831653918775504, B : 20.718646292445865},
-            {L : 90.52289128383626, A : 3.233666015118153, B : 28.307937546766237},
-            {L : 87.86424337552954, A : 5.039781815103062, B : 35.51057954854002},
-            {L : 84.02555434458635, A : 7.303593750393079, B : 32.35239498551059},
+            { L: 93.24308501707372, A: 1.8831653918775504, B: 20.718646292445865 },
+            { L: 90.52289128383626, A: 3.233666015118153, B: 28.307937546766237 },
+            { L: 87.86424337552954, A: 5.039781815103062, B: 35.51057954854002 },
+            { L: 84.02555434458635, A: 7.303593750393079, B: 32.35239498551059 },
             //가을
-            {L : 88.01422576423417, A : 0.44469105936484343, B : 22.066594327876565},
-            {L : 85.40709355772393, A : 2.6280755544423884, B : 28.39518318891747},
-            {L : 79.77375484413481, A : 7.765231163705922, B : 31.730027579476207},
-            {L : 75.76154718068078, A : 7.23321668208865, B : 40.38007858135049}
+            { L: 88.01422576423417, A: 0.44469105936484343, B: 22.066594327876565 },
+            { L: 85.40709355772393, A: 2.6280755544423884, B: 28.39518318891747 },
+            { L: 79.77375484413481, A: 7.765231163705922, B: 31.730027579476207 },
+            { L: 75.76154718068078, A: 7.23321668208865, B: 40.38007858135049 }
 
         ]
         var coolColor = [
             //여름
-            {L : 94.50167496851937, A : 4.139834223156058, B : 7.996009480649668},
-            {L : 92.13269969033836, A : 7.406843133354157, B : 10.332405216677664},
-            {L : 90.69511899883976, A : 8.506748645930816, B : 13.506314388479757},
-            {L : 86.45273910781171, A : 11.28147997114498, B : 17.43590092164615},
+            { L: 94.50167496851937, A: 4.139834223156058, B: 7.996009480649668 },
+            { L: 92.13269969033836, A: 7.406843133354157, B: 10.332405216677664 },
+            { L: 90.69511899883976, A: 8.506748645930816, B: 13.506314388479757 },
+            { L: 86.45273910781171, A: 11.28147997114498, B: 17.43590092164615 },
             //겨울
-            {L : 92.35725352107004, A : 3.850753074886304, B : 9.013026210042252},
-            {L : 91.2734226421461, A : 5.028273762088087, B : 11.6465909405429},
-            {L : 88.21365467347522, A : 6.757624702209474, B : 15.649915754155597},
-            {L : 84.31331292028791, A : 6.67861946731424, B : 17.951879223826882}
+            { L: 92.35725352107004, A: 3.850753074886304, B: 9.013026210042252 },
+            { L: 91.2734226421461, A: 5.028273762088087, B: 11.6465909405429 },
+            { L: 88.21365467347522, A: 6.757624702209474, B: 15.649915754155597 },
+            { L: 84.31331292028791, A: 6.67861946731424, B: 17.951879223826882 }
         ]
 
 
@@ -572,15 +572,13 @@ function colorTest() {
             coolColor[6],
             coolColor[7],
 
-            {L : 58.379648198801945, A : 68.30647333894213, B : 41.567078646533886},
-            {L : 54.94213801213769, A : -53.07384198363935, B : 34.43417705537093},
-            {L : 62.18763178824342, A : -8.479405327875222, B : -46.28902249513915},
-            {L : 20.217290355298722, A : 36.06355989320672, B : -57.05422997619636},
-            {L : 50.41376744611719, A : 43.73719859707093, B : -77.79677741706573},
-            {L : 99.65492223276894, A : 0.005244850979191362, B : -0.010377222171187306},
-            {L : 0.27417592423966397, A : 0.00003730131757639921, B : -0.00007380574454374234}
+            { L: 54.94213801213769, A: -53.07384198363935, B: 34.43417705537093 },
+            { L: 62.18763178824342, A: -8.479405327875222, B: -46.28902249513915 },
+            { L: 20.217290355298722, A: 36.06355989320672, B: -57.05422997619636 },
+            { L: 50.41376744611719, A: 43.73719859707093, B: -77.79677741706573 },
+            { L: 99.65492223276894, A: 0.005244850979191362, B: -0.010377222171187306 },
+            { L: 0.27417592423966397, A: 0.00003730131757639921, B: -0.00007380574454374234 }
             //여기까지 톤색깔
-            // [255, 36, 163],//핑크
             // [0, 152, 68],//초록
             // [0, 159, 232],//하늘색
             // [29, 32, 135],//파랑
@@ -588,7 +586,7 @@ function colorTest() {
             // [254, 254, 254],//하양
             // [0, 0, 0]//검정
         ]
-        
+
         var imgRed;
         var imgGreen;
         var imgBlue;
@@ -746,7 +744,7 @@ function colorTest() {
             // imgBlue = colorThief.getColor(sourceImage)[2];
 
             var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
-             labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2]};
+            labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2] };
 
             for (var i = 0; i < colorList.length; i++) {
                 // var color = "color" + i;
@@ -756,8 +754,8 @@ function colorTest() {
                 // green = green < 0 ? -(green) : green;
                 // var blue = (imgBlue - colorList[i][2]);
                 // blue = blue < 0 ? -(blue) : blue;
-                
-                firstResult.push([window.module1(labColor,colorList[i]), i]);
+
+                firstResult.push([window.module1(labColor, colorList[i]), i]);
             }
             firstResult.sort(function (a, b) { // 오름차순 
                 return a[0] - b[0];
@@ -1657,36 +1655,40 @@ function colorTest() {
                 // var blue = (imgBlue - colorGroup[i][2]);
                 // blue = blue < 0 ? -(blue) : blue;
 
-                calResult.push([window.module1(labColor,colorGroup[i]), i]);
+                calResult.push([window.module1(labColor, colorGroup[i]), i]);
                 // calResult.push([red + green + blue, i]);
 
             }
             var length2 = calResult.length
             var season1 = [];
             var season2 = [];
+            var colorNum;
             calResult.sort(function (a, b) { // 오름차순 
                 return a[0] - b[0];
             });
-            for (var i = 0; i < length2; i++) {
-                if (calResult[i][1] <= 3) {
-                    season1.push(calResult[i][0])
-                    season1.push(calResult[i][1])
-                } else {
-                    season2.push(calResult[i][0])
-                    season2.push(calResult[i][1])
-                }
-                if (season2[0] && season1[0]) {
-                    break;
-                }
-            }
-            // if (toneColor == "warm") {
-            //     season1 -= season1 / 5
-            // } else {
 
-            //     season1 -= season1 / 7.3
-            // }
+            //스트림 방식은 아무래도 카메라로 바로 측정하기 때문에 그늘지기도 하고 크롭으로 특정 부위를 자를수도 없어 좀 더 어둡기 때문에 인위적으로 벨런스를 조절해줌.
+            if (stream) {
+                for (var i = 0; i < length2; i++) {
+                    if (calResult[i][1] <= 3) {
+                        season1.push(calResult[i][0])
+                        season1.push(calResult[i][1])
+                    } else {
+                        season2.push(calResult[i][0])
+                        season2.push(calResult[i][1])
+                    }
+                    if (season2[0] && season1[0]) {
+                        break;
+                    }
+                }
+                // if (toneColor == "warm") {
+                //     season1 -= season1 / 5
+                // } else {
 
-            // if (season2[0] < 200 || season1[0] < 200) {
+                //     season1 -= season1 / 7.3
+                // }
+
+                // if (season2[0] < 200 || season1[0] < 200) {
                 if (toneColor == "warm") {
                     season1[0] -= season2[0] * 0.15
                 } else {
@@ -1694,8 +1696,11 @@ function colorTest() {
                 }
                 console.log(season1[0]);
                 console.log(season2[0]);
-            // }
-            var colorNum = season1[0] == season2[0] ? calResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
+                // }
+                colorNum = season1[0] == season2[0] ? calResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
+            } else {
+                colorNum = calResult[0][1]
+            }
             setTimeout(function () {
                 if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
                     // window.location.href = "https://mycolor.kr/springWarm"
@@ -1717,7 +1722,7 @@ function colorTest() {
 
 
     </script>
-    
+
     <script>
 
 
