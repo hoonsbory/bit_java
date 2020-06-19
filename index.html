@@ -278,7 +278,7 @@
 // console.log(DeltaE.getDeltaE00(color1, color2));
     </script> -->
     <script type="module">
-        import dE00 from "./node_modules/delta-e/src/de00.js"
+        import dE00 from "./pcEtc/dE00.js"
         var module1 = function (labColor1, labColor2) {
             var delta = new dE00(labColor1, labColor2);
             return delta.getDeltaE();
@@ -761,12 +761,9 @@
                 return a[0] - b[0];
             });
             var colorNum = firstResult[0][1];
-            console.log(firstResult);
-            alert(colorNum + "/ rgb=" + colorThief.getColor(sourceImage) + "//" + firstResult[0][0]);
             setTimeout(function () {
 
                 loading.style.display = "none"
-                console.log(colorNum);
                 if (colorNum < 16) {
                     checkSuccess.style.display = "block"
                     checkFail.style.display = "none"
@@ -777,8 +774,10 @@
                 }
                 else {
                     checkFail.firstElementChild.nextElementSibling.innerHTML = "사각형에 피부가 꽉차게 편집해주세요!"
-                    if (stream) {
+                    if (stream && colorNum == 21) {
                         checkFail.firstElementChild.nextElementSibling.innerHTML = "혹시 주변이 어두우시다면 피부가 화면에 꽉 찬 상태에서 시도해보세요!"
+                    }else if(stream && colorNum!= 21){
+                        checkFail.firstElementChild.nextElementSibling.innerHTML = "피부가 화면에 꽉 찬 상태에서 시도해보세요!"
                     }
                     checkSuccess.style.display = "none"
                     checkFail.style.display = "block"
@@ -1689,9 +1688,12 @@
                 // }
 
                 // if (season2[0] < 200 || season1[0] < 200) {
-                    season1[0] -= season2[0] * 0.15
-                console.log(season1[0]);
-                console.log(season2[0]);
+                    if(!stream){
+                        season1[0] -= season2[0] * 0.1
+                    }else{
+                        season1[0] -= season2[0] * 0.15
+                    }
+
                 // }
                 colorNum = season1[0] == season2[0] ? calResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
             } else {
@@ -1699,17 +1701,13 @@
             }
             setTimeout(function () {
                 if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
-                    // window.location.href = "https://mycolor.kr/springWarm"
-                    alert("spring");
+                    window.location.href = "https://mycolor.kr/springWarm"
                 } else if (toneColor == "warm") {
-                    // window.location.href = "https://mycolor.kr/fallWarm"
-                    alert("fall");
+                    window.location.href = "https://mycolor.kr/fallWarm"
                 } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
-                    // window.location.href = "https://mycolor.kr/summerCool"
-                    alert("summer");
+                    window.location.href = "https://mycolor.kr/summerCool"
                 } else {
-                    // window.location.href = "https://mycolor.kr/winterCool"
-                    alert("winter");
+                    window.location.href = "https://mycolor.kr/winterCool"
                 }
             }, 1500);
 
