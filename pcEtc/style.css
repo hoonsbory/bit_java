@@ -2,7 +2,7 @@
 @charset "utf-8";
 
 html{
-  font-size: 17px;
+  font-size: 10px;
   scroll-behavior: smooth; 
   word-break: keep-all;
 }
@@ -105,13 +105,13 @@ html{
 #cropNotice{
   display: none;
   margin-bottom: 1vh;
-  background: rgb(250,50,34);
-  padding: 4px;
-  font-size: 1.4rem;
-  color: white;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-bottom: 1px;
+    background: rgb(250,50,34);
+    padding: .5vh;
+    font-size: 1.5vh;
+    color: white;
+    padding-left: 5vh;
+    padding-right: 5vh;
+  
 }
 #stepDiv{
   width: 7vh;
@@ -128,11 +128,11 @@ html{
     color: white;
     padding-right: 3vh;
     padding-top: .5vh;
-    padding-left: .7vh;
+    padding-left: .5vh;
     height: 6.9vh;
-    padding-bottom: .7vh;
-    margin-top: 12vh;
+    padding-bottom: .56vh;
     margin-bottom: 2vh;
+    margin-top: 12vh;
   }
 #stepNum{
   color: rgb(74, 114, 176);
@@ -153,12 +153,12 @@ html{
   background-image: url(../pcImages/arrow.png);
   background-size: contain;
   background-repeat: no-repeat;
-  padding: 1.5rem;
-  left: 0 !important;
-  top: -2vh;
+  font-size: 2vh;
+  padding: 3vh;
+  padding-top: 3.2vh;
+  left : 0 !important;
   cursor: pointer;
-  
-}
+  }
 .arrowBtn img{
   width: 9rem;
   height: 4rem;
@@ -175,7 +175,7 @@ html{
     border: 2px solid rgb(10, 59, 112);
     display: inline;
     border-radius: 7px;
-    padding: 5px;
+    padding: 1vh;
     padding-bottom: 0px;
     background-color: white;
     color : rgb(10, 59, 112);
@@ -198,26 +198,31 @@ html{
   padding-bottom: 1.5rem;
 }
 #newfile{
-  width: 284px !important;
-  padding: 0;
-  display: block;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  padding-top: 4px;
-  margin-bottom: 7vh;
-  margin-top: 1vh !important;
+    max-width: 300px;
+    width: 34vh;
+    min-width: 189px;
+    padding: 0;
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 4px;
+    margin-bottom: 4vh;
+    margin-top: 1vh !important;
 }
 #leftBtn span{
   left : -6rem;
 }
 
 .btnGroup img{
-  width: 20px;
-  height: 20px;
+  width: 2.5vh;
+  height: 2.5vh;
   position: relative;
-  top: .3rem;
+  min-width: 10px;
+  min-height: 10px;
+  top : .8vh;
 }
+
 .btnGroup span{
   padding-left: .6vh;
   font-size: 1.7vh;
@@ -235,7 +240,7 @@ html{
   top: 50%;
   width: 100%;
   transform: translateX(-50%);
-  font-size: 1rem;
+  font-size: 1.5vh;
   z-index: 100;
 }
 
@@ -281,7 +286,7 @@ p{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   background-image: url(../pcImages/mainBg.png);  
   background-size: contain;
 }
@@ -372,9 +377,9 @@ p{
   position: relative;
   overflow: hidden;
   margin: 20px auto 0 auto;
+  margin-top: 0px;
   border-radius: 4px;
 }
-
 #slider ul {
   position: relative;
   margin: 0;
@@ -578,8 +583,10 @@ margin-bottom: 5px;
     margin-left : -550px !important;
   }
   #realImage{
-    width: 450px !important;
-    height: 450px !important;
+    width: 43vh !important;
+    height: 43vh !important;
+    max-width: 580px !important;
+    max-height: 580px !important;
   }
   .file-upload {
     width: 550px;
@@ -608,9 +615,6 @@ margin-bottom: 5px;
     width : 3600px !important;
     margin-left : -600px !important;
   }
-  #mainbody{
-    height: 100vh;
-  }
   #realImage{
     width: 43vh !important;
     height: 43vh !important;
@@ -619,8 +623,6 @@ margin-bottom: 5px;
   }
   #newfile{
     max-width: 450px;
-    width: 35vh !important;
-    min-width: 223px;
   }
 
 }
@@ -644,18 +646,9 @@ margin-bottom: 5px;
   #notice{
     font-size: 2.3vh;
   }
-  .btnGroup{
-    padding : 1vh;
-    padding-top : 1vh;
-    padding-bottom: 0px;
-  }
+  
  
-  .btnGroup img{
-    width: 1.5rem;
-    height: 1.5rem;
-    position: relative;
-    top: .4rem;
-  }
+ 
 .image-upload-wrap {
 position: relative;
 width: 36vh;
@@ -666,18 +659,7 @@ transform: translateX(-50%);
 background: white;
 }
 
-.arrowBtn{
-color: white;
-display: inline;
-position: relative;
-background-image: url(../pcImages/arrow.png);
-background-size: contain;
-background-repeat: no-repeat;
-font-size: 2vh;
-padding: 3vh;
-padding-top: 3.2vh;
-left : 0 !important
-}
+
 .arrowBtn img{
 width: 9rem;
 height: 5rem;
@@ -692,16 +674,7 @@ left : -6rem;
 }
 
 
-#cropNotice {
-display: none;
-margin-bottom: 1vh;
-background: rgb(250,50,34);
-padding: 4px;
-font-size: 1.5vh;
-color: white;
-padding-left: 2rem;
-padding-right: 2rem;
-}
+
 }
 @media(max-width: 767px){
   #popup img{
@@ -733,29 +706,15 @@ padding-right: 2rem;
  
 
 
-#slider{
-position: relative;
-  overflow: hidden;
-  margin: 10px auto 0 auto;
-  border-radius: 4px
-}
+
 #newfile{
-width: 37vh !important;
 max-width: 300px;
-min-width: 150px;
 }
 
-#mainbody{
-height: 100vh;
-justify-content: unset;
-}
 
   #slider ul{
     width : 1920px !important;
     margin-left : -320px !important;
-  }
-  html{
-    font-size : 10px !important;
   }
   #realImage{
     width: 48vh !important;
@@ -770,5 +729,6 @@ justify-content: unset;
 @media(max-height : 439px){
   #mainbody{
     height: unset;
+    justify-content: unset;
   }
 }

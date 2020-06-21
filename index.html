@@ -2,11 +2,24 @@
 <html>
 
 <head>
-    
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161543285-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-161543285-2');
+    </script> -->
 
     <link rel="stylesheet" href="pcEtc/style.css">
-    <link rel="icon" href="images/favicon.ico" />
-    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
     <meta property="og:image" content="https://mycolor.kr/pcImages/metaImg.jpg" />
     <meta property="og:type" content="website" />
@@ -14,17 +27,16 @@
     <meta property="og:description"
         content="나는 웜톤일까? 쿨톤일까? 퍼스널컬러 진단하러가기!! 인공지능이 피부사진을 분석하여 결과를 알려줍니다. 회원가입없이 봄 웜톤, 여름 쿨톤, 가을 웜톤, 겨울 쿨톤 중 어디에 해당하는지 알아보세요." />
     <meta property="og:site_name" content="마이퍼스널컬러" />
-    <link rel="canonical" href="https://mycolor.kr"> -->
-    <!-- <meta name="description"
-        content="나는 웜톤일까? 쿨톤일까? 퍼스널컬러 진단하러가기!! 인공지능이 피부사진을 분석하여 결과를 알려줍니다. 회원가입없이 봄 웜톤, 여름 쿨톤, 가을 웜톤, 겨울 쿨톤 중 어디에 해당하는지 알아보세요."> -->
+    <link rel="canonical" href="https://mycolor.kr">
+    <meta name="description"
+        content="나는 웜톤일까? 쿨톤일까? 퍼스널컬러 진단하러가기!! 인공지능이 피부사진을 분석하여 결과를 알려줍니다. 회원가입없이 봄 웜톤, 여름 쿨톤, 가을 웜톤, 겨울 쿨톤 중 어디에 해당하는지 알아보세요.">
+    <!-- <meta name="naver-site-verification" content="5dc3a557afdd3f611a7539f850a0d9a895ac7867" />
+    <meta name="google-site-verification" content="x5-5ISQuDn24eQWdy-pG-KeCAYIi5iss2oL4dseBkS8" /> -->
 
     <title>마이퍼스널컬러</title>
 </head>
 
 <body>
-    <input id="color1" type="text">
-    <input id="color2" type="text">
-    <button onclick="colorTest()">측정</button>
     <img id="loading" src="pcImages/loading.gif"
         style="width : 65px; z-index : 999;display : none; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);">
     <canvas id="myCanvas" style="display: none;">
@@ -70,13 +82,13 @@
                 <p style="margin-bottom : 15px">더 정확한 진단을 위해 다음 단계로 넘어갑니다</p>
             </div>
             <div class="confirmBtn" onclick="popupConfirm('checkResult')"><span class="popupConfirm">확 인</span></div>
-            <!-- <ins class="kakao_ad_area" style="display:block; margin-top: 5px !important; margin : auto;"
+            <ins class="kakao_ad_area" style="display:block; margin-top: 5px !important; margin : auto;"
                 data-ad-unit="DAN-1h7fvl13rbh9w" data-ad-width="250" data-ad-height="250"></ins>
-        </div> -->
+        </div>
     </div>
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-     결과페이지 하단2 
-    <div class="middleSec">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 결과페이지 하단2 -->
+    <!-- <div class="middleSec">
         <ins class="adsbygoogle" style="display:block; width: 100%; height: 100px;"
             data-ad-client="ca-pub-9106671749645972" data-ad-slot="1655934358"></ins>
     </div>
@@ -227,19 +239,19 @@
         </div>
     </div>
 
-    <!-- <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script> -->
+    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     <div class="middleSec">
 
         <!-- <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-9106671749645972"
             data-ad-slot="7150630154" data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        </script> -->
+        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t89ovgrl5so5" data-ad-width="320"
+            data-ad-height="100"></ins>
         <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t4tgk6re3upi" data-ad-width="320"
-            data-ad-height="50"></ins> -->
+            data-ad-height="50"></ins>
         <div id="disqus_thread"></div>
-        <!-- <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t89ovgrl5so5" data-ad-width="320"
-            data-ad-height="100"></ins> -->
     </div>
     <div id="footer">
         <div id="footerLeft">
@@ -251,44 +263,22 @@
         <div id="footerCenter"><a href="https://mycolor.kr/privacy" style="color : rgb(10, 59, 112)">개인정보 처리방침</a></div>
         <div id="footerRight">Contact : 신재훈 -tonymkcv93@gmail.com</div>
     </div>
-    <!-- <script type="module">
-        import dE00 from "./node_modules/delta-e/src/de00.js"
-/**
- * Converts RGB color to CIE 1931 XYZ color space.
- * https://www.image-engineering.de/library/technotes/958-how-to-convert-between-srgb-and-ciexyz
- * @param  {string} hex
- * @return {number[]}
- */
- 
 
-        // var DeltaE = require('delta-e');
-        var color1 = { L: 36, A: 60, B: 41 };
-        var color2 = { L: 100, A: 40, B: 90 };
-        var delta = new dE00(color1, color2);
-        console.log(delta.getDeltaE());
-// console.log(DeltaE.getDeltaE00(color1, color2));
-    </script> -->
-    <script type="module">
+     <script type="module">
+        //delta E lab값으로 유사도 측정 몇개 공식중 00년도 공식이 젤 최신이라 프로토타입으로 연결되어 있던 거  다 버리고 얘만 가져옴
         import dE00 from "https://hoonsbory.netlify.app/pcEtc/dE00.js"
         var module1 = function (labColor1, labColor2) {
             var delta = new dE00(labColor1, labColor2);
             return delta.getDeltaE();
         }
+        //전역으로 등록
         window.module1 = module1;
-    </script>
+    </script> 
     <script>
-        /**
-         * Converts RGB color to CIE 1931 XYZ color space.
-         * https://www.image-engineering.de/library/technotes/958-how-to-convert-between-srgb-and-ciexyz
-         * @param  {string} hex
-         * @return {number[]}
-         */
-
-
-        // var DeltaE = require('delta-e');
 
 
 
+        //rgb값을 xyz로 변환 후 lab로 최종 변환
         function rgbToXyz(hex) {
             const [r, g, b] = hex.map(_ => _ / 255).map(sRGBtoLinearRGB)
             const X = 0.4124 * r + 0.3576 * g + 0.1805 * b
@@ -351,17 +341,7 @@
             return [l, a, b]
         }
 
-        function colorTest() {
-            var color1 = []
-            var color2 = []
-            color1 = document.getElementById("color1").value.split(",")
-            color2 = document.getElementById("color2").value.split(",")
-            var colorArray1 = xyzToLab(rgbToXyz(color1));
-            var labColor1 = { L: colorArray1[0], A: colorArray1[1], B: colorArray1[2] };
-            var colorArray2 = xyzToLab(rgbToXyz(color2));
-            var labColor2 = { L: colorArray2[0], A: colorArray2[1], B: colorArray2[2] };
-            window.module1(labColor1, labColor2)
-        }
+
 
 
 
@@ -451,39 +431,7 @@
             document.documentElement.classList.add('fonts-loaded');
         });
 
-        //         function deltaE(rgbA, rgbB) {
-        //   let labA = rgb2lab(rgbA);
-        //   let labB = rgb2lab(rgbB);
-        //   let deltaL = labA[0] - labB[0];
-        //   let deltaA = labA[1] - labB[1];
-        //   let deltaB = labA[2] - labB[2];
-        //   let c1 = Math.sqrt(labA[1] * labA[1] + labA[2] * labA[2]);
-        //   let c2 = Math.sqrt(labB[1] * labB[1] + labB[2] * labB[2]);
-        //   let deltaC = c1 - c2;
-        //   let deltaH = deltaA * deltaA + deltaB * deltaB - deltaC * deltaC;
-        //   deltaH = deltaH < 0 ? 0 : Math.sqrt(deltaH);
-        //   let sc = 1.0 + 0.045 * c1;
-        //   let sh = 1.0 + 0.015 * c1;
-        //   let deltaLKlsl = deltaL / (1.0);
-        //   let deltaCkcsc = deltaC / (sc);
-        //   let deltaHkhsh = deltaH / (sh);
-        //   let i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
-        //   return i < 0 ? 0 : Math.sqrt(i);
-        // }
 
-        // function rgb2lab(rgb){
-        //   let r = rgb[0] / 255, g = rgb[1] / 255, b = rgb[2] / 255, x, y, z;
-        //   r = (r > 0.04045) ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
-        //   g = (g > 0.04045) ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
-        //   b = (b > 0.04045) ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
-        //   x = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047;
-        //   y = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 1.00000;
-        //   z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883;
-        //   x = (x > 0.008856) ? Math.pow(x, 1/3) : (7.787 * x) + 16/116;
-        //   y = (y > 0.008856) ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
-        //   z = (z > 0.008856) ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
-        //   return [(116 * x) - 16, 500 * (x - y), 200 * (y - z)]
-        // }
         //페이스북 인앱 브라우저에서 accept속성때문에 업로드가 안되는 버그가 있어서 대응
 
         //크롭없이 회전후 크롭할 경우  크롭을 하는 것은, 원본이미지를 캔버스에 옮겨오는 것으로 시작하는데, 크롭버튼을 누르지않고 회전부터 할 경우, 나중에 크롭할때 회전도가 달라 문제가 생긴다.
@@ -767,7 +715,7 @@
                     checkFail.firstElementChild.nextElementSibling.innerHTML = "사각형에 피부가 꽉차게 편집해주세요!"
                     if (stream && colorNum == 21) {
                         checkFail.firstElementChild.nextElementSibling.innerHTML = "혹시 주변이 어두우시다면 피부가 화면에 꽉 찬 상태에서 시도해보세요!"
-                    }else if(stream && colorNum!= 21){
+                    } else if (stream && colorNum != 21) {
                         checkFail.firstElementChild.nextElementSibling.innerHTML = "피부가 화면에 꽉 찬 상태에서 시도해보세요!"
                     }
                     checkSuccess.style.display = "none"
@@ -1413,7 +1361,12 @@
             }
         }
 
-
+        $('.image-upload-wrap').bind('dragover', function() {
+            $('.image-upload-wrap').addClass('image-dropping');
+        });
+        $('.image-upload-wrap').bind('dragleave', function() {
+            $('.image-upload-wrap').removeClass('image-dropping');
+        });
         //이미지 회전.
         function rotateImg(plusMinus) {
             document.getElementById("rotateBtn").style.animation = "fade 0.5s"
@@ -1634,6 +1587,10 @@
 
 
         //색상과 질문 총 결과값을 종합하여 결과 도출
+        //아래 주석처리된 부분이 원래로직. 단순하게 rgb값들의 오차를 절대값으로 더해서 가장 숫자가 적은, 즉 오차가 가장 적은 컬러가 가까운 컬러로 뽑히게 짰다.
+        //그러나 rgb값으로는 색의 오차를 수치로 판단하기가 힘들다. 예를들어 50,50,50을 비교하면, 100,100,100과는 총 150의 차이, 50,50,199와는 총 149의 차이로 후자가 더 비슷한 컬러로 결과가 나오지만,
+        //실제 인간이 봤을 때 비슷한 색은 100,100,100이다. 후자는 blue값이 149의 차이가 나기때문에 색이 완전히 다른 색이 되어버린다. 이처럼 세 영역의 벨런스를 잡아줄 수가 없어서 구글링을 해봤는데,
+        //CIE(국제조명위원회)가 LAB값을 활용한 공식을 발표했고(delta-e), 그걸 js로 만들어놓은 사람이 있어서 가져와서 모듈화해서 사용했다.
         function season(colorGroup, toneColor) {
             loading.style.display = "block"
             var length = colorGroup.length
@@ -1656,7 +1613,7 @@
             calResult.sort(function (a, b) { // 오름차순 
                 return a[0] - b[0];
             });
-            console.log(calResult);
+
             //스트림 방식은 아무래도 카메라로 바로 측정하기 때문에 그늘지기도 하고 크롭으로 특정 부위를 자를수도 없어 좀 더 어둡기 때문에 인위적으로 벨런스를 조절해줌.
             if (stream || toneColor == "warm") {
                 for (var i = 0; i < length2; i++) {
@@ -1671,8 +1628,6 @@
                         break;
                     }
                 }
-                console.log(season1);
-                console.log(season2);
                 // if (toneColor == "warm") {
                 //     season1 -= season1 / 5
                 // } else {
@@ -1681,31 +1636,28 @@
                 // }
 
                 // if (season2[0] < 200 || season1[0] < 200) {
-                    if(!stream){
-                        season1[0] -= season2[0] * 0.125
-                    }else{
-                        season1[0] -= season2[0] * 0.15
-                    }
+                if (!stream) {
+                    season1[0] -= season2[0] * 0.125
+                } else {
+                    season1[0] -= season2[0] * 0.15
+                }
 
                 // }
-                console.log(season1);
-                console.log(season2);
                 colorNum = season1[0] == season2[0] ? calResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
             } else {
                 colorNum = calResult[0][1]
             }
-            console.log(colorNum);
-            // setTimeout(function () {
-            //     if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
-            //         window.location.href = "https://mycolor.kr/springWarm"
-            //     } else if (toneColor == "warm") {
-            //         window.location.href = "https://mycolor.kr/fallWarm"
-            //     } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
-            //         window.location.href = "https://mycolor.kr/summerCool"
-            //     } else {
-            //         window.location.href = "https://mycolor.kr/winterCool"
-            //     }
-            // }, 1500);
+            setTimeout(function () {
+                if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
+                    window.location.href = "https://mycolor.kr/springWarm"
+                } else if (toneColor == "warm") {
+                    window.location.href = "https://mycolor.kr/fallWarm"
+                } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
+                    window.location.href = "https://mycolor.kr/summerCool"
+                } else {
+                    window.location.href = "https://mycolor.kr/winterCool"
+                }
+            }, 1500);
 
             calResult = [];
         }
