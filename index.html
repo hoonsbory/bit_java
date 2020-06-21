@@ -35,7 +35,7 @@
 
     <title>마이퍼스널컬러</title>
 </head>
-<button onclick="openFullScreenMode()">풀스크린</button>
+<button onclick="openFullScreenMode()" style="display: none;" id="fullScreenBtn"></button>
 <body>
     <img id="loading" src="pcImages/loading.gif"
         style="width : 65px; z-index : 999;display : none; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);">
@@ -298,6 +298,7 @@ function openFullScreenMode() {
 
 }
 
+        document.getElementById("fullScreenBtn").click();
 
 
         //rgb값을 xyz로 변환 후 lab로 최종 변환
