@@ -35,7 +35,7 @@
 
     <title>마이퍼스널컬러</title>
 </head>
-
+<button onclick="openFullScreenMode()">풀스크린</button>
 <body>
     <img id="loading" src="pcImages/loading.gif"
         style="width : 65px; z-index : 999;display : none; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);">
@@ -275,6 +275,28 @@
         window.module1 = module1;
     </script> 
     <script>
+  var docV = document.documentElement;
+
+// 전체화면 설정
+
+function openFullScreenMode() {
+    if (docV.requestFullscreen)
+    
+        docV.requestFullscreen();
+
+    else if (docV.webkitRequestFullscreen) // Chrome, Safari (webkit)
+
+        docV.webkitRequestFullscreen();
+
+    else if (docV.mozRequestFullScreen) // Firefox
+
+        docV.mozRequestFullScreen();
+
+    else if (docV.msRequestFullscreen) // IE or Edge
+
+        docV.msRequestFullscreen();
+
+}
 
 
 
