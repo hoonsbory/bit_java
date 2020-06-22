@@ -695,6 +695,7 @@ function openFullScreenMode() {
 
                 colorThief.getColor(sourceImage)
             } catch (error) {
+                checkFail.firstElementChild.nextElementSibling.innerHTML = "사진을 잘못 올리신 거 같아요! 다시 시도해주세요"
                 checkSuccess.style.display = "none"
                 checkFail.style.display = "block"
                 checkResult.style.display = "block"
@@ -709,6 +710,8 @@ function openFullScreenMode() {
             labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2] };
 
             for (var i = 0; i < colorList.length; i++) {
+
+                //절대값을 구할때는 Math.ads로 구하면된다..
                 // var color = "color" + i;
                 // var red = (imgRed - colorList[i][0]);
                 // red = red < 0 ? -(red) : red;
@@ -727,7 +730,7 @@ function openFullScreenMode() {
             setTimeout(function () {
 
                 loading.style.display = "none"
-                if (colorNum < 16) {
+                if (colorNum < 16 && firstResult[0][0] <= 30) {
                     checkSuccess.style.display = "block"
                     checkFail.style.display = "none"
 
@@ -1658,7 +1661,7 @@ function openFullScreenMode() {
             season2[0] += (cool/5)
             console.log(season1[0]);
             console.log(season2[0]);
-            
+
             if(season1[0] > season2[0]){
                 toneColor = "warm"
             }else{
