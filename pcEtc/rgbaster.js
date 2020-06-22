@@ -56,7 +56,7 @@ var defaultOpts = {
   ignore: [],
   scale: 1
 };
-var index = (function (src, opts) {
+export default function index (src, opts) {
   if ( opts === void 0 ) opts = defaultOpts;
 
   try {
@@ -75,6 +75,6 @@ var index = (function (src, opts) {
   } catch (e) {
     return Promise.reject(e);
   }
-});
+};
 
-module.exports = index;
+

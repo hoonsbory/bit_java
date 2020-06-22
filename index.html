@@ -274,7 +274,7 @@
     <script type="module">
         //delta E lab값으로 유사도 측정 몇개 공식중 00년도 공식이 젤 최신이라 프로토타입으로 연결되어 있던 거  다 버리고 얘만 가져옴
         import dE00 from "https://hoonsbory.netlify.app/pcEtc/dE00.js"
-        import { index } from "https://hoonsbory.netlify.app/pcEtc/rgbaster.js"
+        import index from "https://hoonsbory.netlify.app/pcEtc/rgbaster.js"
         var module1 = function (labColor1, labColor2) {
             var delta = new dE00(labColor1, labColor2);
             return delta.getDeltaE();
