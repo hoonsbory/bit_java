@@ -1711,16 +1711,17 @@ function openFullScreenMode() {
                     season1[0] -= season2[0] * 0.15
                 }
                 // }
+                console.log(season1);
+                console.log(season2);
                 colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
             } else {
+                console.log(season1);
+                console.log(season2);
                 colorNum = firstResult[0][1]
             }
-                console.log(season1);
-                console.log(season2);
-                console.log(colorNum);
+               
             setTimeout(function () {
-                console.log(season1);
-                console.log(season2);
+                
                 console.log(colorNum);
                 if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
                     // window.location.href = "https://mycolor.kr/springWarm"
