@@ -50,6 +50,7 @@
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="pcEtc/Jcrop.min.js"></script>
+    <script src="pcEtc/rgbaster.umd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
@@ -700,12 +701,13 @@
             var sourceImage = src
             try {
 
-
+                const result = analyze(sourceImage)
+                console.log(result[0].color);
             // imgRed = colorThief.getColor(sourceImage)[0];
             // imgGreen = colorThief.getColor(sourceImage)[1];
             // imgBlue = colorThief.getColor(sourceImage)[2];
             
-            var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
+            // var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
 
             console.log(colorThief.getColor(sourceImage));
             labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2] };
