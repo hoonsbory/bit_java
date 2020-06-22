@@ -683,6 +683,7 @@ function openFullScreenMode() {
 
         //이미지에서 색상추출
         function color(src) {
+            firstResult = [];
             var checkSuccess = document.getElementById("checkSuccess");
             var checkFail = document.getElementById("checkFail");
             var checkResult = document.getElementById("checkResult")
@@ -723,6 +724,7 @@ function openFullScreenMode() {
                 return a[0] - b[0];
             });
             var colorNum = firstResult[0][1];
+            console.log(firstResult);
             setTimeout(function () {
 
                 loading.style.display = "none"
@@ -746,7 +748,7 @@ function openFullScreenMode() {
                     checkResult.style.display = "block"
                 }
             }, 1500);
-            firstResult = [];
+           
 
         }
 
@@ -1616,7 +1618,7 @@ function openFullScreenMode() {
         //CIE(국제조명위원회)가 LAB값을 활용한 공식을 발표했고(delta-e), 그걸 js로 만들어놓은 사람이 있어서 가져와서 모듈화해서 사용했다.
         function season(colorGroup, toneColor) {
             loading.style.display = "block"
-            var length = colorGroup.length
+            var length = firstResult.length
             for (var i = 0; i < length; i++) {
                 // var red = (imgRed - colorGroup[i][0]);
                 // red = red < 0 ? -(red) : red;
@@ -1625,27 +1627,28 @@ function openFullScreenMode() {
                 // var blue = (imgBlue - colorGroup[i][2]);
                 // blue = blue < 0 ? -(blue) : blue;
 
-                calResult.push([window.module1(labColor, colorGroup[i]), i]);
+                firstResult.push([window.module1(labColor, colorGroup[i]), i]);
                 // calResult.push([red + green + blue, i]);
 
             }
-            var length2 = calResult.length
+            // var length2 = firstResult.length
             var season1 = [];
             var season2 = [];
-            var colorNum;
-            calResult.sort(function (a, b) { // 오름차순 
-                return a[0] - b[0];
-            });
+            // var colorNum;
+            // calResult.sort(function (a, b) { // 오름차순 
+            //     return a[0] - b[0];
+            // });
+            console.log(firstResult);
 
             //스트림 방식은 아무래도 카메라로 바로 측정하기 때문에 그늘지기도 하고 크롭으로 특정 부위를 자를수도 없어 좀 더 어둡기 때문에 인위적으로 벨런스를 조절해줌.
             if (stream || toneColor == "warm") {
-                for (var i = 0; i < length2; i++) {
-                    if (calResult[i][1] <= 3) {
-                        season1.push(calResult[i][0])
-                        season1.push(calResult[i][1])
+                for (var i = 0; i < length; i++) {
+                    if (firstResult[i][1] <= 3) {
+                        season1.push(firstResult[i][0])
+                        season1.push(firstResult[i][1])
                     } else {
-                        season2.push(calResult[i][0])
-                        season2.push(calResult[i][1])
+                        season2.push(firstResult[i][0])
+                        season2.push(firstResult[i][1])
                     }
                     if (season2[0] && season1[0]) {
                         break;
@@ -1664,21 +1667,22 @@ function openFullScreenMode() {
                 } else {
                     season1[0] -= season2[0] * 0.15
                 }
-
+                console.log(season1);
+                console.log(season2);
                 // }
-                colorNum = season1[0] == season2[0] ? calResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
+                colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
             } else {
-                colorNum = calResult[0][1]
+                colorNum = firstResult[0][1]
             }
             setTimeout(function () {
                 if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
-                    window.location.href = "https://mycolor.kr/springWarm"
+                    // window.location.href = "https://mycolor.kr/springWarm"
                 } else if (toneColor == "warm") {
-                    window.location.href = "https://mycolor.kr/fallWarm"
+                    // window.location.href = "https://mycolor.kr/fallWarm"
                 } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
-                    window.location.href = "https://mycolor.kr/summerCool"
+                    // window.location.href = "https://mycolor.kr/summerCool"
                 } else {
-                    window.location.href = "https://mycolor.kr/winterCool"
+                    // window.location.href = "https://mycolor.kr/winterCool"
                 }
             }, 1500);
 
