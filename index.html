@@ -274,14 +274,13 @@
     <script type="module">
         //delta E lab값으로 유사도 측정 몇개 공식중 00년도 공식이 젤 최신이라 프로토타입으로 연결되어 있던 거  다 버리고 얘만 가져옴
         import dE00 from "https://hoonsbory.netlify.app/pcEtc/dE00.js"
-        import index from "https://hoonsbory.netlify.app/pcEtc/rgbaster.js"
+    
         var module1 = function (labColor1, labColor2) {
             var delta = new dE00(labColor1, labColor2);
             return delta.getDeltaE();
         }
         //전역으로 등록
         window.module1 = module1;
-        window.module2 = index;
     </script>
     <script>
         var docV = document.documentElement;
@@ -700,15 +699,13 @@
             var colorThief = new ColorThief();
 
             var sourceImage = src
-            const result =  window.module2("https://hoonsbory.netlify.app/pcImages/camera.png")
-            console.log(result[0].color);
             try {
 
             // imgRed = colorThief.getColor(sourceImage)[0];
             // imgGreen = colorThief.getColor(sourceImage)[1];
             // imgBlue = colorThief.getColor(sourceImage)[2];
             
-            // var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
+            var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
 
             console.log(colorThief.getColor(sourceImage));
             labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2] };
