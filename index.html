@@ -98,6 +98,9 @@
 
 
     <div id="mainbody">
+        <div id="notice2" style="text-align: center;">인공지능</span>이 CIE의 delta-e 방식을 통해<p>컬러리스트가 분석한 샘플을 기반으로
+            <span style="background-color: rgb(10, 59, 112); color: white; padding : 4px; padding-bottom: 0px;">피부를 진단합니다.</span></p>
+                    </div>
         <div id="mainTitle">
             <p>나는 <span id="warmSpan">웜톤</span>일까? <span id="coolSpan">쿨톤</span>일까?</p>
             <span id="bgSpan">퍼스널컬러</span><span id="noBgSpan"> 진단</span>
@@ -1713,8 +1716,6 @@ function openFullScreenMode() {
                     season1[0] -= season2[0] * 0.15
                 }
                 // }
-                console.log(season1);
-                console.log(season2);
                 colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
             } else {
                 console.log(season1);
