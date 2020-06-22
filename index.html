@@ -1723,16 +1723,16 @@ function openFullScreenMode() {
             setTimeout(function () {
                 
                 console.log(colorNum);
-                if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
+                if (colorNum <= 3) {
                     // window.location.href = "https://mycolor.kr/springWarm"
                     alert('봄');
-                } else if (toneColor == "warm") {
+                } else if (colorNum <= 7) {
                     // window.location.href = "https://mycolor.kr/fallWarm"
                     alert('가을');
-                } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
+                } else if (colorNum <= 11) {
                     // window.location.href = "https://mycolor.kr/summerCool"
                     alert('여름');
-                } else {
+                } else if(colorNum <=15) {
                     // window.location.href = "https://mycolor.kr/winterCool"
                     alert("겨울");
                 }
