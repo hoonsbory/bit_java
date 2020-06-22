@@ -50,7 +50,6 @@
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="pcEtc/Jcrop.min.js"></script>
-    <script src="pcEtc/rgbaster.umd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
@@ -275,12 +274,15 @@
     <script type="module">
         //delta E lab값으로 유사도 측정 몇개 공식중 00년도 공식이 젤 최신이라 프로토타입으로 연결되어 있던 거  다 버리고 얘만 가져옴
         import dE00 from "https://hoonsbory.netlify.app/pcEtc/dE00.js"
+        import analyze from "https://hoonsbory.netlify.app/pcEtc/rgbaster.js"
         var module1 = function (labColor1, labColor2) {
             var delta = new dE00(labColor1, labColor2);
             return delta.getDeltaE();
         }
+        var analyze2 = analyze();
         //전역으로 등록
         window.module1 = module1;
+        window.module2 = analyze2;
     </script>
     <script>
         var docV = document.documentElement;
@@ -699,7 +701,7 @@
             var colorThief = new ColorThief();
 
             var sourceImage = src
-            const result = analyze(sourceImage)
+            const result = window.module2(sourceImage)
             console.log(result[0].color);
             try {
 
