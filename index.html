@@ -700,20 +700,14 @@
             var sourceImage = src
             try {
 
-                colorThief.getColor(sourceImage)
-            } catch (error) {
-                checkFail.firstElementChild.nextElementSibling.innerHTML = "사진을 잘못 올리신 거 같아요! 다시 시도해주세요"
-                checkSuccess.style.display = "none"
-                checkFail.style.display = "block"
-                checkResult.style.display = "block"
-                loading.style.display = "none"
-            }
 
             // imgRed = colorThief.getColor(sourceImage)[0];
             // imgGreen = colorThief.getColor(sourceImage)[1];
             // imgBlue = colorThief.getColor(sourceImage)[2];
-
+            
             var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
+
+            console.log(colorThief.getColor(sourceImage));
             labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2] };
 
             for (var i = 0; i < colorList.length; i++) {
@@ -758,6 +752,13 @@
                 }
             }, 1500);
 
+            } catch (error) {
+                checkFail.firstElementChild.nextElementSibling.innerHTML = "사진을 잘못 올리신 거 같아요! 다시 시도해주세요"
+                checkSuccess.style.display = "none"
+                checkFail.style.display = "block"
+                checkResult.style.display = "block"
+                loading.style.display = "none"
+            }
 
         }
 
