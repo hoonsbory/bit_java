@@ -70,7 +70,7 @@ html{
   z-index: 999;
   transform: translate(-50%,-50%);
   background-color: rgba(230, 230, 230, 1 );
-  font-size: 1.7vh;
+  font-size: 11px;
   color: rgb(10, 59, 112);
   word-break: keep-all;
   max-width: 250px;
@@ -97,9 +97,9 @@ html{
     display: inline;
     border: 1px solid rgb(10, 59, 112);
     border-radius: 6px;
-    padding: 2vh;
-    padding-top: 1vh;
-    padding-bottom: .4vh;
+    padding: 15px;
+    padding-top: 7px;
+    padding-bottom: 2px;
     cursor: pointer;
 }
 #cropNotice{
@@ -127,8 +127,8 @@ html{
     font-size: 4vh;
     color: white;
     padding-right: 3vh;
-    padding-top: .5vh;
-    padding-left: .5vh;
+    padding-top: .4vh;
+    padding-left: .4vh;
     height: 6.9vh;
     padding-bottom: .56vh;
     margin-bottom: 2vh;
@@ -260,26 +260,25 @@ p{
 }
 
 #notice{
-  background-color: #ffffff;
   background-color: rgba( 255, 255, 255, 0.4 );
   font-size: 2.3vh;
   color: rgb(10, 59, 112);
   margin-top: 5vh;
-  margin-bottom : 2rem;
-  padding-left : 2rem;
-  padding-right: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  margin-bottom: 1vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
 }
 #subTitle{
   color: white;
   background-color: rgb(10, 59, 112);
   font-size: 1.9vh;
   margin-bottom: 5vh;
-  padding: 6px;
-  padding-bottom: 3px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-bottom: .5vh;
+  padding-left: 4vh;
+  padding-right: 4vh;
+  padding-top: .8vh;
 }
 #mainbody{
   display: flex;
@@ -496,11 +495,14 @@ a.control_next {
   border-radius: 200px;
   width: 36vh;
   height: 36vh;
+  min-width: 135px;
+  min-height: 135px;
   left: 50%;
   transform: translateX(-50%);
   background: white;
   cursor: pointer;
 }
+
 .drag-text{
   position: relative;
   top: 50%;
@@ -509,6 +511,7 @@ a.control_next {
 }
 .drag-text img{
   width: 13vh;
+  min-width: 49px;
   height: unset;
 }
 .drag-text p{
@@ -633,32 +636,9 @@ margin-bottom: 5px;
   #bgSpan, #noBgSpan{
     font-size: 6vh;
   }
-  #subTitle{
-    font-size: 1.9vh;
-  }
-  .drag-text img{
-    width : 11vh;
-    height: unset;
-  }
   .drag-text h1{
     font-size: 3.4vh;
   }
-  #notice{
-    font-size: 2.3vh;
-  }
-  
- 
- 
-.image-upload-wrap {
-position: relative;
-width: 36vh;
-height: 36vh;
-left: 50%;
-border-radius: 1000px;
-transform: translateX(-50%);
-background: white;
-}
-
 
 .arrowBtn img{
 width: 9rem;
@@ -673,15 +653,10 @@ left: -8rem;
 left : -6rem;
 }
 
-
-
 }
 @media(max-width: 767px){
   #popup img{
     width: 6vw;
-  }
-  .popDiv{
-      font-size: 2.2vw;
   }
   .popDivFB{
     font-size: 2vw;
