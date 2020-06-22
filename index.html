@@ -1651,8 +1651,12 @@ function openFullScreenMode() {
 
             var result1 = 0;
             var result2 = 0;
-            result1 = 50 - (50/(100/season1[0])) + (warm/10)
-            result2 = 50 - (50/(100/season2[0])) + (cool/10)
+            result1 = 50 - (50/(100/season1[0]))
+            result2 = 50 - (50/(100/season2[0]))
+            console.log(result1);
+            console.log(result2);
+            result1 += (warm/10)
+            result2 += (cool/10)
 
             console.log(result1);
             console.log(result2);
