@@ -699,10 +699,10 @@
             var colorThief = new ColorThief();
 
             var sourceImage = src
+            const result = analyze(sourceImage)
+            console.log(result[0].color);
             try {
 
-                const result = analyze(sourceImage)
-                console.log(result[0].color);
             // imgRed = colorThief.getColor(sourceImage)[0];
             // imgGreen = colorThief.getColor(sourceImage)[1];
             // imgBlue = colorThief.getColor(sourceImage)[2];
