@@ -427,7 +427,6 @@ function openFullScreenMode() {
             if (document.getElementById("checkSuccess").style.display == "block") {
                 moveRight("");
                 uploadCheck = true;
-                firstResult = [];
             }
             document.getElementById(div).style.display = "none";
         }
@@ -1677,12 +1676,16 @@ function openFullScreenMode() {
             setTimeout(function () {
                 if (0 <= colorNum && colorNum <= 3 && toneColor == "warm") {
                     // window.location.href = "https://mycolor.kr/springWarm"
+                    alert('봄');
                 } else if (toneColor == "warm") {
                     // window.location.href = "https://mycolor.kr/fallWarm"
+                    alert('가을');
                 } else if (0 <= colorNum && colorNum <= 3 && toneColor == "cool") {
                     // window.location.href = "https://mycolor.kr/summerCool"
+                    alert('여름');
                 } else {
                     // window.location.href = "https://mycolor.kr/winterCool"
+                    alert("겨울");
                 }
             }, 1500);
 
