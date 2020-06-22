@@ -1655,7 +1655,8 @@
                 if (firstResult[i][1] < 8 && !season1[0]) {
                     season1.push(firstResult[i][0])
                     season1.push(firstResult[i][1])
-                } else if (firstResult[i][1] < 16 && !season2[0]) {
+                }
+                if ((firstResult[i][1] >= 8 && firstResult[i][1] < 16) && !season2[0]) {
                     season2.push(firstResult[i][0])
                     season2.push(firstResult[i][1])
                 }
