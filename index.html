@@ -291,6 +291,7 @@
             return [X, Y, Z].map(_ => _ * 100)
         }
 
+
         /**
          * Undoes gamma-correction from an RGB-encoded color.
          * https://en.wikipedia.org/wiki/SRGB#Specification_of_the_transformation
@@ -366,7 +367,7 @@
             document.documentElement.classList.add('fonts-loaded');
             alert("지원하지않는 브라우저입니다. 크롬,엣지,사파리 등의 브라우저를 이용해주세요");
         }
-
+        document.getElementById("cropNotice").innerHTML = ua
         //애플 기기의 ios버전을 체크하기 위함.
         let osInfo;
         let realOs;
@@ -997,7 +998,7 @@
                 //아이폰xs ios업데이트를 했더니 알아서 정방향으로 잘나온다. 이전에 했던 로직이 안먹힘. 하... 일단 ios 13.4버전 기준으로 자동회전을 시켜놨다.
                 //아이패드에서도 실험해봤는데 13.5버전 또한 안드로이드처럼 정방향으로 잘나온다. 확실히 ios문제인거 같다. 정확히 이 패치가 몇 버전에서 이루어졌는지 알아내야한다.
                 if (appleCheck) {
-                    if (floatOs >= 13.4 || ua.indexOf("13.4") > -1 || ua.indexOf("13.5") > -1) {
+                    if (floatOs >= 13.4 || ua.indexOf("13.4") > -1 || ua.indexOf("13.5") > -1 ) {
                         canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
                         if (plusMinus) callback(plusMinus);
                         return
@@ -1176,6 +1177,7 @@
             document.getElementById("subTitle").style.display = "none";
             document.getElementById("mainTitle").style.display = "none";
             document.getElementById("notice").style.display = "none";
+            document.getElementById("notice2").style.display = "none";
             document.getElementById("stepInfo").style.display = "block";
             document.getElementById("cropNotice").style.display = "block";
             document.getElementById('editBtn').style.pointerEvents = 'auto';
@@ -1635,8 +1637,11 @@
                 }
                 if (season1[0] && season2[0]) break;
             }
+            //delta-e에서 리턴받은 값을 점수화해서 질문결과와 합침.
+            //대부분 필터 같은 것들이 껴있어서 밝은 부분이 많아 쿨톤이 점수가 높게 나오기 때문에 웜톤을 상향 조정했다.
             if (stream) {
-                season1[0] = 50 - (47 / (100 / season1[0]));
+                //스트림을 통한 측정은 필터가 없이 쌩으로 측정하기 때문에 아주 약간만 상향.
+                season1[0] = 50 - (49 / (100 / season1[0]));
                 season2[0] = 50 - (50 / (100 / season2[0]));
             }
             else {
@@ -1676,6 +1681,8 @@
                             break;
                         }
                     }
+                    //웜톤은 가뜩이나 필터때문에 잘나오지 못하는데, 그나마 웜톤이 나왔을때는 사진이 다소 어두울 때라, 가을 웜톤에 결과가 치우친다.
+                    //그래서 봄웜톤 살짝 상향 조정.
                     if (!stream) {
                         if (season2[0] <= 12) season1[0] -= season2[0] * 0.2
                         else if (season2[0] <= 24) season1[0] -= season2[0] * 0.15
