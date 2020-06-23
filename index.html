@@ -701,56 +701,56 @@
             try {
 
 
-            // imgRed = colorThief.getColor(sourceImage)[0];
-            // imgGreen = colorThief.getColor(sourceImage)[1];
-            // imgBlue = colorThief.getColor(sourceImage)[2];
-            
-            var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
+                // imgRed = colorThief.getColor(sourceImage)[0];
+                // imgGreen = colorThief.getColor(sourceImage)[1];
+                // imgBlue = colorThief.getColor(sourceImage)[2];
 
-            console.log(colorThief.getColor(sourceImage));
-            labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2] };
+                var colorArray = xyzToLab(rgbToXyz(colorThief.getColor(sourceImage)));
 
-            for (var i = 0; i < colorList.length; i++) {
+                console.log(colorThief.getColor(sourceImage));
+                labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2] };
 
-                //절대값을 구할때는 Math.ads로 구하면된다..
-                // var color = "color" + i;
-                // var red = (imgRed - colorList[i][0]);
-                // red = red < 0 ? -(red) : red;
-                // var green = (imgGreen - colorList[i][1]);
-                // green = green < 0 ? -(green) : green;
-                // var blue = (imgBlue - colorList[i][2]);
-                // blue = blue < 0 ? -(blue) : blue;
+                for (var i = 0; i < colorList.length; i++) {
 
-                firstResult.push([window.module1(labColor, colorList[i]), i]);
-            }
-            firstResult.sort(function (a, b) { // 오름차순 
-                return a[0] - b[0];
-            });
-            var colorNum = firstResult[0][1];
-            console.log(firstResult);
-            setTimeout(function () {
+                    //절대값을 구할때는 Math.ads로 구하면된다..
+                    // var color = "color" + i;
+                    // var red = (imgRed - colorList[i][0]);
+                    // red = red < 0 ? -(red) : red;
+                    // var green = (imgGreen - colorList[i][1]);
+                    // green = green < 0 ? -(green) : green;
+                    // var blue = (imgBlue - colorList[i][2]);
+                    // blue = blue < 0 ? -(blue) : blue;
 
-                loading.style.display = "none"
-                if (colorNum < 16 && firstResult[0][0] <= 30) {
-                    checkSuccess.style.display = "block"
-                    checkFail.style.display = "none"
-
-                    checkResult.style.display = "block"
-
-                    return;
+                    firstResult.push([window.module1(labColor, colorList[i]), i]);
                 }
-                else {
-                    checkFail.firstElementChild.nextElementSibling.innerHTML = "사각형에 피부가 꽉차게 편집해주세요!"
-                    if (stream && colorNum == 21) {
-                        checkFail.firstElementChild.nextElementSibling.innerHTML = "혹시 주변이 어두우시다면 피부가 화면에 꽉 찬 상태에서 시도해보세요!"
-                    } else if (stream && colorNum != 21) {
-                        checkFail.firstElementChild.nextElementSibling.innerHTML = "피부가 화면에 꽉 찬 상태에서 시도해보세요!"
+                firstResult.sort(function (a, b) { // 오름차순 
+                    return a[0] - b[0];
+                });
+                var colorNum = firstResult[0][1];
+                console.log(firstResult);
+                setTimeout(function () {
+
+                    loading.style.display = "none"
+                    if (colorNum < 16 && firstResult[0][0] <= 30) {
+                        checkSuccess.style.display = "block"
+                        checkFail.style.display = "none"
+
+                        checkResult.style.display = "block"
+
+                        return;
                     }
-                    checkSuccess.style.display = "none"
-                    checkFail.style.display = "block"
-                    checkResult.style.display = "block"
-                }
-            }, 1500);
+                    else {
+                        checkFail.firstElementChild.nextElementSibling.innerHTML = "사각형에 피부가 꽉차게 편집해주세요!"
+                        if (stream && colorNum == 21) {
+                            checkFail.firstElementChild.nextElementSibling.innerHTML = "혹시 주변이 어두우시다면 피부가 화면에 꽉 찬 상태에서 시도해보세요!"
+                        } else if (stream && colorNum != 21) {
+                            checkFail.firstElementChild.nextElementSibling.innerHTML = "피부가 화면에 꽉 찬 상태에서 시도해보세요!"
+                        }
+                        checkSuccess.style.display = "none"
+                        checkFail.style.display = "block"
+                        checkResult.style.display = "block"
+                    }
+                }, 1500);
 
             } catch (error) {
                 checkFail.firstElementChild.nextElementSibling.innerHTML = "사진을 잘못 올리신 거 같아요! 다시 시도해주세요"
@@ -1666,8 +1666,8 @@
             season2[0] = 50 - (50 / (100 / season2[0]));
             console.log(season1[0]);
             console.log(season2[0]);
-            console.log("warm="+warm);
-            console.log("cool="+cool);
+            console.log("warm=" + warm);
+            console.log("cool=" + cool);
             season1[0] += (warm / 2.5)
             season2[0] += (cool / 2.5)
             console.log(season1[0]);
@@ -1689,13 +1689,21 @@
                             season1.push(firstResult[i][0])
                             season1.push(firstResult[i][1])
                         }
-                        if ((firstResult[i][1] >=4 && firstResult[i][1] <= 7) && !season2[0]) {
+                        if ((firstResult[i][1] >= 4 && firstResult[i][1] <= 7) && !season2[0]) {
                             season2.push(firstResult[i][0])
                             season2.push(firstResult[i][1])
                         }
                         if (season2[0] && season1[0]) {
                             break;
                         }
+                    }
+                    if (stream) {
+                        if (season2[0] <= 12) season1[0] -= season2[0] * 0.2
+                        else if (season2[0] <= 24) season1[0] -= season2[0] * 0.15
+                    }
+                    else {
+                        if (season2[0] <= 12) season1[0] -= season2[0] * 0.15
+                        else if (season2[0] <= 24) season1[0] -= season2[0] * 0.125
                     }
                 } else {
                     for (var i = 0; i < length; i++) {
@@ -1703,7 +1711,7 @@
                             season1.push(firstResult[i][0])
                             season1.push(firstResult[i][1])
                         }
-                        if ((firstResult[i][1] >=12 && firstResult[i][1] <= 15) && !season2[0]) {
+                        if ((firstResult[i][1] >= 12 && firstResult[i][1] <= 15) && !season2[0]) {
                             season2.push(firstResult[i][0])
                             season2.push(firstResult[i][1])
                         }
@@ -1711,6 +1719,8 @@
                             break;
                         }
                     }
+                    if (season2[0] <= 12) season1[0] -= season2[0] * 0.125
+                    else if (season2[0] <= 24) season1[0] -= season2[0] * 0.1
                 }
                 // if (toneColor == "warm") {
                 //     season1 -= season1 / 5
@@ -1720,12 +1730,8 @@
                 // }
 
                 // if (season2[0] < 200 || season1[0] < 200) {
-                    console.log(season1[0]);
-                    if(season2[0]<=6) season1[0] -= season2[0] * 0.25
-                    else if(season2[0]<=12) season1[0] -= season2[0] * 0.2
-                    else if(season2[0]<=24) season1[0] -= season2[0] * 0.15
 
-                    console.log(season1[0]);
+                console.log(season1[0]);
                 // }
                 colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
             } else {
