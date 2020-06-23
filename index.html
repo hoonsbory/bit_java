@@ -1056,7 +1056,9 @@
                                 canvasContext.translate(canvas.width / 2, canvas.height / 2);
                                 canvasContext.rotate(Math.PI * 0.5);
                                 canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
+                                alert('before');
                                 canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                                alert('after');
                                 if (plusMinus) callback(plusMinus);
 
 
