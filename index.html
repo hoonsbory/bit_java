@@ -377,10 +377,10 @@
             if(ua.indexOf("FBSS") > -1){
             osInfo = ua.split("FBSS")[0];
             document.getElementById("notice").innerHTML = osInfo
-            // realOs = os.slice(-5,-1);
-            // document.getElementById("bgSpan").innerHTML = realOs
-            // floatOs = parseFloat(realOs)
-            // document.getElementById("noBgSpan").innerHTML = floatOs
+            realOs = osInfo.slice(-5,-1);
+            document.getElementById("bgSpan").innerHTML = realOs
+            floatOs = parseFloat(realOs)
+            document.getElementById("noBgSpan").innerHTML = floatOs
             }else{
             osInfo = ua.split("OS")[1]
             realOs = osInfo.substring(1, 3) + "." + osInfo.substring(4, 5);
