@@ -1662,8 +1662,14 @@
                 }
                 if (season1[0] && season2[0]) break;
             }
-            season1[0] = 50 - (42 / (100 / season1[0]));
-            season2[0] = 50 - (50 / (100 / season2[0]));
+            if (stream) {
+                season1[0] = 50 - (47 / (100 / season1[0]));
+                season2[0] = 50 - (50 / (100 / season2[0]));
+            }
+            else {
+                season1[0] = 50 - (42 / (100 / season1[0]));
+                season2[0] = 50 - (50 / (100 / season2[0]));
+            }
             console.log(season1[0]);
             console.log(season2[0]);
             console.log("warm=" + warm);
