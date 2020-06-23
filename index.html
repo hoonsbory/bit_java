@@ -41,7 +41,7 @@
         style="width : 65px; z-index : 999;display : none; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);">
     <canvas id="myCanvas" style="display: none;">
     </canvas>
-    <canvas id="copyCanvas" style="display: none;">
+    <canvas id="copyCanvas" >
     </canvas>
     <p id="resultText"></p>
     <p id="resultText"></p>
@@ -962,6 +962,9 @@
                     return;
                 }
             }
+            try {
+                
+           
             document.getElementById("editBtn").style.animation = "fade 0.5s"
             setTimeout(function () {
                 document.getElementById("editBtn").style.animation = "unset"
@@ -1085,7 +1088,9 @@
                 $('.file-upload-content').show();
                 // firstCrop = true;
             }
-
+        } catch (error) {
+                document.getElementById("cropNotice").innerHTML = error
+            }
         }
 
         function streamTrue() {
