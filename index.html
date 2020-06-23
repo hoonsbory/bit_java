@@ -35,7 +35,6 @@
 
     <title>마이퍼스널컬러</title>
 </head>
-<button onclick="openFullScreenMode()" style="display: none;" id="fullScreenBtn"></button>
 
 <body>
     <img id="loading" src="pcImages/loading.gif"
@@ -282,32 +281,6 @@
         window.module1 = module1;
     </script>
     <script>
-        var docV = document.documentElement;
-
-        // 전체화면 설정
-
-        function openFullScreenMode() {
-            if (docV.requestFullscreen)
-
-                docV.requestFullscreen();
-
-            else if (docV.webkitRequestFullscreen) // Chrome, Safari (webkit)
-
-                docV.webkitRequestFullscreen();
-
-            else if (docV.mozRequestFullScreen) // Firefox
-
-                docV.mozRequestFullScreen();
-
-            else if (docV.msRequestFullscreen) // IE or Edge
-
-                docV.msRequestFullscreen();
-
-        }
-
-        document.getElementById("fullScreenBtn").click();
-
-
         //rgb값을 xyz로 변환 후 lab로 최종 변환
         function rgbToXyz(hex) {
             const [r, g, b] = hex.map(_ => _ / 255).map(sRGBtoLinearRGB)
@@ -1703,7 +1676,7 @@
                             break;
                         }
                     }
-                    if (stream) {
+                    if (!stream) {
                         if (season2[0] <= 12) season1[0] -= season2[0] * 0.2
                         else if (season2[0] <= 24) season1[0] -= season2[0] * 0.15
                     }
