@@ -973,7 +973,6 @@
             // @breif 캔버스의 이미지
 
             var image = new Image();
-            image.src = document.getElementById("originalImg").src;
             image.onload = function () {
 
                 canvas.width = this.width;
@@ -1088,6 +1087,8 @@
 
                 // 사진편집을 누르면 편집 테두리가 전체를 감싸도록 설정
                 $('.file-upload-content').show();
+            image.src = document.getElementById("originalImg").src;
+
                 // firstCrop = true;
             }
 
