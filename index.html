@@ -962,9 +962,6 @@
                     return;
                 }
             }
-            try {
-                
-           
             document.getElementById("editBtn").style.animation = "fade 0.5s"
             setTimeout(function () {
                 document.getElementById("editBtn").style.animation = "unset"
@@ -1011,6 +1008,7 @@
                     EXIF.getData(fileInfo, function () {
                         const orientation = EXIF.getTag(fileInfo, "Orientation");
                         // console.log("회전도는 " + orientation);
+                        alert(orientation);
                         switch (orientation) {
 
                             // @details 이미지 회전값이 0인경우 ( 정방향 )
@@ -1018,6 +1016,10 @@
                                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
                                 if (plusMinus) callback(plusMinus);
                                 break;
+                            case 0:
+                                canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
+                                if (plusMinus) callback(plusMinus);
+                                break;    
                             case 1:
 
 
@@ -1088,9 +1090,7 @@
                 $('.file-upload-content').show();
                 // firstCrop = true;
             }
-        } catch (error) {
-                document.getElementById("cropNotice").innerHTML = error
-            }
+
         }
 
         function streamTrue() {
