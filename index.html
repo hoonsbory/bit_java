@@ -1720,9 +1720,12 @@
                 // }
 
                 // if (season2[0] < 200 || season1[0] < 200) {
+                    console.log(season1[0]);
                     if(season2[0]<=6) season1[0] -= season2[0] * 0.25
                     else if(season2[0]<=12) season1[0] -= season2[0] * 0.2
                     else if(season2[0]<=24) season1[0] -= season2[0] * 0.15
+
+                    console.log(season1[0]);
                 // }
                 colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
             } else {
