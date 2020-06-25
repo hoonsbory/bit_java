@@ -1360,7 +1360,7 @@ function season() {
     //     return a[0] - b[0];
     // });
     console.log(firstResult);
-
+alert(firstResult);
 
     for (var i = 0; i < length; i++) {
         if (firstResult[i][1] < 8 && !season1[0]) {
@@ -1441,8 +1441,8 @@ function season() {
                     break;
                 }
             }
-            if (season2[0] <= 12) season1[0] -= season2[0] * 0.125
-            else if (season2[0] <= 24) season1[0] -= season2[0] * 0.1
+            if (season2[0] <= 12) season1[0] -= season2[0] * 0.14
+            else if (season2[0] <= 24) season1[0] -= season2[0] * 0.125
         }
         // if (toneColor == "warm") {
         //     season1 -= season1 / 5
@@ -1461,7 +1461,8 @@ function season() {
         console.log(season2);
         colorNum = season2[1]
     }
-
+    alert(season1[0]);
+    alert(season2[0]);
     setTimeout(function () {
 
         console.log(colorNum);
