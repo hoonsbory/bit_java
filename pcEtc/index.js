@@ -1441,8 +1441,8 @@ alert(firstResult);
                     break;
                 }
             }
-            if (season2[0] <= 12) season1[0] -= season2[0] * 0.14
-            else if (season2[0] <= 24) season1[0] -= season2[0] * 0.125
+            if (season2[0] <= 12) season1[0] -= season2[0] * 0.135
+            else if (season2[0] <= 24) season1[0] -= season2[0] * 0.12
         }
         // if (toneColor == "warm") {
         //     season1 -= season1 / 5
