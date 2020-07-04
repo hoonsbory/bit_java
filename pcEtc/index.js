@@ -1470,6 +1470,7 @@ alert(firstResult);
         season1[0] = Math.round(50 - percentage);
     }else{
         var percentage = season2[0] - season1[0] * 60;
+        if(percentage>50) percentage = 50;
         season1[0] = Math.round(50 + percentage);
         season2[0] = Math.round(50 - percentage);
     }
