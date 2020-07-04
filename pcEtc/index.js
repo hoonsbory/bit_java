@@ -1470,7 +1470,10 @@ alert(firstResult);
         season2[0] = Math.round(50 + percentage);
         season1[0] = Math.round(50 - percentage);
     }else{
+        console.log(season1[0]);
+        console.log(season2[0]);
         var percentage = season2[0] - season1[0] * 60;
+        console.log(percentage);
         if(percentage>50) percentage = 50;
         console.log(percentage);
         season1[0] = Math.round(50 + percentage);
