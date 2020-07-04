@@ -93,16 +93,16 @@ let floatOs = 0;
 if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPod") > -1) || (ua.indexOf("Mac") > -1)) {
     appleCheck = true;
     //인스타그램, 페이스북, 카카오 전부 OS라는 문자옆에 버전이 적혀있는데 페이스북 메신저는 OS가 없고 다른 곳에 버전이 적혀있어서 따로 구현함.
-    if(ua.indexOf("FBSV") > -1){
-    osInfo = ua.split("FBSV")[1];
-    realOs = osInfo.substring(1, 3) + "." + osInfo.substring(4,5);
-    floatOs = parseFloat(realOs)
-    }else{
-    osInfo = ua.split("OS")[1]
-    realOs = osInfo.substring(1, 3) + "." + osInfo.substring(4, 5);
+    if (ua.indexOf("FBSV") > -1) {
+        osInfo = ua.split("FBSV")[1];
+        realOs = osInfo.substring(1, 3) + "." + osInfo.substring(4, 5);
+        floatOs = parseFloat(realOs)
+    } else {
+        osInfo = ua.split("OS")[1]
+        realOs = osInfo.substring(1, 3) + "." + osInfo.substring(4, 5);
 
-    //ios버전 추출해서 실수형으로.
-    floatOs = parseFloat(realOs)
+        //ios버전 추출해서 실수형으로.
+        floatOs = parseFloat(realOs)
     }
 }
 document.getElementById("bgSpan").innerHTML = ua.indexOf("Android")
@@ -712,107 +712,107 @@ function editImg(callback, plusMinus) {
             div();
         });
         try {
-            
-        
 
-        //안드로이드인 내 폰에서는 방향에 맞게 자동으로 회전되어 등록되지만 애플은 그렇지 않다. 애플은 정방향에서 90도회전된 정보가 사진에 들어가 있다.
-        //예를 들면 정방향에서 찍었으면 회전값이 1이어야 하는데 애플은 8이 나온다. 그래서 애플 디바이스를 위한 회전 로직을 따로 짜야했다.
-        //그리고 데스크탑 같은 경우, 크롬은 자동으로 정방향으로 나오지만 엣지는 회전되어 나온다. 기기 별 대응이 너무 많아지기 떄문에, 자체적으로 회전 로직을 추가했다.
-        //크롭을 하기위해선 캔버스가 필요한데, 애플 기기에서 업로드시 img태그에는 정방향으로 나오지만 캔버스에는 회전이 적용되어 나오기 때문에, 피부를 특정해서 crop해야 하는
-        //이 앱에서는 자동회전이 불가피하게 되어 넣게 됐다.iPhone|iPad|iPod|Mac
 
-        //망할놈의 캔버스. 아이폰6+페북, 아이패드+페북 에서는 정확히 잘됨. 그러나 아이폰xs+페북에서는 안드로이드처럼 정방향으로 잘나온다...
-        //아이폰 xs에서만 이렇게 되면 예외처리를 해두면 되겠지만, 분명 다른 버전에서도 문제가 일어날 것이 뻔하다.. 대체 왜이러는걸까.
-        //아이폰xs ios업데이트를 했더니 알아서 정방향으로 잘나온다. 이전에 했던 로직이 안먹힘. 하... 일단 ios 13.4버전 기준으로 자동회전을 시켜놨다.
-        //아이패드에서도 실험해봤는데 13.5버전 또한 안드로이드처럼 정방향으로 잘나온다. 확실히 ios문제인거 같다. 정확히 이 패치가 몇 버전에서 이루어졌는지 알아내야한다.
-        if (appleCheck) {
-            if (floatOs >= 13.4) {
+
+            //안드로이드인 내 폰에서는 방향에 맞게 자동으로 회전되어 등록되지만 애플은 그렇지 않다. 애플은 정방향에서 90도회전된 정보가 사진에 들어가 있다.
+            //예를 들면 정방향에서 찍었으면 회전값이 1이어야 하는데 애플은 8이 나온다. 그래서 애플 디바이스를 위한 회전 로직을 따로 짜야했다.
+            //그리고 데스크탑 같은 경우, 크롬은 자동으로 정방향으로 나오지만 엣지는 회전되어 나온다. 기기 별 대응이 너무 많아지기 떄문에, 자체적으로 회전 로직을 추가했다.
+            //크롭을 하기위해선 캔버스가 필요한데, 애플 기기에서 업로드시 img태그에는 정방향으로 나오지만 캔버스에는 회전이 적용되어 나오기 때문에, 피부를 특정해서 crop해야 하는
+            //이 앱에서는 자동회전이 불가피하게 되어 넣게 됐다.iPhone|iPad|iPod|Mac
+
+            //망할놈의 캔버스. 아이폰6+페북, 아이패드+페북 에서는 정확히 잘됨. 그러나 아이폰xs+페북에서는 안드로이드처럼 정방향으로 잘나온다...
+            //아이폰 xs에서만 이렇게 되면 예외처리를 해두면 되겠지만, 분명 다른 버전에서도 문제가 일어날 것이 뻔하다.. 대체 왜이러는걸까.
+            //아이폰xs ios업데이트를 했더니 알아서 정방향으로 잘나온다. 이전에 했던 로직이 안먹힘. 하... 일단 ios 13.4버전 기준으로 자동회전을 시켜놨다.
+            //아이패드에서도 실험해봤는데 13.5버전 또한 안드로이드처럼 정방향으로 잘나온다. 확실히 ios문제인거 같다. 정확히 이 패치가 몇 버전에서 이루어졌는지 알아내야한다.
+            if (appleCheck) {
+                if (floatOs >= 13.4) {
+                    canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                    if (plusMinus) callback(plusMinus);
+                    return
+                }
+                // console.log("애플기기입니다.");
+                var fileInfo = document.getElementById("fileInput").files[0];
+                EXIF.getData(fileInfo, function () {
+                    const orientation = EXIF.getTag(fileInfo, "Orientation");
+                    // console.log("회전도는 " + orientation);
+                    alert(orientation);
+                    switch (orientation) {
+
+                        // @details 이미지 회전값이 0인경우 ( 정방향 )
+                        case undefined:
+                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                            if (plusMinus) callback(plusMinus);
+                            break;
+                        case 0:
+                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                            if (plusMinus) callback(plusMinus);
+                            break;
+                        case 1:
+
+
+                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                            if (plusMinus) callback(plusMinus);
+                            break;
+
+                        case 3:
+
+
+                            canvasContext.translate(canvas.width / 2, canvas.height / 2);
+                            canvasContext.rotate(Math.PI);
+                            canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
+
+
+
+                            // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
+
+                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                            if (plusMinus) callback(plusMinus);
+                            break;
+
+                        // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
+                        case 6:
+                            if (canvas.width < canvas.height) {
+                                canvas.width = canvas.height;
+                            } else {
+                                canvas.height = canvas.width;
+                            }
+
+                            canvasContext.translate(canvas.width / 2, canvas.height / 2);
+                            canvasContext.rotate(Math.PI * 0.5);
+                            canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
+                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                            if (plusMinus) callback(plusMinus);
+
+
+                            // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
+
+
+                            break;
+
+                        // @details 이미지 회전값이 90 기운 경우
+                        case 8:
+                            if (canvas.width < canvas.height) {
+                                canvas.width = canvas.height;
+                            } else {
+                                canvas.height = canvas.width;
+                            }
+
+                            canvasContext.translate(canvas.width / 2, canvas.height / 2);
+                            canvasContext.rotate(Math.PI * 1.5);
+                            canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
+                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+                            if (plusMinus) callback(plusMinus);
+                            //회전하기전에 정사각형을 만들어주자.
+                            break;
+                    }
+
+                })
+            } else {
                 canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
                 if (plusMinus) callback(plusMinus);
-                return
             }
-            // console.log("애플기기입니다.");
-            var fileInfo = document.getElementById("fileInput").files[0];
-            EXIF.getData(fileInfo, function () {
-                const orientation = EXIF.getTag(fileInfo, "Orientation");
-                // console.log("회전도는 " + orientation);
-                alert(orientation);
-                switch (orientation) {
-
-                    // @details 이미지 회전값이 0인경우 ( 정방향 )
-                    case undefined:
-                        canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                        if (plusMinus) callback(plusMinus);
-                        break;
-                    case 0:
-                        canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                        if (plusMinus) callback(plusMinus);
-                        break;    
-                    case 1:
-
-
-                        canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                        if (plusMinus) callback(plusMinus);
-                        break;
-
-                    case 3:
-
-
-                        canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                        canvasContext.rotate(Math.PI);
-                        canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-
-
-
-                        // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
-
-                        canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                        if (plusMinus) callback(plusMinus);
-                        break;
-
-                    // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
-                    case 6:
-                        if (canvas.width < canvas.height) {
-                            canvas.width = canvas.height;
-                        } else {
-                            canvas.height = canvas.width;
-                        }
-
-                        canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                        canvasContext.rotate(Math.PI * 0.5);
-                        canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-                        canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                        if (plusMinus) callback(plusMinus);
-
-
-                        // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
-
-
-                        break;
-
-                    // @details 이미지 회전값이 90 기운 경우
-                    case 8:
-                        if (canvas.width < canvas.height) {
-                            canvas.width = canvas.height;
-                        } else {
-                            canvas.height = canvas.width;
-                        }
-
-                        canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                        canvasContext.rotate(Math.PI * 1.5);
-                        canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-                        canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                        if (plusMinus) callback(plusMinus);
-                        //회전하기전에 정사각형을 만들어주자.
-                        break;
-                }
-
-            })
-        } else {
-            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-            if (plusMinus) callback(plusMinus);
-        }
-    } catch (error) {
+        } catch (error) {
             alert(error);
         }
 
@@ -1360,7 +1360,7 @@ function season() {
     //     return a[0] - b[0];
     // });
     console.log(firstResult);
-alert(firstResult);
+    alert(firstResult);
 
     for (var i = 0; i < length; i++) {
         if (firstResult[i][1] < 8 && !season1[0]) {
@@ -1400,81 +1400,83 @@ alert(firstResult);
     }
 
     //스트림 방식은 아무래도 카메라로 바로 측정하기 때문에 그늘지기도 하고 크롭으로 특정 부위를 자를수도 없어 좀 더 어둡기 때문에 인위적으로 벨런스를 조절해줌.
-    if (stream || toneColor == "warm") {
-        season1 = [];
-        season2 = [];
-        if (toneColor == "warm") {
-            for (var i = 0; i < length; i++) {
-                if (firstResult[i][1] <= 3 && !season1[0]) {
-                    season1.push(firstResult[i][0])
-                    season1.push(firstResult[i][1])
-                }
-                if ((firstResult[i][1] >= 4 && firstResult[i][1] <= 7) && !season2[0]) {
-                    season2.push(firstResult[i][0])
-                    season2.push(firstResult[i][1])
-                }
-                if (season2[0] && season1[0]) {
-                    break;
-                }
+    season1 = [];
+    season2 = [];
+    if (toneColor == "warm") {
+        for (var i = 0; i < length; i++) {
+            if (firstResult[i][1] <= 3 && !season1[0]) {
+                season1.push(firstResult[i][0])
+                season1.push(firstResult[i][1])
             }
-            //웜톤은 가뜩이나 필터때문에 잘나오지 못하는데, 그나마 웜톤이 나왔을때는 사진이 다소 어두울 때라, 가을 웜톤에 결과가 치우친다.
-            //그래서 봄웜톤 살짝 상향 조정.
-            if (!stream) {
-                if (season2[0] <= 12) season1[0] -= season2[0] * 0.2
-                else if (season2[0] <= 24) season1[0] -= season2[0] * 0.15
+            if ((firstResult[i][1] >= 4 && firstResult[i][1] <= 7) && !season2[0]) {
+                season2.push(firstResult[i][0])
+                season2.push(firstResult[i][1])
             }
-            else {
-                if (season2[0] <= 12) season1[0] -= season2[0] * 0.14
-                else if (season2[0] <= 24) season1[0] -= season2[0] * 0.125
+            if (season2[0] && season1[0]) {
+                break;
             }
+        }
+        //웜톤은 가뜩이나 필터때문에 잘나오지 못하는데, 그나마 웜톤이 나왔을때는 사진이 다소 어두울 때라, 가을 웜톤에 결과가 치우친다.
+        //그래서 봄웜톤 살짝 상향 조정.
+        if (!stream) {
+            if (season2[0] <= 12) season1[0] -= season2[0] * 0.2
+            else if (season2[0] <= 24) season1[0] -= season2[0] * 0.15
+        }
+        else {
+            if (season2[0] <= 12) season1[0] -= season2[0] * 0.14
+            else if (season2[0] <= 24) season1[0] -= season2[0] * 0.125
+        }
+    } else {
+        for (var i = 0; i < length; i++) {
+            if ((firstResult[i][1] >= 8 && firstResult[i][1] <= 11) && !season1[0]) {
+                season1.push(firstResult[i][0])
+                season1.push(firstResult[i][1])
+            }
+            if ((firstResult[i][1] >= 12 && firstResult[i][1] <= 15) && !season2[0]) {
+                season2.push(firstResult[i][0])
+                season2.push(firstResult[i][1])
+            }
+            if (season2[0] && season1[0]) {
+                break;
+            }
+        }
+        if (!stream) {
+            if (season2[0] <= 12) season1[0] -= season2[0] * 0.2
+            else if (season2[0] <= 24) season1[0] -= season2[0] * 0.15
         } else {
-            for (var i = 0; i < length; i++) {
-                if ((firstResult[i][1] >= 8 && firstResult[i][1] <= 11) && !season1[0]) {
-                    season1.push(firstResult[i][0])
-                    season1.push(firstResult[i][1])
-                }
-                if ((firstResult[i][1] >= 12 && firstResult[i][1] <= 15) && !season2[0]) {
-                    season2.push(firstResult[i][0])
-                    season2.push(firstResult[i][1])
-                }
-                if (season2[0] && season1[0]) {
-                    break;
-                }
-            }
             if (season2[0] <= 12) season1[0] -= season2[0] * 0.135
             else if (season2[0] <= 24) season1[0] -= season2[0] * 0.12
         }
-        // if (toneColor == "warm") {
-        //     season1 -= season1 / 5
-        // } else {
-
-        //     season1 -= season1 / 7.3
-        // }
-
-        // if (season2[0] < 200 || season1[0] < 200) {
-
-        console.log(season1[0]);
-        console.log(season2[0]);
-        // }
-        colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
-    } else {
-        console.log(season1);
-        console.log(season2);
-        colorNum = season2[1]
     }
+    // if (toneColor == "warm") {
+    //     season1 -= season1 / 5
+    // } else {
+
+    //     season1 -= season1 / 7.3
+    // }
+
+    // if (season2[0] < 200 || season1[0] < 200) {
+
+    console.log(season1[0]);
+    console.log(season2[0]);
+    // }
+    colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
+    console.log(season1);
+    console.log(season2);
+    colorNum = season2[1]
     //100점 기준으로 점수 변환
-    if(season1[0]>season2[0]){
+    if (season1[0] > season2[0]) {
         var percentage = (season1[0] - season2[0]) * 30;
-        if(percentage>50) percentage = 50;
+        if (percentage > 50) percentage = 50;
         console.log(percentage);
         season2[0] = Math.round(50 + percentage);
         season1[0] = Math.round(50 - percentage);
-    }else{
+    } else {
         console.log(season1[0]);
         console.log(season2[0]);
         var percentage = (season2[0] - season1[0]) * 30;
         console.log(percentage);
-        if(percentage>50) percentage = 50;
+        if (percentage > 50) percentage = 50;
         console.log(percentage);
         season1[0] = Math.round(50 + percentage);
         season2[0] = Math.round(50 - percentage);
@@ -1498,13 +1500,13 @@ alert(firstResult);
         //     alert("겨울");
         // }
         if (colorNum <= 3) {
-            window.location.href = "http://localhost:3000/springWarm?spring="+season1[0]+"&fall="+season2[0]
+            window.location.href = "http://localhost:3000/springWarm?spring=" + season1[0] + "&fall=" + season2[0]
         } else if (colorNum <= 7) {
-            window.location.href = "http://localhost:3000/fallWarm?spring="+season1[0]+"&fall="+season2[0]
+            window.location.href = "http://localhost:3000/fallWarm?spring=" + season1[0] + "&fall=" + season2[0]
         } else if (colorNum <= 11) {
-            window.location.href = "http://localhost:3000/summerCool?summer="+season1[0]+"&winter="+season2[0]
+            window.location.href = "http://localhost:3000/summerCool?summer=" + season1[0] + "&winter=" + season2[0]
         } else if (colorNum <= 15) {
-            window.location.href = "http://localhost:3000/winterCool?summer="+season1[0]+"&winter="+season2[0]
+            window.location.href = "http://localhost:3000/winterCool?summer=" + season1[0] + "&winter=" + season2[0]
         }
     }, 1500);
 
