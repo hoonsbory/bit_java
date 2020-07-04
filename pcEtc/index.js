@@ -1454,12 +1454,22 @@ alert(firstResult);
         // if (season2[0] < 200 || season1[0] < 200) {
 
         console.log(season1[0]);
+        console.log(season2[0]);
         // }
         colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
     } else {
         console.log(season1);
         console.log(season2);
         colorNum = season2[1]
+    }
+    if(season1[0]>season2[0]){
+        var percentage = season1[0] - season2[0];
+        season1[0] = 50 + percentage;
+        season2[0] = 50 - percentage;
+    }else{
+        var percentage = season2[0] - season1[0];
+        season2[0] = 50 + percentage;
+        season1[0] = 50 - percentage;
     }
     alert(season1[0]);
     alert(season2[0]);
