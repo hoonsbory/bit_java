@@ -1463,7 +1463,7 @@ alert(firstResult);
         colorNum = season2[1]
     }
     if(season1[0]>season2[0]){
-        var percentage = season1[0] - season2[0];
+        var percentage = (season1[0] - season2[0]) +10;
         season1[0] = Math.round(50 + percentage);
         season2[0] = Math.round(50 - percentage);
     }else{
