@@ -1460,7 +1460,7 @@ function season() {
     colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
     //100점 기준으로 점수 변환
     if (season1[0] > season2[0]) {
-        var percentage = (season1[0] - season2[0]) * 30;
+        var percentage = (season1[0] - season2[0]) * 20;
         if (percentage > 50) percentage = 50;
         console.log(percentage);
         season2[0] = Math.round(50 + percentage);
@@ -1468,7 +1468,7 @@ function season() {
     } else {
         console.log(season1[0]);
         console.log(season2[0]);
-        var percentage = (season2[0] - season1[0]) * 30;
+        var percentage = (season2[0] - season1[0]) * 20;
         console.log(percentage);
         if (percentage > 50) percentage = 50;
         console.log(percentage);
