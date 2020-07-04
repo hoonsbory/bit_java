@@ -1472,7 +1472,7 @@ alert(firstResult);
     }else{
         console.log(season1[0]);
         console.log(season2[0]);
-        var percentage = season2[0] - season1[0] * 60;
+        var percentage = (season2[0] - season1[0]) * 60;
         console.log(percentage);
         if(percentage>50) percentage = 50;
         console.log(percentage);
