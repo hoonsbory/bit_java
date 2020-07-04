@@ -1464,30 +1464,39 @@ alert(firstResult);
     }
     if(season1[0]>season2[0]){
         var percentage = season1[0] - season2[0];
-        season1[0] = 50 + percentage;
-        season2[0] = 50 - percentage;
+        season1[0] = Math.round(50 + percentage);
+        season2[0] = Math.round(50 - percentage);
     }else{
         var percentage = season2[0] - season1[0];
-        season2[0] = 50 + percentage;
-        season1[0] = 50 - percentage;
+        season2[0] = Math.round(50 + percentage);
+        season1[0] = Math.round(50 - percentage);
     }
     alert(season1[0]);
     alert(season2[0]);
     setTimeout(function () {
 
-        console.log(colorNum);
+        // console.log(colorNum);
+        // if (colorNum <= 3) {
+        //     // window.location.href = "https://mycolor.kr/springWarm"
+        //     alert('봄');
+        // } else if (colorNum <= 7) {
+        //     // window.location.href = "https://mycolor.kr/fallWarm"
+        //     alert('가을');
+        // } else if (colorNum <= 11) {
+        //     // window.location.href = "https://mycolor.kr/summerCool"
+        //     alert('여름');
+        // } else if (colorNum <= 15) {
+        //     // window.location.href = "https://mycolor.kr/winterCool"
+        //     alert("겨울");
+        // }
         if (colorNum <= 3) {
-            // window.location.href = "https://mycolor.kr/springWarm"
-            alert('봄');
+            window.location.href = "http://localhost:3000/springWarm?spring="+season1[0]+"&fall="+season2[0]
         } else if (colorNum <= 7) {
-            // window.location.href = "https://mycolor.kr/fallWarm"
-            alert('가을');
+            window.location.href = "http://localhost:3000/fallWarm?spring="+season1[0]+"&fall="+season2[0]
         } else if (colorNum <= 11) {
-            // window.location.href = "https://mycolor.kr/summerCool"
-            alert('여름');
+            window.location.href = "http://localhost:3000/summerCool?summer="+season1[0]+"&winter="+season2[0]
         } else if (colorNum <= 15) {
-            // window.location.href = "https://mycolor.kr/winterCool"
-            alert("겨울");
+            window.location.href = "http://localhost:3000/winterCool?summer="+season1[0]+"&winter="+season2[0]
         }
     }, 1500);
 
