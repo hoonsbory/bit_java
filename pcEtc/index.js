@@ -1462,14 +1462,15 @@ alert(firstResult);
         console.log(season2);
         colorNum = season2[1]
     }
+    //100점 기준으로 점수 변환
     if(season1[0]>season2[0]){
         var percentage = (season1[0] - season2[0]) +10;
-        season1[0] = Math.round(50 + percentage);
-        season2[0] = Math.round(50 - percentage);
-    }else{
-        var percentage = season2[0] - season1[0];
         season2[0] = Math.round(50 + percentage);
         season1[0] = Math.round(50 - percentage);
+    }else{
+        var percentage = season2[0] - season1[0];
+        season1[0] = Math.round(50 + percentage);
+        season2[0] = Math.round(50 - percentage);
     }
     alert(season1[0]);
     alert(season2[0]);
