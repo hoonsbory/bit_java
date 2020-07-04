@@ -1464,7 +1464,7 @@ alert(firstResult);
     }
     //100점 기준으로 점수 변환
     if(season1[0]>season2[0]){
-        var percentage = (season1[0] - season2[0]) * 40;
+        var percentage = (season1[0] - season2[0]) * 30;
         if(percentage>50) percentage = 50;
         console.log(percentage);
         season2[0] = Math.round(50 + percentage);
@@ -1472,7 +1472,7 @@ alert(firstResult);
     }else{
         console.log(season1[0]);
         console.log(season2[0]);
-        var percentage = (season2[0] - season1[0]) * 40;
+        var percentage = (season2[0] - season1[0]) * 30;
         console.log(percentage);
         if(percentage>50) percentage = 50;
         console.log(percentage);
