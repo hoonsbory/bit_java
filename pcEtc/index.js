@@ -105,7 +105,6 @@ if ((ua.indexOf("iPhone") > -1) || (ua.indexOf("iPad") > -1) || (ua.indexOf("iPo
         floatOs = parseFloat(realOs)
     }
 }
-document.getElementById("bgSpan").innerHTML = ua.indexOf("Android")
 function isFacebookApp() {
     return (ua.indexOf("Android") > -1 && ((ua.indexOf("FBAN") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("FBSV") > -1) || (ua.indexOf("FBSS") > -1) || (ua.indexOf("FBCR") > -1) || (ua.indexOf("FBID") > -1) || (ua.indexOf("FBCL") > -1) || (ua.indexOf("FBMD") > -1) || (ua.indexOf("FBDV") > -1) || (ua.indexOf("FBSN") > -1)));
 };
@@ -115,7 +114,7 @@ if (isFacebookApp()) {
     document.getElementById("popup").style.display = "block";
 }
 
-if (ua.indexOf("Mobile") > -1) {
+if (ua.indexOf("Mobile") > -1 && ua.indexOf("iPad") < 0) {
     document.getElementById("subInfo").style.position = "relative"
     document.getElementById("subInfo").style.top = "1vh"
 }
