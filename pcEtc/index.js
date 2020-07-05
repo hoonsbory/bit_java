@@ -113,7 +113,8 @@ function isFacebookApp() {
 if (isFacebookApp()) {
     document.getElementById("popup").style.display = "block";
 }
-
+alert(ua);
+alert(ua.indexOf("iPad"));
 if (ua.indexOf("Mobile") > -1 && ua.indexOf("iPad") < 0) {
     document.getElementById("subInfo").style.position = "relative"
     document.getElementById("subInfo").style.top = "1vh"
