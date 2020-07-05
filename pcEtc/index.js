@@ -116,6 +116,7 @@ if (isFacebookApp()) {
 alert(ua);
 alert(ua.indexOf("iPad"));
 if (ua.indexOf("Mobile") > -1 && ua.indexOf("iPad") < 0) {
+    alert('not ipad');
     document.getElementById("subInfo").style.position = "relative"
     document.getElementById("subInfo").style.top = "1vh"
 }
