@@ -133,7 +133,7 @@ var video = document.getElementById('video');
 function camErr() {
     alert('video false');
 }
-function camTrue(){
+function camTrue() {
     alert('video true');
     stream = true;
 }
@@ -145,14 +145,15 @@ function popupConfirm(div) {
     }
     document.getElementById(div).style.display = "none";
 }
-function cameraCheckTest(){
-    if(stream){
+function cameraCheckTest() {
+    if (stream) {
+        video.play();
         document.getElementById("mainCam").style.display = "block"
-    document.getElementById("cropNotice").innerHTML = "※ 손목 안쪽이 잘보이는 상태에서 측정 버튼을 눌러주세요"
-    modeChange();
-    }else{
+        document.getElementById("cropNotice").innerHTML = "※ 손목 안쪽이 잘보이는 상태에서 측정 버튼을 눌러주세요"
+        modeChange();
+    } else {
         document.getElementById("noCamDiv").style.display = "block"
-    document.getElementById("fileInput").click();
+        document.getElementById("fileInput").click();
     }
 }
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -169,7 +170,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             //video.src = window.URL.createObjectURL(stream);
             camTrue()
             video.srcObject = stream;
-            video.play();
         }).catch(function (err) {
             //err은 문자열이 아니기 때문에 문자열로 만들어줘야 indexOf가 가능
             err = err + "";
@@ -189,7 +189,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             //video.src = window.URL.createObjectURL(stream);
             camTrue()
             video.srcObject = stream;
-            video.play();
         }).catch(function (err) {
             camErr()
         });
@@ -204,7 +203,6 @@ else if (navigator.getUserMedia) { // Standard
     }, function (stream) {
         camTrue()
         video.src = stream;
-        video.play();
     }, camErr());
 } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
     navigator.webkitGetUserMedia({
@@ -215,7 +213,6 @@ else if (navigator.getUserMedia) { // Standard
     }, function (stream) {
         camTrue()
         video.src = window.webkitURL.createObjectURL(stream);
-        video.play();
     }, camErr());
 } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
     navigator.mozGetUserMedia({
@@ -226,7 +223,6 @@ else if (navigator.getUserMedia) { // Standard
     }, function (stream) {
         camTrue()
         video.srcObject = stream;
-        video.play();
     }, camErr());
 } else {
     camErr();
