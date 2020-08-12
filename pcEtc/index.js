@@ -145,35 +145,53 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
     if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
         navigator.mediaDevices.getUserMedia(
-        ).then(function(){
+        ).then(function () {
             alert("video true")
         }).catch(function (err) {
+            err = err + "";
+            alert(err);
+            alert('1');
             alert("video false")
         });
     } else {
         navigator.mediaDevices.getUserMedia(
-        ).then(function(){
+        ).then(function () {
             alert("video true")
         }).catch(function (err) {
+            err = err + "";
+            alert(err);
+            alert('2');
             alert("video false")
         });
     }
 }
 else if (navigator.getUserMedia) { // Standard
     navigator.getUserMedia(
-    function (stream) {
-        alert("video true")
-    }, () => {alert("video false")});
+        function (stream) {
+            alert("video true")
+        }, (err) => {
+            err = err + "";
+            alert('3');
+            alert(err); alert("video false")
+        });
 } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
     navigator.webkitGetUserMedia(
-    function (stream) {
-        alert("video true")
-    }, () => {alert("video false")});
+        function (stream) {
+            alert("video true")
+        }, (err) => {
+            err = err + "";
+            alert('4');
+            alert(err); alert("video false")
+        });
 } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
     navigator.mozGetUserMedia(
-    function (stream) {
-        alert("video true")
-    }, () => {alert("video false")});
+        function (stream) {
+            alert("video true")
+        }, (err) => {
+            err = err + "";
+            alert('5');
+            alert(err); alert("video false")
+        });
 } else {
 }
 
@@ -186,7 +204,7 @@ function openVideo() {
             document.getElementById("guideVideo").style.width = "100%"
             document.getElementById("guideVideo").style.height = "unset"
         }
-    }else{
+    } else {
         document.getElementById("guideVideo").style.height = "unset"
         document.getElementById("guideVideo").style.width = "500px"
     }
