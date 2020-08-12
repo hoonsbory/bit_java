@@ -133,8 +133,14 @@ function camErr() {
     document.getElementById("guideVideo").load()
 }
 
-
 //상황에따라 다른 팝업창 구분
+function popupConfirm(div) {
+    if (document.getElementById("checkSuccess").style.display == "block") {
+        moveRight("");
+        uploadCheck = true;
+    }
+    document.getElementById(div).style.display = "none";
+}
 
 
 function openVideo() {
