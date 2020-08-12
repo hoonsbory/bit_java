@@ -126,109 +126,16 @@ if (ua.indexOf("Mobile") > -1 || ua.indexOf("Mac") > -1) {
 var video = document.getElementById('video');
 
 //비디오 에러 캐치
-// function camErr() {
-//     document.getElementById("noCamDiv").style.display = "block"
-//     document.getElementById("fileInput").click();
-// }
 function camErr() {
-    alert('video false');
+    document.getElementById("noCamDiv").style.display = "block"
+    document.getElementById("fileInput").click();
     document.getElementById("videoSource").src = "https://mycolor.kr/video/테스트비디오.mp4"
     document.getElementById("guideVideo").load()
 }
-function camTrue() {
-    alert('video true');
-    stream = true;
-}
-//상황에따라 다른 팝업창 구분
-function popupConfirm(div) {
-    if (document.getElementById("checkSuccess").style.display == "block") {
-        moveRight("");
-        uploadCheck = true;
-    }
-    document.getElementById(div).style.display = "none";
-}
-function cameraCheckTest() {
-    if (stream) {
-        video.play();
-        document.getElementById("mainCam").style.display = "block"
-        document.getElementById("cropNotice").innerHTML = "※ 손목 안쪽이 잘보이는 상태에서 측정 버튼을 눌러주세요"
-        modeChange();
-    } else {
-        document.getElementById("noCamDiv").style.display = "block"
-        document.getElementById("fileInput").click();
-    }
-}
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
-    //사파리는 해상도가 자동으로 조절되기때문에 해상도를 설정해주면 에러가난다. 그래서 사파리는 설정을 안해줘야하는데,
-    //기기 정보를 받아올때 크롬에는 사파리 크롬이 다 적혀있고, 사파리에는 사파리만 적혀있으므로 사파리를 특정하기 위해서는 
-    //사파리 문자를 포함하고 크롬 문자를 포함하지않는 조건을 충족시켜줘야한다
-    if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
-        navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: { exact: "environment" }
-            }
-        }).then(function (stream) {
-            //video.src = window.URL.createObjectURL(stream);
-            camTrue()
-            video.srcObject = stream;
-        }).catch(function (err) {
-            //err은 문자열이 아니기 때문에 문자열로 만들어줘야 indexOf가 가능
-            err = err + "";
-            if (err.indexOf("NotAllowedError") > -1) {
-                window.location.reload();
-            }
-            camErr()
-        });
-    } else {
-        // Not adding `{ audio: true }` since we only want video now
-        navigator.mediaDevices.getUserMedia({
-            video: {
-                width: { min: 1024, ideal: 1280, max: 1920 },
-                height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
-            }
-        }).then(function (stream) {
-            //video.src = window.URL.createObjectURL(stream);
-            camTrue()
-            video.srcObject = stream;
-        }).catch(function (err) {
-            camErr()
-        });
-    }
-}
-else if (navigator.getUserMedia) { // Standard
-    navigator.getUserMedia({
-        video: {
-            width: { min: 1024, ideal: 1280, max: 1920 },
-            height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-        }
-    }, function (stream) {
-        camTrue()
-        video.src = stream;
-    }, camErr());
-} else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-    navigator.webkitGetUserMedia({
-        video: {
-            width: { min: 1024, ideal: 1280, max: 1920 },
-            height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-        }
-    }, function (stream) {
-        camTrue()
-        video.src = window.webkitURL.createObjectURL(stream);
-    }, camErr());
-} else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
-    navigator.mozGetUserMedia({
-        video: {
-            width: { min: 1024, ideal: 1280, max: 1920 },
-            height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
-        }
-    }, function (stream) {
-        camTrue()
-        video.srcObject = stream;
-    }, camErr());
-} else {
-    camErr();
-}
+
+//상황에따라 다른 팝업창 구분
+
 
 function openVideo() {
     if (window.innerWidth < 768) {
@@ -239,7 +146,7 @@ function openVideo() {
             document.getElementById("guideVideo").style.width = "100%"
             document.getElementById("guideVideo").style.height = "unset"
         }
-    } else {
+    }else{
         document.getElementById("guideVideo").style.height = "unset"
         document.getElementById("guideVideo").style.width = "500px"
     }
