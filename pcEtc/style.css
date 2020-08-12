@@ -17,6 +17,15 @@ html{
   url(../font/HSThin.otf) format('opentype')
   /* 파이썬의 pyftsubset을 통해 경량화함 */
 }
+#guideVideo{
+  width: 500px;
+  z-index: 999;
+  position: fixed;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%,-50%);
+  top: 50%;
+}
 .fonts-loaded body {
   font-family: 'HSThin';
   opacity: 1;

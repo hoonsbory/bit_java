@@ -141,7 +141,66 @@ function popupConfirm(div) {
     document.getElementById(div).style.display = "none";
 }
 
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
+    if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
+        navigator.mediaDevices.getUserMedia(
+        ).then(function(){
+            alert("video true")
+        }).catch(function (err) {
+            alert("video false")
+        });
+    } else {
+        navigator.mediaDevices.getUserMedia(
+        ).then(function(){
+            alert("video true")
+        }).catch(function (err) {
+            alert("video false")
+        });
+    }
+}
+else if (navigator.getUserMedia) { // Standard
+    navigator.getUserMedia(
+    function (stream) {
+        alert("video true")
+    }, () => {alert("video false")});
+} else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
+    navigator.webkitGetUserMedia(
+    function (stream) {
+        alert("video true")
+    }, () => {alert("video false")});
+} else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
+    navigator.mozGetUserMedia(
+    function (stream) {
+        alert("video true")
+    }, () => {alert("video false")});
+} else {
+}
+
+function openVideo() {
+    if (window.innerWidth < 768) {
+        if (window.innerWidth >= window.innerHeight) {
+            document.getElementById("guideVideo").style.height = "100%"
+            document.getElementById("guideVideo").style.width = "unset"
+        } else {
+            document.getElementById("guideVideo").style.width = "100%"
+            document.getElementById("guideVideo").style.height = "unset"
+        }
+    }else{
+        document.getElementById("guideVideo").style.height = "unset"
+        document.getElementById("guideVideo").style.width = "500px"
+    }
+    document.getElementById("guideDiv").style.display = "block"
+    document.getElementById("guideVideo").play()
+    document.getElementById("close").style.display = "block"
+}
+
+
+function closeVideo() {
+    document.getElementById("guideDiv").style.display = "none"
+    document.getElementById("guideVideo").pause()
+    document.getElementById("close").style.display = "none"
+}
 
 //캠화면 캡쳐 및 주요컬러 도출
 function camCheck() {

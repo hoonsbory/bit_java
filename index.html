@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -33,6 +33,14 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <section>
+        <div id="guideDiv" style="display: none;">
+            <div class="popupBg" onclick="closeVideo()"></div>
+            <p id="close" onclick="closeVideo()"
+                style="cursor : pointer; z-index: 999; display : none; color : white; position : fixed; top : 0; right : 20px; margin : 0; font-size : 3rem;">x</p>
+                <video controls id="guideVideo">
+                    <source src="https://mycolor.kr/video/퍼스널컬러홍보영상.mp4" type="video/mp4" />
+                </video>
+        </div>
         <div id="popup" style="display: none;">
             <div class="popupBg"></div>
             <div class="popDivFB" style=" background-color: rgba(230, 230, 230, 1);">
@@ -100,6 +108,7 @@
                         <p>※ 손목 안쪽 피부</p>
                     </div>
                 </div>
+                <button onclick="openVideo()">튜토리얼 영상</button>
                 <div id="slider" style="display: none;">
 
                     <ul>
@@ -227,10 +236,10 @@
     <section class="middleSec">
 
        
-        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t89ovgrl5so5" data-ad-width="320"
+        <!-- <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t89ovgrl5so5" data-ad-width="320"
             data-ad-height="100"></ins>
         <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t4tgk6re3upi" data-ad-width="320"
-            data-ad-height="50"></ins>
+            data-ad-height="50"></ins> -->
         <div id="disqus_thread"></div>
     </section>
     <footer id="footer">
@@ -289,4 +298,4 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
- --> -->
+ -->
