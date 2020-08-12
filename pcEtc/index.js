@@ -133,6 +133,7 @@ var video = document.getElementById('video');
 function camErr() {
     alert('video false');
     document.getElementById("videoSource").src = "https://mycolor.kr/video/테스트비디오.mp4"
+    document.getElementById("guideVideo").load()
 }
 function camTrue() {
     alert('video true');
