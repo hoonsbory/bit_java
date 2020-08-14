@@ -937,11 +937,9 @@ function cameraCheck() {
 }
 function modeChange() {
     document.getElementById("mainbody").scrollIntoView();
-    document.getElementById("subTitle").style.display = "none";
-    document.getElementById("mainTitle").style.display = "none";
+    document.getElementById("secondPage").style.display = "none";
     document.getElementById("notice").style.display = "none";
     document.getElementById("notice2").style.display = "none";
-    document.getElementById("stepInfo").style.display = "block";
     document.getElementById("cropNotice").style.display = "block";
     document.getElementById('editBtn').style.pointerEvents = 'auto';
     $('.image-upload-wrap').hide();

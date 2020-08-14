@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    
+
 
     <link rel="stylesheet" href="pcEtc/style.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#ffffff">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
-   
+
     <title>마이퍼스널컬러</title>
 </head>
 
@@ -23,7 +23,7 @@
         style="width : 65px; z-index : 999;display : none; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);">
     <canvas id="myCanvas" style="display: none;">
     </canvas>
-    <canvas id="copyCanvas"  >
+    <canvas id="copyCanvas">
     </canvas>
     <script src="pcEtc/color-thief.umd.js"></script>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -36,10 +36,11 @@
         <div id="guideDiv" style="display: none;">
             <div class="popupBg" onclick="closeVideo()"></div>
             <p id="close" onclick="closeVideo()"
-                style="cursor : pointer; z-index: 999; display : none; color : white; position : fixed; top : 0; right : 20px; margin : 0; font-size : 3rem;">x</p>
-                <video controls id="guideVideo">
-                    <source id="videoSource" src="https://mycolor.kr/video/퍼스널컬러홍보영상.mp4" type="video/mp4" />
-                </video>
+                style="cursor : pointer; z-index: 999; display : none; color : white; position : fixed; top : 0; right : 20px; margin : 0; font-size : 3rem;">
+                x</p>
+            <video controls id="guideVideo">
+                <source id="videoSource" src="https://mycolor.kr/video/퍼스널컬러홍보영상.mp4" type="video/mp4" />
+            </video>
         </div>
         <div id="popup" style="display: none;">
             <div class="popupBg"></div>
@@ -58,7 +59,7 @@
             <div class="popupBg"></div>
 
             <div class="popDiv">
-                
+
 
                 <div id="checkFail" style="margin-top: 10px;">
                     <p>피부색과 너무 거리가 멀어요!</p>
@@ -75,7 +76,7 @@
             </div>
         </div>
     </section>
-    
+
 
 
     <section id="mainbody">
@@ -92,14 +93,16 @@
 
         <article style="display: contents;">
             <div id="subTitle">'톤.잘.알'이 되어 훈남 , 훈녀 되자!</div>
-            <div id="stepInfo">
-                <div id="stepDiv"></div><span id="stepNum">1</span><span id="subInfo" style="vertical-align: top;">피부 사진
-                    촬영</span>
+            <div id="secondPage" style="text-align: center;">
+                <div id="stepInfo">
+                    <div id="stepDiv"></div><span id="stepNum">1</span><span id="subInfo"
+                        style="vertical-align: top;">피부 사진
+                        촬영</span>
+                </div>
+                <div id="cropNotice">※ 손목 안쪽 피부가 꽉 차게 편집해주세요</div>
+                <button onclick="openVideo()">튜토리얼 영상</button>
             </div>
-            <div id="cropNotice">※ 손목 안쪽 피부가 꽉 차게 편집해주세요</div>
-            <button onclick="openVideo()">튜토리얼 영상</button>
             <div class="file-upload">
-
                 <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
                     onchange="readURL(this);" accept="image/*" ; style="display: none; z-index: 998;" />
                 <div class="image-upload-wrap" onclick="cameraCheck()">
@@ -235,7 +238,7 @@
     <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     <section class="middleSec">
 
-       
+
         <!-- <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t89ovgrl5so5" data-ad-width="320"
             data-ad-height="100"></ins>
         <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t4tgk6re3upi" data-ad-width="320"
@@ -263,7 +266,7 @@
         window.module1 = module1;
     </script>
     <script src="pcEtc/index.js"></script>
-    
+
 </body>
 
 </html>
