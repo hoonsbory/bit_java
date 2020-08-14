@@ -937,7 +937,8 @@ function cameraCheck() {
 }
 function modeChange() {
     document.getElementById("mainbody").scrollIntoView();
-    document.getElementById("secondPage").style.display = "none";
+    document.getElementById("subTitle").style.display = "none";
+    document.getElementById("secondPage").style.display = "block";
     document.getElementById("notice").style.display = "none";
     document.getElementById("notice2").style.display = "none";
     document.getElementById("cropNotice").style.display = "block";
