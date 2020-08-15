@@ -23,7 +23,7 @@
         style="width : 65px; z-index : 999;display : none; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);">
     <canvas id="myCanvas" style="display: none;">
     </canvas>
-    <canvas id="copyCanvas">
+    <canvas id="copyCanvas" style="display: none;">
     </canvas>
     <script src="pcEtc/color-thief.umd.js"></script>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -93,7 +93,6 @@
 
         <article style="display: contents;">
             <div id="subTitle">'톤.잘.알'이 되어 훈남 , 훈녀 되자!</div>
-            <div id="secondPage" style="display: none;">
                 <div id="stepInfo">
                     <div id="stepDiv"></div><span id="stepNum">1</span><span id="subInfo"
                         style="vertical-align: top;">피부 사진
@@ -101,7 +100,6 @@
                 </div>
                 <div id="cropNotice">※ 손목 안쪽 피부가 꽉 차게 편집해주세요</div>
                 <div id="openVideoBtn" onclick="openVideo()">튜토리얼 영상▶</div>
-            </div>
             <div class="file-upload">
                 <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
                     onchange="readURL(this);" accept="image/*" ; style="display: none; z-index: 998;" />

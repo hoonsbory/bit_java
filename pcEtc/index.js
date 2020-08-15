@@ -939,10 +939,11 @@ function cameraCheck() {
 function modeChange() {
     document.getElementById("mainbody").scrollIntoView();
     document.getElementById("subTitle").style.display = "none";
-    document.getElementById("secondPage").style.display = "block";
+    document.getElementById("stepInfo").style.display = "block";
+    document.getElementById("openVideoBtn").style.display = "block";
+    document.getElementById("cropNotice").style.display = "block";
     document.getElementById("notice").style.display = "none";
     document.getElementById("notice2").style.display = "none";
-    document.getElementById("cropNotice").style.display = "block";
     document.getElementById('editBtn').style.pointerEvents = 'auto';
     $('.image-upload-wrap').hide();
     $('.file-upload-image').removeAttr("style");
