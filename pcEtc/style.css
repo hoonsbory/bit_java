@@ -18,11 +18,18 @@ html{
   /* 파이썬의 pyftsubset을 통해 경량화함 */
 }
 #openVideoBtn{
+  font-size: 1.7vh;
+  border: 2px solid rgb(10, 59, 112);
+  display: inline;
+  margin-bottom: 4px;
+  border-radius: 1vh;
+  padding: .2vh;
+  padding-left: .7vh;
+  padding-right: .7vh;
+  padding-bottom: .3vh;
+  background-color: white;
   color: rgb(10, 59, 112);
-  font-size : 1.5vh;
-  text-decoration-line: underline;
   cursor: pointer;
-  display: none;
 }
 #guideVideo{
   width: 500px;
@@ -190,7 +197,7 @@ html{
 .btnGroup{
     border: 2px solid rgb(10, 59, 112);
     display: inline;
-    border-radius: 7px;
+    border-radius: 1vh;
     padding: 1vh;
     padding-bottom: 0px;
     background-color: white;
