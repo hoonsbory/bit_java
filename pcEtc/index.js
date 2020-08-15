@@ -129,8 +129,9 @@ var video = document.getElementById('video');
 function camErr() {
     document.getElementById("noCamDiv").style.display = "block"
     document.getElementById("fileInput").click();
-    document.getElementById("videoSource").src = "https://mycolor.kr/video/테스트비디오.mp4"
-    document.getElementById("guideVideo").load()
+    document.getElementById("openVideoBtn").style.display = "none"
+    // document.getElementById("videoSource").src = "https://mycolor.kr/video/테스트비디오.mp4"
+    // document.getElementById("guideVideo").load()
 }
 
 //상황에따라 다른 팝업창 구분

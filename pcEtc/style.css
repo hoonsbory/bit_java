@@ -17,6 +17,12 @@ html{
   url(../font/HSThin.otf) format('opentype')
   /* 파이썬의 pyftsubset을 통해 경량화함 */
 }
+#openVideoBtn{
+  color: rgb(10, 59, 112);
+  font-size : 1.5vh;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
 #guideVideo{
   width: 500px;
   z-index: 999;
@@ -129,7 +135,6 @@ html{
   background: white;
 }
   #stepInfo {
-    display: none;
     background-color: rgb(74, 114, 176);
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;

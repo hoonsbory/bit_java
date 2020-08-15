@@ -38,7 +38,7 @@
             <p id="close" onclick="closeVideo()"
                 style="cursor : pointer; z-index: 999; display : none; color : white; position : fixed; top : 0; right : 20px; margin : 0; font-size : 3rem;">
                 x</p>
-            <video controls id="guideVideo">
+            <video controls id="guideVideo" muted autoplay playsinline>
                 <source id="videoSource" src="https://mycolor.kr/video/퍼스널컬러홍보영상.mp4" type="video/mp4" />
             </video>
         </div>
@@ -71,8 +71,8 @@
                 </div>
                 <div class="confirmBtn" onclick="popupConfirm('checkResult')"><span class="popupConfirm">확 인</span>
                 </div>
-                <ins class="kakao_ad_area" style="display:block; margin-top: 5px !important; margin : auto;"
-                    data-ad-unit="DAN-1h7fvl13rbh9w" data-ad-width="250" data-ad-height="250"></ins>
+                <!-- <ins class="kakao_ad_area" style="display:block; margin-top: 5px !important; margin : auto;"
+                    data-ad-unit="DAN-1h7fvl13rbh9w" data-ad-width="250" data-ad-height="250"></ins> -->
             </div>
         </div>
     </section>
@@ -100,7 +100,7 @@
                         촬영</span>
                 </div>
                 <div id="cropNotice">※ 손목 안쪽 피부가 꽉 차게 편집해주세요</div>
-                <button onclick="openVideo()">튜토리얼 영상</button>
+                <div id="openVideoBtn" onclick="openVideo()">튜토리얼 영상▶</div>
             </div>
             <div class="file-upload">
                 <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
