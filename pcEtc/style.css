@@ -20,13 +20,12 @@ html{
 #openVideoBtn{
   font-size: 1.7vh;
   border: 2px solid rgb(10, 59, 112);
-  display: inline;
+  display: none;
   margin-bottom: 4px;
   border-radius: 1vh;
   padding: .2vh;
   padding-left: .7vh;
   padding-right: .7vh;
-  padding-bottom: .3vh;
   background-color: white;
   color: rgb(10, 59, 112);
   cursor: pointer;
