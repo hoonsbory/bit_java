@@ -129,7 +129,7 @@ var video = document.getElementById('video');
 function camErr() {
     document.getElementById("noCamDiv").style.display = "block"
     document.getElementById("fileInput").click();
-    document.getElementById("openVideoBtn").style.display = "block";
+    document.getElementById("openVideoBtn").style.display = "block"
     document.getElementById("videoSource").src = "https://mycolor.kr/video/테스트비디오.mp4"
 }
 
@@ -156,6 +156,7 @@ function openVideo() {
         document.getElementById("guideVideo").style.height = "unset"
         document.getElementById("guideVideo").style.width = "500px"
     }
+    document.getElementById("guideVideo").load()
     document.getElementById("guideDiv").style.display = "block"
     document.getElementById("guideVideo").play()
     document.getElementById("close").style.display = "block"
