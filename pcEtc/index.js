@@ -1031,7 +1031,6 @@ video.addEventListener('play', () => {
   const canvas = faceapi.createCanvasFromMedia(video)
   canvas.style.position = "absolute"
   canvas.style.width = "100%"
-  canvas.style.height = "60vh"
   canvas.id = "faceCanvas"
   document.getElementById("mainCam").insertBefore(canvas,video)
   const displaySize = { width : video.clientWidth , height : video.clientHeight}
