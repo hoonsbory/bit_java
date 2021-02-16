@@ -17,6 +17,10 @@ html{
   url(../font/HSThin.otf) format('opentype')
   /* 파이썬의 pyftsubset을 통해 경량화함 */
 }
+#video #faceCanvas{
+  width : 100%  !important;
+  height : 60vh !important;
+}
 #close{
   cursor : pointer; 
   z-index: 999; 
@@ -650,7 +654,7 @@ margin-bottom: 5px;
 }
 
 @media(min-width : 768px) and (max-width : 1024px){
-  #video{
+  #video #faceCanvas{
     height: 80vh;
   }
   #slider ul li{

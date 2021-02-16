@@ -1030,6 +1030,7 @@ video.addEventListener('play', () => {
     alert(123)
   const canvas = faceapi.createCanvasFromMedia(video)
   canvas.style.position = "absolute"
+  canvas.id = "faceCanvas"
   document.getElementById("mainCam").insertBefore(canvas,video)
   const displaySize = { width : video.clientWidth , height : video.clientHeight}
   faceapi.matchDimensions(canvas, displaySize)
