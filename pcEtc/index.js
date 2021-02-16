@@ -119,7 +119,7 @@ if (ua.indexOf("Mobile") > -1 || ua.indexOf("Mac") > -1) {
 }
 
 
-var video = document.getElementById('video');
+const video = document.getElementById('video');
 
 //비디오 에러 캐치
 function camErr() {
@@ -855,86 +855,127 @@ function streamTrue() {
     modeChange();
     stream = true;
 }
-function cameraCheck() {
-    console.log(navigator.mediaDevices)
-    console.log(navigator.mediaDevices.getUserMedia)
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
-        //사파리는 해상도가 자동으로 조절되기때문에 해상도를 설정해주면 에러가난다. 그래서 사파리는 설정을 안해줘야하는데,
-        //기기 정보를 받아올때 크롬에는 사파리 크롬이 다 적혀있고, 사파리에는 사파리만 적혀있으므로 사파리를 특정하기 위해서는 
-        //사파리 문자를 포함하고 크롬 문자를 포함하지않는 조건을 충족시켜줘야한다
-        if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
-            navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: { exact: "right" }
-                }
-            }).then(function (stream) {
-                //video.src = window.URL.createObjectURL(stream);
-                streamTrue();
-                video.srcObject = stream;
-                video.play();
-            }).catch(function (err) {
-                //err은 문자열이 아니기 때문에 문자열로 만들어줘야 indexOf가 가능
-                err = err + "";
-                if (err.indexOf("NotAllowedError") > -1) {
-                    window.location.reload();
-                }
-                camErr()
-            });
-        } else {
-            // Not adding `{ audio: true }` since we only want video now
-            navigator.mediaDevices.getUserMedia({
-                video: {
-                    width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-                }
-            }).then(function (stream) {
-                //video.src = window.URL.createObjectURL(stream);
-                streamTrue();
-                video.srcObject = stream;
-                video.play();
-            }).catch(function (err) {
-                camErr()
-            });
-        }
-    }
-    else if (navigator.getUserMedia) { // Standard
-        navigator.getUserMedia({
-            video: {
-                width: { min: 1024, ideal: 1280, max: 1920 },
-                height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-            }
-        }, function (stream) {
-            streamTrue();
-            video.src = stream;
-            video.play();
-        }, camErr());
-    } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-        navigator.webkitGetUserMedia({
-            video: {
-                width: { min: 1024, ideal: 1280, max: 1920 },
-                height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-            }
-        }, function (stream) {
-            streamTrue();
-            video.src = window.webkitURL.createObjectURL(stream);
-            video.play();
-        }, camErr());
-    } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
-        navigator.mozGetUserMedia({
-            video: {
-                width: { min: 1024, ideal: 1280, max: 1920 },
-                height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-            }
-        }, function (stream) {
-            streamTrue();
-            video.srcObject = stream;
-            video.play();
-        }, camErr());
-    } else {
-        camErr();
-    }
+function test(){
+    streamTrue();
+    navigator.getUserMedia(
+        { video: {
+            width: { min: 500, ideal: 1280, max: 1920 },
+                    height: { min: 200, ideal: 720, max: 1080 }
+        } },
+        stream => video.srcObject = stream,
+        err => console.error(err)
+      )
 }
+ 
+  
+
+
+function cameraCheck() {
+    Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+        faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+        faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+        faceapi.nets.faceExpressionNet.loadFromUri('/models'),
+        alert(123)
+      ]).then(test)
+    
+      
+    // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    //     console.log(navigator.mediaDevices)
+
+    //     //사파리는 해상도가 자동으로 조절되기때문에 해상도를 설정해주면 에러가난다. 그래서 사파리는 설정을 안해줘야하는데,
+    //     //기기 정보를 받아올때 크롬에는 사파리 크롬이 다 적혀있고, 사파리에는 사파리만 적혀있으므로 사파리를 특정하기 위해서는 
+    //     //사파리 문자를 포함하고 크롬 문자를 포함하지않는 조건을 충족시켜줘야한다
+    //     if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
+    //         navigator.mediaDevices.getUserMedia({
+    //             video: {
+    //                 facingMode: { exact: "user" }
+    //             }
+    //         }).then(function (stream) {
+    //             //video.src = window.URL.createObjectURL(stream);
+    //             streamTrue();
+    //             video.srcObject = stream;
+    //             video.play();
+    //         }).catch(function (err) {
+    //             //err은 문자열이 아니기 때문에 문자열로 만들어줘야 indexOf가 가능
+    //             err = err + "";
+    //             if (err.indexOf("NotAllowedError") > -1) {
+    //                 window.location.reload();
+    //             }
+    //             camErr()
+    //         });
+    //     } else {
+    //         // Not adding `{ audio: true }` since we only want video now
+    //         navigator.mediaDevices.getUserMedia({
+    //             video: {
+    //                 width: { min: 1024, ideal: 1280, max: 1920 },
+    //                 height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+    //             }
+    //         }).then(function (stream) {
+    //             //video.src = window.URL.createObjectURL(stream);
+    //             streamTrue();
+    //             video.srcObject = stream;
+    //             video.play();
+    //         }).catch(function (err) {
+    //             camErr()
+    //         });
+    //     }
+    // }
+    // else if (navigator.getUserMedia) { // Standard
+    //     navigator.getUserMedia({
+    //         video: {
+    //             width: { min: 1024, ideal: 1280, max: 1920 },
+    //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+    //         }
+    //     }, function (stream) {
+    //         streamTrue();
+    //         video.src = stream;
+    //         video.play();
+    //     }, camErr());
+    // } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
+    //     navigator.webkitGetUserMedia({
+    //         video: {
+    //             width: { min: 1024, ideal: 1280, max: 1920 },
+    //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+    //         }
+    //     }, function (stream) {
+    //         streamTrue();
+    //         video.src = window.webkitURL.createObjectURL(stream);
+    //         video.play();
+    //     }, camErr());
+    // } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
+    //     navigator.mozGetUserMedia({
+    //         video: {
+    //             width: { min: 1024, ideal: 1280, max: 1920 },
+    //             height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+    //         }
+    //     }, function (stream) {
+    //         streamTrue();
+    //         video.srcObject = stream;
+    //         video.play();
+    //     }, camErr());
+    // } else {
+    //     camErr();
+    // }
+}
+video.addEventListener('play', () => {
+    console.log(video)
+    alert(123)
+  const canvas = faceapi.createCanvasFromMedia(video)
+  canvas.style.position = "absolute"
+  document.getElementById("mainCam").insertBefore(canvas,video)
+  const displaySize = { width : video.clientWidth , height : video.clientHeight}
+  faceapi.matchDimensions(canvas, displaySize)
+  setInterval(async () => {
+    const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+    const resizedDetections = faceapi.resizeResults(detections, displaySize)
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+    faceapi.draw.drawDetections(canvas, resizedDetections)
+    faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+    faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+  }, 100)
+})
 function modeChange() {
     document.getElementById("mainbody").scrollIntoView();
     document.getElementById("subTitle").style.display = "none";
