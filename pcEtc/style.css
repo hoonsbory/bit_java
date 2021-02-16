@@ -633,7 +633,14 @@ margin-bottom: 5px;
     width: 550px;
   }
   
-  
+  #middleBar{
+    background: white;
+    height: 50vh;
+    width: 3px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
  
   .middleSec{
     width: 1024px;

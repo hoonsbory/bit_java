@@ -868,7 +868,7 @@ function cameraCheck() {
         if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
             navigator.mediaDevices.getUserMedia({
                 video: {
-                    facingMode: { exact: "environment" }
+                    facingMode: { exact: "user" }
                 }
             }).then(function (stream) {
                 //video.src = window.URL.createObjectURL(stream);
@@ -888,7 +888,7 @@ function cameraCheck() {
             navigator.mediaDevices.getUserMedia({
                 video: {
                     width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
+                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
                 }
             }).then(function (stream) {
                 //video.src = window.URL.createObjectURL(stream);
@@ -926,7 +926,7 @@ function cameraCheck() {
         navigator.mozGetUserMedia({
             video: {
                 width: { min: 1024, ideal: 1280, max: 1920 },
-                height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "environment" }
+                height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
             }
         }, function (stream) {
             streamTrue();
