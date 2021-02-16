@@ -113,11 +113,7 @@ function isFacebookApp() {
 if (isFacebookApp()) {
     document.getElementById("popup").style.display = "block";
 }
-alert(ua);
-alert(ua.indexOf("iPad"));
-alert(ua.indexOf("Mobile"));
 if (ua.indexOf("Mobile") > -1 || ua.indexOf("Mac") > -1) {
-    alert('not ipad');
     document.getElementById("subInfo").style.position = "relative"
     document.getElementById("subInfo").style.top = "1vh"
 }
@@ -860,6 +856,8 @@ function streamTrue() {
     stream = true;
 }
 function cameraCheck() {
+    console.log(navigator.mediaDevices)
+    console.log(navigator.mediaDevices.getUserMedia)
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
         //사파리는 해상도가 자동으로 조절되기때문에 해상도를 설정해주면 에러가난다. 그래서 사파리는 설정을 안해줘야하는데,
