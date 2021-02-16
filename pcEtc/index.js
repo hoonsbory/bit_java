@@ -866,7 +866,7 @@ function cameraCheck() {
         if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
             navigator.mediaDevices.getUserMedia({
                 video: {
-                    facingMode: { exact: "user" }
+                    facingMode: { exact: "left" }
                 }
             }).then(function (stream) {
                 //video.src = window.URL.createObjectURL(stream);
