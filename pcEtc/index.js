@@ -936,17 +936,15 @@ function test(){
         }
 }
  
-  
-
-
-function cameraCheck() {
     Promise.all([
         faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
         faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
         faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
         faceapi.nets.faceExpressionNet.loadFromUri('/models'),
-        alert(123)
-      ]).then(test)
+      ])
+
+function cameraCheck() {
+    test()
     
       
     // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
