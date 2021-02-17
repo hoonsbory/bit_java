@@ -1025,12 +1025,20 @@ function cameraCheck() {
     // }
 }
 video.addEventListener('play', () => {
-    console.log(video)
-    alert(123)
-  const canvas = faceapi.createCanvasFromMedia(video)
+setTimeout(() => {
+    var canvas
+    try {
+        canvas = faceapi.createCanvasFromMedia(video)
+        
+    } catch (error) {
+        video.pause();
+        video.play();
+    }
   canvas.style.position = "absolute"
   canvas.style.width = "100%"
-  canvas.style.height = "60vh"
+  const regionsToExtract = [
+    new faceapi.Rect(0, 0, 100, 100)
+  ]
   canvas.id = "faceCanvas"
   document.getElementById("mainCam").insertBefore(canvas,video)
   const displaySize = { width : video.clientWidth , height : video.clientHeight}
@@ -1042,6 +1050,8 @@ video.addEventListener('play', () => {
     faceapi.draw.drawDetections(canvas, resizedDetections)
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
   }, 100)
+}, 100);
+
 })
 function modeChange() {
     document.getElementById("mainbody").scrollIntoView();
