@@ -21,6 +21,9 @@ html{
   width : 100%  !important;
   height : 60vh !important;
 }
+#video{
+  object-fit : fill;
+}
 #close{
   cursor : pointer; 
   z-index: 999; 
