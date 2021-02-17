@@ -887,7 +887,8 @@ function test(){
                 navigator.mediaDevices.getUserMedia({
                     video: {
                         width: { min: 0, ideal: 1280, max: 1920 },
-                        height: { min: 0, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+                        height: { min: 0, ideal: 720, max: 1080 }, 
+                        facingMode: { exact: "user" }
                     }
                 }).then(function (stream) {
                     //video.src = window.URL.createObjectURL(stream);
@@ -1036,6 +1037,7 @@ setTimeout(() => {
     }
   canvas.style.position = "absolute"
   canvas.style.width = "100%"
+  canvas.style.height = "60vh"
   const regionsToExtract = [
     new faceapi.Rect(0, 0, 100, 100)
   ]
