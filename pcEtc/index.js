@@ -937,11 +937,11 @@ function test() {
 }
 
 Promise.all([
+    faceapi.nets.ssdMobilenetv1.loadFromUri('/models'),
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
     console.log("tiny loaded"),
     faceapi.nets.faceLandmark68TinyNet.loadFromUri('/models'),
     console.log("68 tiny loaded"),
-    faceapi.nets.ssdMobilenetv1.loadFromUri('/models'),
     console.log("all loaded"),
 ])
 document.getElementById("cameraBtn").onclick = 
