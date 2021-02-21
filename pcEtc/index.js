@@ -176,11 +176,11 @@ function camCheck() {
 //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
 //3초가 지나면 기본폰트로
 setTimeout(function () {
-    document.body.style.opacity = 1
+    // document.body.style.opacity = 1
 }, 3000)
 var font = new FontFaceObserver('HSThin');
 font.load(null, 3000).then(function () {
-    // document.documentElement.classList.add('fonts-loaded');
+    // document.body.classList.add('fonts-loaded');
 });
 
 
@@ -947,7 +947,8 @@ Promise.all([
 var interval = setInterval(() => {
     console.log("로딩중")
     if(faceapi.nets.ssdMobilenetv1.isLoaded){
-        document.documentElement.classList.add('fonts-loaded');
+        document.body.style.opacity = 1
+        document.body.classList.add('fonts-loaded');
         clearInterval(interval)
         console.log("로딩완료")
     }
