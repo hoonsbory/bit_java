@@ -1,5 +1,4 @@
 
-
 //rgb값을 xyz로 변환 후 lab로 최종 변환
 function rgbToXyz(hex) {
     const [r, g, b] = hex.map(_ => _ / 255).map(sRGBtoLinearRGB)
@@ -63,7 +62,6 @@ function xyzToLab([x, y, z]) {
     const b = 200 * (y - z)
     return [l, a, b]
 }
-
 
 
 
@@ -148,7 +146,7 @@ function openVideo() {
             document.getElementById("guideVideo").style.width = "100%"
             document.getElementById("guideVideo").style.height = "unset"
         }
-    }else{
+    } else {
         document.getElementById("guideVideo").style.height = "unset"
         document.getElementById("guideVideo").style.width = "500px"
     }
@@ -600,7 +598,7 @@ function crop() {
 
         // let canvasContext2 = canvas2.getContext("2d");
         // var image = new Image();
-        // image.src = document.getElementById("realImage").src;
+        // src = document.getElementById("realImage").src;
         // image.onload = function () {
 
         //     canvasContext2.drawImage(image, 0, 0, 200, 200);
@@ -697,154 +695,156 @@ function resize() {
     }
 }
 //업로드된 이미지를 jcrop라이브러리로 변환하고 이미지를 캔버스에 그려놓는다.
-function editImg(callback, plusMinus) {
-    editCheck = true;
-    if (plusMinus) {
+async function editImg(callback, plusMinus) {
+    // editCheck = true;
+    // if (plusMinus) {
 
-    } else {
-        document.getElementById('editBtn').style.pointerEvents = 'none';
-        if (rotateCrop) {
-            document.getElementsByClassName("jcrop-holder aft")[0].className = "jcrop-holder";
-            document.getElementsByClassName("jcrop-holder")[0].lastElementChild.id = "jcropImg";
-            document.getElementsByClassName("jcrop-holder")[0].lastElementChild.style.opacity = 0.6;
-            rotateCrop = false;
-            return;
-        }
-    }
-    document.getElementById("editBtn").style.animation = "fade 0.5s"
-    setTimeout(function () {
-        document.getElementById("editBtn").style.animation = "unset"
-    }, 500);
-    let canvas = document.getElementById("copyCanvas");
+    // } else {
+    //     document.getElementById('editBtn').style.pointerEvents = 'none';
+    //     if (rotateCrop) {
+    //         document.getElementsByClassName("jcrop-holder aft")[0].className = "jcrop-holder";
+    //         document.getElementsByClassName("jcrop-holder")[0].lastElementChild.id = "jcropImg";
+    //         document.getElementsByClassName("jcrop-holder")[0].lastElementChild.style.opacity = 0.6;
+    //         rotateCrop = false;
+    //         return;
+    //     }
+    // }
+    // document.getElementById("editBtn").style.animation = "fade 0.5s"
+    // setTimeout(function () {
+    //     document.getElementById("editBtn").style.animation = "unset"
+    // }, 500);
+    // let canvas = document.getElementById("copyCanvas");
 
-    let canvasContext = canvas.getContext("2d");
+    // let canvasContext = canvas.getContext("2d");
 
-    // @breif 캔버스의 이미지
+    // // @breif 캔버스의 이미지
 
-    var image = new Image();
-    image.src = document.getElementById("originalImg").src;
+    // var image = new Image();
+    // src = document.getElementById("originalImg").src;
 
-    image.onload = function () {
+    // image.onload = function () {
 
-        canvas.width = this.width;
+    //     canvas.width = this.width;
 
-        canvas.height = this.height;
-        $("#realImage").Jcrop({
-            onSelect: showCoords,
-        }, function () {
-            jcropApi = this;
-            div();
-        });
-        try {
-
-
-
-            //안드로이드인 내 폰에서는 방향에 맞게 자동으로 회전되어 등록되지만 애플은 그렇지 않다. 애플은 정방향에서 90도회전된 정보가 사진에 들어가 있다.
-            //예를 들면 정방향에서 찍었으면 회전값이 1이어야 하는데 애플은 8이 나온다. 그래서 애플 디바이스를 위한 회전 로직을 따로 짜야했다.
-            //그리고 데스크탑 같은 경우, 크롬은 자동으로 정방향으로 나오지만 엣지는 회전되어 나온다. 기기 별 대응이 너무 많아지기 떄문에, 자체적으로 회전 로직을 추가했다.
-            //크롭을 하기위해선 캔버스가 필요한데, 애플 기기에서 업로드시 img태그에는 정방향으로 나오지만 캔버스에는 회전이 적용되어 나오기 때문에, 피부를 특정해서 crop해야 하는
-            //이 앱에서는 자동회전이 불가피하게 되어 넣게 됐다.iPhone|iPad|iPod|Mac
-
-            //망할놈의 캔버스. 아이폰6+페북, 아이패드+페북 에서는 정확히 잘됨. 그러나 아이폰xs+페북에서는 안드로이드처럼 정방향으로 잘나온다...
-            //아이폰 xs에서만 이렇게 되면 예외처리를 해두면 되겠지만, 분명 다른 버전에서도 문제가 일어날 것이 뻔하다.. 대체 왜이러는걸까.
-            //아이폰xs ios업데이트를 했더니 알아서 정방향으로 잘나온다. 이전에 했던 로직이 안먹힘. 하... 일단 ios 13.4버전 기준으로 자동회전을 시켜놨다.
-            //아이패드에서도 실험해봤는데 13.5버전 또한 안드로이드처럼 정방향으로 잘나온다. 확실히 ios문제인거 같다. 정확히 이 패치가 몇 버전에서 이루어졌는지 알아내야한다.
-            if (appleCheck) {
-                if (floatOs >= 13.4) {
-                    canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                    if (plusMinus) callback(plusMinus);
-                    return
-                }
-                // console.log("애플기기입니다.");
-                var fileInfo = document.getElementById("fileInput").files[0];
-                EXIF.getData(fileInfo, function () {
-                    const orientation = EXIF.getTag(fileInfo, "Orientation");
-                    // console.log("회전도는 " + orientation);
-                    alert(orientation);
-                    switch (orientation) {
-
-                        // @details 이미지 회전값이 0인경우 ( 정방향 )
-                        case undefined:
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                            if (plusMinus) callback(plusMinus);
-                            break;
-                        case 0:
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                            if (plusMinus) callback(plusMinus);
-                            break;
-                        case 1:
-
-
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                            if (plusMinus) callback(plusMinus);
-                            break;
-
-                        case 3:
-
-
-                            canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                            canvasContext.rotate(Math.PI);
-                            canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
+    //     canvas.height = this.height;
+    //     $("#realImage").Jcrop({
+    //         onSelect: showCoords,
+    //     }, function () {
+    //         jcropApi = this;
+    //         div();
+    //     });
+    //     try {
 
 
 
-                            // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
+    //         //안드로이드인 내 폰에서는 방향에 맞게 자동으로 회전되어 등록되지만 애플은 그렇지 않다. 애플은 정방향에서 90도회전된 정보가 사진에 들어가 있다.
+    //         //예를 들면 정방향에서 찍었으면 회전값이 1이어야 하는데 애플은 8이 나온다. 그래서 애플 디바이스를 위한 회전 로직을 따로 짜야했다.
+    //         //그리고 데스크탑 같은 경우, 크롬은 자동으로 정방향으로 나오지만 엣지는 회전되어 나온다. 기기 별 대응이 너무 많아지기 떄문에, 자체적으로 회전 로직을 추가했다.
+    //         //크롭을 하기위해선 캔버스가 필요한데, 애플 기기에서 업로드시 img태그에는 정방향으로 나오지만 캔버스에는 회전이 적용되어 나오기 때문에, 피부를 특정해서 crop해야 하는
+    //         //이 앱에서는 자동회전이 불가피하게 되어 넣게 됐다.iPhone|iPad|iPod|Mac
 
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                            if (plusMinus) callback(plusMinus);
-                            break;
+    //         //망할놈의 캔버스. 아이폰6+페북, 아이패드+페북 에서는 정확히 잘됨. 그러나 아이폰xs+페북에서는 안드로이드처럼 정방향으로 잘나온다...
+    //         //아이폰 xs에서만 이렇게 되면 예외처리를 해두면 되겠지만, 분명 다른 버전에서도 문제가 일어날 것이 뻔하다.. 대체 왜이러는걸까.
+    //         //아이폰xs ios업데이트를 했더니 알아서 정방향으로 잘나온다. 이전에 했던 로직이 안먹힘. 하... 일단 ios 13.4버전 기준으로 자동회전을 시켜놨다.
+    //         //아이패드에서도 실험해봤는데 13.5버전 또한 안드로이드처럼 정방향으로 잘나온다. 확실히 ios문제인거 같다. 정확히 이 패치가 몇 버전에서 이루어졌는지 알아내야한다.
+    //         if (appleCheck) {
+    //             if (floatOs >= 13.4) {
+    //                 canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //                 if (plusMinus) callback(plusMinus);
+    //                 return
+    //             }
+    //             // console.log("애플기기입니다.");
+    //             var fileInfo = document.getElementById("fileInput").files[0];
+    //             EXIF.getData(fileInfo, function () {
+    //                 const orientation = EXIF.getTag(fileInfo, "Orientation");
+    //                 // console.log("회전도는 " + orientation);
+    //                 alert(orientation);
+    //                 switch (orientation) {
 
-                        // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
-                        case 6:
-                            if (canvas.width < canvas.height) {
-                                canvas.width = canvas.height;
-                            } else {
-                                canvas.height = canvas.width;
-                            }
-
-                            canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                            canvasContext.rotate(Math.PI * 0.5);
-                            canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                            if (plusMinus) callback(plusMinus);
+    //                     // @details 이미지 회전값이 0인경우 ( 정방향 )
+    //                     case undefined:
+    //                         canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //                         if (plusMinus) callback(plusMinus);
+    //                         break;
+    //                     case 0:
+    //                         canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //                         if (plusMinus) callback(plusMinus);
+    //                         break;
+    //                     case 1:
 
 
-                            // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
+    //                         canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //                         if (plusMinus) callback(plusMinus);
+    //                         break;
+
+    //                     case 3:
 
 
-                            break;
+    //                         canvasContext.translate(canvas.width / 2, canvas.height / 2);
+    //                         canvasContext.rotate(Math.PI);
+    //                         canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
 
-                        // @details 이미지 회전값이 90 기운 경우
-                        case 8:
-                            if (canvas.width < canvas.height) {
-                                canvas.width = canvas.height;
-                            } else {
-                                canvas.height = canvas.width;
-                            }
 
-                            canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                            canvasContext.rotate(Math.PI * 1.5);
-                            canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                            if (plusMinus) callback(plusMinus);
-                            //회전하기전에 정사각형을 만들어주자.
-                            break;
-                    }
 
-                })
-            } else {
-                canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                if (plusMinus) callback(plusMinus);
-            }
-        } catch (error) {
-            alert(error);
-        }
+    //                         // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
 
-        // 사진편집을 누르면 편집 테두리가 전체를 감싸도록 설정
-        $('.file-upload-content').show();
+    //                         canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //                         if (plusMinus) callback(plusMinus);
+    //                         break;
 
-        // firstCrop = true;
-    }
+    //                     // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
+    //                     case 6:
+    //                         if (canvas.width < canvas.height) {
+    //                             canvas.width = canvas.height;
+    //                         } else {
+    //                             canvas.height = canvas.width;
+    //                         }
+
+    //                         canvasContext.translate(canvas.width / 2, canvas.height / 2);
+    //                         canvasContext.rotate(Math.PI * 0.5);
+    //                         canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
+    //                         canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //                         if (plusMinus) callback(plusMinus);
+
+
+    //                         // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
+
+
+    //                         break;
+
+    //                     // @details 이미지 회전값이 90 기운 경우
+    //                     case 8:
+    //                         if (canvas.width < canvas.height) {
+    //                             canvas.width = canvas.height;
+    //                         } else {
+    //                             canvas.height = canvas.width;
+    //                         }
+
+    //                         canvasContext.translate(canvas.width / 2, canvas.height / 2);
+    //                         canvasContext.rotate(Math.PI * 1.5);
+    //                         canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
+    //                         canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //                         if (plusMinus) callback(plusMinus);
+    //                         //회전하기전에 정사각형을 만들어주자.
+    //                         break;
+    //                 }
+
+    //             })
+    //         } else {
+    //             canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //             if (plusMinus) callback(plusMinus);
+    //         }
+    //     } catch (error) {
+    //         alert(error);
+    //     }
+
+    //     // 사진편집을 누르면 편집 테두리가 전체를 감싸도록 설정
+    //     $('.file-upload-content').show();
+
+    //     // firstCrop = true;
+    // }
+
+
 
 }
 
@@ -856,97 +856,98 @@ function streamTrue() {
     stream = true;
 }
 
-function test(){
-    streamTrue();
-    alert(navigator.mediaDevices)
+function test() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    
-            //사파리는 해상도가 자동으로 조절되기때문에 해상도를 설정해주면 에러가난다. 그래서 사파리는 설정을 안해줘야하는데,
-            //기기 정보를 받아올때 크롬에는 사파리 크롬이 다 적혀있고, 사파리에는 사파리만 적혀있으므로 사파리를 특정하기 위해서는 
-            //사파리 문자를 포함하고 크롬 문자를 포함하지않는 조건을 충족시켜줘야한다
-            if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
-                navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: { exact: "user" }
-                    }
-                }).then(function (stream) {
-                    //video.src = window.URL.createObjectURL(stream);
-                    streamTrue();
-                    video.srcObject = stream;
-                    video.play();
-                }).catch(function (err) {
-                    //err은 문자열이 아니기 때문에 문자열로 만들어줘야 indexOf가 가능
-                    err = err + "";
-                    if (err.indexOf("NotAllowedError") > -1) {
-                        window.location.reload();
-                    }
-                    camErr()
-                });
-            } else {
-                // Not adding `{ audio: true }` since we only want video now
-                navigator.mediaDevices.getUserMedia({
-                    video: {
-                        width: { min: 0, ideal: 1280, max: 1920 },
-                        height: { min: 0, ideal: 720, max: 1080 }, 
-                        facingMode: { exact: "user" }
-                    }
-                }).then(function (stream) {
-                    //video.src = window.URL.createObjectURL(stream);
-                    video.srcObject = stream;
-                }).catch(function (err) {
-                    console.log(err)
-                    camErr()
-                });
-            }
-        }
-        else if (navigator.getUserMedia) { // Standard
-            navigator.getUserMedia({
+
+        //사파리는 해상도가 자동으로 조절되기때문에 해상도를 설정해주면 에러가난다. 그래서 사파리는 설정을 안해줘야하는데,
+        //기기 정보를 받아올때 크롬에는 사파리 크롬이 다 적혀있고, 사파리에는 사파리만 적혀있으므로 사파리를 특정하기 위해서는 
+        //사파리 문자를 포함하고 크롬 문자를 포함하지않는 조건을 충족시켜줘야한다
+        if (ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1) {
+            navigator.mediaDevices.getUserMedia({
                 video: {
-                    width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+                    facingMode: { exact: "user" }
                 }
-            }, function (stream) {
-                streamTrue();
-                video.src = stream;
-                video.play();
-            }, camErr());
-        } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-            navigator.webkitGetUserMedia({
-                video: {
-                    width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-                }
-            }, function (stream) {
-                streamTrue();
-                video.src = window.webkitURL.createObjectURL(stream);
-                video.play();
-            }, camErr());
-        } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
-            navigator.mozGetUserMedia({
-                video: {
-                    width: { min: 1024, ideal: 1280, max: 1920 },
-                    height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
-                }
-            }, function (stream) {
+            }).then(function (stream) {
+                //video.src = window.URL.createObjectURL(stream);
                 streamTrue();
                 video.srcObject = stream;
                 video.play();
-            }, camErr());
+            }).catch(function (err) {
+                //err은 문자열이 아니기 때문에 문자열로 만들어줘야 indexOf가 가능
+                err = err + "";
+                if (err.indexOf("NotAllowedError") > -1) {
+                    window.location.reload();
+                }
+                camErr()
+            });
         } else {
-            camErr();
+            // Not adding `{ audio: true }` since we only want video now
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    width: { min: 0, ideal: 1280, max: 1920 },
+                    height: { min: 0, ideal: 720, max: 1080 },
+                    facingMode: { exact: "user" }
+                }
+            }).then(function (stream) {
+                streamTrue();
+                video.srcObject = stream;
+                //video.src = window.URL.createObjectURL(stream);
+            }).catch(function (err) {
+                console.log(err)
+                camErr()
+            });
         }
+    }
+    else if (navigator.getUserMedia) { // Standard
+        navigator.getUserMedia({
+            video: {
+                width: { min: 1024, ideal: 1280, max: 1920 },
+                height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+            }
+        }, function (stream) {
+            streamTrue();
+            video.src = stream;
+            video.play();
+        }, camErr());
+    } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
+        navigator.webkitGetUserMedia({
+            video: {
+                width: { min: 1024, ideal: 1280, max: 1920 },
+                height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+            }
+        }, function (stream) {
+            streamTrue();
+            video.src = window.webkitURL.createObjectURL(stream);
+            video.play();
+        }, camErr());
+    } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
+        navigator.mozGetUserMedia({
+            video: {
+                width: { min: 1024, ideal: 1280, max: 1920 },
+                height: { min: 776, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
+            }
+        }, function (stream) {
+            streamTrue();
+            video.srcObject = stream;
+            video.play();
+        }, camErr());
+    } else {
+        camErr();
+    }
 }
- 
-    Promise.all([
-        faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-        faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-        faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-      ])
 
+Promise.all([
+    faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+    faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+    faceapi.nets.faceLandmark68TinyNet.loadFromUri('/models'),
+    faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+    faceapi.nets.ssdMobilenetv1.loadFromUri('/models'),
+])
+document.getElementById("cameraBtn").onclick = 
 function cameraCheck() {
     test()
-    
-      
+
+
     // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     //     console.log(navigator.mediaDevices)
 
@@ -1026,40 +1027,61 @@ function cameraCheck() {
     // }
 }
 video.addEventListener('play', () => {
-setTimeout(() => {
-    var canvas
-    try {
-        canvas = faceapi.createCanvasFromMedia(video)
-        
-    } catch (error) {
-        video.pause();
-        video.play();
-    }
-  canvas.style.position = "absolute"
-  canvas.style.width = "100%"
-  canvas.style.height = "60vh"
-  const regionsToExtract = [
-    new faceapi.Rect(0, 0, 100, 100)
-  ]
-  canvas.id = "faceCanvas"
-  document.getElementById("mainCam").insertBefore(canvas,video)
-  const displaySize = { width : video.clientWidth , height : video.clientHeight}
-  faceapi.matchDimensions(canvas, displaySize)
-  setInterval(async () => {
-    const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks()
-    const resizedDetections = faceapi.resizeResults(detections, displaySize)
-    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-    faceapi.draw.drawDetections(canvas, resizedDetections)
-    faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
-  }, 100)
-}, 100);
+    setTimeout(() => {
+        var canvas
+        try {
+            canvas = faceapi.createCanvasFromMedia(video)
+
+        } catch (error) {
+            video.pause();
+            video.play();
+        }
+        canvas.style.position = "absolute"
+        canvas.style.width = "100%"
+        canvas.style.height = "60vh"
+        canvas.id = "faceCanvas"
+        document.getElementById("mainCam").insertBefore(canvas, video)
+        const displaySize = { width: video.clientWidth, height: video.clientHeight }
+        faceapi.matchDimensions(canvas, displaySize)
+        setInterval(async () => {
+            const detections = await faceapi.detectSingleFace(video).withFaceLandmarks(true) //video 캡쳐본 얼굴인식 정보  사이즈를 맞추기 전이기때문에 좌표값이 다르다
+            var resizedDetections
+            if(detections){
+            resizedDetections = await faceapi.resizeResults(detections, displaySize) //detections를 displaysize에 맞춘 결과값
+            await canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height) //캔버스 초기화
+            await faceapi.draw.drawDetections(canvas, resizedDetections) //얼굴인식 사각형 박스 드로잉
+            await faceapi.draw.drawFaceLandmarks(canvas, resizedDetections) //얼굴인식 랜드마크 드로잉
+            console.log(resizedDetections.landmarks.positions) //페이스 랜드마크 좌표정보
+            // const landmark = await faceapi.detectFaceLandmarksTiny(canvas) //페이스랜드마크 좌표
+            // console.log(landmark.positions)
+            const nose = await resizedDetections.landmarks.positions[38]
+            // console.log(nose)
+            var camCanvas = document.getElementById('canvas');
+            await canvas.getContext('2d').fillRect(nose.x, nose.y, 10, 10)
+            camCanvas.width = video.clientWidth;
+            camCanvas.height = video.clientHeight;
+            var context = camCanvas.getContext('2d');
+            await context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
+            var data = context.getImageData(nose.x, nose.y, 1, 1).data
+            context.fillStyle = `rgb(${data[0]},${data[1]},${data[2]})`
+            context.fillRect(0, 0, 100, 100)
+            // data.data[0] = 0
+            // data.data[1] = 0;
+            // data.data[2] = 0
+            // context.putImageData(data,50,50)
+            }else{
+            await canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+            }
+        }, 100)
+    }, 100);
 
 })
 function modeChange() {
     document.getElementById("mainbody").scrollIntoView();
     document.getElementById("subTitle").style.display = "none";
-    document.getElementById("stepInfo").style.display = "block";
-    document.getElementById("cropNotice").style.display = "block";
+    document.getElementById("mainTitle").style.display = "none";
+    document.getElementById("stepInfo").style.display = "inline-block";
+    document.getElementById("cropNotice").style.display = "inline-block";
     document.getElementById("notice").style.display = "none";
     document.getElementById("notice2").style.display = "none";
     document.getElementById('editBtn').style.pointerEvents = 'auto';
@@ -1068,12 +1090,12 @@ function modeChange() {
     $('#slider').show();
 }
 //인풋창 파일 업로드 시 
-function readURL(input) {
+async function readURL(input) {
 
     if ((input.files && input.files[0])) {
         loading.style.display = "block"
 
-        // $('#originalImg').attr('src', tempImage.src);
+        // $('#originalImg').attr('src', tempsrc);
 
 
         // $('.file-upload-image').css("display", "none");
@@ -1090,13 +1112,31 @@ function readURL(input) {
         const fileInfo = input.files[0];
         var reader = new FileReader();
         let tempImage = new Image();
-        reader.onload = function (e) {
+        var img = await faceapi.bufferToImage(input.files[0])
+        reader.onload = async function (e) {
 
             document.getElementById("originalImg").src = e.target.result;
             $('.file-upload-image').attr('src', e.target.result);
             modeChange();
 
+            canvas = document.createElement("canvas")
+            var input = document.getElementById("realImage")
+            input.src = img.src
 
+            const detectionsWithLandmarks = await faceapi.detectAllFaces(input).withFaceLandmarks()
+            console.log(detectionsWithLandmarks)
+            canvas = faceapi.createCanvasFromMedia(input)
+            document.getElementById("noCamDiv").insertBefore(canvas, input)
+            const displaySize = { width: input.width, height: input.height }
+
+            faceapi.matchDimensions(canvas, displaySize)
+            const detectionsForSize = faceapi.resizeResults(detectionsWithLandmarks, { width: input.width, height: input.height })
+            const box = detectionsWithLandmarks[0].detection.box;
+            const facebox = new faceapi.draw.DrawBox(box)
+            const resizedDetections = faceapi.resizeResults(detectionsForSize, displaySize)
+            faceapi.draw.drawDetections(canvas, detectionsForSize)
+            faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+            canvas.style.position = "absolute"
 
             //회전값이 있는 사진을 정방향으로 돌리는 로직을 짜려했지만, 디바이스마다 회전값을 처리하는 기준이 달라서(특히 애플) 결국 포기하고 
             //있는 그대로의 사진을 올리고 유저가 회전시킬 수 있게 바꾸었다...
@@ -1187,7 +1227,7 @@ function readURL(input) {
             //                 // @details 270° 회전의 경우 이미지의 높이와 넓이를 서로 바꿔준다.
 
 
-            //                 // tempImage.src = document.getElementById("ToneImage").getAttribute("src");
+            //                 // tempsrc = document.getElementById("ToneImage").getAttribute("src");
             //                 // canvasContext.save();
             //                 // canvasContext.translate(tempImage.width / 2, tempImage.height / 2);
             //                 // canvasContext.rotate(Math.PI * 0.5);
@@ -1367,10 +1407,10 @@ function refresh() {
     document.getElementById("refreshBtn").disabled = true;
     document.getElementById("originalImg").style.transform = "none";
     var image = new Image();
-    image.src = document.getElementById("originalImg").src;
-    document.getElementById("realImage").src = image.src;
-    document.getElementsByClassName("file-upload-image")[1].src = image.src;
-    document.getElementsByClassName("jcrop-holder")[0].firstElementChild.firstElementChild.firstElementChild.src = image.src;
+    src = document.getElementById("originalImg").src;
+    document.getElementById("realImage").src = src;
+    document.getElementsByClassName("file-upload-image")[1].src = src;
+    document.getElementsByClassName("jcrop-holder")[0].firstElementChild.firstElementChild.firstElementChild.src = src;
     document.getElementsByClassName("file-upload-image")[1].style.transform = "none";
     document.getElementsByClassName("jcrop-holder")[0].firstElementChild.firstElementChild.firstElementChild.style.transform = "none";
 

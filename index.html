@@ -44,12 +44,6 @@
     <link rel="canonical" href="https://mycolor.kr">
     <meta name="description"
         content="나는 웜톤일까? 쿨톤일까? 퍼스널컬러 자가 진단하러가기!! 인공지능이 피부사진을 분석하여 결과를 알려줍니다. 회원가입없이 봄 웜톤, 여름 쿨톤, 가을 웜톤, 겨울 쿨톤 중 어디에 해당하는지 알아보세요.">
-    <meta name="naver-site-verification" content="5dc3a557afdd3f611a7539f850a0d9a895ac7867" />
-    <!-- <meta name="google-site-verification" content="x5-5ISQuDn24eQWdy-pG-KeCAYIi5iss2oL4dseBkS8" /> -->
-    <meta name="google-site-verification" content="LnPXO7tnBYdKcGLOVEFe1GtEop1LyJtgUPdbZMp_fVg" />
-    <script data-ad-client="ca-pub-9106671749645972" async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 
     <title>인공지능 퍼스널컬러 자가진단 테스트-마이퍼스널컬러</title>
 </head>
@@ -71,7 +65,8 @@
     <script src="pcEtc/Jcrop.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
-    <script  src="/pcEtc/face-api.min.js"></script>
+    <script  src="/pcEtc/face-api.js"></script>
+
     <section>
         <div id="guideDiv" style="display: none;">
             <div class="popupBg" onclick="closeVideo()"></div>
@@ -113,20 +108,19 @@
                 </div>
                 <div class="confirmBtn" onclick="popupConfirm('checkResult')"><span class="popupConfirm">확 인</span>
                 </div>
-                <ins class="kakao_ad_area" style="display:block; margin-top: 5px !important; margin : auto;"
-                    data-ad-unit="DAN-1h7fvl13rbh9w" data-ad-width="250" data-ad-height="250"></ins>
+               
             </div>
         </div>
     </section>
     <!-- 상단광고 -->
     <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <div class="middleSec">
-        <ins class="adsbygoogle" style="display:block; width: 100%; height: 100px;"
-            data-ad-client="ca-pub-9106671749645972" data-ad-slot="1655934358"></ins>
-    </div>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script> -->
+        <div class="middleSec">
+            <ins class="adsbygoogle" style="display:block; width: 100%; height: 100px;"
+                data-ad-client="ca-pub-9106671749645972" data-ad-slot="1655934358"></ins>
+        </div>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script> -->
 
 
     <section id="mainbody">
@@ -155,7 +149,7 @@
 
                 <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
                     onchange="readURL(this);" accept="image/*" ; style="display: none; z-index: 998;" />
-                <div class="image-upload-wrap" onclick="cameraCheck()">
+                <div class="image-upload-wrap"  id="cameraBtn">
                     <div class="drag-text">
                         <img alt="camera 카메라" src="pcImages/camera.png" />
                         <h1>내 피부 촬영하기 </h1>
@@ -189,7 +183,7 @@
                                 <video id="video" style="margin-bottom : 5vh; width: 100%; height : 60vh" muted autoplay
                                     playsinline></video>
                                 <div class="arrowBtn" onclick="camCheck()">피부톤 측정</div>
-                                <canvas id="canvas" style="display: none;"></canvas>
+                                <canvas id="canvas" ></canvas>
                             </div>
                             <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                             </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
@@ -224,13 +218,6 @@
                             <div id="askFooter">
                                 <div class="leftArrow" onclick="moveLeft()">이전 단계로</div>
                             </div>
-                            <ins class="adsbygoogle"
-                                style="display:block; text-align : center; width : 100%; height : 50px;"
-                                data-ad-client="ca-pub-9106671749645972" data-ad-slot="3391188785"
-                                data-ad-format="horizontal"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
                         </li>
                         <li>
                             <div class="question">
@@ -246,13 +233,8 @@
                             <div id="askFooter">
                                 <div class="leftArrow" onclick="moveLeft()">이전 단계로</div>
                             </div>
-                            <ins class="adsbygoogle"
-                                style="display:block; text-align : center; width : 100%; height : 50px;"
-                                data-ad-client="ca-pub-9106671749645972" data-ad-slot="5912753800"
-                                data-ad-format="horizontal"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                            <!-- <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-trqsbvdjn2hv"
+                                data-ad-width="320" data-ad-height="50"></ins> -->
                         </li>
                         <li>
                             <div class="question">
@@ -268,8 +250,7 @@
                             <div id="askFooter">
                                 <div class="leftArrow" onclick="moveLeft()">이전 단계로</div>
                             </div>
-                            <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-1iauwxguw28tx"
-                                data-ad-width="320" data-ad-height="50"></ins>
+                            
                         </li>
                         <li>
                             <div class="question">
@@ -279,7 +260,6 @@
                                 <div class="leftChoose"
                                     style="border-top: 4px solid rgb(253,245,226); border-bottom: 4px solid rgb(253,245,226); background-color: rgb(253,245,226);"
                                     onclick="moveRight('warm')"><span>아이보리 / 베이지</span></div>
-                                <div class="middleBar"></div>
                                 <div class="rightChoose"
                                     style="border-top: 4px solid rgb(253,245,226); border-bottom: 4px solid rgb(253,245,226); background-color: white;"
                                     onclick="moveRight('cool')"><span>순백색</span></div>
@@ -287,8 +267,7 @@
                             <div id="askFooter">
                                 <div class="leftArrow" onclick="moveLeft()">이전 단계로</div>
                             </div>
-                            <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t4tgk6re3upi"
-                                data-ad-width="320" data-ad-height="50"></ins>
+                            
                         </li>
                     </ul>
                 </div>
@@ -305,30 +284,22 @@
         </article>
     </section>
 
-    <section class="middleSec">
-
-        <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-9106671749645972"
-            data-ad-slot="7150630154" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        <!-- <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-t89ovgrl5so5" data-ad-width="320"
-            data-ad-height="100"></ins> -->
-
-    </section>
+ 
 
     <footer id="footer">
         <div id="footerLeft">
             <img alt="마이퍼스널컬러 로고" src="pcImages/footerImg.png">
             <p>mycolor.kr</p>
         </div>
-        <div id="footerCenter"><a href="https://mycolor.kr/privacy" style="color : rgb(10, 59, 112)">개인정보 처리방침</a></div>
-        <div id="footerRight">Contact : 신재훈 -tonymkcv93@gmail.com</div>
+        <div id="footerCenter">
+            <a href="https://mycolor.kr/privacy" style="color : rgb(10, 59, 112)">개인정보 처리방침</a>
+        </div>
+        <!-- <a href="https://www.youtube.com/channel/UCQNE2JmbasNYbjGAcuBiRRg" style="color : rgb(10, 59, 112)">제작 도움 - 조코딩 유튜브</a> -->
+        <div id="footerRight">Contact : 신재훈 - <a href="mailto:tonymkcv93@gmail.com">tonymkcv93@gmail.com</a></div>
     </footer>
 
     <script type="module">
         //delta E lab값으로 유사도 측정 몇개 공식중 00년도 공식이 젤 최신이라 프로토타입으로 연결되어 있던 거  다 버리고 얘만 가져옴
-        // import dE00 from "https://mycolor.kr/pcEtc/dE00.js"
         import dE00 from "./pcEtc/dE00.js"
         var module1 = function (labColor1, labColor2) {
             var delta = new dE00(labColor1, labColor2);
@@ -337,7 +308,7 @@
         //전역으로 등록
         window.module1 = module1;
     </script>
-    <script src="pcEtc/index.js"></script>
+    <script type="module" src="pcEtc/index.js"></script>
 
 </body>
 
