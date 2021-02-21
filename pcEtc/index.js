@@ -939,12 +939,8 @@ function test() {
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
     console.log("tiny loaded"),
-    faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-    console.log("68land loaded"),
     faceapi.nets.faceLandmark68TinyNet.loadFromUri('/models'),
     console.log("68 tiny loaded"),
-    faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-    console.log("recong loaded"),
     faceapi.nets.ssdMobilenetv1.loadFromUri('/models'),
     console.log("all loaded"),
 ])
