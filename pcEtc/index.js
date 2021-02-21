@@ -176,11 +176,11 @@ function camCheck() {
 //폰트가 로드되기전까지 투명도를 줘서 안보이게 했다가 3초이내에 로딩되면 보이게함.
 //3초가 지나면 기본폰트로
 setTimeout(function () {
-    // document.body.style.opacity = 1
+    document.body.style.opacity = 1
 }, 3000)
 var font = new FontFaceObserver('HSThin');
 font.load(null, 3000).then(function () {
-    // document.body.classList.add('fonts-loaded');
+    document.body.classList.add('fonts-loaded');
 });
 
 
@@ -937,22 +937,20 @@ function test() {
 }
 
 Promise.all([
-    faceapi.nets.ssdMobilenetv1.loadFromUri('/models'),
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-    console.log("tiny loaded"),
-    faceapi.nets.faceLandmark68TinyNet.loadFromUri('/models'),
-    console.log("68 tiny loaded"),
-    console.log("all loaded"),
+  faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+  faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+  faceapi.nets.faceExpressionNet.loadFromUri('/models')
 ])
-var interval = setInterval(() => {
-    console.log("로딩중")
-    if(faceapi.nets.ssdMobilenetv1.isLoaded){
-        document.body.style.opacity = 1
-        document.body.classList.add('fonts-loaded');
-        clearInterval(interval)
-        console.log("로딩완료")
-    }
-}, 1000);
+// var interval = setInterval(() => {
+//     console.log("로딩중")
+//     if(faceapi.nets.ssdMobilenetv1.isLoaded){
+//         document.body.style.opacity = 1
+//         document.body.classList.add('fonts-loaded');
+//         clearInterval(interval)
+//         console.log("로딩완료")
+//     }
+// }, 1000);
     
 document.getElementById("cameraBtn").onclick = 
 function cameraCheck() {
@@ -1055,7 +1053,7 @@ video.addEventListener('play', () => {
         const displaySize = { width: video.clientWidth, height: video.clientHeight }
         faceapi.matchDimensions(canvas, displaySize)
         setInterval(async () => {
-            const detections = await faceapi.detectSingleFace(video).withFaceLandmarks(true) //video 캡쳐본 얼굴인식 정보  사이즈를 맞추기 전이기때문에 좌표값이 다르다
+            const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks() //video 캡쳐본 얼굴인식 정보  사이즈를 맞추기 전이기때문에 좌표값이 다르다
             var resizedDetections
             if(detections){
             resizedDetections = await faceapi.resizeResults(detections, displaySize) //detections를 displaysize에 맞춘 결과값
