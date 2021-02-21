@@ -1060,20 +1060,21 @@ video.addEventListener('play', () => {
             await canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height) //캔버스 초기화
             await faceapi.draw.drawDetections(canvas, resizedDetections) //얼굴인식 사각형 박스 드로잉
             await faceapi.draw.drawFaceLandmarks(canvas, resizedDetections) //얼굴인식 랜드마크 드로잉
-            console.log(resizedDetections.landmarks.positions) //페이스 랜드마크 좌표정보
+            console.log(resizedDetections[0].landmarks) //페이스 랜드마크 좌표정보
             // const landmark = await faceapi.detectFaceLandmarksTiny(canvas) //페이스랜드마크 좌표
             // console.log(landmark.positions)
-            const nose = await resizedDetections.landmarks.positions[38]
+            const nose = await resizedDetections[0].landmarks.positions[38]
+            
             // console.log(nose)
             var camCanvas = document.getElementById('canvas');
-            await canvas.getContext('2d').fillRect(nose.x, nose.y, 10, 10)
             camCanvas.width = video.clientWidth;
             camCanvas.height = video.clientHeight;
             var context = camCanvas.getContext('2d');
+            var ctx = canvas.getContext('2d');
             await context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
             var data = context.getImageData(nose.x, nose.y, 1, 1).data
-            context.fillStyle = `rgb(${data[0]},${data[1]},${data[2]})`
-            context.fillRect(0, 0, 100, 100)
+            ctx.fillStyle = `rgb(${data[0]},${data[1]},${data[2]})`
+            ctx.fillRect(0, 0, 100, 100)
             // data.data[0] = 0
             // data.data[1] = 0;
             // data.data[2] = 0
