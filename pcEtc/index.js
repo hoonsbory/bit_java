@@ -180,7 +180,7 @@ setTimeout(function () {
 }, 3000)
 var font = new FontFaceObserver('HSThin');
 font.load(null, 3000).then(function () {
-    document.documentElement.classList.add('fonts-loaded');
+    // document.documentElement.classList.add('fonts-loaded');
 });
 
 
@@ -944,6 +944,15 @@ Promise.all([
     console.log("68 tiny loaded"),
     console.log("all loaded"),
 ])
+var interval = setInterval(() => {
+    console.log("로딩중")
+    if(faceapi.nets.ssdMobilenetv1.isLoaded){
+        document.documentElement.classList.add('fonts-loaded');
+        clearInterval(interval)
+        console.log("로딩완료")
+    }
+}, 1000);
+    
 document.getElementById("cameraBtn").onclick = 
 function cameraCheck() {
     test()
