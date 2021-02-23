@@ -1467,7 +1467,7 @@
       }
       return DrawBoxOptions;
   }());
-  var DrawBox = /** @class */ (function () {
+  var DrawBox = /** @class */ (function () { //사각형 박스 커스텀
       function DrawBox(box, options) {
           if (options === void 0) { options = {}; }
           this.box = new Box(box);
@@ -1480,15 +1480,15 @@
           ctx.strokeStyle = boxColor;
           ctx.lineWidth = lineWidth;
           ctx.strokeRect(x, y, width, height);
-          var label = this.options.label;
-          if (label) {
-              new DrawTextField([label], { x: x - (lineWidth / 2), y: y }, this.options.drawLabelOptions).draw(canvasArg);
-          }
+        //   var label = this.options.label;
+        //   if (label) {
+        //       new DrawTextField([label], { x: x - (lineWidth / 2), y: y }, this.options.drawLabelOptions).draw(canvasArg);
+        //   }
       };
       return DrawBox;
   }());
 
-  function drawDetections(canvasArg, detections) {
+  function drawDetections(canvasArg, detections) { //얼굴 정확성 스코어
       var detectionsArray = Array.isArray(detections) ? detections : [detections];
       detectionsArray.forEach(function (det) {
           var score = det instanceof FaceDetection
@@ -2736,17 +2736,17 @@
               drawContour(ctx, this.faceLandmarks.getRightEye(), true);
               drawContour(ctx, this.faceLandmarks.getMouth(), true);
           }
-          if (drawPoints) {
-              ctx.strokeStyle = pointColor;
-              ctx.fillStyle = pointColor;
-              var drawPoint = function (pt) {
-                  ctx.beginPath();
-                  ctx.arc(pt.x, pt.y, pointSize, 0, 2 * Math.PI);
-                  ctx.fill();
-              };
+        //   if (drawPoints) {
+        //       ctx.strokeStyle = pointColor;
+        //       ctx.fillStyle = pointColor;
+        //       var drawPoint = function (pt) {
+        //           ctx.beginPath();
+        //           ctx.arc(pt.x, pt.y, pointSize, 0, 2 * Math.PI);
+        //           ctx.fill();
+        //       };
               
-              this.faceLandmarks.positions.forEach(drawPoint);
-          }
+        //       this.faceLandmarks.positions.forEach(drawPoint);
+        //   }
       };
       return DrawFaceLandmarks;
   }());

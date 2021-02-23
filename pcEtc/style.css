@@ -17,7 +17,34 @@ html{
   url(../font/HSThin.otf) format('opentype')
   /* 파이썬의 pyftsubset을 통해 경량화함 */
 }
-#video #faceCanvas{
+#progressContainer{
+  width : 40vh;
+  background: rgba(74, 114, 176,.7);
+  display: flex;
+  flex-direction: column-reverse;
+  border-radius: 10px;
+  margin-bottom: 1vh;
+  border : .5px solid rgb(10, 59, 112);
+  display: none;
+}
+
+#progressContainer span{
+  position : absolute;
+  left : 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+#progressBar{
+  float: left;
+  background: rgb(10, 59, 112);
+  height: 1.6rem;
+  width: 0%;
+  transition: all 0.3s;
+  border-radius: 10px;
+}
+
+#video, #faceCanvas{
+  transform: scale(-1, 1)  !important;
   width : 100%  !important;
   height : 60vh !important;
 }
@@ -659,9 +686,9 @@ margin-bottom: 5px;
 }
 
 @media(min-width : 768px) and (max-width : 1024px){
-  #video #canvas{
+  /* #video, #canvas , #faceCanvas{
     height: 80vh;
-  }
+  } */
   #slider ul li{
     width : 600px;
   }

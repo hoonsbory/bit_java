@@ -59,18 +59,20 @@
 
 
 
-
+    <script src="https://unpkg.com/core-js-bundle@3.1.4/index.js"></script>
+    <script src="https://unpkg.com/regenerator-runtime@0.13.3/runtime.js"></script>
     <script src="pcEtc/color-thief.umd.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="pcEtc/Jcrop.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
-    <script  src="/pcEtc/face-api.min.js"></script>
+    <script  src="/pcEtc/face-api.js"></script>
+    <!-- <script src="/pcEtc/webgazer.js" type="text/javascript" ></script> -->
 
     <section>
         <div id="guideDiv" style="display: none;">
-            <div class="popupBg" onclick="closeVideo()"></div>
-            <p id="close" onclick="closeVideo()">x</p>
+            <div class="popupBg closeVideo"></div>
+            <p id="close" class="closeVideo">x</p>
             <video controls id="guideVideo" muted preload="none" playsinline>
                 <source id="videoSource"
                     src="https://s3.ap-northeast-2.amazonaws.com/jaehoon-dayoff.ml/video/퍼스널컬러홍보영상.mp4"
@@ -87,7 +89,7 @@
                     <p>* 우측하단 혹은 우측상단 터치 후</p>
                     <p style="margin-bottom : 15px">* 열기 or Safari에서 열기</p>
                 </div>
-                <div onclick="popupConfirm('popup')" class="confirmBtn"><span class="popupConfirm">확 인</span></div>
+                <div id="noticePopup"  class="confirmBtn"><span class="popupConfirm">확 인</span></div>
             </div>
         </div>
         <div id="checkResult" style="display: none;">
@@ -106,7 +108,7 @@
                     <p>피부 측정이 완료되었습니다!</p>
                     <p style="margin-bottom : 15px">더 정확한 진단을 위해 다음 단계로 넘어갑니다</p>
                 </div>
-                <div class="confirmBtn" onclick="popupConfirm('checkResult')"><span class="popupConfirm">확 인</span>
+                <div class="confirmBtn" id="resultPopup"><span class="popupConfirm">확 인</span>
                 </div>
                
             </div>
@@ -145,10 +147,14 @@
             </div><br>
             <div id="cropNotice">※ 손목 안쪽 피부가 꽉 차게 편집해주세요</div>
             <div id="openVideoBtn" onclick="openVideo()">▶ 튜토리얼 보기 ◀</div>
+            <div id="progressContainer">
+                <div id="progressBar"></div>
+                <span id="progresspercent">0%</span>
+            </div>
             <div class="file-upload">
 
-                <input class="file-upload-input" id="fileInput" type='file' onclick="removeValue()"
-                    onchange="readURL(this);" accept="image/*" ; style="display: none; z-index: 998;" />
+                <input class="file-upload-input" id="fileInput" type='file' 
+                    accept="image/*" ; style="display: none; z-index: 998;" />
                 <div class="image-upload-wrap"  id="cameraBtn">
                     <div class="drag-text">
                         <img alt="camera 카메라" src="pcImages/camera.png" />
@@ -180,10 +186,9 @@
                                 <img alt="" id="originalImg" style="display: none;" />
                             </div>
                             <div id="mainCam" style="display: none;">
-                                <video id="video" style="margin-bottom : 5vh; width: 100%; height : 60vh" muted autoplay
+                                <video id="video" muted autoplay
                                     playsinline></video>
-                                <div class="arrowBtn" onclick="camCheck()">피부톤 측정</div>
-                                <canvas id="canvas" style="display: none;"></canvas>
+                                <!-- <div class="arrowBtn" id="toneCheck">피부톤 측정</div> -->
                             </div>
                             <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                             </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
@@ -200,7 +205,7 @@
                                     onclick="moveRight('cool')"><span>파란색</span></div>
                             </div>
                             <div id="askFooter">
-                                <div class="leftArrow" onclick="moveLeft()">이전 단계로</div>
+                                <div class="leftArrow">이전 단계로</div>
                             </div>
 
                         </li>
@@ -216,7 +221,7 @@
                                     <span>블랙</span></div>
                             </div>
                             <div id="askFooter">
-                                <div class="leftArrow" onclick="moveLeft()">이전 단계로</div>
+                                <div class="leftArrow" >이전 단계로</div>
                             </div>
                         </li>
                         <li>
@@ -231,7 +236,7 @@
                                     onclick="moveRight('cool')"><span>붉은기</span></div>
                             </div>
                             <div id="askFooter">
-                                <div class="leftArrow" onclick="moveLeft()">이전 단계로</div>
+                                <div class="leftArrow" >이전 단계로</div>
                             </div>
                             <!-- <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-trqsbvdjn2hv"
                                 data-ad-width="320" data-ad-height="50"></ins> -->
@@ -248,7 +253,7 @@
                                     onclick="moveRight('cool')"><span>빨갛게 익는다</span></div>
                             </div>
                             <div id="askFooter">
-                                <div class="leftArrow" onclick="moveLeft()">이전 단계로</div>
+                                <div class="leftArrow" >이전 단계로</div>
                             </div>
                             
                         </li>
@@ -265,7 +270,7 @@
                                     onclick="moveRight('cool')"><span>순백색</span></div>
                             </div>
                             <div id="askFooter">
-                                <div class="leftArrow" onclick="moveLeft()">이전 단계로</div>
+                                <div class="leftArrow" >이전 단계로</div>
                             </div>
                             
                         </li>
@@ -308,7 +313,7 @@
         //전역으로 등록
         window.module1 = module1;
     </script>
-    <script src="pcEtc/index.js"></script>
+    <script type="module" src="pcEtc/index.js"></script>
 
 </body>
 
