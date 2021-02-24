@@ -4,6 +4,7 @@ import videoPlayEvent from './videoPlayEvent.js'
 import seasonResult from './seasonResult.js'
 import { Debounce } from './debounce.js'
 import { throttling } from './throttle.js'
+
 var deb = Debounce()
 var throttler = throttling()
 //뒤로가기고 페이지에 진입하면 새로고침되게
@@ -85,6 +86,7 @@ function popupConfirm(div) {
 
 //캠화면 캡쳐 및 주요컬러 도출
 function camCheck(camCanvas,colorSum) {
+    
     colorSum.forEach((i,idx)=>{
         colorSum[idx] = i/30
     })
@@ -707,7 +709,9 @@ function readURL(input) {
             document.getElementById("originalImg").src = e.target.result;
             $('.file-upload-image').attr('src', e.target.result);
             modeChange();
-
+            try {
+                
+            
             var canvas = document.createElement("canvas")
             var input = document.getElementById("realImage")
             input.src = e.target.result
@@ -723,7 +727,9 @@ function readURL(input) {
             faceapi.draw.drawDetections(canvas, resizedDetections)
             faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
             canvas.style.position = "absolute"
-
+        } catch (error) {
+                console.log(error)
+        }
             //회전값이 있는 사진을 정방향으로 돌리는 로직을 짜려했지만, 디바이스마다 회전값을 처리하는 기준이 달라서(특히 애플) 결국 포기하고 
             //있는 그대로의 사진을 올리고 유저가 회전시킬 수 있게 바꾸었다...
 
