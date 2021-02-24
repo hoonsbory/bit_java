@@ -58,12 +58,14 @@ export default async function videopPlayEvent(video, camCheck) {
           
                 // Log facial keypoints.
                 for (let i = 0; i < keypoints.length; i++) {
+                    if(i==1||i==2||i==3||i==4||i==5||i==6||i==7||i==8||i==9||i==10||i==11){
                       const [x, y, z] = keypoints[i];
                       ctx.fillStyle = 'rgb(0,0,0)'
                       ctx.fillRect(x,y,3,3)
                     //   ctx.font = '10px'
                     //   ctx.scale(-1,1)
                     //   ctx.fillText(i+1,x,y)
+                    }
                 }
               }
             }else{
