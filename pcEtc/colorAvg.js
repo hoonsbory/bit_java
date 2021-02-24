@@ -1,20 +1,21 @@
 import rgbToLab from './rgbToLab.js'
 
 
-export default function colorAvg(src, firstResult, labColor, colorList,stream,colorNum) {
+export default function colorAvg(colorSum, firstResult, labColor, colorList,stream,colorNum) {
     var checkSuccess = document.getElementById("checkSuccess");
     var checkFail = document.getElementById("checkFail");
     var checkResult = document.getElementById("checkResult")
     var loading = document.getElementById("loading");
     loading.style.display = "block"
-    var colorThief = new ColorThief();
+    // var colorThief = new ColorThief();
 
-    var sourceImage = src
+    // var sourceImage = src
     try {
 
 
 
-        var colorArray = new rgbToLab(colorThief.getColor(sourceImage));
+        // var colorArray = new rgbToLab(colorThief.getColor(sourceImage));
+        var colorArray = new rgbToLab(colorSum);
 
         labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2] };
 

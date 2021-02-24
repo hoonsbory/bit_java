@@ -84,14 +84,15 @@ function popupConfirm(div) {
 
 
 //캠화면 캡쳐 및 주요컬러 도출
-function camCheck() {
-    var camCanvas = document.getElementById('canvas');
-    camCanvas.width = video.clientWidth;
-    camCanvas.height = video.clientHeight;
-    var context = camCanvas.getContext('2d');
-    context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
+function camCheck(camCanvas,colorSum) {
+    colorSum.forEach((i,idx)=>{
+        colorSum[idx] = i/30
+    })
+    document.getElementById("subInfo").style.backgroundColor = `rgb(${colorSum[0]}, ${colorSum[1]}, ${colorSum[2]})`
+    // var context = camCanvas.getContext('2d');
+    // context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
     firstResult = []
-    colorAvg(camCanvas,firstResult,labColor,colorList,stream,colorNum)
+    colorAvg(colorSum,firstResult,labColor,colorList,stream,colorNum)
 }
 // document.getElementById("toneCheck").onclick = camCheck
 
@@ -254,14 +255,6 @@ $('#slider ul li:last-child').prependTo('#slider ul');
 
 //리사이징이벤트
 window.addEventListener("resize", function () {
-    throttler.throttle(()=>{
-        var canvas = document.getElementById("canvas")
-        if(canvas){
-            canvas.remove()
-            document.getElementById("faceCanvas").remove()
-            videoPlayEvent(video,camCheck)
-        }
-    },3000)
         if (window.innerWidth < 768 && resizeCheck != "mob") {
         resizeCheck = "mob";
         if (jcropApi) {
@@ -672,8 +665,6 @@ function streamTrue() {
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
   faceapi.nets.faceLandmark68TinyNet.loadFromUri('/models'),
-  faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-  faceapi.nets.faceExpressionNet.loadFromUri('/models')
 ])
 
     
