@@ -90,7 +90,7 @@ function camCheck(camCanvas,colorSum) {
     colorSum.forEach((i,idx)=>{
         colorSum[idx] = i/30
     })
-    document.getElementById("subInfo").style.backgroundColor = `rgb(${colorSum[0]}, ${colorSum[1]}, ${colorSum[2]})`
+    // document.getElementById("subInfo").style.backgroundColor = `rgb(${colorSum[0]}, ${colorSum[1]}, ${colorSum[2]})`
     // var context = camCanvas.getContext('2d');
     // context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
     firstResult = []
