@@ -43,7 +43,7 @@ html{
   border-radius: 10px;
 }
 
-#video, #faceCanvas{
+#video, #faceCanvas, #colorCanvas{
   transform: scale(-1, 1)  !important;
   width : 100%  !important;
   height : 60vh !important;

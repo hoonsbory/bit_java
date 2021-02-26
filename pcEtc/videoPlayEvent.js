@@ -1,4 +1,5 @@
 import { throttling } from './throttle.js'
+import selfMode from './selfMode.js'
 
 const throttler = throttling()
 export default async function videopPlayEvent(video, camCheck) {
@@ -39,7 +40,7 @@ export default async function videopPlayEvent(video, camCheck) {
     //     ]
     //     */
     //    var canvas = document.createElement('canvas')
-    //     canvas.style.position = "absolute"
+    //     canvas.style.position[i] = "absolute"
     //     canvas.style.zIndex = "998"
     //     canvas.style.transform = "scale(-1,1)"
     //     canvas.width = video.videoWidth
@@ -72,13 +73,83 @@ export default async function videopPlayEvent(video, camCheck) {
     //             ctx.clearRect(0, 0, canvas.width, canvas.height)
     //         }
     //     }, 100);
-
+    const colorRgb1 = [
+        'rgb(137,81,0)',
+        'rgb(235,163,0)',
+        'rgb(208,136,0)',
+        'rgb(232,202,0)',
+        'rgb(195,79,0)',
+        'rgb(158,200,0)',
+        'rgb(223,204,0)',
+        'rgb(63,168,0)',
+        'rgb(220,129,0)',
+        'rgb(219,86,0)',
+        'rgb(217,131,0)',
+        'rgb(208,101,0)',
+        'rgb(215,119,0)',
+        'rgb(212,36,0)',
+        'rgb(49,160,0)',
+        'rgb(215,193,0)',
+        'rgb(187,195,0)',
+        'rgb(225,44,0)',
+        'rgb(53,169,0)',
+        'rgb(230,96,0)',
+    ]
+    const colorRgb2 = [
+        'rgb(137,81,105)',
+        'rgb(235,163,175)',
+        'rgb(208,136,156)',
+        'rgb(232,202,116)',
+        'rgb(195,79,98)',
+        'rgb(158,200,126)',
+        'rgb(223,204,161)',
+        'rgb(63,168,127)',
+        'rgb(220,129,180)',
+        'rgb(219,86,117)',
+        'rgb(217,131,140)',
+        'rgb(208,101,96)',
+        'rgb(215,119,71)',
+        'rgb(212,36,71)',
+        'rgb(49,160,183)',
+        'rgb(215,193,143)',
+        'rgb(187,195,73)',
+        'rgb(225,44,115)',
+        'rgb(53,169,184)',
+        'rgb(230,96,107)',
+    ]
+    var colorRgb = [
+        'rgb(137,81,105)',
+        'rgb(235,163,175)',
+        'rgb(208,136,156)',
+        'rgb(232,202,116)',
+        'rgb(195,79,98)',
+        'rgb(158,200,126)',
+        'rgb(223,204,161)',
+        'rgb(63,168,127)',
+        'rgb(220,129,180)',
+        'rgb(219,86,117)',
+        'rgb(217,131,140)',
+        'rgb(208,101,96)',
+        'rgb(215,119,71)',
+        'rgb(212,36,71)',
+        'rgb(49,160,183)',
+        'rgb(215,193,143)',
+        'rgb(187,195,73)',
+        'rgb(225,44,115)',
+        'rgb(53,169,184)',
+        'rgb(230,96,107)',
+    ]
     // var btn = document.createElement('button')
-    // btn.onclick = () => { drawColorCanvas(1) }
+    // btn.onclick = () => {
+    //     colorRgb = colorRgb1
+    // }
+
     // btn.innerText = '컬러 1'
     // document.body.insertBefore(btn, document.body.firstElementChild)
     // var btn2 = document.createElement('button')
-    // btn2.onclick = () => { drawColorCanvas(2) }
+    // btn2.onclick = () => {
+    //     colorRgb = colorRgb2
+    // }
     // btn2.innerText = '컬러 2'
     // document.body.insertBefore(btn2, document.body.firstElementChild)
     // var btn3 = document.createElement('button')
@@ -90,7 +161,7 @@ export default async function videopPlayEvent(video, camCheck) {
     // btn4.innerText = '컬러 4'
     // document.body.insertBefore(btn4, document.body.firstElementChild)
 
-    setTimeout(() => {
+    setTimeout(async () => {
         var canvas
         try {
             canvas = faceapi.createCanvasFromMedia(video)
@@ -125,14 +196,61 @@ export default async function videopPlayEvent(video, camCheck) {
             if (detections) {
                 resizedDetections = await faceapi.resizeResults(detections, displaySize) //detections를 displaysize에 맞춘 결과값
                 await ctx.clearRect(0, 0, canvas.width, canvas.height) //캔버스 초기화
-                await faceapi.draw.drawDetections(canvas, resizedDetections) //얼굴인식 사각형 박스 드로잉
+                // await faceapi.draw.drawDetections(canvas, resizedDetections) //얼굴인식 사각형 박스 드로잉
                 await faceapi.draw.drawFaceLandmarks(canvas, resizedDetections) //얼굴인식 랜드마크 드로잉
                 // const landmark = await faceapi.detectFaceLandmarksTiny(canvas) //페이스랜드마크 좌표
                 const positions = await resizedDetections.landmarks.positions
                 const nose = positions[31]
                 const leftChin = positions[2]
+                const faceLength = positions[6].y - positions[19].y
                 const leftCheek = { x: (nose.x + leftChin.x) / 2, y: (nose.y + leftChin.y) / 2 }
                 // console.log(nose)
+                const colorposition = [
+                    { x: positions[17].x - faceLength / 24, y: positions[17].y - faceLength / 6 },
+                    { x: positions[19].x, y: positions[19].y - faceLength / 4 },
+                    { x: positions[21].x, y: positions[21].y - faceLength / 3 },
+                    { x: positions[22].x, y: positions[22].y - faceLength / 3 },
+                    { x: positions[24].x, y: positions[24].y - faceLength / 4 },
+                    { x: positions[26].x + faceLength / 24, y: positions[26].y - faceLength / 6 },
+                    positions[16],
+                    positions[15],
+                    positions[14],
+                    positions[13],
+                    positions[12],
+                    positions[11],
+                    positions[9],
+                    positions[7],
+                    positions[5],
+                    positions[4],
+                    positions[3],
+                    positions[2],
+                    positions[1],
+                    positions[0],
+                    { x: positions[17].x - faceLength / 24, y: positions[17].y - faceLength / 6 },
+                ]
+                // var colorRgb = [
+                //     'rgb(137,81,105)',
+                //     'rgb(235,163,175)',
+                //     'rgb(208,136,156)',
+                //     'rgb(232,202,116)',
+                //     'rgb(195,79,98)',
+                //     'rgb(158,200,126)',
+                //     'rgb(223,204,161)',
+                //     'rgb(63,168,127)',
+                //     'rgb(220,129,180)',
+                //     'rgb(219,86,117)',
+                //     'rgb(217,131,140)',
+                //     'rgb(208,101,96)',
+                //     'rgb(215,119,71)',
+                //     'rgb(212,36,71)',
+                //     'rgb(49,160,183)',
+                //     'rgb(215,193,143)',
+                //     'rgb(187,195,73)',
+                //     'rgb(225,44,115)',
+                //     'rgb(53,169,184)',
+                //     'rgb(230,96,107)',
+                // ]
+
                 const leftTopEye1 = positions[37]
                 const leftBottomEye2 = positions[41]
                 const leftPupil = { x: (leftTopEye1.x + leftBottomEye2.x) / 2, y: (leftTopEye1.y + leftBottomEye2.y) / 2 }
@@ -141,61 +259,60 @@ export default async function videopPlayEvent(video, camCheck) {
                 const rightPupil = { x: (rightTopEye1.x + rightBottomEye2.x) / 2, y: (rightTopEye1.y + rightBottomEye2.y) / 2 }
                 const centerPupil = { x: (leftPupil.x + rightPupil.x) / 2, y: (leftPupil.y + rightPupil.y) / 2 }
                 context.drawImage(video, 0, 0, camCanvas.width, camCanvas.height);
-                // drawColorCanvas(positions[0],positions[17], "rgb(200,0,0")
-                // drawColorCanvas(positions[17],positions[18],"rgb(255,0,0)")
+                // new selfMode(colorposition, colorRgb, canvas)
                 var eyeAvgColor = context.getImageData(centerPupil.x, centerPupil.y, 1, 1).data
                 var cheekAvgColor = context.getImageData(leftCheek.x, leftCheek.y, 1, 1).data
 
-                // ctx.fillStyle = `rgb(${eyeAvgColor[0]},${eyeAvgColor[1]},${eyeAvgColor[2]})`
+                ctx.fillStyle = `rgb(${eyeAvgColor[0]},${eyeAvgColor[1]},${eyeAvgColor[2]})`
 
-                // ctx.fillRect(0, 0, 100, 100)
+                ctx.fillRect(0, 0, 100, 100)
 
-                // ctx.fillStyle = `rgb(${cheekAvgColor[0]},${cheekAvgColor[1]},${cheekAvgColor[2]})`
+                ctx.fillStyle = `rgb(${cheekAvgColor[0]},${cheekAvgColor[1]},${cheekAvgColor[2]})`
 
-                // ctx.fillRect(0, 150, 100, 100)
-                // // ctx.font = "20px serif"
-                // // ctx.strokeText("hello world", 0,20)
+                ctx.fillRect(0, 150, 100, 100)
+                // ctx.font = "20px serif"
+                // ctx.strokeText("hello world", 0,20)
 
-                // var eyeTextCanvas = document.createElement("canvas")
-                // eyeTextCanvas.width = 100
-                // eyeTextCanvas.height = 25
-                // var eyeTextContext = eyeTextCanvas.getContext("2d")
-                // eyeTextContext.scale(-1, 1)
-                // eyeTextContext.font = "15px"
-                // eyeTextContext.fillText("오른쪽 홍채색", -70, 20)
-                // eyeTextContext.setTransform(1, 0, 0, 1, 0, 0);
-                // ctx.putImageData(eyeTextContext.getImageData(0, 0, eyeTextCanvas.width, eyeTextCanvas.height), 100, 0)
+                var eyeTextCanvas = document.createElement("canvas")
+                eyeTextCanvas.width = 100
+                eyeTextCanvas.height = 25
+                var eyeTextContext = eyeTextCanvas.getContext("2d")
+                eyeTextContext.scale(-1, 1)
+                eyeTextContext.font = "15px"
+                eyeTextContext.fillText("오른쪽 홍채색", -70, 20)
+                eyeTextContext.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.putImageData(eyeTextContext.getImageData(0, 0, eyeTextCanvas.width, eyeTextCanvas.height), 100, 0)
 
-                // var cheekTextCanvas = document.createElement("canvas")
-                // cheekTextCanvas.width = 70
-                // cheekTextCanvas.height = 25
-                // var cheekTextContext = cheekTextCanvas.getContext("2d")
-                // cheekTextContext.scale(-1, 1)
-                // cheekTextContext.font = "15px"
-                // cheekTextContext.fillText("오른쪽 볼 색", -60, 20)
-                // cheekTextContext.setTransform(1, 0, 0, 1, 0, 0);
-                // ctx.putImageData(cheekTextContext.getImageData(0, 0, cheekTextCanvas.width, cheekTextCanvas.height), 100, 150)
+                var cheekTextCanvas = document.createElement("canvas")
+                cheekTextCanvas.width = 70
+                cheekTextCanvas.height = 25
+                var cheekTextContext = cheekTextCanvas.getContext("2d")
+                cheekTextContext.scale(-1, 1)
+                cheekTextContext.font = "15px"
+                cheekTextContext.fillText("오른쪽 볼 색", -60, 20)
+                cheekTextContext.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.putImageData(cheekTextContext.getImageData(0, 0, cheekTextCanvas.width, cheekTextCanvas.height), 100, 150)
 
 
-                // var eyePointArc = document.createElement("canvas")
-                // var eyePointArcCtx = eyePointArc.getContext('2d')
-                // eyePointArc.width = 3
-                // eyePointArc.height = 3
-                // eyePointArcCtx.beginPath();
-                // eyePointArcCtx.arc(1.5, 1.5, 1.5, 0, 2 * Math.PI);
-                // eyePointArcCtx.fillStyle = 'rgb(255,0,0)'
-                // eyePointArcCtx.fill();
-                // ctx.putImageData(eyePointArcCtx.getImageData(0, 0, eyePointArc.width, eyePointArc.height), centerPupil.x, centerPupil.y)
+                var eyePointArc = document.createElement("canvas")
+                var eyePointArcCtx = eyePointArc.getContext('2d')
+                eyePointArc.width = 3
+                eyePointArc.height = 3
+                eyePointArcCtx.beginPath();
+                eyePointArcCtx.arc(1.5, 1.5, 1.5, 0, 2 * Math.PI);
+                eyePointArcCtx.fillStyle = 'rgb(255,0,0)'
+                eyePointArcCtx.fill();
+                ctx.putImageData(eyePointArcCtx.getImageData(0, 0, eyePointArc.width, eyePointArc.height), centerPupil.x, centerPupil.y)
 
-                // var cheekPointArc = document.createElement("canvas")
-                // cheekPointArc.width = 3
-                // cheekPointArc.height = 3
-                // var cheekPointArcCtx = cheekPointArc.getContext('2d')
-                // cheekPointArcCtx.beginPath();
-                // cheekPointArcCtx.arc(1.5, 1.5, 1.5, 0, Math.PI * 2);
-                // cheekPointArcCtx.fillStyle = 'rgb(255,0,0)'
-                // cheekPointArcCtx.fill();
-                // ctx.putImageData(cheekPointArcCtx.getImageData(0, 0, cheekPointArc.width, cheekPointArc.height), leftCheek.x, leftCheek.y)
+                var cheekPointArc = document.createElement("canvas")
+                cheekPointArc.width = 3
+                cheekPointArc.height = 3
+                var cheekPointArcCtx = cheekPointArc.getContext('2d')
+                cheekPointArcCtx.beginPath();
+                cheekPointArcCtx.arc(1.5, 1.5, 1.5, 0, Math.PI * 2);
+                cheekPointArcCtx.fillStyle = 'rgb(255,0,0)'
+                cheekPointArcCtx.fill();
+                ctx.putImageData(cheekPointArcCtx.getImageData(0, 0, cheekPointArc.width, cheekPointArc.height), leftCheek.x, leftCheek.y)
                 cnt++
 
 
@@ -233,152 +350,3 @@ export default async function videopPlayEvent(video, camCheck) {
     }, 100);
 }
 
-// function drawColorCanvas(position,position2,color) {
-//     var colorCanvas = document.getElementById("colorCanvas")
-//     var colorCtx = colorCanvas.getContext('2d')
-//     colorCtx.clearRect(0, 0, colorCanvas.width, colorCanvas.height)
-//     var video = document.getElementById("video")
-//     colorCanvas.width = video.clientWidth
-//     colorCanvas.height = video.clientHeight
-//     colorCanvas.style.position = "absolute"
-//     colorCanvas.style.zIndex = "999"
-//     colorCanvas.style.transform = "scale(-1,1)"
-//     var unit = colorCanvas.width/6
-//     var startPos = {x : unit/2, y : 0}
-//     for(var i=0; i<20; i++){
-//         if(startPos.y==0) topDraw(colorCtx)
-//         if(startPos.y==0&&startPos.x+unit>colorCanvas.width) rightTopDraw(colorCtx)
-//         if(startPos.x==colorCanvas.width) rightDraw(colorCtx)
-//         if(startPos.x==colorCanvas.width&&startPos.y+unit>colorCanvas.height) rightBottomDraw(colorCtx)
-    
-//     }
-// function topDraw(ctx,position,position2){
-//     colorCtx.beginPath()
-//     colorCtx.moveTo(position.x,position.y)
-//     colorCtx.lineTo(startPos.x,0)
-//     startPos.x += unit
-//     colorCtx.lineTo(startPos.x,0)
-//     colorCtx.lineTo(position2.x,position2.y)
-//     colorCtx.bezierCurveTo((position.x+position2.x)/2,position2.y,position.x,(position.y+position2.y)/2,position.x,position.y)
-//     // colorCtx.lineWidth = 100;
-//     // colorCtx.strokeStyle = 'rgb(255,0,0)'
-//     // colorCtx.stroke()
-//     colorCtx.fillStyle = color
-//     colorCtx.fill()
-// }
-// function bottomDraw(ctx){
-//     colorCtx.beginPath()
-//     colorCtx.moveTo(position.x,position.y)
-//     colorCtx.lineTo(startPos.x,startPos.y)
-//     colorCtx.lineTo(50,0)
-//     colorCtx.lineTo(position2.x,position2.y)
-//     colorCtx.bezierCurveTo((position.x+position2.x)/2,position2.y,position.x,(position.y+position2.y)/2,position.x,position.y)
-//     // colorCtx.lineWidth = 100;
-//     // colorCtx.strokeStyle = 'rgb(255,0,0)'
-//     // colorCtx.stroke()
-//     colorCtx.fillStyle = color
-//     colorCtx.fill()
-// }
-// function leftDraw(ctx){
-//     colorCtx.beginPath()
-//     colorCtx.moveTo(position.x,position.y)
-//     colorCtx.lineTo(startPos.x,startPos.y)
-//     colorCtx.lineTo(50,0)
-//     colorCtx.lineTo(position2.x,position2.y)
-//     colorCtx.bezierCurveTo((position.x+position2.x)/2,position2.y,position.x,(position.y+position2.y)/2,position.x,position.y)
-//     // colorCtx.lineWidth = 100;
-//     // colorCtx.strokeStyle = 'rgb(255,0,0)'
-//     // colorCtx.stroke()
-//     colorCtx.fillStyle = color
-//     colorCtx.fill()
-// }
-// function rightDraw(ctx){
-//     colorCtx.beginPath()
-//     colorCtx.moveTo(position.x,position.y)
-//     colorCtx.lineTo(startPos.x,startPos.y)
-//     startPos.y += unit
-//     colorCtx.lineTo(startPos.x,startPos.y)
-//     colorCtx.lineTo(position2.x,position2.y)
-//     colorCtx.bezierCurveTo((position.x+position2.x)/2,position2.y,position.x,(position.y+position2.y)/2,position.x,position.y)
-//     // colorCtx.lineWidth = 100;
-//     // colorCtx.strokeStyle = 'rgb(255,0,0)'
-//     // colorCtx.stroke()
-//     colorCtx.fillStyle = color
-//     colorCtx.fill()
-// }
-// function leftTopDraw(ctx){
-//     colorCtx.beginPath()
-//     colorCtx.moveTo(position.x,position.y)
-//     colorCtx.lineTo(startPos.x,startPos.y)
-//     colorCtx.lineTo(50,0)
-//     colorCtx.lineTo(position2.x,position2.y)
-//     colorCtx.bezierCurveTo((position.x+position2.x)/2,position2.y,position.x,(position.y+position2.y)/2,position.x,position.y)
-//     // colorCtx.lineWidth = 100;
-//     // colorCtx.strokeStyle = 'rgb(255,0,0)'
-//     // colorCtx.stroke()
-//     colorCtx.fillStyle = color
-//     colorCtx.fill()
-// }
-// function rightTopDraw(ctx){
-//     colorCtx.beginPath()
-//     colorCtx.moveTo(position.x,position.y)
-//     colorCtx.lineTo(startPos.x,0)
-//     startPos.x = colorCanvas.width
-//     startPos.y = unit/2
-//     colorCtx.lineTo(startPos.x,startPos.y)
-//     colorCtx.lineTo(position2.x,position2.y)
-//     colorCtx.bezierCurveTo((position.x+position2.x)/2,position2.y,position.x,(position.y+position2.y)/2,position.x,position.y)
-//     // colorCtx.lineWidth = 100;
-//     // colorCtx.strokeStyle = 'rgb(255,0,0)'
-//     // colorCtx.stroke()
-//     colorCtx.fillStyle = color
-//     colorCtx.fill()
-// }
-// function leftBottomDraw(ctx){
-//     colorCtx.beginPath()
-//     colorCtx.moveTo(position.x,position.y)
-//     colorCtx.lineTo(startPos.x,startPos.y)
-//     colorCtx.lineTo(50,0)
-//     colorCtx.lineTo(position2.x,position2.y)
-//     colorCtx.bezierCurveTo((position.x+position2.x)/2,position2.y,position.x,(position.y+position2.y)/2,position.x,position.y)
-//     // colorCtx.lineWidth = 100;
-//     // colorCtx.strokeStyle = 'rgb(255,0,0)'
-//     // colorCtx.stroke()
-//     colorCtx.fillStyle = color
-//     colorCtx.fill()
-// }
-// function rightBottomDraw(ctx){
-//     colorCtx.beginPath()
-//     colorCtx.moveTo(position.x,position.y)
-//     colorCtx.lineTo(startPos.x,startPos.y)
-//     colorCtx.lineTo(50,0)
-//     colorCtx.lineTo(position2.x,position2.y)
-//     colorCtx.bezierCurveTo((position.x+position2.x)/2,position2.y,position.x,(position.y+position2.y)/2,position.x,position.y)
-//     // colorCtx.lineWidth = 100;
-//     // colorCtx.strokeStyle = 'rgb(255,0,0)'
-//     // colorCtx.stroke()
-//     colorCtx.fillStyle = color
-//     colorCtx.fill()
-// }
-//     // var img = new Image()
-//     // img.src = `./pcImages/color${num}.png`
-
-//     // img.onload = () => {
-
-//     //     var colorCanvas = document.getElementById("colorCanvas")
-//     //     var colorCtx = colorCanvas.getContext('2d')
-//     //     colorCtx.clearRect(0,0,colorCanvas.width,colorCanvas.height)
-
-//     //     var video = document.getElementById("video")
-//     //     colorCanvas.width = video.clientWidth
-//     //     colorCanvas.height = video.clientHeight
-//     //     colorCanvas.style.position = "absolute"
-//     //     colorCanvas.style.zIndex = "999"
-//     //     // colorCanvas.style.transform = "scale(-1,1)"
-//     //     colorCtx.beginPath()
-
-//     //     // colorCtx.drawImage(img,0,0,video.clientWidth,video.clientHeight)
-//     //     // var imgData = colorCtx.getImageData(0,0,colorCanvas.width,colorCanvas.height)
-//     //     // ctx.putImageData(imgData,0,0)
-//     // }
-// }
