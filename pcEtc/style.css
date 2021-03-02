@@ -307,7 +307,7 @@ html{
   content: "";
 }
 body{
-  opacity: 0;
+  /* opacity: 0; */
   font-family: sans-serif;
   margin: 0;
   font-weight: 600;
