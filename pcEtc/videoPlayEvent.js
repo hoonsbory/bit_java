@@ -340,12 +340,12 @@ export default async function videopPlayEvent(video, camCheck) {
             } else {
                 await ctx.clearRect(0, 0, canvas.width, canvas.height)
             }
-            if (cnt === 30){
-                clearInterval(interval)
-                throttler.throttle(()=>{
-                    camCheck(camCanvas,colorSum)
-                },500)
-            }
+            // if (cnt === 30){
+            //     clearInterval(interval)
+            //     throttler.throttle(()=>{
+            //         camCheck(camCanvas,colorSum)
+            //     },500)
+            // }
         }, 100)
     }, 100);
 }

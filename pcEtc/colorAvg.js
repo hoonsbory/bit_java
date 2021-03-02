@@ -1,5 +1,5 @@
 import rgbToLab from './rgbToLab.js'
-
+import dE00 from './dE00.js'
 
 export default function colorAvg(colorSum, firstResult, labColor, colorList,stream,colorNum) {
     var checkSuccess = document.getElementById("checkSuccess");
@@ -29,8 +29,8 @@ export default function colorAvg(colorSum, firstResult, labColor, colorList,stre
             // green = green < 0 ? -(green) : green;
             // var blue = (imgBlue - colorList[i][2]);
             // blue = blue < 0 ? -(blue) : blue;
-
-            firstResult.push([window.module1(labColor, colorList[i]), i]);
+            var delta = new dE00(labColor,colorList[i])
+            firstResult.push([delta.getDeltaE(), i]);
         }
         firstResult.sort(function (a, b) { // 오름차순 
             return a[0] - b[0];
