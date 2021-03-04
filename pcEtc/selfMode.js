@@ -8,8 +8,9 @@ export default class selfMode {
             { x: positions[21].x, y: positions[21].y - faceLength / 3 },
             { x: positions[22].x, y: positions[22].y - faceLength / 3 },
             { x: positions[24].x - faceWidth / 10, y: positions[24].y - faceLength / 6 },
-            { x: positions[26].x + faceLength / 24, y: positions[26].y - faceLength / 10 },
-            positions[16],
+            { x: positions[26].x + faceLength / 24, y: positions[26].y - faceLength / 20 },
+            // positions[16],
+            { x: positions[16].x, y: positions[16].y - faceLength / 20 },
             positions[15],
             positions[14],
             positions[13],
@@ -22,16 +23,17 @@ export default class selfMode {
             positions[3],
             positions[2],
             positions[1],
-            positions[0],
-            { x: positions[17].x - faceLength / 24, y: positions[17].y - faceLength / 10 },
+            // positions[0],
+            { x: positions[0].x, y: positions[0].y - faceLength / 20 },
+            { x: positions[17].x - faceLength / 24, y: positions[17].y - faceLength / 20 },
             { x: positions[19].x + faceWidth / 10, y: positions[19].y - faceLength / 6 },
         ]
         this.positions = colorposition
         this.colors = colors
         this.canvas = canvas
         this.ctx = canvas.getContext('2d')
-        this.unit = (canvas.width) / 4 //가로
-        this.unit2 = (canvas.width) / 6 //세로. 세로에 더 많은 컬러가 들어가기 때문에 unit크기를 작게 잡아준다.
+        this.unit = (canvas.width) / 4
+        this.unit2 = (canvas.width) / 6
         this.startPos = { x: this.unit / 2, y: 0 }
         this.drawLoop()
     }
