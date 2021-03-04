@@ -32,8 +32,8 @@ export default function streamMode(ua,streamTrue,camErr,video) {
                 }
             }).then(function (stream) {
                 streamTrue();
-                // camErr()
                 video.srcObject = stream;
+                // camErr()
                 //video.src = window.URL.createObjectURL(stream);
             }).catch(function (err) {
                 console.log(err)

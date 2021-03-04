@@ -5,7 +5,7 @@ import faceBoardColor from './faceBoardColor.js'
 
 const throttler = throttling()
 export default async function videopPlayEvent(video, camCheck, faceBoard, faceBoardResult,firstResult) {
-    
+    var interval
     var colorRgb = [
         'rgb(137,81,105)',
         'rgb(235,163,175)',
@@ -61,6 +61,8 @@ export default async function videopPlayEvent(video, camCheck, faceBoard, faceBo
             document.getElementById("filter4").classList.add('clicked')
         }
         document.getElementById("goResult").onclick = () => {
+            clearInterval(interval)
+            video.pause()
             seasonResult(firstResult,faceBoardResult)
         }
     }
@@ -96,7 +98,7 @@ export default async function videopPlayEvent(video, camCheck, faceBoard, faceBo
         let cnt = 0;
         var colorSum = new Array(3).fill(0)
 
-        var interval = setInterval(async () => {
+        interval = setInterval(async () => {
             const detections = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks(true) //video 캡쳐본 얼굴인식 정보  사이즈를 맞추기 전이기때문에 좌표값이 다르다
             var resizedDetections
             document.getElementById('loading').style.display = 'none'
@@ -158,35 +160,38 @@ export default async function videopPlayEvent(video, camCheck, faceBoard, faceBo
                     var eyeAvgColor = context.getImageData(centerPupil.x, centerPupil.y, 1, 1).data
                     var cheekAvgColor = context.getImageData(leftCheek.x, leftCheek.y, 1, 1).data
 
-                    ctx.fillStyle = `rgb(${eyeAvgColor[0]},${eyeAvgColor[1]},${eyeAvgColor[2]})`
+                    // ctx.fillStyle = `rgb(${eyeAvgColor[0]},${eyeAvgColor[1]},${eyeAvgColor[2]})`
 
-                    ctx.fillRect(0, 0, 100, 100)
+                    // ctx.fillRect(0, 0, 100, 100)
 
+                    // ctx.fillStyle = `rgb(${cheekAvgColor[0]},${cheekAvgColor[1]},${cheekAvgColor[2]})`
+
+                    // ctx.fillRect(0, 150, 100, 100)
                     ctx.fillStyle = `rgb(${cheekAvgColor[0]},${cheekAvgColor[1]},${cheekAvgColor[2]})`
 
-                    ctx.fillRect(0, 150, 100, 100)
+                    ctx.fillRect(0, 0, canvas.width/4, canvas.width/4)
                     // ctx.font = "20px serif"
                     // ctx.strokeText("hello world", 0,20)
 
-                    var eyeTextCanvas = document.createElement("canvas")
-                    eyeTextCanvas.width = 100
-                    eyeTextCanvas.height = 25
-                    var eyeTextContext = eyeTextCanvas.getContext("2d")
-                    eyeTextContext.scale(-1, 1)
-                    eyeTextContext.font = "15px"
-                    eyeTextContext.fillText("오른쪽 홍채색", -70, 20)
-                    eyeTextContext.setTransform(1, 0, 0, 1, 0, 0);
-                    ctx.putImageData(eyeTextContext.getImageData(0, 0, eyeTextCanvas.width, eyeTextCanvas.height), 100, 0)
+                    // var eyeTextCanvas = document.createElement("canvas")
+                    // eyeTextCanvas.width = 100
+                    // eyeTextCanvas.height = 25
+                    // var eyeTextContext = eyeTextCanvas.getContext("2d")
+                    // eyeTextContext.scale(-1, 1)
+                    // eyeTextContext.font = "15px"
+                    // eyeTextContext.fillText("오른쪽 홍채색", -70, 20)
+                    // eyeTextContext.setTransform(1, 0, 0, 1, 0, 0);
+                    // ctx.putImageData(eyeTextContext.getImageData(0, 0, eyeTextCanvas.width, eyeTextCanvas.height), 0, 0)
 
-                    var cheekTextCanvas = document.createElement("canvas")
-                    cheekTextCanvas.width = 70
-                    cheekTextCanvas.height = 25
-                    var cheekTextContext = cheekTextCanvas.getContext("2d")
-                    cheekTextContext.scale(-1, 1)
-                    cheekTextContext.font = "15px"
-                    cheekTextContext.fillText("오른쪽 볼 색", -60, 20)
-                    cheekTextContext.setTransform(1, 0, 0, 1, 0, 0);
-                    ctx.putImageData(cheekTextContext.getImageData(0, 0, cheekTextCanvas.width, cheekTextCanvas.height), 100, 150)
+                    // var cheekTextCanvas = document.createElement("canvas")
+                    // cheekTextCanvas.width = 70
+                    // cheekTextCanvas.height = 25
+                    // var cheekTextContext = cheekTextCanvas.getContext("2d")
+                    // cheekTextContext.scale(-1, 1)
+                    // cheekTextContext.font = "15px"
+                    // cheekTextContext.fillText("오른쪽 볼 색", -60, 20)
+                    // cheekTextContext.setTransform(1, 0, 0, 1, 0, 0);
+                    // ctx.putImageData(cheekTextContext.getImageData(0, 0, cheekTextCanvas.width, cheekTextCanvas.height), 100, 150)
 
 
                     var eyePointArc = document.createElement("canvas")

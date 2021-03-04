@@ -4,11 +4,8 @@
 //실제 인간이 봤을 때 비슷한 색은 100,100,100이다. 후자는 blue값이 149의 차이가 나기때문에 색이 완전히 다른 색이 되어버린다. 이처럼 세 영역의 벨런스를 잡아줄 수가 없어서 구글링을 해봤는데,
 //CIE(국제조명위원회)가 LAB값을 활용한 공식을 발표했고(delta-e), 그걸 js로 만들어놓은 사람이 있어서 가져와서 모듈화해서 사용했다.
 export default function season(firstResult,faceBoardResult) {
-    loading.style.display = "block"
-    firstResult.forEach(i=>{
-        var a = 90 - (i[0] * 0.9)
-        console.log('score is '+a)
-    })
+    document.getElementById("loading").style.display = "block"
+    console.log(firstResult)
     
     softmax(firstResult.map(i=> i[0]))
 
@@ -27,7 +24,7 @@ export default function season(firstResult,faceBoardResult) {
              return Math.exp(value - C) / d;
         })
     }
-    
+    console.log(firstResult)
     if(faceBoardResult==='warm'){
         firstResult.map((i,idx)=>{
             if(idx>=0&&idx<4) i[0]+= 0.4
@@ -182,7 +179,7 @@ export default function season(firstResult,faceBoardResult) {
                 }
             }
             var seasonData = softmax2([firstResult[0][0],anotherSeason])
-            window.location.href = "https://mycolor.kr/summerCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
+            // window.location.href = "https://mycolor.kr/summerCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
         } else if (colorNum <= 15) {
             var anotherSeason;
             for(var i=0; i<firstResult.length; i++){
@@ -194,7 +191,6 @@ export default function season(firstResult,faceBoardResult) {
             var seasonData = softmax2([anotherSeason,firstResult[0][0]])
             window.location.href = "https://mycolor.kr/winterCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
         }
-        
     }, 1500);
 
 }

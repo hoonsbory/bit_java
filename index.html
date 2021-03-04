@@ -176,7 +176,7 @@ function draw() {
                 <div id="stepDiv"></div><span id="stepNum">1</span><span id="subInfo" style="vertical-align: top;">피부 사진
                     촬영</span>
             </div><br>
-            <div id="cropNotice">※ 손목 안쪽 피부가 꽉 차게 편집해주세요</div>
+            <div id="cropNotice"></div>
             <!-- <div id="openVideoBtn" onclick="openVideo()">▶ 튜토리얼 보기 ◀</div> -->
             <div id="progressContainer">
                 <div id="progressBar"></div>
@@ -190,14 +190,12 @@ function draw() {
                     <div class="drag-text">
                         <img alt="camera 카메라" src="pcImages/camera.png" />
                         <h1>내 피부 촬영하기 </h1>
-                        <p>※ 손목 안쪽 피부</p>
+                        <!-- <p>※ 카메라 정면으로 응시</p> -->
                     </div>
                 </div>
 
                 <div id="slider" style="display: none;">
 
-                    <ul>
-                        <li>
                             <div class="file-upload-content" id="noCamDiv" style="display: none;">
                                 <img alt="내 피부 사진" class="file-upload-image imageMode" id="realImage" src="#" />
                             </div>
@@ -209,89 +207,6 @@ function draw() {
                             </div>
                             <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                             </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
-                        </li>
-                        <li>
-                            <div class="question">
-                                <p>1.나는 손목에 ○ ○색을 띄는 혈관이 많다</p>
-                            </div>
-                            <div class="choose" style="color: rgb(10, 59, 112);">
-                                <div class="leftChoose" style="background-color: rgb(162,206,164);"
-                                    onclick="moveRight('warm')"><span>초록색</span></div>
-                                <div class="middleBar"></div>
-                                <div class="rightChoose" style="background-color: rgb(153,198,228);"
-                                    onclick="moveRight('cool')"><span>파란색</span></div>
-                            </div>
-                            <div id="askFooter">
-                                <div class="leftArrow">이전 단계로</div>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="question">
-                                <p>2.나는 헤어컬러가 ○ ○에 가깝다</p>
-                            </div>
-                            <div class="choose" style="color: white;">
-                                <div class="leftChoose" style="background-color: rgb(117,76,36);"
-                                    onclick="moveRight('warm')"><span>브라운</span></div>
-                                <div class="middleBar"></div>
-                                <div class="rightChoose" style="background-color: black;" onclick="moveRight('cool')">
-                                    <span>블랙</span></div>
-                            </div>
-                            <div id="askFooter">
-                                <div class="leftArrow" >이전 단계로</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="question">
-                                <p>3.나는 피부에 ○ ○ ○가 많다</p>
-                            </div>
-                            <div class="choose" style="color: rgb(10, 59, 112);">
-                                <div class="leftChoose" style="background-color: rgb(253,215,153);"
-                                    ><span>노란기</span></div>
-                                <div class="middleBar"></div>
-                                <div class="rightChoose" style="background-color: rgb(250,208,184);"
-                                    ><span>붉은기</span></div>
-                            </div>
-                            <div id="askFooter">
-                                <div class="leftArrow" >이전 단계로</div>
-                            </div>
-                            <!-- <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-trqsbvdjn2hv"
-                                data-ad-width="320" data-ad-height="50"></ins> -->
-                        </li>
-                        <li>
-                            <div class="question">
-                                <p>4.나는 햇볕에 장시간 있으면</p>
-                            </div>
-                            <div class="choose" style="color: white;">
-                                <div class="leftChoose" style="background-color: rgb(167,135,84);"
-                                    ><span>쉽게 탄다</span></div>
-                                <div class="middleBar"></div>
-                                <div class="rightChoose" style="background-color: rgb(225,152,142);"
-                                    ><span>빨갛게 익는다</span></div>
-                            </div>
-                            <div id="askFooter">
-                                <div class="leftArrow" >이전 단계로</div>
-                            </div>
-                            
-                        </li>
-                        <li>
-                            <div class="question">
-                                <p>5.나는 ○ ○색 티셔츠가 더 잘어울린다</p>
-                            </div>
-                            <div class="choose" style="color: rgb(10, 59, 112);">
-                                <div class="leftChoose"
-                                    style="border-top: 4px solid rgb(253,245,226); border-bottom: 4px solid rgb(253,245,226); background-color: rgb(253,245,226);"
-                                    ><span>아이보리 / 베이지</span></div>
-                                <div class="rightChoose"
-                                    style="border-top: 4px solid rgb(253,245,226); border-bottom: 4px solid rgb(253,245,226); background-color: white;"
-                                    ><span>순백색</span></div>
-                            </div>
-                            <div id="askFooter">
-                                <div class="leftArrow" >이전 단계로</div>
-                            </div>
-                            
-                        </li>
-                    </ul>
                 </div>
 
 
@@ -301,7 +216,7 @@ function draw() {
                     카메라 측색값</span>과<p>
                     <span
                         style="background-color: rgb(10, 59, 112); color: white; padding : 4px; padding-bottom: 0px;">2단계
-                        질문결과</span>를 종합하여 평가합니다</p>
+                        자가진단</span>을 종합하여 평가합니다</p>
             </footer>
         </article>
     </section>

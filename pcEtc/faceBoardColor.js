@@ -103,8 +103,8 @@ export default class faceBoardColor{
                         <div class="btnGroup" id="filter2"><span>필터 2</span></div>
                         <div class="btnGroup" id="filter3"><span style="padding-left: 0px">필터 3</span></div>
                         <div class="btnGroup" id="filter4"><span style="padding-left: 0px">필터 4</span></div>
+                        </div>
                         <div class="arrowBtn" id="goResult">결과 확인</div>
-                    </div>
                 </div>`
         $(`#${this.targetNode}`).append(tag)
     }
