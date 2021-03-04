@@ -194,15 +194,15 @@ export default async function videopPlayEvent(video, camCheck, faceBoard, faceBo
                     // ctx.putImageData(cheekTextContext.getImageData(0, 0, cheekTextCanvas.width, cheekTextCanvas.height), 100, 150)
 
 
-                    var eyePointArc = document.createElement("canvas")
-                    var eyePointArcCtx = eyePointArc.getContext('2d')
-                    eyePointArc.width = 3
-                    eyePointArc.height = 3
-                    eyePointArcCtx.beginPath();
-                    eyePointArcCtx.arc(1.5, 1.5, 1.5, 0, 2 * Math.PI);
-                    eyePointArcCtx.fillStyle = 'rgb(255,0,0)'
-                    eyePointArcCtx.fill();
-                    ctx.putImageData(eyePointArcCtx.getImageData(0, 0, eyePointArc.width, eyePointArc.height), centerPupil.x, centerPupil.y)
+                    // var eyePointArc = document.createElement("canvas")
+                    // var eyePointArcCtx = eyePointArc.getContext('2d')
+                    // eyePointArc.width = 3
+                    // eyePointArc.height = 3
+                    // eyePointArcCtx.beginPath();
+                    // eyePointArcCtx.arc(1.5, 1.5, 1.5, 0, 2 * Math.PI);
+                    // eyePointArcCtx.fillStyle = 'rgb(255,0,0)'
+                    // eyePointArcCtx.fill();
+                    // ctx.putImageData(eyePointArcCtx.getImageData(0, 0, eyePointArc.width, eyePointArc.height), centerPupil.x, centerPupil.y)
 
                     var cheekPointArc = document.createElement("canvas")
                     cheekPointArc.width = 3
