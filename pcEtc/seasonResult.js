@@ -191,6 +191,6 @@ export default function season(firstResult,faceBoardResult) {
             var seasonData = softmax2([anotherSeason,firstResult[0][0]])
             window.location.href = "https://mycolor.kr/winterCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
         }
-    }, 1500);
+    }, 1600);
 
 }
