@@ -179,7 +179,7 @@ export default function season(firstResult,faceBoardResult) {
                 }
             }
             var seasonData = softmax2([firstResult[0][0],anotherSeason])
-            // window.location.href = "https://mycolor.kr/summerCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
+            window.location.href = "https://mycolor.kr/summerCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
         } else if (colorNum <= 15) {
             var anotherSeason;
             for(var i=0; i<firstResult.length; i++){
