@@ -15,10 +15,10 @@ export default function colorAvg(colorSum, firstResult, labColor, colorList,stre
 
 
         // var colorArray = new rgbToLab(colorThief.getColor(sourceImage));
+        console.log(colorSum)
         var colorArray = new rgbToLab(colorSum);
 
         labColor = { L: colorArray[0], A: colorArray[1], B: colorArray[2] };
-
         for (var i = 0; i < colorList.length; i++) {
 
             //절대값을 구할때는 Math.ads로 구하면된다..
@@ -32,9 +32,9 @@ export default function colorAvg(colorSum, firstResult, labColor, colorList,stre
             var delta = new dE00(labColor,colorList[i])
             firstResult.push([delta.getDeltaE(), i]);
         }
-        firstResult.sort(function (a, b) { // 오름차순 
-            return a[0] - b[0];
-        });
+        // firstResult.sort(function (a, b) { // 오름차순 
+        //     return a[0] - b[0];
+        // });
         var colorNum = firstResult[0][1];
         console.log(colorNum)
         setTimeout(function () {

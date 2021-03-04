@@ -1,7 +1,31 @@
 export default class selfMode {
 
     constructor(positions, colors, canvas) {
-        this.positions = positions
+        const faceLength = positions[6].y - positions[19].y
+        const colorposition = [
+            { x: positions[17].x - faceLength / 24, y: positions[17].y - faceLength / 6 },
+            { x: positions[19].x, y: positions[19].y - faceLength / 4 },
+            { x: positions[21].x, y: positions[21].y - faceLength / 3 },
+            { x: positions[22].x, y: positions[22].y - faceLength / 3 },
+            { x: positions[24].x, y: positions[24].y - faceLength / 4 },
+            { x: positions[26].x + faceLength / 24, y: positions[26].y - faceLength / 6 },
+            positions[16],
+            positions[15],
+            positions[14],
+            positions[13],
+            positions[12],
+            positions[11],
+            positions[9],
+            positions[7],
+            positions[5],
+            positions[4],
+            positions[3],
+            positions[2],
+            positions[1],
+            positions[0],
+            { x: positions[17].x - faceLength / 24, y: positions[17].y - faceLength / 6 },
+        ]
+        this.positions = colorposition
         this.colors = colors
         this.canvas = canvas
         this.ctx = canvas.getContext('2d')
@@ -34,8 +58,8 @@ export default class selfMode {
             }
             // this.ctx.bezierCurveTo((this.positions[i].x + this.positions[i + 1].x) / 2, this.positions[i + 1].y, this.positions[i].x, (this.positions[i].y + this.positions[i + 1].y) / 2, this.positions[i].x, this.positions[i].y)
             // this.ctx.lineWidth = 100;
-            // this.ctx.strokeStyle = 'rgb(255,0,0)'
-            // this.ctx.stroke()
+            this.ctx.strokeStyle = this.colors[i]
+            this.ctx.stroke()
             this.ctx.lineTo(this.positions[i + 1].x, this.positions[i + 1].y)
             this.ctx.fillStyle = this.colors[i]
             this.ctx.fill()

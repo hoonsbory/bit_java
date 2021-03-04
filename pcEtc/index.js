@@ -2,11 +2,8 @@ import colorAvg from './colorAvg.js'
 import streamMode from './streamMode.js'
 import videoPlayEvent from './videoPlayEvent.js'
 import seasonResult from './seasonResult.js'
-import { Debounce } from './debounce.js'
-import { throttling } from './throttle.js'
+import imageModeFaceBoard from './imageModeFaceBoard.js'
 
-var deb = Debounce()
-var throttler = throttling()
 //뒤로가기고 페이지에 진입하면 새로고침되게
 //엣지는 뒤로가기해도 캐시가없이 스크립트가 실행되었고, 크롬 일부버전은 persisted값이 false로만 나오는 버그가 있다고 한다. 그래서 window.performance조건을 추가해줌
 if (document.addEventListener) {
@@ -66,18 +63,23 @@ var video = document.getElementById('video');
 function camErr() {
     document.getElementById("noCamDiv").style.display = "block"
     document.getElementById("fileInput").click();
-    document.getElementById("openVideoBtn").style.display = "block"
-    document.getElementById("videoSource").src = "https://s3.ap-northeast-2.amazonaws.com/jaehoon-dayoff.ml/video/퍼스널컬러홍보영상2.mp4"
+    // document.getElementById("openVideoBtn").style.display = "block"
+    // document.getElementById("videoSource").src = "https://s3.ap-northeast-2.amazonaws.com/jaehoon-dayoff.ml/video/퍼스널컬러홍보영상2.mp4"
 }
 
-document.getElementById("resultPopup").onclick = () => {popupConfirm('checkResult')}
-document.getElementById("noticePopup").onclick = () => {popupConfirm('popup')}
+document.getElementById("resultPopup").onclick = () => { popupConfirm('checkResult') }
+document.getElementById("noticePopup").onclick = () => { popupConfirm('popup') }
 
 //상황에따라 다른 팝업창 구분
 function popupConfirm(div) {
     if (document.getElementById("checkSuccess").style.display == "block") {
-        moveRight("");
-        uploadCheck = true;
+        // moveRight("");
+        console.log(123)
+        faceBoard = true;
+        console.log(uploadCheck)
+        if (uploadCheck) new imageModeFaceBoard(facePositions, faceBoardCanvas, faceBoardResult, firstResult)
+
+        else video.play()
     }
     document.getElementById(div).style.display = "none";
 }
@@ -85,16 +87,18 @@ function popupConfirm(div) {
 
 
 //캠화면 캡쳐 및 주요컬러 도출
-function camCheck(camCanvas,colorSum) {
+function camCheck(colorSum) {
     
-    colorSum.forEach((i,idx)=>{
-        colorSum[idx] = i/30
-    })
+    if (colorSum.length !==4)
+        colorSum.forEach((i, idx) => {
+            colorSum[idx] = i / 30
+        })
+    else colorSum = colorSum.slice(0,3)
     // document.getElementById("subInfo").style.backgroundColor = `rgb(${colorSum[0]}, ${colorSum[1]}, ${colorSum[2]})`
     // var context = camCanvas.getContext('2d');
     // context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
     firstResult = []
-    colorAvg(colorSum,firstResult,labColor,colorList,stream,colorNum)
+    colorAvg(colorSum, firstResult, labColor, colorList, stream, colorNum)
 }
 // document.getElementById("toneCheck").onclick = camCheck
 
@@ -108,35 +112,35 @@ font.load(null, 3000).then(function () {
     document.body.classList.add('fonts-loaded');
 });
 
-document.getElementById("openVideoBtn").onclick = openVideo
+// document.getElementById("openVideoBtn").onclick = openVideo
 
-function openVideo() {
-    if (window.innerWidth < 768) {
-        if (window.innerWidth >= window.innerHeight) {
-            guideVideo.style.height = "100%"
-            guideVideo.style.width = "unset"
-        } else {
-            guideVideo.style.width = "100%"
-            guideVideo.style.height = "unset"
-        }
-    } else {
-        guideVideo.style.height = "unset"
-        guideVideo.style.width = "500px"
-    }
-    guideVideo.load()
-    document.getElementById("guideDiv").style.display = "block"
-    guideVideo.play()
-    document.getElementById("close").style.display = "block"
-}
-document.querySelectorAll(".closeVideo").forEach(i=>{
-    i.onclick = closeVideo
-})
+// function openVideo() {
+//     if (window.innerWidth < 768) {
+//         if (window.innerWidth >= window.innerHeight) {
+//             guideVideo.style.height = "100%"
+//             guideVideo.style.width = "unset"
+//         } else {
+//             guideVideo.style.width = "100%"
+//             guideVideo.style.height = "unset"
+//         }
+//     } else {
+//         guideVideo.style.height = "unset"
+//         guideVideo.style.width = "500px"
+//     }
+//     guideVideo.load()
+//     document.getElementById("guideDiv").style.display = "block"
+//     guideVideo.play()
+//     document.getElementById("close").style.display = "block"
+// }
+// document.querySelectorAll(".closeVideo").forEach(i=>{
+//     i.onclick = closeVideo
+// })
 
-function closeVideo() {
-    document.getElementById("guideDiv").style.display = "none"
-    guideVideo.pause()
-    document.getElementById("close").style.display = "none"
-}
+// function closeVideo() {
+//     document.getElementById("guideDiv").style.display = "none"
+//     guideVideo.pause()
+//     document.getElementById("close").style.display = "none"
+// }
 
 
 
@@ -171,7 +175,10 @@ var rotateRate = 0; //회전율
 var firstResult = []; //첫 비교 결과값을 담을 변수
 
 var colorNum
-
+var faceBoardCanvas;
+var facePositions;
+var faceBoard = false;
+var faceBoardResult = 'warm'
 var warmColor = [
     //봄
     { L: 93.24308501707372, A: 1.8831653918775504, B: 20.718646292445865 },
@@ -257,7 +264,7 @@ $('#slider ul li:last-child').prependTo('#slider ul');
 
 //리사이징이벤트
 window.addEventListener("resize", function () {
-        if (window.innerWidth < 768 && resizeCheck != "mob") {
+    if (window.innerWidth < 768 && resizeCheck != "mob") {
         resizeCheck = "mob";
         if (jcropApi) {
             jcropApi.destroy();
@@ -295,9 +302,9 @@ function div() {
     }
 
 }
-document.querySelectorAll(".leftArrow").forEach(i=>{
+document.querySelectorAll(".leftArrow").forEach(i => {
     i.onclick = moveLeft
-}) 
+})
 //뒤로가기
 function moveLeft() {
     document.getElementById("mainbody").scrollIntoView();
@@ -319,10 +326,10 @@ function moveLeft() {
         $('#slider ul').css('left', '');
     });
 };
-document.querySelectorAll(".leftChoose").forEach(i=>{
+document.querySelectorAll(".leftChoose").forEach(i => {
     i.onclick = () => moveRight('warm')
 })
-document.querySelectorAll(".rightChoose").forEach(i=>{
+document.querySelectorAll(".rightChoose").forEach(i => {
     i.onclick = () => moveRight('cool')
 })
 //다음 단계로
@@ -350,7 +357,7 @@ function moveRight(tone) {
                 cool++;
             }
         }
-        seasonResult(firstResult,stream,colorNum,warm,cool);
+        seasonResult(firstResult, stream, colorNum, warm, cool);
         return;
 
     }
@@ -468,7 +475,7 @@ function crop() {
             jcropApi.destroy();
             jcropApi = null;
         }
-        
+
         $(".file-upload-image").attr("src", getBase64Image());
 
         document.getElementById("realImage").style.transform = "none";
@@ -657,7 +664,7 @@ function editImg(callback, plusMinus) {
 function streamTrue() {
     document.getElementById("mainCam").style.display = "block"
     document.getElementById("cropNotice").innerHTML = "※ 피부를 측정할 때까지 얼굴이 인식된 상태에서 기다려주세요"
-    document.getElementById("openVideoBtn").style.display = "block";
+    // document.getElementById("openVideoBtn").style.display = "block";
     document.getElementById("progressContainer").style.display = "flex";
     modeChange();
     stream = true;
@@ -666,13 +673,13 @@ function streamTrue() {
 //AI 모듈 로드
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-  faceapi.nets.faceLandmark68TinyNet.loadFromUri('/models'),
+    faceapi.nets.faceLandmark68TinyNet.loadFromUri('/models'),
 ])
 
-    
-document.getElementById("cameraBtn").onclick = ()=> { streamMode(ua,streamTrue,camErr,video) }
 
-video.addEventListener('play',()=>{videoPlayEvent(video,camCheck)})
+document.getElementById("cameraBtn").onclick = () => { streamMode(ua, streamTrue, camErr, video) }
+
+video.addEventListener('play', () => { videoPlayEvent(video, camCheck, faceBoard, faceBoardResult, firstResult) })
 
 function modeChange() {
     document.getElementById("mainbody").scrollIntoView();
@@ -682,208 +689,87 @@ function modeChange() {
     document.getElementById("cropNotice").style.display = "inline-block";
     document.getElementById("notice").style.display = "none";
     document.getElementById("notice2").style.display = "none";
-    document.getElementById('editBtn').style.pointerEvents = 'auto';
     $('.image-upload-wrap').hide();
-    $('.file-upload-image').removeAttr("style");
     $('#slider').show();
 }
 //인풋창 파일 업로드 시 
 document.getElementById("fileInput").onclick = document.getElementById("fileInput").value = ""
-document.getElementById("fileInput").onchange = 
-function readURL(input) {
-    if ((input.target.files && input.target.files[0])) {
-        loading.style.display = "block"
+document.getElementById("fileInput").onchange =
+    function readURL(input) {
+        if ((input.target.files && input.target.files[0])) {
+            loading.style.display = "block"
 
-        uploadCheck = false;
+            uploadCheck = false;
 
-        editCheck = false;
-        if (jcropApi) {
-            jcropApi.destroy();
+            editCheck = false;
+            if (jcropApi) {
+                jcropApi.destroy();
 
-            jcropApi = null;
-        }
-        firstCrop = true;
-        const fileInfo = input.target.files[0];
-        var reader = new FileReader();
-        reader.onload = async function (e) {
-            document.getElementById("originalImg").src = e.target.result;
-            $('.file-upload-image').attr('src', e.target.result);
-            modeChange();
-            try {
-                
-            
-            var canvas = document.createElement("canvas")
-            var input = document.getElementById("realImage")
-            input.src = e.target.result
+                jcropApi = null;
+            }
+            firstCrop = true;
+            const fileInfo = input.target.files[0];
+            var reader = new FileReader();
+            reader.onload = async function (e) {
 
-            const detectionsWithLandmarks = await faceapi.detectSingleFace(input, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks(true)
-            console.log(detectionsWithLandmarks)
-            canvas = faceapi.createCanvasFromMedia(input)
-            document.getElementById("noCamDiv").insertBefore(canvas, input)
-            const displaySize = { width: input.width, height: input.height }
-
-            faceapi.matchDimensions(canvas, displaySize)
-            const resizedDetections = faceapi.resizeResults(detectionsWithLandmarks, displaySize)
-            faceapi.draw.drawDetections(canvas, resizedDetections)
-            faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
-            canvas.style.position = "absolute"
-        } catch (error) {
-                console.log(error)
-        }
-            //회전값이 있는 사진을 정방향으로 돌리는 로직을 짜려했지만, 디바이스마다 회전값을 처리하는 기준이 달라서(특히 애플) 결국 포기하고 
-            //있는 그대로의 사진을 올리고 유저가 회전시킬 수 있게 바꾸었다...
+                try {
 
 
-            // canvasContext.drawImage(tempImage, 0, 0, canvas.width, canvas.height);
+                    var input = document.getElementById("realImage")
+                    input.src = e.target.result
 
-            //     await EXIF.getData(fileInfo, async () => {
-            //         // if (navigator.userAgent.indexOf('Mobile') != -1) {
-            //         //     canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-            //         //     // console.log("모바일기기입니다.")
-            //         //     return
-            //         // }
-            //         fileInfo.exifdata = null;
-            //         console.log(EXIF.getAllTags(fileInfo));
-            //         const orientation = EXIF.getTag(fileInfo, "Orientation");
-            //         console.log("회전도는 "+orientation);
+                    const detectionsWithLandmarks = await faceapi.detectAllFaces(input, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks(true)
+                    if (detectionsWithLandmarks.length === 0) {
+                        alert('얼굴이 인식되지 않습니다. 다른 사진으로 시도해주세요.')
+                    }
+                    else if (detectionsWithLandmarks.length > 1) {
+                        alert("사진 속에 얼굴이 2개 이상 인식되었습니다. 혼자 찍은 사진을 올려주세요.")
+                    }
+                    else {
+                        $('.file-upload-image').attr('src', e.target.result);
+                        modeChange();
+                        uploadCheck = true
+                        faceBoardCanvas = document.createElement("canvas")
 
-            //         switch (orientation) {
+                        var camCanvas = document.createElement("canvas")
+                        camCanvas.className = "imageMode"
+                        camCanvas.style.position = 'absolute'
+                        camCanvas.style.zIndex = '998'
+                        camCanvas.width = input.width
+                        camCanvas.height = input.height
+                        // document.getElementById("mainCam").appendChild(camCanvas)
+                        var context = camCanvas.getContext('2d');
+                        context.drawImage(input, 0, 0, camCanvas.width, camCanvas.height);
+                        faceBoardCanvas = faceapi.createCanvasFromMedia(input)
+                        faceBoardCanvas.style.position = "absolute"
+                        faceBoardCanvas.className = 'imageMode'
+                        document.getElementById("noCamDiv").insertBefore(faceBoardCanvas, input)
+                        const displaySize = { width: input.width, height: input.height }
 
-            //             // @details 이미지 회전값이 0인경우 ( 정방향 )
-            //             case undefined:
+                        faceapi.matchDimensions(faceBoardCanvas, displaySize)
+                        const resizedDetections = faceapi.resizeResults(detectionsWithLandmarks, displaySize)
+                        facePositions = resizedDetections[0].landmarks.positions
+                        faceapi.draw.drawFaceLandmarks(faceBoardCanvas, resizedDetections)
 
-            //                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-            //                 $('.image-upload-wrap').hide();
-            // $('.file-upload-image').removeAttr("style");
-            // $('.file-upload-image').attr('src', getBase64Image());
+                        const nose = facePositions[31]
+                        const leftChin = facePositions[2]
+                        const leftCheek = { x: (nose.x + leftChin.x) / 2, y: (nose.y + leftChin.y) / 2 }
+                        var cheekAvgColor = context.getImageData(leftCheek.x, leftCheek.y, 1, 1).data
+                        console.log(leftCheek)
+                        console.log(cheekAvgColor)
+                        camCheck(cheekAvgColor)
+                    }
 
-            //  $('#originalImg').attr('src', getBase64Image());
-            //   $("#realImage").Jcrop({
-            //     onSelect: showCoords,
-            // }, function () {
-            //     jcropApi = this;
-            // });
+                } catch (error) {
+                    console.log(error)
+                }
+            }
 
-            // // $('.file-upload-image').css("display", "none");
-            // // $('#realImage').attr('src', e.target.result);
-            // $('.file-upload-content').show();
-            // $('.image-title').html(input.files[0].name);
-            //             //    callback(canvas);
-
-            //                 break;
-            //             case 1:
-
-            //                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-            //                 break;
-            //             case 0:
-
-            //                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-            //                 break;
-            //             // @details 이미지 회전값이 180 기운 경우
-            //             case 3:
-            //                 // document.getElementById("realImage").style.transform = "rotate( 180deg )";
-            //                 // document.getElementById("originalImg").style.transform = "rotate( 180deg )";
-            //                 // document.getElementsByClassName("file-upload-image")[1].style.transform = "rotate( 180deg )";
-            //                 // document.getElementsByClassName("jcrop-holder")[0].firstElementChild.firstElementChild.firstElementChild.style.transform = "rotate(180deg)";
-
-
-
-
-
-            //                 // canvasContext.rotate((180) * Math.PI / 180);
-
-            //                 canvasContext.translate(canvas.width / 2, canvas.height / 2);
-            //                 canvasContext.rotate(Math.PI);
-            //                 canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-
-
-
-
-            //                 // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
-
-            //                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-
-            //                 break;
-
-            //             // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
-            //             case 6:
-            //                 if (canvas.width < canvas.height) {
-            //                     canvas.width = canvas.height;
-            //                 } else {
-            //                     canvas.height = canvas.width;
-            //                 }
-            //                 // document.getElementById("realImage").style.transform = "rotate( 90deg )";
-            //                 // document.getElementById("originalImg").style.transform = "rotate( 90deg )";
-            //                 // document.getElementsByClassName("file-upload-image")[1].style.transform = "rotate( 90deg )";
-            //                 // document.getElementsByClassName("jcrop-holder")[0].firstElementChild.firstElementChild.firstElementChild.style.transform = "rotate(90deg)";
-            //                 // @details 270° 회전의 경우 이미지의 높이와 넓이를 서로 바꿔준다.
-
-
-            //                 // tempImage.src = document.getElementById("ToneImage").getAttribute("src");
-            //                 // canvasContext.save();
-            //                 // canvasContext.translate(tempImage.width / 2, tempImage.height / 2);
-            //                 // canvasContext.rotate(Math.PI * 0.5);
-
-            //                 // canvasContext.drawImage(this, -1490,-0);
-
-            //                 // canvasContext.restore();
-            //                 console.log("ㅅㅂ");
-            //                 canvasContext.translate(canvas.width / 2, canvas.height / 2);
-            //                 canvasContext.rotate(Math.PI * 0.5);
-            //                 canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-            //                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-
-
-
-            //                 // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
-
-
-            //                 break;
-
-            //             // @details 이미지 회전값이 90 기운 경우
-            //             case 8:
-            //                 //회전하기전에 정사각형을 만들어주자.
-            //                 if (canvas.width < canvas.height) {
-            //                     canvas.width = canvas.height;
-            //                 } else {
-            //                     canvas.height = canvas.width;
-            //                 }
-            //                 // document.getElementById("realImage").style.transform = "rotate( 270deg )";
-            //                 // document.getElementById("originalImg").style.transform = "rotate( 270deg )";
-            //                 // document.getElementsByClassName("file-upload-image")[1].style.transform = "rotate( 270deg )";
-            //                 // document.getElementsByClassName("jcrop-holder")[0].firstElementChild.firstElementChild.firstElementChild.style.transform = "rotate(270deg)";
-            //                 // @details 90° 회전의 경우 이미지의 높이와 넓이를 서로 바꿔준다.
-
-
-
-
-            //                 // canvasContext.rotate((90) * Math.PI / 180);
-
-            //                 //캔버스의 중심점 설정.
-            //                 canvasContext.translate(canvas.width / 2, canvas.height / 2);
-            //                 canvasContext.rotate(Math.PI * 1.5);
-            //                 //회전시킨 후 다시 중심점 0,0으로 설정.
-            //                 canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-
-
-            //                 // @details 이미지가 90° 회전 했을 경우 y축의 값을 업로드 이미지의 높이를 음수로 변경한다.
-            //                 canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-            //                 break;
-            //         }
-            //     });
-            // let dataURI = canvas.toDataURL("image/jpeg");
-
-            // document.querySelector("#ToneImage").src = dataURI;
-
-
+            reader.readAsDataURL(fileInfo);
+            loading.style.display = "none"
 
         }
-
-        reader.readAsDataURL(fileInfo);
-        loading.style.display = "none"
-
     }
-}
 
 $('.image-upload-wrap').bind('dragover', function () {
     $('.image-upload-wrap').addClass('image-dropping');
@@ -892,222 +778,8 @@ $('.image-upload-wrap').bind('dragleave', function () {
     $('.image-upload-wrap').removeClass('image-dropping');
 });
 //이미지 회전.
-function rotateImg(plusMinus) {
-    document.getElementById("rotateBtn").style.animation = "fade 0.5s"
-    setTimeout(function () {
-        document.getElementById("rotateBtn").style.animation = "unset"
-    }, 500);
-    if (plusMinus == "right") {
-        rotateRate += 90;
-    } else {
-        rotateRate -= 90;
-    }
-
-    if (rotateRate == 360 || rotateRate == -360) {
-        rotateRate = 0;
-    }
-
-    if (!editCheck) {
-        firstCrop = false;
-        rotateCrop = true;
-        //캔버스에 그림이 그려진 후 회전을 시켜야해서 콜백함수로 순서를 맞춤.
-        editImg(rotateCall, plusMinus);
-
-    } else {
-        rotateCall(plusMinus);
-    }
-
-}
-function rotateCall(plusMinus) {
-    let canvas = document.getElementById("copyCanvas");
-
-    let canvasContext = canvas.getContext("2d");
-
-    let rotateCanvas = document.getElementById("myCanvas");
-    let rtx = rotateCanvas.getContext("2d");
-    document.getElementById("realImage").style.transform = "rotate( " + rotateRate + "deg )";
-    document.getElementById("originalImg").style.transform = "rotate( " + rotateRate + "deg )";
-    if (document.getElementsByClassName("jcrop-holder")[0]) {
-        document.getElementsByClassName("file-upload-image")[1].style.transform = "rotate( " + rotateRate + "deg )";
-        document.getElementsByClassName("jcrop-holder")[0].firstElementChild.firstElementChild.firstElementChild.style.transform = "rotate( " + rotateRate + "deg )";
-
-    }
-    rotateCanvas.width = canvas.width;
-    rotateCanvas.height = canvas.height;
-
-    if (rotateCanvas.width < rotateCanvas.height) {
-        rotateCanvas.width = rotateCanvas.height;
-    } else {
-        rotateCanvas.height = rotateCanvas.width;
-    }
-
-    // 캔버스의 중심점 설정.
-    rtx.translate(rotateCanvas.width / 2, rotateCanvas.height / 2);
-    if (plusMinus == "right") {
-        rtx.rotate(Math.PI * 0.5);
-    } else {
-        rtx.rotate(Math.PI * -0.5);
-
-    }
-    rtx.translate(-rotateCanvas.width / 2, -rotateCanvas.height / 2);
-    rtx.drawImage(canvas, 0, 0, rotateCanvas.width, rotateCanvas.height);
 
 
-
-    //회전용 캔버스의 내용을 다시 메인 캔버스에 복사해준다. 이미지를 회전시켜 캔버스에 그리면 편하나, 원래 이미지를 회전시킨건 단순 css를 통한 회전이다
-    //캔버스에는 회전이 적용되지않은 원래의 이미지가 그려지기 때문에 메인캔버스의 그림을 불러와 서브캔버스에 회전한 상태를 그린 후, 다시 서브에서 메인으로 옮겨 그린다.
-    canvas.width = rotateCanvas.width;
-    canvas.height = rotateCanvas.height;
-
-    canvasContext.drawImage(rotateCanvas, 0, 0, rotateCanvas.width, rotateCanvas.height);
-}
-
-//크롭 영역 지정 이벤트 함수
-var showCoords = function (c) {
-    cropCheck = false;
-    if (document.getElementsByClassName("jcrop-holder")[0]) {
-        document.getElementsByClassName("jcrop-holder")[0].className = "jcrop-holder aft";
-    }
-
-    x = c.x;
-    y = c.y;
-    w = c.w;
-    h = c.h;
-};
-
-//캔버스의 이미지를 base64로 변환
-function getBase64Image() {
-
-    var canvas = document.getElementById("copyCanvas");
-
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL; // dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-
-}
-
-
-//사진 원상복구. 숨겨놓앗던 오리지널 이미지태그를 불러와 캔버스에 다시그림
-function refresh() {
-    document.getElementById("refreshBtn").style.animation = "fade 0.5s"
-    setTimeout(function () {
-        document.getElementById("refreshBtn").style.animation = "unset"
-    }, 500);
-    uploadCheck = false;
-    cropCheck = true;
-    rotateRate = 0;
-    document.getElementById("refreshBtn").disabled = true;
-    document.getElementById("originalImg").style.transform = "none";
-    var image = new Image();
-    image.src = document.getElementById("originalImg").src;
-    document.getElementById("realImage").src = image.src;
-    document.getElementsByClassName("file-upload-image")[1].src = image.src;
-    document.getElementsByClassName("jcrop-holder")[0].firstElementChild.firstElementChild.firstElementChild.src = image.src;
-    document.getElementsByClassName("file-upload-image")[1].style.transform = "none";
-    document.getElementsByClassName("jcrop-holder")[0].firstElementChild.firstElementChild.firstElementChild.style.transform = "none";
-
-    var canvas = document.getElementById("copyCanvas");
-    var canvasContext = canvas.getContext("2d");
-
-
-
-    // canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-    try {
-
-
-        image.onload = function () {
-            canvas.width = this.width;
-            canvas.height = this.height;
-            if (appleCheck) {
-                if (floatOs >= 13.4) {
-                    canvasContext.drawImage(this, 0, 0, canvas.width, canvas.height);
-                    if (plusMinus) callback(plusMinus);
-                    return
-                }
-                var fileInfo = document.getElementById("fileInput").files[0];
-                EXIF.getData(fileInfo, function () {
-                    const orientation = EXIF.getTag(fileInfo, "Orientation");
-                    // console.log("회전도는 " + orientation);
-                    switch (orientation) {
-
-                        // @details 이미지 회전값이 0인경우 ( 정방향 )
-
-                        case 1:
-
-
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                            break;
-                        case undefined:
-
-
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-                            break;
-
-                        case 3:
-
-
-                            canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                            canvasContext.rotate(Math.PI);
-                            canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-
-
-
-                            // @details 이미지가 180° 회전 했을 경우 x, y축의 값을 업로드 이미지의 넓이와 높이를 음수로 변경한다.
-
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-                            break;
-
-                        // @details 이미지 회전값이 270 기운 경우 ( 왼쪽으로 90 기운 경우 )
-                        case 6:
-                            if (canvas.width < canvas.height) {
-                                canvas.width = canvas.height;
-                            } else {
-                                canvas.height = canvas.width;
-                            }
-
-                            canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                            canvasContext.rotate(Math.PI * 0.5);
-                            canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-
-
-                            // @details 이미지가 270° 회전 했을 경우 x축의 값을 업로드 이미지의 넓이를 음수로 변경한다.
-
-
-                            break;
-
-                        // @details 이미지 회전값이 90 기운 경우
-                        case 8:
-                            if (canvas.width < canvas.height) {
-                                canvas.width = canvas.height;
-                            } else {
-                                canvas.height = canvas.width;
-                            }
-
-                            canvasContext.translate(canvas.width / 2, canvas.height / 2);
-                            canvasContext.rotate(Math.PI * 1.5);
-                            canvasContext.translate(-canvas.width / 2, -canvas.height / 2);
-                            canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-                            //회전하기전에 정사각형을 만들어주자.x
-                            break;
-                    }
-
-
-                })
-            } else {
-                canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-
-
-            }
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
 
 
 

@@ -52,12 +52,9 @@
     <!-- 로딩이미지 및 편집시 필요한 캔버스 숨겨놓는 곳-->
     <img alt="로딩 loading" id="loading" src="pcImages/loading.gif"
         style="width : 65px; z-index : 999;display : none; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);">
-    <canvas id="myCanvas" style="display: none;">
-    </canvas>
-    <canvas id="copyCanvas" style="display: none;">
-    </canvas>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.min.js"></script>
 
    <!-- Require the peer dependencies of face-landmarks-detection. -->
 <script src="https://unpkg.com/@tensorflow/tfjs-core@2.4.0/dist/tf-core.js"></script>
@@ -76,7 +73,32 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script  src="/pcEtc/face-api.js"></script>
     <!-- <script src="/pcEtc/webgazer.js" type="text/javascript" ></script> -->
+    <!-- <script>
+        var mode = true
+var x;
+function setup() {
+  createCanvas(255,255)
+  x = createSlider(0, 255,125);
+  p = createP('ffff')
+  p.elt.id = 'pppp'
+  
+}
 
+function draw() {
+  clear()
+  background(100)
+  rect(0,9,1,1)
+  fill(255,255,255)
+  noStroke()
+ ellipse(x.value(),height/2,25)
+  var a = get(0,10)
+  // if(mode) x++
+  // else x--
+  
+  // if(x>=113)mode = false
+  // if(x===-13) mode = true
+}
+    </script> -->
     <section>
         <div id="guideDiv" style="display: none;">
             <div class="popupBg closeVideo"></div>
@@ -115,6 +137,7 @@
                 <div id="checkSuccess" style="display: none; margin-top: 10px;">
                     <p>피부 측정이 완료되었습니다!</p>
                     <p style="margin-bottom : 15px">더 정확한 진단을 위해 다음 단계로 넘어갑니다</p>
+                    <p style="margin-bottom : 15px">버튼을 눌러 각 필터를 적용해본 후 얼굴이 돋보이는 필터를 선택해주세요</p>
                 </div>
                 <div class="confirmBtn" id="resultPopup"><span class="popupConfirm">확 인</span>
                 </div>
@@ -154,7 +177,7 @@
                     촬영</span>
             </div><br>
             <div id="cropNotice">※ 손목 안쪽 피부가 꽉 차게 편집해주세요</div>
-            <div id="openVideoBtn" onclick="openVideo()">▶ 튜토리얼 보기 ◀</div>
+            <!-- <div id="openVideoBtn" onclick="openVideo()">▶ 튜토리얼 보기 ◀</div> -->
             <div id="progressContainer">
                 <div id="progressBar"></div>
                 <span id="progresspercent">0%</span>
@@ -176,22 +199,7 @@
                     <ul>
                         <li>
                             <div class="file-upload-content" id="noCamDiv" style="display: none;">
-                                <img alt="내 피부 사진" class="file-upload-image" id="realImage" src="#" />
-                                <div style="margin-top : 2vh;">
-                                    <div class="btnGroup" id="editBtn" onclick="editImg()"><img alt="자르기 표시"
-                                            src="pcImages/crop.png"><span>자르기</span></div>
-                                    <div class="btnGroup" id="rotateBtn" onclick="rotateImg('right')"><img alt="회전표시"
-                                            src="pcImages/rotate.png"><span>회전</span></div>
-                                    <div class="btnGroup" id="refreshBtn" onclick="refresh()"><span
-                                            style="padding-left: 0px">재설정</span></div>
-                                    <div class="btnGroup" onclick="crop()"><span style="padding-left: 0px">완료</span>
-                                    </div>
-                                </div>
-                                <div onclick="$('.file-upload-input').trigger( 'click' )" class="btnGroup" id="newfile">
-                                    <span>새로운 사진으로
-                                        재시도</span></div>
-                                <div class="arrowBtn" onclick="next()">다음 단계로</div>
-                                <img alt="" id="originalImg" style="display: none;" />
+                                <img alt="내 피부 사진" class="file-upload-image imageMode" id="realImage" src="#" />
                             </div>
                             <div id="mainCam" style="display: none;">
                                 <!-- <canvas id="colorCanvas"></canvas> -->

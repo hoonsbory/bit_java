@@ -43,13 +43,13 @@ html{
   border-radius: 10px;
 }
 
-#video, #faceCanvas, #colorCanvas{
-  transform: scale(-1, 1)  !important;
+#video, #faceCanvas, #colorCanvas, .imageMode{
   width : 100%  !important;
   height : 60vh !important;
 }
 #video{
   object-fit : fill;
+  transform: scale(-1, 1)  !important;
 }
 #close{
   cursor : pointer; 
@@ -144,6 +144,7 @@ html{
   color: rgb(10, 59, 112);
   word-break: keep-all;
   max-width: 250px;
+  padding: 10px 5px;
 }
 .popDivFB{
   position: fixed;
@@ -224,7 +225,8 @@ html{
   background-repeat: no-repeat;
   font-size: 2vh;
   padding: 3vh;
-  padding-top: 3.2vh;
+  padding-top: 2.4vh;
+  padding-left: 2vh;
   left : 0 !important;
   cursor: pointer;
   }
@@ -249,7 +251,14 @@ html{
     background-color: white;
     color : rgb(10, 59, 112);
     cursor: pointer;
-    
+    transition: all 0.3s ease-out 0s;
+}
+.btnGroup.clicked{
+  border: 2px solid rgb(10, 59, 112);
+  display: inline;
+  background-color: rgb(10, 59, 112);
+  color : white;
+  cursor: pointer;
 }
 
 #askFooter{
@@ -283,7 +292,6 @@ html{
 }
 
 .btnGroup span{
-  padding-left: .6vh;
   font-size: 1.7vh;
   word-break: keep-all;
 }
@@ -307,7 +315,7 @@ html{
   content: "";
 }
 body{
-  /* opacity: 0; */
+  opacity: 0;
   font-family: sans-serif;
   margin: 0;
   font-weight: 600;
@@ -664,14 +672,14 @@ margin-bottom: 5px;
     width : 3300px !important;
     margin-left : -550px !important;
   }
-  #realImage{
+  /* .imageMode{
     width: 43vh !important;
     height: 43vh !important;
     max-width: 580px !important;
     max-height: 580px !important;
     min-width: 236px !important;
     min-height: 236px !important;
-  }
+  } */
   .file-upload {
     width: 550px;
   }
@@ -699,12 +707,12 @@ margin-bottom: 5px;
     width : 3600px !important;
     margin-left : -600px !important;
   }
-  #realImage{
+  /* .imageMode{
     width: 43vh !important;
     height: 43vh !important;
     max-width: 580px !important;
     max-height: 580px !important;
-  }
+  } */
   #newfile{
     max-width: 450px;
   }
@@ -772,14 +780,14 @@ max-width: 300px;
     width : 1920px !important;
     margin-left : -320px !important;
   }
-  #realImage{
+  /* .imageMode{
     width: 48vh !important;
     height: 48vh !important;
     min-width: 182px !important;
     max-width: 310px !important;
     max-height: 310px !important;
     min-height: 182px !important;
-  }
+  } */
   
 }
 @media(max-height : 439px){
