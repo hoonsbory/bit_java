@@ -10,7 +10,7 @@ export default class selfMode {
             { x: positions[24].x - faceWidth / 10, y: positions[24].y - faceLength / 6 },
             { x: positions[26].x + faceLength / 24, y: positions[26].y - faceLength / 20 },
             // positions[16],
-            { x: positions[16].x, y: positions[16].y - faceLength / 20 },
+            { x: positions[16].x + faceWidth/30, y: positions[16].y - faceLength / 20 },
             positions[15],
             positions[14],
             positions[13],
@@ -24,7 +24,7 @@ export default class selfMode {
             positions[2],
             positions[1],
             // positions[0],
-            { x: positions[0].x, y: positions[0].y - faceLength / 20 },
+            { x: positions[0].x - faceWidth/30, y: positions[0].y - faceLength / 20 },
             { x: positions[17].x - faceLength / 24, y: positions[17].y - faceLength / 20 },
             { x: positions[19].x + faceWidth / 10, y: positions[19].y - faceLength / 6 },
         ]
