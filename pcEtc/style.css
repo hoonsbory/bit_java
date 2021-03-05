@@ -351,7 +351,6 @@ p{
   color: white;
   background-color: rgb(10, 59, 112);
   font-size: 1.9vh;
-  margin-bottom: 5vh;
   padding-bottom: .5vh;
   padding-left: 4vh;
   padding-right: 4vh;
@@ -570,13 +569,13 @@ a.control_next {
 }
 
 .image-upload-wrap {
-  border: 1.4vh solid rgb(10, 59, 112);
+  border: 1vh solid rgb(10, 59, 112);
   position: relative;
-  border-radius: 300px;
+  border-radius: 30px;
+  margin-top : 15px;
   width: 36vh;
-  height: 36vh;
+  height: 14vh;
   min-width: 135px;
-  min-height: 135px;
   left: 50%;
   transform: translateX(-50%);
   background: white;
@@ -590,26 +589,24 @@ a.control_next {
   margin-top: 5px;
 }
 .drag-text img{
-  width: 13vh;
-  min-width: 49px;
+  width: 9vh;
+  min-width: 46px;
   height: unset;
 }
 .drag-text p{
-  font-size: 2vh;
-    color: white;
-    background: red;
-    padding: 5px;
-    display: inline;
-    padding-bottom: 0px;
-    border-radius: 5px;
+  font-size: 1.7vh;
+  padding-bottom: 0px;
+  border-radius: 5px;
 }
 
 .drag-text h1 {
 font-weight: 100;
 text-transform: uppercase;
 color: rgb(10, 59, 112);
-font-size: 3vh;
-margin-bottom: 5px;
+font-size: 2.5vh;
+margin-bottom: 0;
+margin-top: 2vh;
+padding-left : 2vh;
 }
 .image-dropping,
 .image-upload-wrap:hover {
@@ -729,9 +726,9 @@ margin-bottom: 5px;
   #bgSpan, #noBgSpan{
     font-size: 6vh;
   }
-  .drag-text h1{
+  /* .drag-text h1{
     font-size: 3.4vh;
-  }
+  } */
 
 .arrowBtn img{
 width: 9rem;
@@ -797,6 +794,17 @@ max-width: 300px;
     min-height: 182px !important;
   } */
   
+}
+@media(max-height : 513px){
+  .image-upload-wrap{
+    width: 185px !important;
+    height: 72px !important;
+  }
+  .drag-text h1{
+    margin-top: 12px !important;
+    padding-left: 10px !important;
+    font-size: 12px !important;
+  }
 }
 @media(max-height : 439px){
   #mainbody{

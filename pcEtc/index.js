@@ -61,6 +61,7 @@ var video = document.getElementById('video');
 
 //비디오 에러 캐치
 function camErr() {
+    alert("카메라가 지원되지 않는 모듈입니다. 크롬,사파리 브라우저를 이용해주세요. 업로드 방식으로 전환합니다.")
     document.getElementById("noCamDiv").style.display = "block"
     document.getElementById("fileInput").click();
     // document.getElementById("openVideoBtn").style.display = "block"
@@ -678,6 +679,7 @@ Promise.all([
 
 
 document.getElementById("cameraBtn").onclick = () => { streamMode(ua, streamTrue, camErr, video) }
+document.getElementById("uploadBtn").onclick = () => { document.getElementById("fileInput").click(); }
 
 video.addEventListener('play', () => { videoPlayEvent(video, camCheck, faceBoard, faceBoardResult, firstResult) })
 
