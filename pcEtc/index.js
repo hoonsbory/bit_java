@@ -679,7 +679,10 @@ Promise.all([
 
 
 document.getElementById("cameraBtn").onclick = () => { streamMode(ua, streamTrue, camErr, video) }
-document.getElementById("uploadBtn").onclick = () => { document.getElementById("fileInput").click(); }
+document.getElementById("uploadBtn").onclick = () => { 
+    document.getElementById("noCamDiv").style.display = "block"
+    document.getElementById("fileInput").click(); 
+}
 
 video.addEventListener('play', () => { videoPlayEvent(video, camCheck, faceBoard, faceBoardResult, firstResult) })
 
@@ -704,16 +707,12 @@ document.getElementById("fileInput").onchange =
             uploadCheck = false;
 
             editCheck = false;
-            if (jcropApi) {
-                jcropApi.destroy();
-
-                jcropApi = null;
-            }
+            
             firstCrop = true;
             const fileInfo = input.target.files[0];
             var reader = new FileReader();
             reader.onload = async function (e) {
-
+                loading.style.display = 'block'
                 try {
 
 
@@ -722,9 +721,12 @@ document.getElementById("fileInput").onchange =
 
                     const detectionsWithLandmarks = await faceapi.detectAllFaces(input, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks(true)
                     if (detectionsWithLandmarks.length === 0) {
+                        loading.style.display = 'none'
                         alert('얼굴이 인식되지 않습니다. 다른 사진으로 시도해주세요.')
+                        
                     }
                     else if (detectionsWithLandmarks.length > 1) {
+                        loading.style.display = 'none'
                         alert("사진 속에 얼굴이 2개 이상 인식되었습니다. 혼자 찍은 사진을 올려주세요.")
                     }
                     else {
