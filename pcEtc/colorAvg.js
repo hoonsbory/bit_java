@@ -30,13 +30,13 @@ export default function colorAvg(colorSum, firstResult, labColor, colorList,stre
             // var blue = (imgBlue - colorList[i][2]);
             // blue = blue < 0 ? -(blue) : blue;
             var delta = new dE00(labColor,colorList[i])
-            firstResult.push([delta.getDeltaE(), i]);
+            firstResult.push([100-delta.getDeltaE(), i]);
         }
         // firstResult.sort(function (a, b) { // 오름차순 
         //     return a[0] - b[0];
         // });
         var colorNum = firstResult[0][1];
-        console.log(colorNum)
+        console.log(firstResult)
         setTimeout(function () {
 
             loading.style.display = "none"
