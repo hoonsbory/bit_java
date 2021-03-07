@@ -24,6 +24,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
             });
         } else {
             // Not adding `{ audio: true }` since we only want video now
+            console.log(123)
             navigator.mediaDevices.getUserMedia({
                 video: {
                     width: { min: 0, ideal: 1280, max: 1920 },
@@ -48,6 +49,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
                 height: { min: 0, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
             }
         }, function (stream) {
+            alert(1)
             streamTrue();
             video.src = stream;
             video.play();
@@ -59,6 +61,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
                 height: { min: 0, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
             }
         }, function (stream) {
+            alert(2)
             streamTrue();
             video.src = window.webkitURL.createObjectURL(stream);
             video.play();
@@ -70,6 +73,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
                 height: { min: 0, ideal: 720, max: 1080 }, facingMode: { exact: "user" }
             }
         }, function (stream) {
+            alert(3)
             streamTrue();
             video.srcObject = stream;
             video.play();
