@@ -11,6 +11,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
                 }
             }).then(function (stream) {
                 //video.src = window.URL.createObjectURL(stream);
+                alert(4)
                 streamTrue();
                 video.srcObject = stream;
                 video.play();
