@@ -34,7 +34,7 @@ export default function season(firstResult) {
             return Math.exp(value - C) / d;
         })
     }
-
+ 
     var faceBoardResult = []
 
     document.querySelectorAll('.select').forEach(i => {
