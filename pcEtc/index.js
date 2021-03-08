@@ -666,7 +666,7 @@ function streamTrue() {
     document.getElementById("mainCam").style.display = "block"
     document.getElementById("cropNotice").innerHTML = "※ 피부를 측정할 때까지 얼굴이 인식된 상태에서 기다려주세요"
     // document.getElementById("openVideoBtn").style.display = "block";
-    document.getElementById("progressContainer").style.display = "flex";
+    document.getElementById("progressContainer").style.display = "inline-flex";
     modeChange();
     stream = true;
 }

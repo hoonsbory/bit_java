@@ -106,6 +106,6 @@ export default class faceBoardColor{
                         </div>
                         <div class="arrowBtn" id="goResult">결과 확인</div>
                 </div>`
-        $(`#${this.targetNode}`).append(tag)
+        $(`#cropNotice`).after(tag)
     }
 }

@@ -171,12 +171,9 @@ function draw() {
                 <div id="stepDiv"></div><span id="stepNum">1</span><span id="subInfo" style="vertical-align: top;">피부 사진
                     촬영</span>
             </div>
-            <div id="cropNotice"></div>
+            <!-- <div id="cropNotice"></div> -->
             <!-- <div id="openVideoBtn" onclick="openVideo()">▶ 튜토리얼 보기 ◀</div> -->
-            <div id="progressContainer">
-                <div id="progressBar"></div>
-                <span id="progresspercent">0%</span>
-            </div>
+            
             <div class="file-upload">
 
                 <input class="file-upload-input" id="fileInput" type='file' 
@@ -216,6 +213,11 @@ function draw() {
                                     playsinline></video>
                                 <!-- <div class="arrowBtn" id="toneCheck">피부톤 측정</div> -->
                             </div>
+                            <div id="progressContainer">
+                                <div id="progressBar"></div>
+                                <span id="progresspercent">0%</span>
+                            </div>
+                            <div><div id="cropNotice"></div></div>
                             <div id="failColor" style="display : none; height: 25px; width: 25px; border-radius: 15px;">
                             </div><span style="display: none;">사진의 상당부분이 피부색이 아닙니다. 다시 업로드하세요 </span>
                 </div>
