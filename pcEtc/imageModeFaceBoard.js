@@ -26,10 +26,9 @@ export default class imageModeFaceBoard{
         'rgb(230,96,107)',
     ]
 
-    constructor(positions,canvas,faceBoardResult,firstResult){
+    constructor(positions,canvas,firstResult){
         this.positions = positions
         this.canvas = canvas
-        this.faceBoardResult = faceBoardResult
         this.firstResult = firstResult
         this.addEvent()
     }
@@ -41,33 +40,47 @@ export default class imageModeFaceBoard{
             this.colorRgb = faceBoardColorList.colorRgb1
             this.classRemove()
             new selfMode(this.positions,this.colorRgb,this.canvas)
-            this.faceBoardResult = "warm"
             document.getElementById("filter1").classList.add('clicked')
         }
         document.getElementById("filter2").onclick = () => {
             this.colorRgb = faceBoardColorList.colorRgb2
             this.classRemove()
             new selfMode(this.positions,this.colorRgb,this.canvas)
-            this.faceBoardResult = "summer"
             document.getElementById("filter2").classList.add('clicked')
         }
         document.getElementById("filter3").onclick = () => {
             this.colorRgb = faceBoardColorList.colorRgb3
             this.classRemove()
             new selfMode(this.positions,this.colorRgb,this.canvas)
-            this.faceBoardResult = "fall"
             document.getElementById("filter3").classList.add('clicked')
         }
         document.getElementById("filter4").onclick = () => {
             this.colorRgb = faceBoardColorList.colorRgb4
             this.classRemove()
             new selfMode(this.positions,this.colorRgb,this.canvas)
-            this.faceBoardResult = "winter"
             document.getElementById("filter4").classList.add('clicked')
         }
         document.getElementById("goResult").onclick = () => {
-            seasonResult(this.firstResult,this.faceBoardResult)
+            seasonResult(this.firstResult)
         }
+        var cnt =2;
+        document.querySelectorAll(".select").forEach(i=>{
+            i.onclick = ()=> {
+                if(i.classList.contains("clicked")){
+                    i.classList.remove("clicked")
+                    document.querySelectorAll('.select').forEach(j=>{
+                        if(i.innerText<j.innerText)
+                        j.innerText = j.innerText - 1
+                    })
+                    i.innerText = 0
+                    cnt--
+                }else {
+                    i.innerText = cnt
+                    i.classList.add('clicked')
+                    cnt++
+                }
+            }
+        })
 
     
     }

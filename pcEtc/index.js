@@ -77,7 +77,7 @@ function popupConfirm(div) {
         console.log(123)
         faceBoard = true;
         console.log(uploadCheck)
-        if (uploadCheck) new imageModeFaceBoard(facePositions, faceBoardCanvas, faceBoardResult, firstResult)
+        if (uploadCheck) new imageModeFaceBoard(facePositions, faceBoardCanvas, firstResult)
 
         else video.play()
     }
@@ -178,7 +178,6 @@ var colorNum
 var faceBoardCanvas;
 var facePositions;
 var faceBoard = false;
-var faceBoardResult = 'warm'
 var warmColor = [
     //봄
     { L: 93.24308501707372, A: 1.8831653918775504, B: 20.718646292445865 },
@@ -682,7 +681,7 @@ document.getElementById("uploadBtn").onclick = () => {
     document.getElementById("fileInput").click();
 }
 
-video.addEventListener('play', () => { videoPlayEvent(video, camCheck, faceBoard, faceBoardResult, firstResult) })
+video.addEventListener('play', () => { videoPlayEvent(video, camCheck, faceBoard,  firstResult) })
 
 function modeChange() {
     document.getElementById("mainbody").scrollIntoView();

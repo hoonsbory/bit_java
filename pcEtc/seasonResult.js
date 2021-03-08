@@ -3,16 +3,26 @@
 //그러나 rgb값으로는 색의 오차를 수치로 판단하기가 힘들다. 예를들어 50,50,50을 비교하면, 100,100,100과는 총 150의 차이, 50,50,199와는 총 149의 차이로 후자가 더 비슷한 컬러로 결과가 나오지만,
 //실제 인간이 봤을 때 비슷한 색은 100,100,100이다. 후자는 blue값이 149의 차이가 나기때문에 색이 완전히 다른 색이 되어버린다. 이처럼 세 영역의 벨런스를 잡아줄 수가 없어서 구글링을 해봤는데,
 //CIE(국제조명위원회)가 LAB값을 활용한 공식을 발표했고(delta-e), 그걸 js로 만들어놓은 사람이 있어서 가져와서 모듈화해서 사용했다.
-export default function season(firstResult,faceBoardResult) {
+export default function season(firstResult) {
+    if (document.querySelectorAll('.select.clicked').length != 4) {
+        if (document.querySelectorAll('.select.clicked').length > 1) {
+            alert("순서를 전부 정해주세요")
+            return
+        } else {
+            alert('숫자 버튼을 클릭해서 잘어울리는 순으로 선택해주세요')
+            return
+        }
+    }
+
     document.getElementById("loading").style.display = "block"
     console.log(firstResult)
-    
-    softmax(firstResult.map(i=> i[0]))
+
+    softmax(firstResult.map(i => i[0]))
 
     function softmax(arr) {
         const C = Math.max(...arr);
         const d = arr.map((y) => Math.exp(y - C)).reduce((a, b) => a + b);
-        return arr.map((value, index) => { 
+        return arr.map((value, index) => {
             firstResult[index][0] = Math.exp(value - C) / d;
         })
     }
@@ -20,37 +30,53 @@ export default function season(firstResult,faceBoardResult) {
     function softmax2(arr) {
         const C = Math.max(...arr);
         const d = arr.map((y) => Math.exp(y - C)).reduce((a, b) => a + b);
-        return arr.map((value, index) => { 
-             return Math.exp(value - C) / d;
+        return arr.map((value, index) => {
+            return Math.exp(value - C) / d;
         })
     }
+
+    var faceBoardResult = []
+
+    document.querySelectorAll('.select').forEach(i => {
+        faceBoardResult.push(5 - i.innerText)
+    })
+
+    console.log(faceBoardResult)
+
+    firstResult.forEach((i, idx) => {
+        if (idx >= 0 && idx < 4) i[0] += faceBoardResult[0] * 0.1
+        else if (idx >= 4 && idx < 8) i[0] += faceBoardResult[2] * 0.1
+        else if (idx >= 8 && idx < 12) i[0] += faceBoardResult[1] * 0.1
+        else i[0] += faceBoardResult[3] * 0.1
+    })
+
     console.log(firstResult)
-    if(faceBoardResult==='warm'){
-        firstResult.map((i,idx)=>{
-            if(idx>=0&&idx<4) i[0]+= 0.4
-        })
-    }
-    else if(faceBoardResult==='fall'){
-        firstResult.map((i,idx)=>{
-            if(idx>=4&&idx<8) i[0]+= 0.4
-        })
-    }
-    else if(faceBoardResult==='summer'){
-        firstResult.map((i,idx)=>{
-            if(idx>=8&&idx<12) i[0]+= 0.4
-        })
-    }
-    else{
-        firstResult.map((i,idx)=>{
-            if(idx>11) i[0]+= 0.4
-        })
-    }
+    // if(faceBoardResult==='warm'){
+    //     firstResult.map((i,idx)=>{
+    //         if(idx>=0&&idx<4) i[0]+= 0.4
+    //     })
+    // }
+    // else if(faceBoardResult==='fall'){
+    //     firstResult.map((i,idx)=>{
+    //         if(idx>=4&&idx<8) i[0]+= 0.4
+    //     })
+    // }
+    // else if(faceBoardResult==='summer'){
+    //     firstResult.map((i,idx)=>{
+    //         if(idx>=8&&idx<12) i[0]+= 0.4
+    //     })
+    // }
+    // else{
+    //     firstResult.map((i,idx)=>{
+    //         if(idx>11) i[0]+= 0.4
+    //     })
+    // }
     firstResult.sort(function (a, b) { // 오름차순 
         return b[0] - a[0];
     });
     var colorNum = firstResult[0][1]
     // var length = firstResult.length
-    
+
     // var season1 = [];
     // var season2 = [];
     // var toneColor
@@ -132,7 +158,7 @@ export default function season(firstResult,faceBoardResult) {
     //         else if (season2[0] <= 24) season1[0] -= season2[0] * 0.12
     //     }
     // }
-    
+
     // colorNum = season1[0] == season2[0] ? firstResult[0][1] : season1[0] < season2[0] ? season1[1] : season2[1];
     // //100점 기준으로 점수 변환
     // if (season1[0] > season2[0]) {
@@ -149,48 +175,48 @@ export default function season(firstResult,faceBoardResult) {
     //     season2[0] = Math.round(50 - percentage);
     // }
 
-    setTimeout(function () {
-        if (colorNum <= 3) {
-            var anotherSeason;
-            for(var i=0; i<firstResult.length; i++){
-                if(firstResult[i][1]>=4&&firstResult[i][1]<8) {
-                    anotherSeason = firstResult[i][0]
-                    break
-                }
-            }
-            var seasonData = softmax2([firstResult[0][0],anotherSeason])
-            window.location.href = "https://mycolor.kr/springWarm/?spring=" + Math.round(seasonData[0]*100) + "&fall=" + Math.round(seasonData[1]*100)
-        } else if (colorNum <= 7) {
-            var anotherSeason;
-            for(var i=0; i<firstResult.length; i++){
-                if(firstResult[i][1]>=0&&firstResult[i][1]<4) {
-                    anotherSeason = firstResult[i][0]
-                    break
-                }
-            }
-            var seasonData = softmax2([anotherSeason,firstResult[0][0]])
-            window.location.href = "https://mycolor.kr/fallWarm/?spring=" + Math.round(seasonData[0]*100) + "&fall=" + Math.round(seasonData[1]*100)
-        } else if (colorNum <= 11) {
-            var anotherSeason;
-            for(var i=0; i<firstResult.length; i++){
-                if(firstResult[i][1]>=12) {
-                    anotherSeason = firstResult[i][0]
-                    break
-                }
-            }
-            var seasonData = softmax2([firstResult[0][0],anotherSeason])
-            window.location.href = "https://mycolor.kr/summerCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
-        } else if (colorNum <= 15) {
-            var anotherSeason;
-            for(var i=0; i<firstResult.length; i++){
-                if(firstResult[i][1]>=8&&firstResult[i][1]<12) {
-                    anotherSeason = firstResult[i][0]
-                    break
-                }
-            }
-            var seasonData = softmax2([anotherSeason,firstResult[0][0]])
-            window.location.href = "https://mycolor.kr/winterCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
-        }
-    }, 1600);
+    // setTimeout(function () {
+    //     if (colorNum <= 3) {
+    //         var anotherSeason;
+    //         for(var i=0; i<firstResult.length; i++){
+    //             if(firstResult[i][1]>=4&&firstResult[i][1]<8) {
+    //                 anotherSeason = firstResult[i][0]
+    //                 break
+    //             }
+    //         }
+    //         var seasonData = softmax2([firstResult[0][0],anotherSeason])
+    //         window.location.href = "https://mycolor.kr/springWarm/?spring=" + Math.round(seasonData[0]*100) + "&fall=" + Math.round(seasonData[1]*100)
+    //     } else if (colorNum <= 7) {
+    //         var anotherSeason;
+    //         for(var i=0; i<firstResult.length; i++){
+    //             if(firstResult[i][1]>=0&&firstResult[i][1]<4) {
+    //                 anotherSeason = firstResult[i][0]
+    //                 break
+    //             }
+    //         }
+    //         var seasonData = softmax2([anotherSeason,firstResult[0][0]])
+    //         window.location.href = "https://mycolor.kr/fallWarm/?spring=" + Math.round(seasonData[0]*100) + "&fall=" + Math.round(seasonData[1]*100)
+    //     } else if (colorNum <= 11) {
+    //         var anotherSeason;
+    //         for(var i=0; i<firstResult.length; i++){
+    //             if(firstResult[i][1]>=12) {
+    //                 anotherSeason = firstResult[i][0]
+    //                 break
+    //             }
+    //         }
+    //         var seasonData = softmax2([firstResult[0][0],anotherSeason])
+    //         window.location.href = "https://mycolor.kr/summerCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
+    //     } else if (colorNum <= 15) {
+    //         var anotherSeason;
+    //         for(var i=0; i<firstResult.length; i++){
+    //             if(firstResult[i][1]>=8&&firstResult[i][1]<12) {
+    //                 anotherSeason = firstResult[i][0]
+    //                 break
+    //             }
+    //         }
+    //         var seasonData = softmax2([anotherSeason,firstResult[0][0]])
+    //         window.location.href = "https://mycolor.kr/winterCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
+    //     }
+    // }, 1600);
 
 }

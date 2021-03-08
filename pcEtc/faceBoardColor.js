@@ -1,5 +1,5 @@
 
-export default class faceBoardColor{
+export default class faceBoardColor {
     colorRgb1 = [
         'rgb(137,81,105)',
         'rgb(235,163,175)',
@@ -88,21 +88,33 @@ export default class faceBoardColor{
         'rgb(38,60,71)',
         'rgb(129,76,144)',
     ]
-    
-    
-    constructor(targetNode){
+
+
+    constructor(targetNode) {
         this.targetNode = targetNode
         this.addBtnGroup()
     }
-    addBtnGroup(){
+    addBtnGroup() {
         document.getElementById("progressContainer").style.display = "none"
-        document.getElementById("cropNotice").innerText = '※ 붉은 기, 노란 기가 적고 얼굴이 환해지는 필터를 선택해주세요'
+        document.getElementById("cropNotice").innerText = '※ 붉은 기, 노란 기가 적고 얼굴이 환해지는 필터가 잘맞는 필터입니다'
         var tag = `<div class="file-upload-content" id="noCamDiv">
                     <div style="margin-top : 2vh;">
+                    <div style="display : inline-flex; flex-direction : column;">
+                        <div class="select clicked" id="select1"><span>1</span></div>
                         <div class="btnGroup clicked" id="filter1"><span>필터 1</span></div>
+                        </div>
+                        <div style="display : inline-flex; flex-direction : column;">  
+                        <div class="select" id="select2"><span>0</span></div>
                         <div class="btnGroup" id="filter2"><span>필터 2</span></div>
+                        </div>
+                        <div style="display : inline-flex; flex-direction : column;">                        
+                        <div class="select" id="select3"><span>0</span></div>
                         <div class="btnGroup" id="filter3"><span style="padding-left: 0px">필터 3</span></div>
+                        </div>
+                        <div style="display : inline-flex; flex-direction : column;">                        
+                        <div class="select" id="select4"><span>0</span></div>
                         <div class="btnGroup" id="filter4"><span style="padding-left: 0px">필터 4</span></div>
+                        </div>
                         </div>
                         <div class="arrowBtn" id="goResult">결과 확인</div>
                 </div>`

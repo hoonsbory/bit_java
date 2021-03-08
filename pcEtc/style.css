@@ -17,6 +17,25 @@ html{
   url(../font/HSThin.otf) format('opentype')
   /* 파이썬의 pyftsubset을 통해 경량화함 */
 }
+.select{
+  background-color: rgba( 255, 255, 255, 0.4);
+  width: 3vh;
+  height: 3vh;
+  min-width: 20px;
+  min-height: 20px;
+  font-size: 1.5vh;
+  border-radius: 15px;
+  line-height: 2.3;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 5px;
+  transition: all .5s;
+}
+.select.clicked{
+  background-color: rgb(74, 114, 176);
+  color: white;
+}
 #progressContainer{
   width : 40vh;
   background: rgba(74, 114, 176,.7);
@@ -44,7 +63,7 @@ html{
 
 #video, #faceCanvas, #colorCanvas, .imageMode{
   width : 100%  !important;
-  height : 65vh !important;
+  height : 60vh !important;
 }
 #video{
   object-fit : fill;
@@ -246,7 +265,8 @@ html{
     border: 2px solid rgb(10, 59, 112);
     display: inline;
     border-radius: 7px;
-    padding: 1vh;
+    padding: 0 1vh;
+    padding-top : .5vh;
     padding-bottom: 0px;
     background-color: white;
     color : rgb(10, 59, 112);
@@ -556,7 +576,6 @@ a.control_next {
 
 .file-upload-content {
   text-align: center;
-  margin-bottom: 7vh;
 }
 
 .file-upload-input {
@@ -692,13 +711,6 @@ padding-left : 2vh;
 }
 
 @media(min-width : 768px) and (max-width : 1024px){
-  /* #video, #canvas , #faceCanvas{
-    height: 80vh;
-  } */
-  #video, #faceCanvas, #colorCanvas, .imageMode{
-    width : 100%  !important;
-    height : 65vh !important;
-  }
   #slider ul li{
     width : 600px;
   }
@@ -746,10 +758,6 @@ left : -6rem;
 
 }
 @media(max-width: 767px){
-  #video, #faceCanvas, #colorCanvas, .imageMode{
-    width : 100%  !important;
-    height : 65vh !important;
-  }
   #popup img{
     width: 6vw;
   }
@@ -808,6 +816,9 @@ max-width: 300px;
   }
 }
 @media(max-height : 470px){
+  .file-upload-content {
+    margin-bottom: 7vh;
+  }
   #mainbody{
     height: unset;
     justify-content: unset;

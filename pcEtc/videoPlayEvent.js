@@ -4,7 +4,7 @@ import seasonResult from './seasonResult.js'
 import faceBoardColor from './faceBoardColor.js'
 
 const throttler = throttling()
-export default async function videopPlayEvent(video, camCheck, faceBoard, faceBoardResult,firstResult) {
+export default async function videopPlayEvent(video, camCheck, faceBoard,firstResult) {
     var interval
     var colorRgb = [
         'rgb(137,81,105)',
@@ -39,32 +39,55 @@ export default async function videopPlayEvent(video, camCheck, faceBoard, faceBo
         document.getElementById("filter1").onclick = () => {
             colorRgb = faceBoardColorList.colorRgb1
             classRemove()
-            faceBoardResult = "warm"
             document.getElementById("filter1").classList.add('clicked')
         }
         document.getElementById("filter2").onclick = () => {
             colorRgb = faceBoardColorList.colorRgb2
             classRemove()
-            faceBoardResult = "summer"
             document.getElementById("filter2").classList.add('clicked')
         }
         document.getElementById("filter3").onclick = () => {
             colorRgb = faceBoardColorList.colorRgb3
             classRemove()
-            faceBoardResult = "fall"
             document.getElementById("filter3").classList.add('clicked')
         }
         document.getElementById("filter4").onclick = () => {
             colorRgb = faceBoardColorList.colorRgb4
             classRemove()
-            faceBoardResult = "winter"
             document.getElementById("filter4").classList.add('clicked')
         }
         document.getElementById("goResult").onclick = () => {
+            if (document.querySelectorAll('.select.clicked').length != 4) {
+                if (document.querySelectorAll('.select.clicked').length > 1) {
+                    alert("순서를 전부 정해주세요")
+                    return
+                } else {
+                    alert('숫자 버튼을 클릭해서 잘어울리는 순으로 선택해주세요')
+                    return
+                }
+            }
             clearInterval(interval)
             video.pause()
-            seasonResult(firstResult,faceBoardResult)
+            seasonResult(firstResult)
         }
+        var cnt =2;
+        document.querySelectorAll(".select").forEach(i=>{
+            i.onclick = ()=> {
+                if(i.classList.contains("clicked")){
+                    i.classList.remove("clicked")
+                    document.querySelectorAll('.select').forEach(j=>{
+                        if(i.innerText<j.innerText)
+                        j.innerText = j.innerText - 1
+                    })
+                    i.innerText = 0
+                    cnt--
+                }else {
+                    i.innerText = cnt
+                    i.classList.add('clicked')
+                    cnt++
+                }
+            }
+        })
     }
 
 

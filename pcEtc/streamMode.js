@@ -29,7 +29,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
             navigator.mediaDevices.getUserMedia({
                 video: {
                     width: { min: 0, ideal: 1280, max: 1920 },
-                    height: { min: 0, ideal: 1000, max: 1640 },
+                    height: { min: 0, ideal: 1050, max: 1690 },
                     facingMode: { exact: "user" }
                 }
             }).then(function (stream) {
@@ -48,7 +48,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
         navigator.getUserMedia({
             video: {
                 width: { min: 0, ideal: 1280, max: 1920 },
-                height: { min: 0, ideal: 1280, max: 1920 }, facingMode: { exact: "user" }
+                height: { min: 0, ideal: 1000, max: 1640 }, facingMode: { exact: "user" }
             }
         }, function (stream) {
             streamTrue();
@@ -60,7 +60,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
         navigator.webkitGetUserMedia({
             video: {
                 width: { min: 0, ideal: 1280, max: 1920 },
-                height: { min: 0, ideal: 1280, max: 1920 }, facingMode: { exact: "user" }
+                height: { min: 0, ideal: 1000, max: 1640 }, facingMode: { exact: "user" }
             }
         }, function (stream) {
             streamTrue();
@@ -72,7 +72,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
         navigator.mozGetUserMedia({
             video: {
                 width: { min: 0, ideal: 1280, max: 1920 },
-                height: { min: 0, ideal: 1280, max: 1920 }, facingMode: { exact: "user" }
+                height: { min: 0, ideal: 1000, max: 1640 }, facingMode: { exact: "user" }
             }
         }, function (stream) {
             streamTrue();
