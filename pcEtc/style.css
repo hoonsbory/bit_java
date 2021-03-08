@@ -43,8 +43,8 @@ html{
 }
 
 #video, #faceCanvas, #colorCanvas, .imageMode{
-  width : 60vh  !important;
-  height : 60vh !important;
+  width : 100%  !important;
+  height : 65vh !important;
 }
 #video{
   object-fit : fill;
@@ -695,8 +695,8 @@ padding-left : 2vh;
     height: 80vh;
   } */
   #video, #faceCanvas, #colorCanvas, .imageMode{
-    width : 600px  !important;
-    height : 600px !important;
+    width : 100%  !important;
+    height : 65vh !important;
   }
   #slider ul li{
     width : 600px;
@@ -746,8 +746,8 @@ left : -6rem;
 }
 @media(max-width: 767px){
   #video, #faceCanvas, #colorCanvas, .imageMode{
-    width : 320px  !important;
-    height : 320px !important;
+    width : 100%  !important;
+    height : 65vh !important;
   }
   #popup img{
     width: 6vw;

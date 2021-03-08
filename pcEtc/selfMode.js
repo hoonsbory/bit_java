@@ -33,7 +33,7 @@ export default class selfMode {
         this.canvas = canvas
         this.ctx = canvas.getContext('2d')
         this.unit = (canvas.width) / 4
-        this.unit2 = (canvas.width) / 6
+        this.unit2 = (canvas.height) / 6
         this.startPos = { x: this.unit / 2, y: 0 }
         this.drawLoop()
     }
