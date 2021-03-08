@@ -15,7 +15,6 @@ if (document.addEventListener) {
     },
         false);
 }
-window.scrollTo(0, window.outerHeight)
 
 let appleCheck = false;
 let ua = navigator.userAgent || navigator.vendor || window.opera;

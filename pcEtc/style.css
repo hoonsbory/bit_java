@@ -173,7 +173,6 @@ html{
 }
 #cropNotice{
   display: none;
-  margin-bottom: 1vh;
     background: rgb(250,50,34);
     padding: .5vh;
     font-size: 1.5vh;
@@ -346,7 +345,7 @@ p{
   padding-right: 1vh;
   padding-top: 0.5vh;
   padding-bottom: 0.5vh;
-  margin-top: 5vh;
+  margin-top: 8vh;
 }
 #subTitle{
   color: white;
@@ -806,7 +805,7 @@ max-width: 300px;
     font-size: 12px !important;
   }
 }
-@media(max-height : 439px){
+@media(max-height : 470px){
   #mainbody{
     height: unset;
     justify-content: unset;
