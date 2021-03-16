@@ -177,45 +177,45 @@ export default function season(firstResult) {
 
     setTimeout(function () {
         if (colorNum <= 3) {
-            var anotherSeason;
-            for(var i=0; i<firstResult.length; i++){
-                if(firstResult[i][1]>=4&&firstResult[i][1]<8) {
+            var anotherSeason
+            for (var i = 0; i < firstResult.length; i++) {
+                if (firstResult[i][1] >= 4 && firstResult[i][1] < 8) {
                     anotherSeason = firstResult[i][0]
                     break
                 }
             }
-            var seasonData = softmax2([firstResult[0][0],anotherSeason])
-            window.location.href = "https://mycolor.kr/springWarm/?spring=" + Math.round(seasonData[0]*100) + "&fall=" + Math.round(seasonData[1]*100)
+            var seasonData = softmax2([firstResult[0][0], anotherSeason])
+            window.location.href = "https://mycolor.kr/springWarm/?spring=" + Math.round(seasonData[0] * 100) + "&fall=" + Math.round(seasonData[1] * 100)
         } else if (colorNum <= 7) {
-            var anotherSeason;
-            for(var i=0; i<firstResult.length; i++){
-                if(firstResult[i][1]>=0&&firstResult[i][1]<4) {
+            var anotherSeason
+            for (var i = 0; i < firstResult.length; i++) {
+                if (firstResult[i][1] >= 0 && firstResult[i][1] < 4) {
                     anotherSeason = firstResult[i][0]
                     break
                 }
             }
-            var seasonData = softmax2([anotherSeason,firstResult[0][0]])
-            window.location.href = "https://mycolor.kr/fallWarm/?spring=" + Math.round(seasonData[0]*100) + "&fall=" + Math.round(seasonData[1]*100)
+            var seasonData = softmax2([anotherSeason, firstResult[0][0]])
+            window.location.href = "https://mycolor.kr/fallWarm/?spring=" + Math.round(seasonData[0] * 100) + "&fall=" + Math.round(seasonData[1] * 100)
         } else if (colorNum <= 11) {
-            var anotherSeason;
-            for(var i=0; i<firstResult.length; i++){
-                if(firstResult[i][1]>=12) {
+            var anotherSeason
+            for (var i = 0; i < firstResult.length; i++) {
+                if (firstResult[i][1] >= 12) {
                     anotherSeason = firstResult[i][0]
                     break
                 }
             }
-            var seasonData = softmax2([firstResult[0][0],anotherSeason])
-            window.location.href = "https://mycolor.kr/summerCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
+            var seasonData = softmax2([firstResult[0][0], anotherSeason])
+            window.location.href = "https://mycolor.kr/summerCool/?summer=" + Math.round(seasonData[0] * 100) + "&winter=" + Math.round(seasonData[1] * 100)
         } else if (colorNum <= 15) {
-            var anotherSeason;
-            for(var i=0; i<firstResult.length; i++){
-                if(firstResult[i][1]>=8&&firstResult[i][1]<12) {
+            var anotherSeason
+            for (var i = 0; i < firstResult.length; i++) {
+                if (firstResult[i][1] >= 8 && firstResult[i][1] < 12) {
                     anotherSeason = firstResult[i][0]
                     break
                 }
             }
-            var seasonData = softmax2([anotherSeason,firstResult[0][0]])
-            window.location.href = "https://mycolor.kr/winterCool/?summer=" + Math.round(seasonData[0]*100) + "&winter=" + Math.round(seasonData[1]*100)
+            var seasonData = softmax2([anotherSeason, firstResult[0][0]])
+            window.location.href = "https://mycolor.kr/winterCool/?summer=" + Math.round(seasonData[0] * 100) + "&winter=" + Math.round(seasonData[1] * 100)
         }
     }, 1600);
 

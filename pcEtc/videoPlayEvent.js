@@ -76,13 +76,13 @@ export default async function videopPlayEvent(video, camCheck, faceBoard,firstRe
                 if(i.classList.contains("clicked")){
                     i.classList.remove("clicked")
                     document.querySelectorAll('.select').forEach(j=>{
-                        if(i.innerText<j.innerText)
-                        j.innerText = j.innerText - 1
+                        if(i.firstElementChild.innerText<j.firstElementChild.innerText)
+                        j.firstElementChild.innerText = j.firstElementChild.innerText - 1
                     })
-                    i.innerText = 0
+                    i.firstElementChild.innerText = 0
                     cnt--
                 }else {
-                    i.innerText = cnt
+                    i.firstElementChild.innerText = cnt
                     i.classList.add('clicked')
                     cnt++
                 }

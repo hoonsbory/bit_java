@@ -17,6 +17,12 @@ html{
   url(../font/HSThin.otf) format('opentype')
   /* 파이썬의 pyftsubset을 통해 경량화함 */
 }
+.select span{
+  position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    top: 50%;
+}
 .select{
   background-color: rgba( 255, 255, 255, 0.4);
   width: 3vh;
@@ -25,12 +31,12 @@ html{
   min-height: 20px;
   font-size: 1.5vh;
   border-radius: 100px;
-  line-height: 3.5vh;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 5px;
   transition: all .5s;
+  cursor: pointer;
 }
 .select.clicked{
   background-color: rgb(74, 114, 176);
@@ -592,7 +598,7 @@ a.control_next {
 .image-upload-wrap {
   border: 1vh solid rgb(10, 59, 112);
   position: relative;
-  border-radius: 30px;
+  border-radius: 2vh;
   margin-top : 15px;
   width: 36vh;
   height: 14vh;
@@ -846,8 +852,8 @@ max-width: 300px;
     top: 4px;
   }
   .arrowBtn{
-    padding: 13px;
-    padding-top: 13.8px;
+    padding: 15px;
+    padding-top: 12px;
   }
   .leftArrow{
     padding: 13px;
