@@ -29,7 +29,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
             navigator.mediaDevices.getUserMedia({
                 video: {
                     width: { min: 0, ideal: 1280, max: 1920 },
-                    height: { min: 0, ideal: 1050, max: 1690 },
+                    height: { min: 0, ideal: 950, max: 1590 },
                     facingMode: { exact: "user" }
                 }
             }).then(function (stream) {

@@ -166,6 +166,10 @@ var loading = document.getElementById("loading"); //로딩
 
 var firstResult = []; //첫 비교 결과값을 담을 변수
 
+
+
+
+
 var colorNum
 var faceBoardCanvas;
 var facePositions;

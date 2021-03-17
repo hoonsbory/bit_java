@@ -69,7 +69,7 @@ html{
 
 #video, #faceCanvas, #colorCanvas, .imageMode{
   width : 100%  !important;
-  height : 62vh !important;
+  height : 55vh !important;
 }
 #video{
   object-fit : fill;
