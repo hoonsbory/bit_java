@@ -49,7 +49,9 @@ export default function streamMode(ua, streamTrue, camErr, video) {
           //video.src = window.URL.createObjectURL(stream);
         })
         .catch(function (err) {
+          err = err + "";
           console.log(err);
+          alert(err);
           camErr();
         });
     }
