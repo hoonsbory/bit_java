@@ -26,13 +26,12 @@ export default function streamMode(ua, streamTrue, camErr, video) {
         });
     } else {
       // Not adding `{ audio: true }` since we only want video now
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+
       navigator.mediaDevices
         .getUserMedia({
           video: {
-            height: { min: height, ideal: height * 1.5, max: height * 2 },
-            width: { min: width, ideal: width * 1.5, max: width * 2 },
+            width: { min: 0, ideal: 1280, max: 2560 },
+            height: { min: 0, ideal: 894, max: 1788 },
             facingMode: "user",
           },
         })
