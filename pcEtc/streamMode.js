@@ -33,11 +33,12 @@ export default function streamMode(ua, streamTrue, camErr, video) {
       if (width > 1024) a = 1280;
       else if (width > 609) a = 1000;
       else if (height > 567) a = 800;
-      else a = 650;
+      else a = 9999;
       navigator.mediaDevices
         .getUserMedia({
           video: {
-            width: { min: 9999, ideal: 9999, max: 9999 },
+            height: { min: a / 2, ideal: a / 2, max: a / 2 },
+            width: { min: a, ideal: a, max: a },
             facingMode: "user",
           },
         })
