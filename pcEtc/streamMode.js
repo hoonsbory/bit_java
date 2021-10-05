@@ -41,7 +41,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
         .getUserMedia({
           video: {
             width: { min: 0, ideal: 1280, max: 2560 },
-            height: { min: 0, ideal: 1100, max: 1788 },
+            height: { min: 0, ideal: 1050, max: 1788 },
             facingMode: "user",
           },
         })
