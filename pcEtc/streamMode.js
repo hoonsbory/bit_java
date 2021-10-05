@@ -39,11 +39,11 @@ export default function streamMode(ua, streamTrue, camErr, video) {
           video: {
             width: {
               min: 320,
-              ideal: 1280,
+              ideal: 720,
             },
             height: {
               min: 320,
-              ideal: 1280,
+              ideal: 720,
             },
             facingMode: "user",
           },
