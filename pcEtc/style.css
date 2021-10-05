@@ -70,7 +70,7 @@ html {
 #colorCanvas,
 .imageMode {
   width: 100% !important;
-  height: 60vh !important;
+  height: 400px !important;
 }
 #video {
   object-fit: fill;
