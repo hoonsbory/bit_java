@@ -37,16 +37,15 @@ export default function streamMode(ua, streamTrue, camErr, video) {
       navigator.mediaDevices
         .getUserMedia({
           video: {
-            width: { min: 720, ideal: 1280, max: 2560 },
-            height: { min: 480, ideal: 720, max: 1788 },
+            width: { min: 0, ideal: 1280, max: 2560 },
+            height: { min: 0, ideal: 894, max: 1788 },
             facingMode: "user",
           },
         })
         .then(function (stream) {
           streamTrue();
           video.srcObject = stream;
-          alert(video.videoWidth);
-          alert(video.videoHeight);
+
           // camErr()
           //video.src = window.URL.createObjectURL(stream);
         })
