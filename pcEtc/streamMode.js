@@ -30,11 +30,11 @@ export default function streamMode(ua, streamTrue, camErr, video) {
       let width;
       let height;
       if (ua.toLowerCase().indexOf("mobile") > -1) {
-        width = 720;
+        width = 1280;
         height = 1280;
       } else {
         width = 1280;
-        height = 720;
+        height = 1280;
       }
 
       navigator.mediaDevices
