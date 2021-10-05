@@ -43,8 +43,7 @@ export default function streamMode(ua, streamTrue, camErr, video) {
           },
         })
         .then(function (stream) {
-          streamTrue();.
-          
+          streamTrue();
           video.srcObject = stream;
           alert(video.videoWidth);
           alert(video.videoHeight);
