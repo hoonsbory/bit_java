@@ -30,8 +30,8 @@ export default function streamMode(ua, streamTrue, camErr, video) {
       let width;
       let height;
       if (ua.toLowerCase().indexOf("mobile") > -1) {
-        width = 1280;
-        height = 1280;
+        width = 720;
+        height = 720;
       } else {
         width = 1280;
         height = 1280;
@@ -42,13 +42,13 @@ export default function streamMode(ua, streamTrue, camErr, video) {
           video: {
             width: {
               min: width - 960,
-              ideal: 720,
-              max: 720,
+              ideal: width,
+              max: width,
             },
             height: {
               min: height - 960,
-              ideal: 720,
-              max: 720,
+              ideal: height,
+              max: height,
             },
             facingMode: "user",
           },
