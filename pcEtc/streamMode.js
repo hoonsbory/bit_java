@@ -40,10 +40,10 @@ export default function streamMode(ua, streamTrue, camErr, video) {
             width: {
               //   min: 320,
               //   ideal: 720,
-              exact: 720,
+              exact: 480,
             },
             height: {
-              exact: 480,
+              exact: 720,
               //   min: 320,
               //   ideal: 480,
             },
